@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdfMapEntries xmlns="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1">
+
+  <!--    
+  <RdfTypeMapEntry type="Curve" target="sf:Curve"/>
+  <RdfTypeMapEntry type="PolyhedralSurface" target="sf:PolyhedralSurface"/>
+  <RdfTypeMapEntry type="MultiPoint" target="sf:MultiPoint"/>
+  <RdfTypeMapEntry type="MultiLineString" target="sf:MultiLineString"/>
+  <RdfTypeMapEntry type="Line" target="sf:Line"/>
+  <RdfTypeMapEntry type="Point" target="sf:Point"/>
+  <RdfTypeMapEntry type="Polygon" target="sf:Polygon"/>
+  <RdfTypeMapEntry type="MultiPolygon" target="sf:MultiPolygon"/>
+  <RdfTypeMapEntry type="Triangle" target="sf:Triangle"/>
+  <RdfTypeMapEntry type="LineString" target="sf:LineString"/>
+  <RdfTypeMapEntry type="LinearRing" target="sf:LinearRing"/>
+  <RdfTypeMapEntry type="Geometry" target="sf:Geometry"/>
+  <RdfTypeMapEntry type="Surface" target="sf:Surface"/>
+  <RdfTypeMapEntry type="MultiSurface" target="sf:MultiSurface"/>
+  <RdfTypeMapEntry type="GeometryCollection" target="sf:GeometryCollection"/>
+  <RdfTypeMapEntry type="TIN" target="sf:TIN"/>
+  <RdfTypeMapEntry type="MultiCurve" target="sf:MultiCurve"/>
+  -->
+  <!-- ... more to be added as required -->
+</rdfMapEntries>

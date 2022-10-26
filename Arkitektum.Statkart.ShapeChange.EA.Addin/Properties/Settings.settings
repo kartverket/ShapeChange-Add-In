@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Kartverket.ShapeChange.EA.Addin.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="JavaRuntime" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files (x86)\Statens kartverk\ShapeChange EA Add-In\jre-11.0.6.10-hotspot\bin\java.exe</Value>
+    <Setting Name="JavaRuntimeX86" Type="System.String" Scope="User">
+      <Value Profile="(Default)">jre-11.0.16.101-hotspot_x86\bin\java.exe</Value>
     </Setting>
     <Setting Name="ReportLevel" Type="System.String" Scope="User">
       <Value Profile="(Default)">INFO</Value>
@@ -13,6 +13,15 @@
     </Setting>
     <Setting Name="ProxyPort" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShapeChangeJar" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ShapeChange\ShapeChange-2.12.0.jar</Value>
+    </Setting>
+    <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="JavaRuntimeX64" Type="System.String" Scope="User">
+      <Value Profile="(Default)">jre-11.0.16.101-hotspot_x64\bin\java.exe</Value>
     </Setting>
   </Settings>
 </SettingsFile>

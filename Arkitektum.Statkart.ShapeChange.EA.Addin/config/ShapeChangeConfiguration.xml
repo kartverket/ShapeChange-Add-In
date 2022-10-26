@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ShapeChangeConfiguration xmlns:xi="http://www.w3.org/2001/XInclude" xmlns="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1" xmlns:sc="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 ShapeChangeConfiguration.xsd">
+	<input>
+		<parameter name="inputModelType" value="EA7"/>
+		<parameter name="inputFile" value="C:\ea\INSPIRE.eap"/>
+		<parameter name="appSchemaNamespaceRegex" value="^urn:x-inspire:.*"/>
+		<parameter name="publicOnly" value="false"/>
+		<parameter name="representTaggedValues" value=""/>
+		<xi:include href="StandardAliases.xml"/>
+	</input>
+	<log>
+		<parameter name="reportLevel" value="INFO"/>
+		<parameter name="logFile" value="C:\INSPIRE\result.xml"/>
+	</log>
+	<targets>
+		<TargetXmlSchema class="de.interactive_instruments.ShapeChange.Target.XmlSchema.XmlSchema">
+			<targetParameter name="gmlVersion" value="3.2"/>
+			<targetParameter name="outputDirectory" value="C:\INSPIRE\XSD"/>
+			<targetParameter name="defaultEncodingRule" value="iso19136_2007_INSPIRE_Extensions"/>
+			<targetParameter name="includeDocumentation" value="true"/>
+			<targetParameter name="enumStyle" value="GLOBAL"/>
+			<targetParameter name="basicTypeStyle" value="GLOBAL"/>
+			<targetParameter name="schematron" value="false"/>
+			<targetParameter name="noGMLtypeDefault" value="false"/>
+			<targetParameter name="supportWSDL" value="false"/>
+			<xi:include href="StandardNamespaces.xml"/>
+			<xi:include href="StandardMapEntries.xml"/>
+			<xsdMapEntries>
+				<XsdMapEntry type="Percentage" xsdEncodingRules="notEncoded iso19136_2007 iso19136_2007_ShapeChange_1.0_Extensions iso19136_2007_INSPIRE_Extensions" xmlPropertyType="anyURI" xmlType="anyURI" xmlTypeType="simple" xmlTypeContent="simple"/>
+			</xsdMapEntries>
+  	</TargetXmlSchema>
+		<Target class="de.interactive_instruments.ShapeChange.Target.Codelists.CodelistDictionaries">
+			<targetParameter name="outputDirectory" value="C:\INSPIRE\CL"/>
+			<targetParameter name="enumerations" value="false"/>
+		</Target>
+	</targets>
+</ShapeChangeConfiguration>

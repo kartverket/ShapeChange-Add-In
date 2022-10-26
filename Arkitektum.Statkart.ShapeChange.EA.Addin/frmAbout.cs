@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using System.Reflection;
 using System.Windows.Forms;
+using static Kartverket.ShapeChange.EA.Addin.Resources.frmAbout;
 
 namespace Kartverket.ShapeChange.EA.Addin
 {
@@ -15,36 +9,17 @@ namespace Kartverket.ShapeChange.EA.Addin
         public frmAbout()
         {
             InitializeComponent();
-            lbVersion.Text = "Versjon: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            //label3.Text = "ShapeChange plugin opprinnelig laget av Arkitektum AS";
+            labelVersion.Text = string.Format(VersionInfoText, Assembly.GetExecutingAssembly().GetName().Version);
         }
 
-       
-
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelAddInCreator_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.statkart.no");
-
+            System.Diagnostics.Process.Start(MailToStandardiseringssekretariatetUrl);
         }
 
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelShapeChangeCreator_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto:standardiseringssekretariatet@kartverket.no");
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://www.interactive-instruments.de/index.php?id=1&L=1");
-        }
-
-        private void FrmAbout_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LbVersion_Click(object sender, EventArgs e)
-        {
-
+            System.Diagnostics.Process.Start(InteractiveInstrumentsUrl);
         }
     }
 }

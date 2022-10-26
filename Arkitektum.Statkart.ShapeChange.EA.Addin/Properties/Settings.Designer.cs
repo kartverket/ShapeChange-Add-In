@@ -12,7 +12,7 @@ namespace Kartverket.ShapeChange.EA.Addin.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,14 +25,13 @@ namespace Kartverket.ShapeChange.EA.Addin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Program Files (x86)\\Statens kartverk\\ShapeChange EA Add-In\\jre-11.0.6.10-hotsp" +
-            "ot\\bin\\java.exe")]
-        public string JavaRuntime {
+        [global::System.Configuration.DefaultSettingValueAttribute("jre-11.0.16.101-hotspot_x86\\bin\\java.exe")]
+        public string JavaRuntimeX86 {
             get {
-                return ((string)(this["JavaRuntime"]));
+                return ((string)(this["JavaRuntimeX86"]));
             }
             set {
-                this["JavaRuntime"] = value;
+                this["JavaRuntimeX86"] = value;
             }
         }
         
@@ -69,6 +68,42 @@ namespace Kartverket.ShapeChange.EA.Addin.Properties {
             }
             set {
                 this["ProxyPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ShapeChange\\ShapeChange-2.12.0.jar")]
+        public string ShapeChangeJar {
+            get {
+                return ((string)(this["ShapeChangeJar"]));
+            }
+            set {
+                this["ShapeChangeJar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSettings {
+            get {
+                return ((bool)(this["UpdateSettings"]));
+            }
+            set {
+                this["UpdateSettings"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("jre-11.0.16.101-hotspot_x64\\bin\\java.exe")]
+        public string JavaRuntimeX64 {
+            get {
+                return ((string)(this["JavaRuntimeX64"]));
+            }
+            set {
+                this["JavaRuntimeX64"] = value;
             }
         }
     }
