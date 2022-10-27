@@ -1,4 +1,5 @@
-﻿using Kartverket.ShapeChange.EA.Addin.Util;
+﻿using System.IO;
+using Kartverket.ShapeChange.EA.Addin.Util;
 using System.Xml;
 
 namespace Kartverket.ShapeChange.EA.Addin
@@ -28,23 +29,26 @@ namespace Kartverket.ShapeChange.EA.Addin
             writer.WriteParameterElement("representTaggedValues",
                 "alwaysVoid,neverVoid,Code,lastChange,appliesTo,SOSI_navn,NVDB_ID,SOSI_verdi,SOSI_presentasjonsnavn,SOSI_bildeAvModellElement");
 
-            writer.WriteIncludeElement("http://shapechange.net/resources/config/StandardAliases.xml");
+            writer.WriteIncludeElement(Path.Combine(settings.ConfigDirectory, "StandardAliases.xml"));
 
             writer.WriteEndElement();
         }
     }
 
-    internal class InputSettings
+    internal class InputSettings : TargetBaseSettings
     {
         public string EaProjectFilePath { get; }
         public string TempDirectory { get; }
+        public string ConfigDirectory { get; }
         public string SchemaName { get; }
         public bool IncludeDiagrams { get; }
 
-        public InputSettings(string eaProjectFilePath, string tempDirectory, string schemaName, bool includeDiagrams)
+        public InputSettings(string outputDirectory, string eaProjectFilePath, string tempDirectory,
+            string configDirectory, string schemaName, bool includeDiagrams) : base(outputDirectory)
         {
             EaProjectFilePath = eaProjectFilePath;
             TempDirectory = tempDirectory;
+            ConfigDirectory = configDirectory;
             SchemaName = schemaName;
             IncludeDiagrams = includeDiagrams;
         }

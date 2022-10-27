@@ -296,7 +296,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxPropsTargetNamespace.Name = "textBoxPropsTargetNamespace";
             this.textBoxPropsTargetNamespace.Size = new System.Drawing.Size(294, 20);
             this.textBoxPropsTargetNamespace.TabIndex = 108;
-            this.textBoxPropsTargetNamespace.Leave += new System.EventHandler(this.textBoxPropsTargetNamespace_Leave);
+            this.textBoxPropsTargetNamespace.Leave += new System.EventHandler(this.TextBoxPropsTargetNamespace_Leave);
             // 
             // labelPropsExportExcel
             // 
@@ -342,7 +342,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxPropsXmlns.Name = "textBoxPropsXmlns";
             this.textBoxPropsXmlns.Size = new System.Drawing.Size(294, 20);
             this.textBoxPropsXmlns.TabIndex = 110;
-            this.textBoxPropsXmlns.Leave += new System.EventHandler(this.textBoxPropsXmlns_Leave);
+            this.textBoxPropsXmlns.Leave += new System.EventHandler(this.TextBoxPropsXmlns_Leave);
             // 
             // labelPropsXmlns
             // 
@@ -398,7 +398,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxPropsVersion.Name = "textBoxPropsVersion";
             this.textBoxPropsVersion.Size = new System.Drawing.Size(294, 20);
             this.textBoxPropsVersion.TabIndex = 112;
-            this.textBoxPropsVersion.Leave += new System.EventHandler(this.textBoxPropsVersion_Leave);
+            this.textBoxPropsVersion.Leave += new System.EventHandler(this.TextBoxPropsVersion_Leave);
             // 
             // labelPropsVersion
             // 
@@ -436,7 +436,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxPropsXsdFile.Name = "textBoxPropsXsdFile";
             this.textBoxPropsXsdFile.Size = new System.Drawing.Size(294, 20);
             this.textBoxPropsXsdFile.TabIndex = 116;
-            this.textBoxPropsXsdFile.Leave += new System.EventHandler(this.textBoxPropsXsdFile_Leave);
+            this.textBoxPropsXsdFile.Leave += new System.EventHandler(this.TextBoxPropsXsdFile_Leave);
             // 
             // labelPropsGmlXsd
             // 

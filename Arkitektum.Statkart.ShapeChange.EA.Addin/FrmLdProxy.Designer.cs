@@ -207,7 +207,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyServiceLabel.Name = "textBoxLdProxyServiceLabel";
             this.textBoxLdProxyServiceLabel.Size = new System.Drawing.Size(297, 20);
             this.textBoxLdProxyServiceLabel.TabIndex = 1002;
-            this.textBoxLdProxyServiceLabel.Leave += new System.EventHandler(this.textBoxLdProxyServiceLabel_Leave);
+            this.textBoxLdProxyServiceLabel.Leave += new System.EventHandler(this.TextBoxLdProxyServiceLabel_Leave);
             // 
             // labelLdProxyServiceLabel
             // 
@@ -269,7 +269,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyEpsgCode.Name = "textBoxLdProxyEpsgCode";
             this.textBoxLdProxyEpsgCode.Size = new System.Drawing.Size(190, 20);
             this.textBoxLdProxyEpsgCode.TabIndex = 402;
-            this.textBoxLdProxyEpsgCode.Leave += new System.EventHandler(this.textBoxLdProxyEpsgCode_Leave);
+            this.textBoxLdProxyEpsgCode.Leave += new System.EventHandler(this.TextBoxLdProxyEpsgCode_Leave);
             // 
             // labelLdProxyEpsgCode
             // 

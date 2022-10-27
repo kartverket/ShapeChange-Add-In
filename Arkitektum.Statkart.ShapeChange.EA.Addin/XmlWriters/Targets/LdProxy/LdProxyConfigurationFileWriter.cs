@@ -6,7 +6,7 @@ namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 {
     internal static class LdProxyConfigurationFileWriter
     {
-        public static void WriteConfigurationFile(string resultDirectory, LdProxyConfigurationFileSettings settings)
+        public static void WriteProviderOverrides(string resultDirectory, LdProxyConfigurationFileSettings settings)
         {
             var configurationFileDirectoryPath = Path.Combine(resultDirectory, InputId, "data", "store", "overrides", "providers");
             

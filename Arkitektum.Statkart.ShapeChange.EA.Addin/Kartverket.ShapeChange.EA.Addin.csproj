@@ -144,7 +144,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LdProxy.resx</DependentUpon>
     </Compile>
-    <Compile Include="XmlWriters\ConfigurationFileWriter.cs" />
+    <Compile Include="XmlWriters\ShapeChangeConfigurationFileWriter.cs" />
     <Compile Include="XmlWriters\InputWriter.cs" />
     <Compile Include="XmlWriters\Targets\CodeList\CodeListSettings.cs" />
     <Compile Include="XmlWriters\Targets\CodeList\CodeListWriter.cs" />

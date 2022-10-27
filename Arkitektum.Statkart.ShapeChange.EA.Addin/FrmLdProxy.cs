@@ -5,11 +5,9 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using EA;
 using Kartverket.ShapeChange.EA.Addin.LdProxy;
 using Kartverket.ShapeChange.EA.Addin.Properties;
-using Kartverket.ShapeChange.EA.Addin.Util;
 using static Kartverket.ShapeChange.EA.Addin.Resources.FileNameResources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
 using File = System.IO.File;
@@ -79,7 +77,6 @@ namespace Kartverket.ShapeChange.EA.Addin
             _shapeChangeJarFullFilename = Path.IsPathRooted(Settings.Default.ShapeChangeJar)
                 ? Settings.Default.ShapeChangeJar
                 : Path.Combine(_applicationDirectory, Settings.Default.ShapeChangeJar);
-
 
             SetProperties();
 
@@ -152,6 +149,10 @@ namespace Kartverket.ShapeChange.EA.Addin
                 SetText(string.Format(logMessageCopyConfigFiles, _configDirectory));
                 CopyStandardShapeChangeConfigAndMappingFiles();
 
+                SetText("Write LdProxy overrides");
+                LdProxyConfigurationFileWriter.WriteProviderOverrides(Path.Combine(_resultDirectory, _ldProxyDirectory),
+                    CreateLdProxyConfigurationFileSettings());
+
                 SetText($"Write {ShapeChangeConfigurationXml}");
                 WriteConfig(shapeChangeConfigurationXmlFullFilename);
 
@@ -167,7 +168,6 @@ namespace Kartverket.ShapeChange.EA.Addin
                 MessageBox.Show(e.Message);
                 SetText("Error -> " + e.Message);
             }
-
         }
 
         private void EnsureRequiredDirectoriesExists()
@@ -284,47 +284,46 @@ namespace Kartverket.ShapeChange.EA.Addin
             else
             {
                 textBoxLog.AppendText($"{text}{Environment.NewLine}");
-                //textBoxLog.Text = new StringBuilder(textBoxLog.Text).AppendLine().Append(text).ToString();
             }
         }
 
 
         private void WriteConfig(string shapeChangeConfigFullFilename)
         {
-            var xmlTextWriter = new XmlTextWriter(shapeChangeConfigFullFilename, Encoding.UTF8)
-            {
-                Formatting = Formatting.Indented,
-                Indentation = 2,
-                IndentChar = ' ',
-                QuoteChar = '"',
-            };
+            var writer = new ShapeChangeConfigurationFileWriter(shapeChangeConfigFullFilename, Encoding.UTF8);
 
-            xmlTextWriter.WriteStartDocument();
+            writer.WriteInitialElements(CreateInputSettings());
 
-            // Write first element
+            writer.WriteStartElement("transformers");
 
-            xmlTextWriter.WriteStartElement("ShapeChangeConfiguration", "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
-            xmlTextWriter.WriteAttributeString("xmlns", "xi", null, "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-            xmlTextWriter.WriteAttributeString("xmlns", "sc", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
-            xmlTextWriter.WriteAttributeString("xsi", "schemaLocation", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd");
+            writer.WriteLdProxyPreprocessingTransformers();
 
-            var inputSettings = new InputSettings(_eaProjectFilePath, _tmpDirectory, _selectedPackage.Name,
-                false);
-            xmlTextWriter.WriteInputElement(inputSettings);
+            writer.WriteEndElement();
 
-            WriteLogElement(xmlTextWriter);
+            writer.WriteStartElement("targets");
 
-            WriteTransformers(xmlTextWriter);
+            writer.WriteLdProxyTarget(CreateLdproxySettings());
 
-            xmlTextWriter.WriteStartElement("targets");
+            writer.WriteEndElement(); //close targets
 
-            var ldProxySettings = new LdproxySettings(Path.Combine(_resultDirectory, _ldProxyDirectory),
-                _templatesDirectory, textBoxLdProxyEpsgCode.Text, textBoxLdProxyServiceLabel.Text, _selectedPackage.Notes);
+            writer.WriteClosingElements();
+        }
 
-            xmlTextWriter.WriteLdProxyTarget(ldProxySettings);
+        private InputSettings CreateInputSettings()
+        {
+            return new InputSettings(_resultDirectory, _eaProjectFilePath, _tmpDirectory, _configDirectory,
+                _selectedPackage.Name, false);
+        }
 
-            var configFileSettings = new LdProxyConfigurationFileSettings()
+        private LdproxySettings CreateLdproxySettings()
+        {
+            return new LdproxySettings(Path.Combine(_resultDirectory, _ldProxyDirectory), _templatesDirectory,
+                textBoxLdProxyEpsgCode.Text, textBoxLdProxyServiceLabel.Text, _selectedPackage.Notes);
+        }
+
+        private LdProxyConfigurationFileSettings CreateLdProxyConfigurationFileSettings()
+        {
+            return new LdProxyConfigurationFileSettings()
             {
                 Id = _selectedPackage.Name.ToLower().Replace('-', '_').Replace('.', '_').Replace(' ', '_'),
                 ConnectionInfo = new ConnectionInfo
@@ -336,35 +335,6 @@ namespace Kartverket.ShapeChange.EA.Addin
                     PathSyntax = new PathSyntax(textBoxLdProxyDbPrimaryKey.Text),
                 }
             };
-
-            LdProxyConfigurationFileWriter.WriteConfigurationFile(Path.Combine(_resultDirectory, _ldProxyDirectory), configFileSettings);
-            
-
-            xmlTextWriter.WriteEndElement(); //close targets
-
-            xmlTextWriter.WriteEndElement(); //close ShapeChangeConfiguration
-
-            xmlTextWriter.WriteEndDocument();
-            xmlTextWriter.Close();
-        }
-        
-        private void WriteLogElement(XmlWriter writer)
-        {
-            writer.WriteStartElement("log");
-
-            writer.WriteParameterElement("reportLevel", Settings.Default.ReportLevel);
-            writer.WriteParameterElement("logFile", Path.Combine(_resultDirectory, "log.xml"));
-
-            writer.WriteEndElement();
-        }
-
-        private static void WriteTransformers(XmlWriter writer)
-        {
-            writer.WriteStartElement("transformers");
-
-            writer.WriteLdProxyPreprocessingTransformers();
-
-            writer.WriteEndElement(); //close transformers
         }
 
         private void ButtonTransform_Click(object sender, EventArgs e)
@@ -418,7 +388,6 @@ namespace Kartverket.ShapeChange.EA.Addin
         {
             GenerateLdProxyFiles();
         }
- 
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
@@ -444,14 +413,13 @@ namespace Kartverket.ShapeChange.EA.Addin
         {
             Process.Start(shapeChangeAddInHelpUrl);
         }
-        
 
-        private void textBoxLdProxyEpsgCode_Leave(object sender, EventArgs e)
+        private void TextBoxLdProxyEpsgCode_Leave(object sender, EventArgs e)
         {
             UpdateOrAddTaggedValue("epsgCode", (sender as TextBox).Text);
         }
 
-        private void textBoxLdProxyServiceLabel_Leave(object sender, EventArgs e)
+        private void TextBoxLdProxyServiceLabel_Leave(object sender, EventArgs e)
         {
             UpdateOrAddTaggedValue("SOSI_presentasjonsnavn", (sender as TextBox).Text);
         }
