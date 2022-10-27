@@ -7,7 +7,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using EA;
+using Kartverket.ShapeChange.EA.Addin.FeatureCatalogue;
 using Kartverket.ShapeChange.EA.Addin.Properties;
+using Kartverket.ShapeChange.EA.Addin.CodeList;
+using Kartverket.ShapeChange.EA.Addin.Util;
+using Kartverket.ShapeChange.EA.Addin.XmlSchema;
+using static Kartverket.ShapeChange.EA.Addin.Resources.FileNameResources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
 using File = System.IO.File;
 
@@ -16,6 +21,8 @@ namespace Kartverket.ShapeChange.EA.Addin
     public partial class frmGML : Form
     {
         private static Repository _repository;
+        private Package _selectedPackage;
+
         private delegate void SetTextCallback(string text);
 
         private string _applicationDirectory;
@@ -23,6 +30,7 @@ namespace Kartverket.ShapeChange.EA.Addin
         private string _resultDirectory;
         private string _featureCatalogueFormat;
         private string _featureCatalogueDirectory;
+        private string _templatesDirectory;
         private string _codeListDirectory;
         private string _configDirectory;
         private string _excelDirectory;
@@ -60,6 +68,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                 HandleError(applicationDirectoryErrorMessage);
                 return;
             }
+
             var eaDirectory = Path.GetDirectoryName(_eaProjectFilePath);
             if (eaDirectory == null)
             {
@@ -67,7 +76,21 @@ namespace Kartverket.ShapeChange.EA.Addin
                 return;
             }
 
-            _resultDirectory = Path.Combine(eaDirectory, $"gmlTransform_{_repository.GetTreeSelectedPackage().Name}");
+            _selectedPackage = _repository.GetTreeSelectedPackage();
+
+            _resultDirectory = Path.Combine(eaDirectory, $"shapeChange_{_selectedPackage.Name}");
+            _featureCatalogueDirectory = Path.Combine(_resultDirectory, "FC");
+            _templatesDirectory = Path.Combine(_applicationDirectory, "templates");
+            _codeListDirectory = "CL";
+            _configDirectory = Path.Combine(_resultDirectory, "config");
+            _excelDirectory = Path.Combine(_resultDirectory, "Excel");
+            _tmpDirectory = Path.Combine(_resultDirectory, "tmp");
+            _xsdDirectory = Path.Combine(_resultDirectory, "XSD");
+
+            _shapeChangeJarFullFilename = Path.IsPathRooted(Settings.Default.ShapeChangeJar)
+                ? Settings.Default.ShapeChangeJar
+                : Path.Combine(_applicationDirectory, Settings.Default.ShapeChangeJar);
+
 
             SetProperties();
 
@@ -84,9 +107,7 @@ namespace Kartverket.ShapeChange.EA.Addin
 
         private void SetProperties()
         {
-            var selectedPackage = _repository.GetTreeSelectedPackage();
-
-            foreach (TaggedValue taggedValue in selectedPackage.Element.TaggedValues)
+            foreach (TaggedValue taggedValue in _selectedPackage.Element.TaggedValues)
             {
                 switch (taggedValue.Name)
                 {
@@ -103,7 +124,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                         textBoxPropsXmlns.Text = taggedValue.Value;
                         break;
                     case "xsdEncodingRule":
-                        textBoxPropsEncoding.Text = taggedValue.Value;
+                        textBoxPropsXsdEncoding.Text = taggedValue.Value;
                         break;
                     case "SOSI_produsent":
                         textBoxFeatureCatalogueProducer.Text = taggedValue.Value;
@@ -111,29 +132,18 @@ namespace Kartverket.ShapeChange.EA.Addin
                 }
             }
 
-            _featureCatalogueDirectory = Path.Combine(_resultDirectory, "FC");
-            _codeListDirectory = Path.Combine(_resultDirectory, "CL");
-            _configDirectory = Path.Combine(_resultDirectory, "config");
-            _excelDirectory = Path.Combine(_resultDirectory, "Excel");
-            _tmpDirectory = Path.Combine(_resultDirectory, "tmp");
-            _xsdDirectory = Path.Combine(_resultDirectory, "XSD");
-            
-            _shapeChangeJarFullFilename = Path.IsPathRooted(Settings.Default.ShapeChangeJar)
-                ? Settings.Default.ShapeChangeJar
-                : Path.Combine(_applicationDirectory, Settings.Default.ShapeChangeJar);
-
             textBoxPropsCodeListDirectory.Text = _codeListDirectory;
             textBoxPropsEaProjectFile.Text = _eaProjectFilePath;
             textBoxPropsExcelDirectory.Text = _excelDirectory;
-            textBoxPropsFeatureCatalogueName.Text = selectedPackage.Name;
-            textBoxPropsXsdDirectory.Text = _xsdDirectory;
+            textBoxPropsFeatureCatalogueName.Text = _selectedPackage.Name;
+            textBoxPropsOutputDirectory.Text = _resultDirectory;
 
-            textBoxFeatureCatalogueDescription.Text = selectedPackage.Notes;
-            textBoxFeatureCatalogueDocxTemplateDirectory.Text = Path.Combine(_applicationDirectory, "templates");
+            textBoxFeatureCatalogueDescription.Text = _selectedPackage.Notes;
+            textBoxFeatureCatalogueDocxTemplateDirectory.Text = _templatesDirectory;
             textBoxFeatureCatalogueDocxTemplateFilename.Text = featureCatalogueTemplateFilename;
             textBoxFeatureCatalogueExportDirectory.Text = _featureCatalogueDirectory;
             textBoxFeatureCatalogueFeatureTerm.Text = featureCatalogueFeatureTerm;
-            textBoxFeatureCatalogueName.Text = selectedPackage.Name;
+            textBoxFeatureCatalogueName.Text = _selectedPackage.Name;
             textBoxFeatureCatalogueVersionDate.Text = DateTime.Now.ToShortDateString();
         }
 
@@ -147,6 +157,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
             else
                 errorProvider.SetError(textBoxPropsTargetNamespace, "");
+
             return bStatus;
         }
 
@@ -160,6 +171,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
             else
                 errorProvider.SetError(textBoxPropsXsdFile, "");
+
             return bStatus;
         }
 
@@ -173,6 +185,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
             else
                 errorProvider.SetError(textBoxPropsXmlns, "");
+
             return bStatus;
         }
 
@@ -186,29 +199,30 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
             else
                 errorProvider.SetError(textBoxPropsVersion, "");
+
             return bStatus;
         }
 
         private bool ValidateEncoding()
         {
             var bStatus = true;
-            if (textBoxPropsEncoding.Text == "")
+            if (textBoxPropsXsdEncoding.Text == "")
             {
-                errorProvider.SetError(textBoxPropsEncoding, validateEncodingErrorMessage);
+                errorProvider.SetError(textBoxPropsXsdEncoding, validateEncodingErrorMessage);
                 bStatus = false;
             }
             else
-                errorProvider.SetError(textBoxPropsEncoding, "");
+                errorProvider.SetError(textBoxPropsXsdEncoding, "");
+
             return bStatus;
         }
-
+        
         private void GenerateGml()
         {
             try
             {
-                var shapeChangeConfigurationXmlFullFilename = Path.Combine(_configDirectory, "ShapeChangeConfiguration.xml");
-                const string shapeChangeBatFilename = "runshapechange.bat";
-                var shapeChangeBatFullFilename = Path.Combine(_resultDirectory, shapeChangeBatFilename);
+                var shapeChangeConfigurationXmlFullFilename =
+                    Path.Combine(_configDirectory, ShapeChangeConfigurationXml);
 
                 EnsureRequiredDirectoriesExists();
 
@@ -217,11 +231,11 @@ namespace Kartverket.ShapeChange.EA.Addin
                 SetText(string.Format(logMessageCopyConfigFiles, _configDirectory));
                 CopyStandardShapeChangeConfigAndMappingFiles();
 
-                SetText("Write ShapeChangeConfiguration.xml");
-                WriteConfig(shapeChangeConfigurationXmlFullFilename, textBoxPropsFeatureCatalogueName.Text, textBoxPropsEncoding.Text);
+                SetText($"Write {ShapeChangeConfigurationXml}");
+                WriteConfig(shapeChangeConfigurationXmlFullFilename);
 
-                SetText($"Write {shapeChangeBatFilename}");
-                WriteShapeChangeBat(shapeChangeBatFullFilename, shapeChangeConfigurationXmlFullFilename);
+                SetText($"Write {RunShapeChangeBat}");
+                WriteShapeChangeBat(shapeChangeConfigurationXmlFullFilename);
 
                 SetText(DateTime.Now + " - Run ShapeChange ...");
 
@@ -240,12 +254,11 @@ namespace Kartverket.ShapeChange.EA.Addin
             Directory.CreateDirectory(_configDirectory);
             Directory.CreateDirectory(_excelDirectory);
             Directory.CreateDirectory(_featureCatalogueDirectory);
-            Directory.CreateDirectory(Path.Combine(_resultDirectory, "JSON"));
             Directory.CreateDirectory(Path.Combine(_resultDirectory, "RDF"));
             Directory.CreateDirectory(_tmpDirectory);
             if (checkBoxCodeLists.Checked)
             {
-                Directory.CreateDirectory(_codeListDirectory);
+                Directory.CreateDirectory(Path.Combine(_resultDirectory, _codeListDirectory));
             }
         }
 
@@ -271,12 +284,12 @@ namespace Kartverket.ShapeChange.EA.Addin
             File.Copy(Path.Combine(configSourceDirectory, "StandardRules.xml"), Path.Combine(_configDirectory, "StandardRules.xml"), true);
         }
 
-        private void WriteShapeChangeBat(string shapeChangeBatFullFilename, string shapeChangeConfigurationXmlFullFilename)
+        private void WriteShapeChangeBat(string shapeChangeConfigurationXmlFullFilename)
         {
             var stringBuilder = new StringBuilder($"\"{GetJavaRuntimeExecutablePath()}\" ");
             stringBuilder.Append(CreateRunShapeChangeArguments(shapeChangeConfigurationXmlFullFilename));
 
-            using (var stream = new FileStream(shapeChangeBatFullFilename, FileMode.Create))
+            using (var stream = new FileStream(Path.Combine(_resultDirectory, RunShapeChangeBat), FileMode.Create))
             {
                 using (var writer = new StreamWriter(stream, Encoding.GetEncoding(1252)))
                 {
@@ -321,9 +334,12 @@ namespace Kartverket.ShapeChange.EA.Addin
             var stringBuilder = new StringBuilder("-Dfile.encoding=UTF-8 ");
             if (!string.IsNullOrWhiteSpace(Settings.Default.ProxyHost))
             {
-                stringBuilder.Append($"-Dhttp.proxyHost={Settings.Default.ProxyHost} -Dhttp.proxyPort={Settings.Default.ProxyPort} ");
+                stringBuilder.Append(
+                    $"-Dhttp.proxyHost={Settings.Default.ProxyHost} -Dhttp.proxyPort={Settings.Default.ProxyPort} ");
             }
-            stringBuilder.Append($"-jar \"{_shapeChangeJarFullFilename}\" -c \"{shapeChangeConfigurationXmlFullFilename}\"");
+
+            stringBuilder.Append(
+                $"-jar \"{_shapeChangeJarFullFilename}\" -c \"{shapeChangeConfigurationXmlFullFilename}\"");
 
             return stringBuilder.ToString();
         }
@@ -372,7 +388,7 @@ namespace Kartverket.ShapeChange.EA.Addin
         }
 
 
-        private void WriteConfig(string shapeChangeConfigFullFilename, string schemaName, string encodingRule)
+        private void WriteConfig(string shapeChangeConfigFullFilename)
         {
             var xmlTextWriter = new XmlTextWriter(shapeChangeConfigFullFilename, Encoding.UTF8)
             {
@@ -386,268 +402,80 @@ namespace Kartverket.ShapeChange.EA.Addin
 
             // Write first element
 
-            xmlTextWriter.WriteStartElement("ShapeChangeConfiguration", "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
+            xmlTextWriter.WriteStartElement("ShapeChangeConfiguration",
+                "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
             xmlTextWriter.WriteAttributeString("xmlns", "xi", null, "http://www.w3.org/2001/XInclude");
             xmlTextWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-            xmlTextWriter.WriteAttributeString("xmlns", "sc", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
-            xmlTextWriter.WriteAttributeString("xsi", "schemaLocation", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd");
+            xmlTextWriter.WriteAttributeString("xmlns", "sc", null,
+                "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
+            xmlTextWriter.WriteAttributeString("xsi", "schemaLocation", null,
+                "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd");
 
-            xmlTextWriter.WriteStartElement("input");
-            
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "inputModelType");
-            xmlTextWriter.WriteAttributeString("value", "EA7");
-            xmlTextWriter.WriteEndElement();
+            var inputSettings = new InputSettings(_eaProjectFilePath, _tmpDirectory, textBoxFeatureCatalogueName.Text,
+                checkBoxFeatureCatalogueIncludeDiagrams.Checked);
+            xmlTextWriter.WriteInputElement(inputSettings);
 
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "inputFile");
-            xmlTextWriter.WriteAttributeString("value", _eaProjectFilePath);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "loadDiagrams");
-            xmlTextWriter.WriteAttributeString("value", checkBoxFeatureCatalogueIncludeDiagrams.Checked ? "true" : "false");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "tmpDirectory");
-            xmlTextWriter.WriteAttributeString("value", _tmpDirectory);
-            xmlTextWriter.WriteEndElement();
-
-            if (checkBoxFeatureCatalogueIncludeDiagrams.Checked)
-            {
-                xmlTextWriter.WriteStartElement("parameter");
-                xmlTextWriter.WriteAttributeString("name", "packageDiagramRegex");
-                xmlTextWriter.WriteAttributeString("value", @"^(.*[\W]+)?Overview([\W]+.*)?$");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("parameter");
-                xmlTextWriter.WriteAttributeString("name", "classDiagramRegex");
-                xmlTextWriter.WriteAttributeString("value", @"^(.*[\W]+)?NAME([\W]+.*)?$");
-                xmlTextWriter.WriteEndElement();
-            }
-
-            if (checkBoxMakeXsd.Checked || checkBoxCodeLists.Checked)
-            {
-                xmlTextWriter.WriteStartElement("parameter");
-                xmlTextWriter.WriteAttributeString("name", "appSchemaName");
-                xmlTextWriter.WriteAttributeString("value", schemaName);
-                xmlTextWriter.WriteEndElement();
-            }
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "addTaggedValues");
-            xmlTextWriter.WriteAttributeString("value", "SOSI_navn,NVDB_ID,SOSI_verdi");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "representTaggedValues");
-            xmlTextWriter.WriteAttributeString("value", "alwaysVoid,neverVoid,Code,lastChange,appliesTo,SOSI_navn,NVDB_ID,SOSI_verdi,SOSI_presentasjonsnavn,SOSI_bildeAvModellElement");
-            xmlTextWriter.WriteEndElement();
-
-            //<xi:include href="StandardAliases.xml"/>
-            xmlTextWriter.WriteStartElement("include", "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("href", Path.Combine(_configDirectory, "StandardAliases.xml"));
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement(); //close input
-
-            xmlTextWriter.WriteStartElement("log");
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "reportLevel");
-            xmlTextWriter.WriteAttributeString("value", Settings.Default.ReportLevel);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "logFile");
-            xmlTextWriter.WriteAttributeString("value", Path.Combine(_resultDirectory, "log.xml"));
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement(); //close log
+            WriteLogElement(xmlTextWriter);
 
             xmlTextWriter.WriteStartElement("targets");
 
-            xmlTextWriter.WriteStartElement("TargetXmlSchema");
-            xmlTextWriter.WriteAttributeString("class", "de.interactive_instruments.ShapeChange.Target.XmlSchema.XmlSchema");
-            xmlTextWriter.WriteAttributeString("mode", checkBoxMakeXsd.Checked ? "enabled" : "disabled");
+            if (checkBoxMakeXsd.Checked)
+            {
+                var xmlSchemaSettings = new XmlSchemaSettings(_resultDirectory, textBoxPropsXsdEncoding.Text,
+                    _configDirectory);
 
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "outputDirectory");
-            xmlTextWriter.WriteAttributeString("value", _xsdDirectory);
-            xmlTextWriter.WriteEndElement();
+                xmlTextWriter.WriteXmlSchemaTarget(xmlSchemaSettings);
+            }
 
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "defaultEncodingRule");
-            xmlTextWriter.WriteAttributeString("value", encodingRule);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("include", "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("href", Path.Combine(_configDirectory, "StandardRules.xml"));
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("include", "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("href", Path.Combine(_configDirectory, "StandardNamespaces.xml"));
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("include", "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("href", Path.Combine(_configDirectory, "StandardMapEntries.xml"));
-            xmlTextWriter.WriteEndElement();
-
-           
-
-            xmlTextWriter.WriteEndElement(); //close xsd
-           
-            
             if (checkBoxCodeLists.Checked)
             {
-                xmlTextWriter.WriteStartElement("Target");
-                xmlTextWriter.WriteAttributeString("class", "de.interactive_instruments.ShapeChange.Target.Codelists.CodelistDictionaries");
-                xmlTextWriter.WriteAttributeString("mode", "enabled");
+                var codeListSettings = new CodeListSettings(Path.Combine(_resultDirectory, _codeListDirectory),
+                    checkBoxGenerateEnums.Checked);
 
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "outputDirectory");
-                xmlTextWriter.WriteAttributeString("value", _codeListDirectory);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "enumerations");
-                xmlTextWriter.WriteAttributeString("value", checkBoxGenerateEnums.Checked ? "true" : "false");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteEndElement(); //close CL target
+                xmlTextWriter.WriteCodeListTarget(codeListSettings);
             }
 
             if (checkBoxFeatureCatalog.Checked)
             {
-                //Control document type
-                
-                xmlTextWriter.WriteStartElement("Target");
-                xmlTextWriter.WriteAttributeString("class", "de.interactive_instruments.ShapeChange.Target.FeatureCatalogue.FeatureCatalogue");
-                xmlTextWriter.WriteEndAttribute();
-                xmlTextWriter.WriteAttributeString("mode", "enabled");
+                var featureCatalogueSettings = new FeatureCatalogueSettings(_featureCatalogueDirectory,
+                    _templatesDirectory, textBoxFeatureCatalogueDocxTemplateFilename.Text, _featureCatalogueFormat,
+                    textBoxPropsFeatureCatalogueName.Text, textBoxFeatureCatalogueDescription.Text,
+                    textBoxPropsVersion.Text, textBoxFeatureCatalogueVersionDate.Text,
+                    textBoxFeatureCatalogueProducer.Text, textBoxFeatureCatalogueFeatureTerm.Text,
+                    checkBoxFeatureCatalogueIncludeDiagrams.Checked, checkBoxFeatureCatalogueIncludeTitle.Checked,
+                    checkBoxFeatureCatalogueIncludeVoidable.Checked);
 
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "outputDirectory");
-                xmlTextWriter.WriteAttributeString("value", _featureCatalogueDirectory);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "outputFilename");
-                xmlTextWriter.WriteAttributeString("value", "FeatureCatalogue");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "inheritedProperties");
-                xmlTextWriter.WriteAttributeString("value", "true");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "outputFormat");
-                xmlTextWriter.WriteAttributeString("value", _featureCatalogueFormat == "DOCX-COMPACT" ? "DOCX" : _featureCatalogueFormat);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "name");
-                xmlTextWriter.WriteAttributeString("value", schemaName);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "scope");
-                xmlTextWriter.WriteAttributeString("value", textBoxFeatureCatalogueDescription.Text);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "versionNumber");
-                xmlTextWriter.WriteAttributeString("value", textBoxPropsVersion.Text);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "versionDate");
-                xmlTextWriter.WriteAttributeString("value", textBoxFeatureCatalogueVersionDate.Text);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "producer");
-                xmlTextWriter.WriteAttributeString("value", textBoxFeatureCatalogueProducer.Text);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "xsltPfad");
-                xmlTextWriter.WriteAttributeString("value", _featureCatalogueDirectory);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "xsltPath");
-                xmlTextWriter.WriteAttributeString("value", _featureCatalogueDirectory);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "xslhtmlFile");
-                xmlTextWriter.WriteAttributeString("value", "html2.xsl");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "xslframeHtmlFileName");
-                xmlTextWriter.WriteAttributeString("value", "frameHtml.xsl");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "xsldocxFile");
-                xmlTextWriter.WriteAttributeString("value", _featureCatalogueFormat == "DOCX-COMPACT" ? "docx-compact.xsl" : "docx.xsl");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "docxTemplateFilePath");
-                xmlTextWriter.WriteAttributeString("value", Path.Combine(textBoxFeatureCatalogueDocxTemplateDirectory.Text, textBoxFeatureCatalogueDocxTemplateFilename.Text));
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "xslTransformerFactory");
-                xmlTextWriter.WriteAttributeString("value", "net.sf.saxon.TransformerFactoryImpl");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "featureTerm");
-                xmlTextWriter.WriteAttributeString("value", textBoxFeatureCatalogueFeatureTerm.Text);
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "includeDiagrams");
-                xmlTextWriter.WriteAttributeString("value", checkBoxFeatureCatalogueIncludeDiagrams.Checked ? "true" : "false");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "includeTitle");
-                xmlTextWriter.WriteAttributeString("value", checkBoxFeatureCatalogueIncludeTitle.Checked ? "true" : "false");
-                xmlTextWriter.WriteEndElement();
-
-                xmlTextWriter.WriteStartElement("targetParameter");
-                xmlTextWriter.WriteAttributeString("name", "includeVoidable");
-                xmlTextWriter.WriteAttributeString("value", checkBoxFeatureCatalogueIncludeVoidable.Checked ? "true" : "false");
-                xmlTextWriter.WriteEndElement();
-               
-                xmlTextWriter.WriteEndElement(); //close FeatureCatalog target
+                xmlTextWriter.WriteFeatureCatalogueTarget(featureCatalogueSettings);
             }
 
             xmlTextWriter.WriteEndElement(); //close targets
 
-            xmlTextWriter.WriteEndElement();
+            xmlTextWriter.WriteEndElement(); //close ShapeChangeConfiguration
 
             xmlTextWriter.WriteEndDocument();
             xmlTextWriter.Close();
         }
 
+        private void WriteLogElement(XmlWriter writer)
+        {
+            writer.WriteStartElement("log");
+
+            writer.WriteParameterElement("reportLevel", Settings.Default.ReportLevel);
+            writer.WriteParameterElement("logFile", Path.Combine(_resultDirectory, "log.xml"));
+
+            writer.WriteEndElement();
+        }
+
         private void ButtonTransform_Click(object sender, EventArgs e)
         {
             var isValid = true;
-            if (checkBoxCodeLists.Checked || checkBoxMakeXsd.Checked) 
+            if (checkBoxCodeLists.Checked || checkBoxMakeXsd.Checked)
             {
-                if (!ValidateEncoding() || !ValidateVersion() || !ValidateXmlns() || !ValidateXsdFile() || !ValidateTargetNamespace())
-                {
-                    isValid = false;
-                }
+                // the logical operator is supposed to be singular, as to avoid 'short-circuiting' 
+                isValid = ValidateEncoding() & ValidateVersion() & ValidateXmlns() & ValidateXsdFile() &
+                          ValidateTargetNamespace();
             }
+
             if (isValid)
             {
                 progressBar.Style = ProgressBarStyle.Marquee;
@@ -663,13 +491,13 @@ namespace Kartverket.ShapeChange.EA.Addin
                 var bw = new BackgroundWorker();
                 bw.DoWork += BackgroundWorker_DoWork;
                 bw.RunWorkerCompleted += delegate
-                                             {
-                                                 progressBar.Visible = false;
-                                                 buttonLogOpenLog.Enabled = true;
-                                                 buttonTransform.Enabled = true;
-                                                 buttonClose.Enabled = true;
-                                                 buttonLogOpenResult.Enabled = true;
-                                             };
+                {
+                    progressBar.Visible = false;
+                    buttonLogOpenLog.Enabled = true;
+                    buttonTransform.Enabled = true;
+                    buttonClose.Enabled = true;
+                    buttonLogOpenResult.Enabled = true;
+                };
                 bw.RunWorkerAsync();
             }
             else
@@ -678,18 +506,43 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
         }
 
+        private void UpdateOrAddTaggedValue(string tagName, string tagValue)
+        {
+            var selectedPackageElement = _selectedPackage.Element;
+
+            TaggedValue taggedValue = selectedPackageElement.TaggedValues.GetByName(tagName) ??
+                                      selectedPackageElement.TaggedValues.AddNew(tagName, "string");
+
+            taggedValue.Value = tagValue;
+            taggedValue.Update();
+            selectedPackageElement.Update();
+            selectedPackageElement.Refresh();
+        }
+
+        private void checkBoxCodeLists_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxCodeLists.Checked)
+            {
+                checkBoxGenerateEnums.Enabled = true;
+            }
+            else
+            {
+                checkBoxGenerateEnums.Enabled = false;
+                checkBoxGenerateEnums.Checked = false;
+            }
+        }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             GenerateGml();
         }
- 
+
 
         private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
-        
+
         private void ButtonLog_Click(object sender, EventArgs e)
         {
             Process.Start(Path.Combine(_resultDirectory, "log.html"));
@@ -709,23 +562,30 @@ namespace Kartverket.ShapeChange.EA.Addin
         {
             errorProvider.ContainerControl = this;
         }
-        
+
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
             Process.Start(shapeChangeAddInHelpUrl);
         }
-
-        private void checkBoxCodeLists_CheckedChanged(object sender, EventArgs e)
+        
+        private void textBoxPropsXsdFile_Leave(object sender, EventArgs e)
         {
-            if (checkBoxCodeLists.Checked)
-            {
-                checkBoxGenerateEnums.Enabled = true;
-            }
-            else
-            {
-                checkBoxGenerateEnums.Enabled = false;
-                checkBoxGenerateEnums.Checked = false;
-            }
+            UpdateOrAddTaggedValue("xsdDocument", (sender as TextBox).Text);
+        }
+
+        private void textBoxPropsTargetNamespace_Leave(object sender, EventArgs e)
+        {
+            UpdateOrAddTaggedValue("targetNamespace", (sender as TextBox).Text);
+        }
+
+        private void textBoxPropsXmlns_Leave(object sender, EventArgs e)
+        {
+            UpdateOrAddTaggedValue("xmlns", (sender as TextBox).Text);
+        }
+
+        private void textBoxPropsVersion_Leave(object sender, EventArgs e)
+        {
+            UpdateOrAddTaggedValue("version", (sender as TextBox).Text);
         }
     }
 }

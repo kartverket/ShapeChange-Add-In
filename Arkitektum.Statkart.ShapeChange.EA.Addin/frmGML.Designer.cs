@@ -45,31 +45,31 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.buttonLogOpenLog = new System.Windows.Forms.Button();
             this.buttonLogOpenResult = new System.Windows.Forms.Button();
             this.tabPageProjectProps = new System.Windows.Forms.TabPage();
-            this.textBoxPropsExcelDirectory = new System.Windows.Forms.TextBox();
-            this.labelPropsExportExcel = new System.Windows.Forms.Label();
-            this.textBoxPropsCodeListDirectory = new System.Windows.Forms.TextBox();
             this.labelPropsExportCodeLists = new System.Windows.Forms.Label();
+            this.textBoxPropsCodeListDirectory = new System.Windows.Forms.TextBox();
+            this.textBoxPropsTargetNamespace = new System.Windows.Forms.TextBox();
+            this.labelPropsExportExcel = new System.Windows.Forms.Label();
+            this.labelPropsTargetNamespace = new System.Windows.Forms.Label();
+            this.textBoxPropsExcelDirectory = new System.Windows.Forms.TextBox();
+            this.labelPropsTagTargetNamespace = new System.Windows.Forms.Label();
+            this.textBoxPropsXmlns = new System.Windows.Forms.TextBox();
+            this.labelPropsXmlns = new System.Windows.Forms.Label();
+            this.labelPropsTagXmlns = new System.Windows.Forms.Label();
+            this.textBoxPropsXsdEncoding = new System.Windows.Forms.TextBox();
+            this.labelPropsEncodingRules = new System.Windows.Forms.Label();
+            this.labelPropsTagXsdEncodingRule = new System.Windows.Forms.Label();
+            this.textBoxPropsVersion = new System.Windows.Forms.TextBox();
+            this.labelPropsVersion = new System.Windows.Forms.Label();
             this.labelPropsTagXsdDocument = new System.Windows.Forms.Label();
+            this.labelPropsTagVersion = new System.Windows.Forms.Label();
             this.textBoxPropsXsdFile = new System.Windows.Forms.TextBox();
-            this.textBoxPropsXsdDirectory = new System.Windows.Forms.TextBox();
             this.labelPropsGmlXsd = new System.Windows.Forms.Label();
-            this.labelPropsExportGml = new System.Windows.Forms.Label();
+            this.textBoxPropsOutputDirectory = new System.Windows.Forms.TextBox();
+            this.labelPropsOutputDirectory = new System.Windows.Forms.Label();
             this.textBoxPropsFeatureCatalogueName = new System.Windows.Forms.TextBox();
             this.textBoxPropsEaProjectFile = new System.Windows.Forms.TextBox();
-            this.textBoxPropsTargetNamespace = new System.Windows.Forms.TextBox();
-            this.textBoxPropsVersion = new System.Windows.Forms.TextBox();
-            this.textBoxPropsXmlns = new System.Windows.Forms.TextBox();
-            this.textBoxPropsEncoding = new System.Windows.Forms.TextBox();
             this.labelPropsFeatureCatalogueName = new System.Windows.Forms.Label();
-            this.labelPropsTagXsdEncodingRule = new System.Windows.Forms.Label();
-            this.labelPropsTagXmlns = new System.Windows.Forms.Label();
-            this.labelPropsTagVersion = new System.Windows.Forms.Label();
-            this.labelPropsTagTargetNamespace = new System.Windows.Forms.Label();
             this.labelPropsEaProjectFile = new System.Windows.Forms.Label();
-            this.labelPropsEncodingRules = new System.Windows.Forms.Label();
-            this.labelPropsTargetNamespace = new System.Windows.Forms.Label();
-            this.labelPropsXmlns = new System.Windows.Forms.Label();
-            this.labelPropsVersion = new System.Windows.Forms.Label();
             this.checkBoxGenerateEnums = new System.Windows.Forms.CheckBox();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageFeatureCatalogue = new System.Windows.Forms.TabPage();
@@ -103,9 +103,9 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // buttonTransform
             // 
-            this.buttonTransform.Location = new System.Drawing.Point(541, 12);
+            this.buttonTransform.Location = new System.Drawing.Point(569, 18);
             this.buttonTransform.Name = "buttonTransform";
-            this.buttonTransform.Size = new System.Drawing.Size(93, 23);
+            this.buttonTransform.Size = new System.Drawing.Size(95, 23);
             this.buttonTransform.TabIndex = 11;
             this.buttonTransform.Text = "Transform";
             this.buttonTransform.UseVisualStyleBackColor = true;
@@ -113,18 +113,18 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(11, 494);
+            this.progressBar.Location = new System.Drawing.Point(11, 445);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(622, 23);
+            this.progressBar.Size = new System.Drawing.Size(653, 23);
             this.progressBar.TabIndex = 1;
             this.progressBar.Visible = false;
             // 
             // buttonClose
             // 
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(541, 41);
+            this.buttonClose.Location = new System.Drawing.Point(569, 47);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(93, 23);
+            this.buttonClose.Size = new System.Drawing.Size(95, 23);
             this.buttonClose.TabIndex = 12;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -136,15 +136,16 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.checkBoxCodeLists.Location = new System.Drawing.Point(15, 51);
             this.checkBoxCodeLists.Name = "checkBoxCodeLists";
             this.checkBoxCodeLists.Size = new System.Drawing.Size(137, 17);
-            this.checkBoxCodeLists.TabIndex = 2;
+            this.checkBoxCodeLists.TabIndex = 1;
             this.checkBoxCodeLists.Text = "Make external codelists";
             this.checkBoxCodeLists.UseVisualStyleBackColor = true;
+            this.checkBoxCodeLists.CheckedChanged += new System.EventHandler(this.checkBoxCodeLists_CheckedChanged);
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(541, 96);
+            this.buttonSettings.Location = new System.Drawing.Point(569, 102);
             this.buttonSettings.Name = "buttonSettings";
-            this.buttonSettings.Size = new System.Drawing.Size(93, 23);
+            this.buttonSettings.Size = new System.Drawing.Size(95, 23);
             this.buttonSettings.TabIndex = 13;
             this.buttonSettings.Text = "Settings";
             this.buttonSettings.UseVisualStyleBackColor = true;
@@ -153,18 +154,16 @@ namespace Kartverket.ShapeChange.EA.Addin
             // checkBoxFeatureCatalog
             // 
             this.checkBoxFeatureCatalog.AutoSize = true;
-            this.checkBoxFeatureCatalog.Location = new System.Drawing.Point(167, 28);
+            this.checkBoxFeatureCatalog.Location = new System.Drawing.Point(211, 28);
             this.checkBoxFeatureCatalog.Name = "checkBoxFeatureCatalog";
             this.checkBoxFeatureCatalog.Size = new System.Drawing.Size(236, 17);
-            this.checkBoxFeatureCatalog.TabIndex = 1;
+            this.checkBoxFeatureCatalog.TabIndex = 4;
             this.checkBoxFeatureCatalog.Text = "Generate documentation (FeatureCatalogue)";
             this.checkBoxFeatureCatalog.UseVisualStyleBackColor = true;
             // 
             // checkBoxMakeXsd
             // 
             this.checkBoxMakeXsd.AutoSize = true;
-            this.checkBoxMakeXsd.Checked = true;
-            this.checkBoxMakeXsd.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxMakeXsd.Location = new System.Drawing.Point(15, 28);
             this.checkBoxMakeXsd.Name = "checkBoxMakeXsd";
             this.checkBoxMakeXsd.Size = new System.Drawing.Size(146, 17);
@@ -187,9 +186,9 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Location = new System.Drawing.Point(541, 461);
+            this.buttonHelp.Location = new System.Drawing.Point(569, 412);
             this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(93, 23);
+            this.buttonHelp.Size = new System.Drawing.Size(95, 23);
             this.buttonHelp.TabIndex = 14;
             this.buttonHelp.Text = "Help";
             this.buttonHelp.UseVisualStyleBackColor = true;
@@ -203,7 +202,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabPageLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageLog.Name = "tabPageLog";
             this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLog.Size = new System.Drawing.Size(515, 340);
+            this.tabPageLog.Size = new System.Drawing.Size(544, 295);
             this.tabPageLog.TabIndex = 1;
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
@@ -214,12 +213,12 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(502, 298);
+            this.textBoxLog.Size = new System.Drawing.Size(531, 278);
             this.textBoxLog.TabIndex = 0;
             // 
             // buttonLogOpenLog
             // 
-            this.buttonLogOpenLog.Location = new System.Drawing.Point(404, 314);
+            this.buttonLogOpenLog.Location = new System.Drawing.Point(922, 314);
             this.buttonLogOpenLog.Name = "buttonLogOpenLog";
             this.buttonLogOpenLog.Size = new System.Drawing.Size(104, 23);
             this.buttonLogOpenLog.TabIndex = 201;
@@ -229,7 +228,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // buttonLogOpenResult
             // 
-            this.buttonLogOpenResult.Location = new System.Drawing.Point(293, 314);
+            this.buttonLogOpenResult.Location = new System.Drawing.Point(811, 314);
             this.buttonLogOpenResult.Name = "buttonLogOpenResult";
             this.buttonLogOpenResult.Size = new System.Drawing.Size(104, 23);
             this.buttonLogOpenResult.TabIndex = 200;
@@ -240,21 +239,21 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // tabPageProjectProps
             // 
-            this.tabPageProjectProps.Controls.Add(this.textBoxPropsExcelDirectory);
-            this.tabPageProjectProps.Controls.Add(this.labelPropsExportExcel);
-            this.tabPageProjectProps.Controls.Add(this.textBoxPropsCodeListDirectory);
             this.tabPageProjectProps.Controls.Add(this.labelPropsExportCodeLists);
+            this.tabPageProjectProps.Controls.Add(this.textBoxPropsCodeListDirectory);
+            this.tabPageProjectProps.Controls.Add(this.labelPropsExportExcel);
+            this.tabPageProjectProps.Controls.Add(this.textBoxPropsExcelDirectory);
             this.tabPageProjectProps.Controls.Add(this.labelPropsTagXsdDocument);
             this.tabPageProjectProps.Controls.Add(this.textBoxPropsXsdFile);
-            this.tabPageProjectProps.Controls.Add(this.textBoxPropsXsdDirectory);
             this.tabPageProjectProps.Controls.Add(this.labelPropsGmlXsd);
-            this.tabPageProjectProps.Controls.Add(this.labelPropsExportGml);
+            this.tabPageProjectProps.Controls.Add(this.textBoxPropsOutputDirectory);
+            this.tabPageProjectProps.Controls.Add(this.labelPropsOutputDirectory);
             this.tabPageProjectProps.Controls.Add(this.textBoxPropsFeatureCatalogueName);
             this.tabPageProjectProps.Controls.Add(this.textBoxPropsEaProjectFile);
             this.tabPageProjectProps.Controls.Add(this.textBoxPropsTargetNamespace);
             this.tabPageProjectProps.Controls.Add(this.textBoxPropsVersion);
             this.tabPageProjectProps.Controls.Add(this.textBoxPropsXmlns);
-            this.tabPageProjectProps.Controls.Add(this.textBoxPropsEncoding);
+            this.tabPageProjectProps.Controls.Add(this.textBoxPropsXsdEncoding);
             this.tabPageProjectProps.Controls.Add(this.labelPropsFeatureCatalogueName);
             this.tabPageProjectProps.Controls.Add(this.labelPropsTagXsdEncodingRule);
             this.tabPageProjectProps.Controls.Add(this.labelPropsTagXmlns);
@@ -268,92 +267,204 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabPageProjectProps.Location = new System.Drawing.Point(4, 22);
             this.tabPageProjectProps.Name = "tabPageProjectProps";
             this.tabPageProjectProps.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProjectProps.Size = new System.Drawing.Size(515, 340);
+            this.tabPageProjectProps.Size = new System.Drawing.Size(544, 295);
             this.tabPageProjectProps.TabIndex = 0;
             this.tabPageProjectProps.Text = "Project properties";
             this.tabPageProjectProps.UseVisualStyleBackColor = true;
             // 
-            // textBoxPropsExcelDirectory
-            // 
-            this.textBoxPropsExcelDirectory.Enabled = false;
-            this.textBoxPropsExcelDirectory.Location = new System.Drawing.Point(94, 237);
-            this.textBoxPropsExcelDirectory.Name = "textBoxPropsExcelDirectory";
-            this.textBoxPropsExcelDirectory.Size = new System.Drawing.Size(411, 20);
-            this.textBoxPropsExcelDirectory.TabIndex = 120;
-            // 
-            // labelPropsExportExcel
-            // 
-            this.labelPropsExportExcel.AutoSize = true;
-            this.labelPropsExportExcel.Location = new System.Drawing.Point(22, 240);
-            this.labelPropsExportExcel.Name = "labelPropsExportExcel";
-            this.labelPropsExportExcel.Size = new System.Drawing.Size(66, 13);
-            this.labelPropsExportExcel.TabIndex = 119;
-            this.labelPropsExportExcel.Text = "Export Excel";
-            this.labelPropsExportExcel.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // textBoxPropsCodeListDirectory
-            // 
-            this.textBoxPropsCodeListDirectory.Enabled = false;
-            this.textBoxPropsCodeListDirectory.Location = new System.Drawing.Point(94, 212);
-            this.textBoxPropsCodeListDirectory.Name = "textBoxPropsCodeListDirectory";
-            this.textBoxPropsCodeListDirectory.Size = new System.Drawing.Size(411, 20);
-            this.textBoxPropsCodeListDirectory.TabIndex = 118;
-            // 
             // labelPropsExportCodeLists
             // 
             this.labelPropsExportCodeLists.AutoSize = true;
-            this.labelPropsExportCodeLists.Location = new System.Drawing.Point(7, 215);
+            this.labelPropsExportCodeLists.Location = new System.Drawing.Point(7, 235);
             this.labelPropsExportCodeLists.Name = "labelPropsExportCodeLists";
             this.labelPropsExportCodeLists.Size = new System.Drawing.Size(81, 13);
             this.labelPropsExportCodeLists.TabIndex = 117;
             this.labelPropsExportCodeLists.Text = "Export codelists";
             this.labelPropsExportCodeLists.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // textBoxPropsCodeListDirectory
+            // 
+            this.textBoxPropsCodeListDirectory.Enabled = false;
+            this.textBoxPropsCodeListDirectory.Location = new System.Drawing.Point(94, 232);
+            this.textBoxPropsCodeListDirectory.Name = "textBoxPropsCodeListDirectory";
+            this.textBoxPropsCodeListDirectory.Size = new System.Drawing.Size(415, 20);
+            this.textBoxPropsCodeListDirectory.TabIndex = 118;
+            // 
+            // textBoxPropsTargetNamespace
+            // 
+            this.textBoxPropsTargetNamespace.Location = new System.Drawing.Point(94, 101);
+            this.textBoxPropsTargetNamespace.Name = "textBoxPropsTargetNamespace";
+            this.textBoxPropsTargetNamespace.Size = new System.Drawing.Size(294, 20);
+            this.textBoxPropsTargetNamespace.TabIndex = 108;
+            this.textBoxPropsTargetNamespace.Leave += new System.EventHandler(this.textBoxPropsTargetNamespace_Leave);
+            // 
+            // labelPropsExportExcel
+            // 
+            this.labelPropsExportExcel.AutoSize = true;
+            this.labelPropsExportExcel.Location = new System.Drawing.Point(22, 260);
+            this.labelPropsExportExcel.Name = "labelPropsExportExcel";
+            this.labelPropsExportExcel.Size = new System.Drawing.Size(66, 13);
+            this.labelPropsExportExcel.TabIndex = 119;
+            this.labelPropsExportExcel.Text = "Export Excel";
+            this.labelPropsExportExcel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelPropsTargetNamespace
+            // 
+            this.labelPropsTargetNamespace.AutoSize = true;
+            this.labelPropsTargetNamespace.Location = new System.Drawing.Point(24, 104);
+            this.labelPropsTargetNamespace.Name = "labelPropsTargetNamespace";
+            this.labelPropsTargetNamespace.Size = new System.Drawing.Size(64, 13);
+            this.labelPropsTargetNamespace.TabIndex = 107;
+            this.labelPropsTargetNamespace.Text = "Namespace";
+            this.labelPropsTargetNamespace.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // textBoxPropsExcelDirectory
+            // 
+            this.textBoxPropsExcelDirectory.Enabled = false;
+            this.textBoxPropsExcelDirectory.Location = new System.Drawing.Point(94, 257);
+            this.textBoxPropsExcelDirectory.Name = "textBoxPropsExcelDirectory";
+            this.textBoxPropsExcelDirectory.Size = new System.Drawing.Size(415, 20);
+            this.textBoxPropsExcelDirectory.TabIndex = 120;
+            // 
+            // labelPropsTagTargetNamespace
+            // 
+            this.labelPropsTagTargetNamespace.AutoSize = true;
+            this.labelPropsTagTargetNamespace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPropsTagTargetNamespace.Location = new System.Drawing.Point(397, 104);
+            this.labelPropsTagTargetNamespace.Name = "labelPropsTagTargetNamespace";
+            this.labelPropsTagTargetNamespace.Size = new System.Drawing.Size(112, 13);
+            this.labelPropsTagTargetNamespace.TabIndex = 999;
+            this.labelPropsTagTargetNamespace.Text = "tag: targetNamespace";
+            // 
+            // textBoxPropsXmlns
+            // 
+            this.textBoxPropsXmlns.Location = new System.Drawing.Point(94, 127);
+            this.textBoxPropsXmlns.Name = "textBoxPropsXmlns";
+            this.textBoxPropsXmlns.Size = new System.Drawing.Size(294, 20);
+            this.textBoxPropsXmlns.TabIndex = 110;
+            this.textBoxPropsXmlns.Leave += new System.EventHandler(this.textBoxPropsXmlns_Leave);
+            // 
+            // labelPropsXmlns
+            // 
+            this.labelPropsXmlns.AutoSize = true;
+            this.labelPropsXmlns.Location = new System.Drawing.Point(55, 130);
+            this.labelPropsXmlns.Name = "labelPropsXmlns";
+            this.labelPropsXmlns.Size = new System.Drawing.Size(33, 13);
+            this.labelPropsXmlns.TabIndex = 109;
+            this.labelPropsXmlns.Text = "xmlns";
+            this.labelPropsXmlns.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelPropsTagXmlns
+            // 
+            this.labelPropsTagXmlns.AutoSize = true;
+            this.labelPropsTagXmlns.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPropsTagXmlns.Location = new System.Drawing.Point(397, 130);
+            this.labelPropsTagXmlns.Name = "labelPropsTagXmlns";
+            this.labelPropsTagXmlns.Size = new System.Drawing.Size(54, 13);
+            this.labelPropsTagXmlns.TabIndex = 999;
+            this.labelPropsTagXmlns.Text = "tag: xmlns";
+            // 
+            // textBoxPropsXsdEncoding
+            // 
+            this.textBoxPropsXsdEncoding.Enabled = false;
+            this.textBoxPropsXsdEncoding.Location = new System.Drawing.Point(94, 179);
+            this.textBoxPropsXsdEncoding.Name = "textBoxPropsXsdEncoding";
+            this.textBoxPropsXsdEncoding.Size = new System.Drawing.Size(294, 20);
+            this.textBoxPropsXsdEncoding.TabIndex = 114;
+            // 
+            // labelPropsEncodingRules
+            // 
+            this.labelPropsEncodingRules.AutoSize = true;
+            this.labelPropsEncodingRules.Location = new System.Drawing.Point(11, 182);
+            this.labelPropsEncodingRules.Name = "labelPropsEncodingRules";
+            this.labelPropsEncodingRules.Size = new System.Drawing.Size(77, 13);
+            this.labelPropsEncodingRules.TabIndex = 113;
+            this.labelPropsEncodingRules.Text = "Encoding rules";
+            this.labelPropsEncodingRules.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelPropsTagXsdEncodingRule
+            // 
+            this.labelPropsTagXsdEncodingRule.AutoSize = true;
+            this.labelPropsTagXsdEncodingRule.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPropsTagXsdEncodingRule.Location = new System.Drawing.Point(397, 182);
+            this.labelPropsTagXsdEncodingRule.Name = "labelPropsTagXsdEncodingRule";
+            this.labelPropsTagXsdEncodingRule.Size = new System.Drawing.Size(111, 13);
+            this.labelPropsTagXsdEncodingRule.TabIndex = 999;
+            this.labelPropsTagXsdEncodingRule.Text = "tag: xsdEncodingRule";
+            // 
+            // textBoxPropsVersion
+            // 
+            this.textBoxPropsVersion.Location = new System.Drawing.Point(94, 153);
+            this.textBoxPropsVersion.Name = "textBoxPropsVersion";
+            this.textBoxPropsVersion.Size = new System.Drawing.Size(294, 20);
+            this.textBoxPropsVersion.TabIndex = 112;
+            this.textBoxPropsVersion.Leave += new System.EventHandler(this.textBoxPropsVersion_Leave);
+            // 
+            // labelPropsVersion
+            // 
+            this.labelPropsVersion.AutoSize = true;
+            this.labelPropsVersion.Location = new System.Drawing.Point(46, 156);
+            this.labelPropsVersion.Name = "labelPropsVersion";
+            this.labelPropsVersion.Size = new System.Drawing.Size(42, 13);
+            this.labelPropsVersion.TabIndex = 111;
+            this.labelPropsVersion.Text = "Version";
+            this.labelPropsVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // labelPropsTagXsdDocument
             // 
             this.labelPropsTagXsdDocument.AutoSize = true;
             this.labelPropsTagXsdDocument.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPropsTagXsdDocument.Location = new System.Drawing.Point(397, 190);
+            this.labelPropsTagXsdDocument.Location = new System.Drawing.Point(397, 208);
             this.labelPropsTagXsdDocument.Name = "labelPropsTagXsdDocument";
             this.labelPropsTagXsdDocument.Size = new System.Drawing.Size(93, 13);
             this.labelPropsTagXsdDocument.TabIndex = 999;
             this.labelPropsTagXsdDocument.Text = "tag: xsdDocument";
             // 
+            // labelPropsTagVersion
+            // 
+            this.labelPropsTagVersion.AutoSize = true;
+            this.labelPropsTagVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPropsTagVersion.Location = new System.Drawing.Point(397, 156);
+            this.labelPropsTagVersion.Name = "labelPropsTagVersion";
+            this.labelPropsTagVersion.Size = new System.Drawing.Size(62, 13);
+            this.labelPropsTagVersion.TabIndex = 999;
+            this.labelPropsTagVersion.Text = "tag: version";
+            // 
             // textBoxPropsXsdFile
             // 
-            this.textBoxPropsXsdFile.Enabled = false;
-            this.textBoxPropsXsdFile.Location = new System.Drawing.Point(94, 187);
+            this.textBoxPropsXsdFile.Location = new System.Drawing.Point(94, 205);
             this.textBoxPropsXsdFile.Name = "textBoxPropsXsdFile";
             this.textBoxPropsXsdFile.Size = new System.Drawing.Size(294, 20);
             this.textBoxPropsXsdFile.TabIndex = 116;
-            // 
-            // textBoxPropsXsdDirectory
-            // 
-            this.textBoxPropsXsdDirectory.Enabled = false;
-            this.textBoxPropsXsdDirectory.Location = new System.Drawing.Point(94, 162);
-            this.textBoxPropsXsdDirectory.Name = "textBoxPropsXsdDirectory";
-            this.textBoxPropsXsdDirectory.Size = new System.Drawing.Size(411, 20);
-            this.textBoxPropsXsdDirectory.TabIndex = 114;
+            this.textBoxPropsXsdFile.Leave += new System.EventHandler(this.textBoxPropsXsdFile_Leave);
             // 
             // labelPropsGmlXsd
             // 
             this.labelPropsGmlXsd.AutoSize = true;
-            this.labelPropsGmlXsd.Location = new System.Drawing.Point(31, 190);
+            this.labelPropsGmlXsd.Location = new System.Drawing.Point(31, 208);
             this.labelPropsGmlXsd.Name = "labelPropsGmlXsd";
             this.labelPropsGmlXsd.Size = new System.Drawing.Size(57, 13);
             this.labelPropsGmlXsd.TabIndex = 115;
             this.labelPropsGmlXsd.Text = "GML (Xsd)";
             this.labelPropsGmlXsd.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // labelPropsExportGml
+            // textBoxPropsOutputDirectory
             // 
-            this.labelPropsExportGml.AutoSize = true;
-            this.labelPropsExportGml.Location = new System.Drawing.Point(25, 165);
-            this.labelPropsExportGml.Name = "labelPropsExportGml";
-            this.labelPropsExportGml.Size = new System.Drawing.Size(63, 13);
-            this.labelPropsExportGml.TabIndex = 113;
-            this.labelPropsExportGml.Text = "Export GML";
-            this.labelPropsExportGml.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.textBoxPropsOutputDirectory.Enabled = false;
+            this.textBoxPropsOutputDirectory.Location = new System.Drawing.Point(94, 69);
+            this.textBoxPropsOutputDirectory.Name = "textBoxPropsOutputDirectory";
+            this.textBoxPropsOutputDirectory.Size = new System.Drawing.Size(415, 20);
+            this.textBoxPropsOutputDirectory.TabIndex = 106;
+            // 
+            // labelPropsOutputDirectory
+            // 
+            this.labelPropsOutputDirectory.AutoSize = true;
+            this.labelPropsOutputDirectory.Location = new System.Drawing.Point(6, 72);
+            this.labelPropsOutputDirectory.Name = "labelPropsOutputDirectory";
+            this.labelPropsOutputDirectory.Size = new System.Drawing.Size(82, 13);
+            this.labelPropsOutputDirectory.TabIndex = 105;
+            this.labelPropsOutputDirectory.Text = "Output directory";
+            this.labelPropsOutputDirectory.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBoxPropsFeatureCatalogueName
             // 
@@ -369,92 +480,20 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             this.textBoxPropsEaProjectFile.AccessibleDescription = "Enterprise Architect Project File";
             this.textBoxPropsEaProjectFile.Enabled = false;
-            this.textBoxPropsEaProjectFile.Location = new System.Drawing.Point(94, 9);
+            this.textBoxPropsEaProjectFile.Location = new System.Drawing.Point(94, 10);
             this.textBoxPropsEaProjectFile.Name = "textBoxPropsEaProjectFile";
-            this.textBoxPropsEaProjectFile.Size = new System.Drawing.Size(413, 20);
+            this.textBoxPropsEaProjectFile.Size = new System.Drawing.Size(415, 20);
             this.textBoxPropsEaProjectFile.TabIndex = 102;
-            // 
-            // textBoxPropsTargetNamespace
-            // 
-            this.textBoxPropsTargetNamespace.Enabled = false;
-            this.textBoxPropsTargetNamespace.Location = new System.Drawing.Point(94, 62);
-            this.textBoxPropsTargetNamespace.Name = "textBoxPropsTargetNamespace";
-            this.textBoxPropsTargetNamespace.Size = new System.Drawing.Size(294, 20);
-            this.textBoxPropsTargetNamespace.TabIndex = 106;
-            // 
-            // textBoxPropsVersion
-            // 
-            this.textBoxPropsVersion.Enabled = false;
-            this.textBoxPropsVersion.Location = new System.Drawing.Point(94, 112);
-            this.textBoxPropsVersion.Name = "textBoxPropsVersion";
-            this.textBoxPropsVersion.Size = new System.Drawing.Size(294, 20);
-            this.textBoxPropsVersion.TabIndex = 110;
-            // 
-            // textBoxPropsXmlns
-            // 
-            this.textBoxPropsXmlns.Enabled = false;
-            this.textBoxPropsXmlns.Location = new System.Drawing.Point(94, 87);
-            this.textBoxPropsXmlns.Name = "textBoxPropsXmlns";
-            this.textBoxPropsXmlns.Size = new System.Drawing.Size(294, 20);
-            this.textBoxPropsXmlns.TabIndex = 108;
-            // 
-            // textBoxPropsEncoding
-            // 
-            this.textBoxPropsEncoding.Enabled = false;
-            this.textBoxPropsEncoding.Location = new System.Drawing.Point(94, 137);
-            this.textBoxPropsEncoding.Name = "textBoxPropsEncoding";
-            this.textBoxPropsEncoding.Size = new System.Drawing.Size(294, 20);
-            this.textBoxPropsEncoding.TabIndex = 112;
             // 
             // labelPropsFeatureCatalogueName
             // 
             this.labelPropsFeatureCatalogueName.AutoSize = true;
-            this.labelPropsFeatureCatalogueName.Location = new System.Drawing.Point(53, 40);
+            this.labelPropsFeatureCatalogueName.Location = new System.Drawing.Point(9, 40);
             this.labelPropsFeatureCatalogueName.Name = "labelPropsFeatureCatalogueName";
-            this.labelPropsFeatureCatalogueName.Size = new System.Drawing.Size(35, 13);
+            this.labelPropsFeatureCatalogueName.Size = new System.Drawing.Size(79, 13);
             this.labelPropsFeatureCatalogueName.TabIndex = 103;
-            this.labelPropsFeatureCatalogueName.Text = "Name";
+            this.labelPropsFeatureCatalogueName.Text = "Package name";
             this.labelPropsFeatureCatalogueName.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelPropsTagXsdEncodingRule
-            // 
-            this.labelPropsTagXsdEncodingRule.AutoSize = true;
-            this.labelPropsTagXsdEncodingRule.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPropsTagXsdEncodingRule.Location = new System.Drawing.Point(397, 140);
-            this.labelPropsTagXsdEncodingRule.Name = "labelPropsTagXsdEncodingRule";
-            this.labelPropsTagXsdEncodingRule.Size = new System.Drawing.Size(111, 13);
-            this.labelPropsTagXsdEncodingRule.TabIndex = 999;
-            this.labelPropsTagXsdEncodingRule.Text = "tag: xsdEncodingRule";
-            // 
-            // labelPropsTagXmlns
-            // 
-            this.labelPropsTagXmlns.AutoSize = true;
-            this.labelPropsTagXmlns.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPropsTagXmlns.Location = new System.Drawing.Point(397, 90);
-            this.labelPropsTagXmlns.Name = "labelPropsTagXmlns";
-            this.labelPropsTagXmlns.Size = new System.Drawing.Size(54, 13);
-            this.labelPropsTagXmlns.TabIndex = 999;
-            this.labelPropsTagXmlns.Text = "tag: xmlns";
-            // 
-            // labelPropsTagVersion
-            // 
-            this.labelPropsTagVersion.AutoSize = true;
-            this.labelPropsTagVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPropsTagVersion.Location = new System.Drawing.Point(397, 115);
-            this.labelPropsTagVersion.Name = "labelPropsTagVersion";
-            this.labelPropsTagVersion.Size = new System.Drawing.Size(62, 13);
-            this.labelPropsTagVersion.TabIndex = 999;
-            this.labelPropsTagVersion.Text = "tag: version";
-            // 
-            // labelPropsTagTargetNamespace
-            // 
-            this.labelPropsTagTargetNamespace.AutoSize = true;
-            this.labelPropsTagTargetNamespace.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPropsTagTargetNamespace.Location = new System.Drawing.Point(397, 65);
-            this.labelPropsTagTargetNamespace.Name = "labelPropsTagTargetNamespace";
-            this.labelPropsTagTargetNamespace.Size = new System.Drawing.Size(112, 13);
-            this.labelPropsTagTargetNamespace.TabIndex = 999;
-            this.labelPropsTagTargetNamespace.Text = "tag: targetNamespace";
             // 
             // labelPropsEaProjectFile
             // 
@@ -466,53 +505,14 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelPropsEaProjectFile.Text = "EA project file";
             this.labelPropsEaProjectFile.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // labelPropsEncodingRules
-            // 
-            this.labelPropsEncodingRules.AutoSize = true;
-            this.labelPropsEncodingRules.Location = new System.Drawing.Point(11, 140);
-            this.labelPropsEncodingRules.Name = "labelPropsEncodingRules";
-            this.labelPropsEncodingRules.Size = new System.Drawing.Size(77, 13);
-            this.labelPropsEncodingRules.TabIndex = 111;
-            this.labelPropsEncodingRules.Text = "Encoding rules";
-            this.labelPropsEncodingRules.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelPropsTargetNamespace
-            // 
-            this.labelPropsTargetNamespace.AutoSize = true;
-            this.labelPropsTargetNamespace.Location = new System.Drawing.Point(24, 65);
-            this.labelPropsTargetNamespace.Name = "labelPropsTargetNamespace";
-            this.labelPropsTargetNamespace.Size = new System.Drawing.Size(64, 13);
-            this.labelPropsTargetNamespace.TabIndex = 105;
-            this.labelPropsTargetNamespace.Text = "Namespace";
-            this.labelPropsTargetNamespace.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelPropsXmlns
-            // 
-            this.labelPropsXmlns.AutoSize = true;
-            this.labelPropsXmlns.Location = new System.Drawing.Point(55, 90);
-            this.labelPropsXmlns.Name = "labelPropsXmlns";
-            this.labelPropsXmlns.Size = new System.Drawing.Size(33, 13);
-            this.labelPropsXmlns.TabIndex = 107;
-            this.labelPropsXmlns.Text = "xmlns";
-            this.labelPropsXmlns.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // labelPropsVersion
-            // 
-            this.labelPropsVersion.AutoSize = true;
-            this.labelPropsVersion.Location = new System.Drawing.Point(46, 115);
-            this.labelPropsVersion.Name = "labelPropsVersion";
-            this.labelPropsVersion.Size = new System.Drawing.Size(42, 13);
-            this.labelPropsVersion.TabIndex = 109;
-            this.labelPropsVersion.Text = "Version";
-            this.labelPropsVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // checkBoxGenerateEnums
             // 
             this.checkBoxGenerateEnums.AutoSize = true;
-            this.checkBoxGenerateEnums.Location = new System.Drawing.Point(15, 74);
+            this.checkBoxGenerateEnums.Enabled = false;
+            this.checkBoxGenerateEnums.Location = new System.Drawing.Point(24, 74);
             this.checkBoxGenerateEnums.Name = "checkBoxGenerateEnums";
             this.checkBoxGenerateEnums.Size = new System.Drawing.Size(199, 17);
-            this.checkBoxGenerateEnums.TabIndex = 3;
+            this.checkBoxGenerateEnums.TabIndex = 2;
             this.checkBoxGenerateEnums.Text = "Encode enumerations as dictionaries";
             this.checkBoxGenerateEnums.UseVisualStyleBackColor = true;
             // 
@@ -524,7 +524,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabControl.Location = new System.Drawing.Point(11, 118);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(523, 366);
+            this.tabControl.Size = new System.Drawing.Size(552, 321);
             this.tabControl.TabIndex = 10;
             // 
             // tabPageFeatureCatalogue
@@ -553,7 +553,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabPageFeatureCatalogue.Location = new System.Drawing.Point(4, 22);
             this.tabPageFeatureCatalogue.Name = "tabPageFeatureCatalogue";
             this.tabPageFeatureCatalogue.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFeatureCatalogue.Size = new System.Drawing.Size(515, 340);
+            this.tabPageFeatureCatalogue.Size = new System.Drawing.Size(544, 295);
             this.tabPageFeatureCatalogue.TabIndex = 2;
             this.tabPageFeatureCatalogue.Text = "FeatureCatalogue";
             this.tabPageFeatureCatalogue.UseVisualStyleBackColor = true;
@@ -757,7 +757,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(642, 531);
+            this.ClientSize = new System.Drawing.Size(670, 480);
             this.Controls.Add(this.checkBoxGenerateEnums);
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.tabControl);
@@ -805,33 +805,17 @@ namespace Kartverket.ShapeChange.EA.Addin
         private System.Windows.Forms.TabPage tabPageFeatureCatalogue;
         private System.Windows.Forms.TabPage tabPageLog;
         private System.Windows.Forms.TabPage tabPageProjectProps;
-
-        // Project Properties tab
         private System.Windows.Forms.Label labelPropsEaProjectFile;
-        private System.Windows.Forms.Label labelPropsEncodingRules;
         private System.Windows.Forms.Label labelPropsExportCodeLists;
         private System.Windows.Forms.Label labelPropsExportExcel;
         private System.Windows.Forms.Label labelPropsExportGml;
         private System.Windows.Forms.Label labelPropsFeatureCatalogueName;
-        private System.Windows.Forms.Label labelPropsGmlXsd;
-        private System.Windows.Forms.Label labelPropsTagTargetNamespace;
-        private System.Windows.Forms.Label labelPropsTagVersion;
-        private System.Windows.Forms.Label labelPropsTagXmlns;
-        private System.Windows.Forms.Label labelPropsTagXsdDocument;
-        private System.Windows.Forms.Label labelPropsTagXsdEncodingRule;
-        private System.Windows.Forms.Label labelPropsTargetNamespace;
-        private System.Windows.Forms.Label labelPropsVersion;
-        private System.Windows.Forms.Label labelPropsXmlns;
+        private System.Windows.Forms.Label labelPropsOutputDirectory;
         private System.Windows.Forms.TextBox textBoxPropsCodeListDirectory;
         private System.Windows.Forms.TextBox textBoxPropsEaProjectFile;
-        private System.Windows.Forms.TextBox textBoxPropsEncoding;
         private System.Windows.Forms.TextBox textBoxPropsExcelDirectory;
         private System.Windows.Forms.TextBox textBoxPropsFeatureCatalogueName;
-        private System.Windows.Forms.TextBox textBoxPropsTargetNamespace;
-        private System.Windows.Forms.TextBox textBoxPropsVersion;
-        private System.Windows.Forms.TextBox textBoxPropsXmlns;
-        private System.Windows.Forms.TextBox textBoxPropsXsdDirectory;
-        private System.Windows.Forms.TextBox textBoxPropsXsdFile;
+        private System.Windows.Forms.TextBox textBoxPropsOutputDirectory;
 
         // Log tab
         private System.Windows.Forms.Button buttonLogOpenLog;
@@ -860,5 +844,20 @@ namespace Kartverket.ShapeChange.EA.Addin
         private System.Windows.Forms.TextBox textBoxFeatureCatalogueName;
         private System.Windows.Forms.TextBox textBoxFeatureCatalogueProducer;
         private System.Windows.Forms.TextBox textBoxFeatureCatalogueVersionDate;
+        private System.Windows.Forms.TextBox textBoxPropsTargetNamespace;
+        private System.Windows.Forms.Label labelPropsTargetNamespace;
+        private System.Windows.Forms.Label labelPropsTagTargetNamespace;
+        private System.Windows.Forms.TextBox textBoxPropsXmlns;
+        private System.Windows.Forms.Label labelPropsXmlns;
+        private System.Windows.Forms.Label labelPropsTagXmlns;
+        private System.Windows.Forms.TextBox textBoxPropsXsdEncoding;
+        private System.Windows.Forms.Label labelPropsEncodingRules;
+        private System.Windows.Forms.Label labelPropsTagXsdEncodingRule;
+        private System.Windows.Forms.TextBox textBoxPropsVersion;
+        private System.Windows.Forms.Label labelPropsVersion;
+        private System.Windows.Forms.Label labelPropsTagXsdDocument;
+        private System.Windows.Forms.Label labelPropsTagVersion;
+        private System.Windows.Forms.TextBox textBoxPropsXsdFile;
+        private System.Windows.Forms.Label labelPropsGmlXsd;
     }
 }

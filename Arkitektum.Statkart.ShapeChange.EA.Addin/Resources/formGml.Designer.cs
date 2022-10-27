@@ -19,7 +19,7 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class formGml {
@@ -151,11 +151,38 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Epsg code must be set. I.e. 4258.
+        /// </summary>
+        internal static string validateEpsgCodeErrorMessage {
+            get {
+                return ResourceManager.GetString("validateEpsgCodeErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The JSON base URI must be set. I.e. http://skjema.geonorge.no/standard/geosynkronisering/1.3/json/.
+        /// </summary>
+        internal static string validateJsonBaseUriErrorMessage {
+            get {
+                return ResourceManager.GetString("validateJsonBaseUriErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Namespace must be set. I.e. http://skjema.geonorge.no/sosi/produktspesifikasjon/navn.
         /// </summary>
         internal static string validateNamespaceErrorMessage {
             get {
                 return ResourceManager.GetString("validateNamespaceErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of the service.
+        /// </summary>
+        internal static string validateSosiRepresentationNameErrorMessage {
+            get {
+                return ResourceManager.GetString("validateSosiRepresentationNameErrorMessage", resourceCulture);
             }
         }
         
