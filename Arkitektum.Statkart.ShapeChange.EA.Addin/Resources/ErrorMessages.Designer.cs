@@ -22,14 +22,14 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class formGml {
+    internal class ErrorMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal formGml() {
+        internal ErrorMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kartverket.ShapeChange.EA.Addin.Resources.formGml", typeof(formGml).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages", typeof(ErrorMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,56 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Objekttype.
+        ///   Looks up a localized string similar to Unable to resolve application directory..
         /// </summary>
-        internal static string featureCatalogueFeatureTerm {
+        internal static string applicationDirectoryErrorMessage {
             get {
-                return ResourceManager.GetString("featureCatalogueFeatureTerm", resourceCulture);
+                return ResourceManager.GetString("applicationDirectoryErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to template.docx.
+        ///   Looks up a localized string similar to Unable to resolve EA project directory..
         /// </summary>
-        internal static string featureCatalogueTemplateFilename {
+        internal static string eaProjectDirectoryErrorMessage {
             get {
-                return ResourceManager.GetString("featureCatalogueTemplateFilename", resourceCulture);
+                return ResourceManager.GetString("eaProjectDirectoryErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to templates.
+        ///   Looks up a localized string similar to Tagged values missing for correct generation. Please update tagged values..
         /// </summary>
-        internal static string templatesDirectory {
+        internal static string missingTaggedValuesMessage {
             get {
-                return ResourceManager.GetString("templatesDirectory", resourceCulture);
+                return ResourceManager.GetString("missingTaggedValuesMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Encoding must be set. I.e. &apos;iso19136_2007&apos; or &apos;iso19136_2007_INSPIRE_Extensions&apos;.
+        ///   Looks up a localized string similar to Please select a package with stereotype applicationSchema..
         /// </summary>
-        internal static string validateEncodingErrorMessage {
+        internal static string unsupportedPackageStereotypeErrorMessage {
             get {
-                return ResourceManager.GetString("validateEncodingErrorMessage", resourceCulture);
+                return ResourceManager.GetString("unsupportedPackageStereotypeErrorMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Namespace must be set. I.e. http://skjema.geonorge.no/sosi/produktspesifikasjon/navn.
+        ///   Looks up a localized string similar to Missing data.
         /// </summary>
-        internal static string validateNamespaceErrorMessage {
+        internal static string unsupportedPackageStereotypeErrorTitle {
             get {
-                return ResourceManager.GetString("validateNamespaceErrorMessage", resourceCulture);
+                return ResourceManager.GetString("unsupportedPackageStereotypeErrorTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Xmlns must be set. Usually sosi.
+        ///   Looks up a localized string similar to Version must be set. I.e. &apos;4.3&apos; or &apos;1.0RC&apos;.
         /// </summary>
-        internal static string validateXmlnsErrorMessage {
+        internal static string validateVersionErrorMessage {
             get {
-                return ResourceManager.GetString("validateXmlnsErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Xsd file must have a name. I.e. &apos;name.xsd&apos;.
-        /// </summary>
-        internal static string validateXsdErrorMessage {
-            get {
-                return ResourceManager.GetString("validateXsdErrorMessage", resourceCulture);
+                return ResourceManager.GetString("validateVersionErrorMessage", resourceCulture);
             }
         }
     }

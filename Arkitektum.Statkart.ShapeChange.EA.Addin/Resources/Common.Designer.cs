@@ -22,14 +22,14 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class formGml {
+    internal class Common {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal formGml() {
+        internal Common() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kartverket.ShapeChange.EA.Addin.Resources.formGml", typeof(formGml).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kartverket.ShapeChange.EA.Addin.Resources.Common", typeof(Common).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,11 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Objekttype.
+        ///   Looks up a localized string similar to https://kartverket.no/geodataarbeid/Standarder/SOSI/Programmer-og-verktoy/.
         /// </summary>
-        internal static string featureCatalogueFeatureTerm {
+        internal static string shapeChangeAddInHelpUrl {
             get {
-                return ResourceManager.GetString("featureCatalogueFeatureTerm", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to template.docx.
-        /// </summary>
-        internal static string featureCatalogueTemplateFilename {
-            get {
-                return ResourceManager.GetString("featureCatalogueTemplateFilename", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to templates.
-        /// </summary>
-        internal static string templatesDirectory {
-            get {
-                return ResourceManager.GetString("templatesDirectory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Encoding must be set. I.e. &apos;iso19136_2007&apos; or &apos;iso19136_2007_INSPIRE_Extensions&apos;.
-        /// </summary>
-        internal static string validateEncodingErrorMessage {
-            get {
-                return ResourceManager.GetString("validateEncodingErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Namespace must be set. I.e. http://skjema.geonorge.no/sosi/produktspesifikasjon/navn.
-        /// </summary>
-        internal static string validateNamespaceErrorMessage {
-            get {
-                return ResourceManager.GetString("validateNamespaceErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Xmlns must be set. Usually sosi.
-        /// </summary>
-        internal static string validateXmlnsErrorMessage {
-            get {
-                return ResourceManager.GetString("validateXmlnsErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Xsd file must have a name. I.e. &apos;name.xsd&apos;.
-        /// </summary>
-        internal static string validateXsdErrorMessage {
-            get {
-                return ResourceManager.GetString("validateXsdErrorMessage", resourceCulture);
+                return ResourceManager.GetString("shapeChangeAddInHelpUrl", resourceCulture);
             }
         }
     }

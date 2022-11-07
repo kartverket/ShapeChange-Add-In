@@ -8,7 +8,10 @@ using System.Windows.Forms;
 using System.Xml;
 using EA;
 using Kartverket.ShapeChange.EA.Addin.Properties;
+using static Kartverket.ShapeChange.EA.Addin.Resources.Common;
+using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
+using static Kartverket.ShapeChange.EA.Addin.Resources.LogMessages;
 using File = System.IO.File;
 
 namespace Kartverket.ShapeChange.EA.Addin

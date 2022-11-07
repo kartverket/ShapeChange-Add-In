@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using EA;
+using Kartverket.ShapeChange.EA.Addin.Resources;
+using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 
 namespace Kartverket.ShapeChange.EA.Addin
 {
@@ -26,7 +28,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                     
                     return "-&ShapeChange";
                 case "-&ShapeChange":
-                    string[] ar = { "&Transform...", "About..." };
+                    string[] ar = { "&Transform GML...", "Generate &JSON schema...", "About..." };
                     return ar;
             
             }
@@ -67,25 +69,23 @@ namespace Kartverket.ShapeChange.EA.Addin
         {
             switch (ItemName)
             {
-                case "&Transform...":
-                    if (Repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema")
+                case "&Transform GML...":
+                    if (SelectedPackageIsApplicationSchema(Repository))
                     {
                         var formGml = new frmGML();
                         formGml.SetRepository(Repository);
                         formGml.ShowDialog();
                     }
-                    else
-                        MessageBox.Show("Please select a package with stereotype applicationSchema.", "Missing data");
-                    
                     break;
-                
-                //case "Generer &WSDL...":
 
-                //    frmWsdlXsd frmWsdl = new frmWsdlXsd();
-                //    frmWsdl.SetRepository(Repository);
-                //    frmWsdl.ShowDialog();
-                //    break;
-                
+                case "Generate &JSON schema...":
+                    if (SelectedPackageIsApplicationSchema(Repository))
+                    {
+                        var formJson = new FrmJson();
+                        formJson.SetRepository(Repository);
+                        formJson.ShowDialog();
+                    }
+                    break;
                 case "About...":
                     var aboutForm = new frmAbout();
                     aboutForm.ShowDialog();
@@ -93,10 +93,19 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
         }
 
-        public string WriteToOutputwindow(Repository repository, object args)
+        private static bool SelectedPackageIsApplicationSchema(IDualRepository repository)
         {
-            string[] currentpackage = (string[])args;
-            string melding = currentpackage[0];
+            if (repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema")
+                return true;
+
+            MessageBox.Show(unsupportedPackageStereotypeErrorMessage, unsupportedPackageStereotypeErrorTitle);
+            return false;
+        }
+
+        public string WriteToOutputWindow(Repository repository, object args)
+        {
+            string[] currentPackage = (string[])args;
+            string melding = currentPackage[0];
             repository.WriteOutput("System", melding, 0);
             return "";
         }
