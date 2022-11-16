@@ -6,6 +6,7 @@
 		<rule name="rule-xsd-all-notEncoded"/>
 		<rule name="rule-xsd-pkg-schematron"/>
 		<rule name="rule-xsd-prop-nillable"/>
+		<rule name="rule-xsd-prop-targetCodeListURI"/>
 	</EncodingRule>
 	<EncodingRule name="sosi" extends="iso19136_2007">
 		<rule name="rule-xsd-prop-length-size-pattern"/>
@@ -13,6 +14,7 @@
 		<rule name="rule-xsd-all-notEncoded"/>
 		<rule name="rule-xsd-pkg-schematron"/>
 		<rule name="rule-xsd-prop-nillable"/>
+		<rule name="rule-xsd-prop-targetCodeListURI"/>
 	</EncodingRule>
 	<EncodingRule name="iso19136_2007_INSPIRE_Extensions" extends="gml33">
 		<rule name="req-all-all-documentation"/>
