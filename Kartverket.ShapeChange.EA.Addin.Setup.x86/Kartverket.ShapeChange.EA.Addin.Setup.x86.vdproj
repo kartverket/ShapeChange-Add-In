@@ -351,6 +351,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_8F1234AAFB95D7FAB1F0F763325CAD1E"
+        "OwnerKey" = "8:_278D87B6DB7241F389D203B7C9CFED3C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_8F852B7E17AAD328F6F387353699F7A2"
         "OwnerKey" = "8:_278D87B6DB7241F389D203B7C9CFED3C"
         "MsmSig" = "8:_UNDEFINED"
@@ -479,6 +485,12 @@
         {
         "MsmKey" = "8:_C165E7FB0602CEE3E70FC282E904C37A"
         "OwnerKey" = "8:_278D87B6DB7241F389D203B7C9CFED3C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C165E7FB0602CEE3E70FC282E904C37A"
+        "OwnerKey" = "8:_8F1234AAFB95D7FAB1F0F763325CAD1E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -713,12 +725,6 @@
         {
         "MsmKey" = "8:_FFA494B0699FF46241BB0BA07302CB6C"
         "OwnerKey" = "8:_278D87B6DB7241F389D203B7C9CFED3C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_20F36B7A993F76C1FAF2DB28695A04FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1375,6 +1381,12 @@
         "OwnerKey" = "8:_CFD462757E44A73956761B60E765FAC8"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_20F36B7A993F76C1FAF2DB28695A04FC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -1415,7 +1427,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Kartverket.ShapeChange.EA.Addin.Setup.x86.msi"
+        "OutputFilename" = "8:..\\..\\..\\..\\OneDrive - Arkitektum AS\\Geonorge\\GEOPORTAL-5346\\Kartverket.ShapeChange.EA.Addin.Setup.x86.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -3119,6 +3131,37 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8F1234AAFB95D7FAB1F0F763325CAD1E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Microsoft.OpenApi, Version=1.4.3.0, Culture=neutral, PublicKeyToken=3f5743946376f042, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_8F1234AAFB95D7FAB1F0F763325CAD1E"
+                    {
+                    "Name" = "8:Microsoft.OpenApi.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Microsoft.OpenApi.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_BBE5B0272E7941988E0762AA76E8E443"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -4975,7 +5018,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ShapeChange EA Add-In (x86)"
         "ProductCode" = "8:{76FF2FF0-1068-4529-B4D2-19DBB18DA19B}"
-        "PackageCode" = "8:{2D0D1533-6AD1-411D-8F0D-DB933B17F967}"
+        "PackageCode" = "8:{ABD1DAEB-582C-4DD8-B60C-A692E07B9173}"
         "UpgradeCode" = "8:{238BDFCA-77FF-4C1D-914A-4A3C71BD1360}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
