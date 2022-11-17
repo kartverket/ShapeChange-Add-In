@@ -173,7 +173,7 @@
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileSettings.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileWriter.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyEncodingRulesWriter.cs" />
-    <Compile Include="XmlWriters\Targets\LdProxy\LdproxySettings.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxySettings.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyWriter.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyMapEntryWriter.cs" />
     <Compile Include="Main.cs" />

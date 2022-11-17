@@ -302,7 +302,7 @@ namespace Kartverket.ShapeChange.EA.Addin
 
             writer.WriteStartElement("targets");
 
-            writer.WriteLdProxyTarget(CreateLdproxySettings());
+            writer.WriteLdProxyTarget(CreateLdProxySettings());
 
             writer.WriteEndElement(); //close targets
 
@@ -315,9 +315,9 @@ namespace Kartverket.ShapeChange.EA.Addin
                 _selectedPackage.Name, false);
         }
 
-        private LdproxySettings CreateLdproxySettings()
+        private LdProxySettings CreateLdProxySettings()
         {
-            return new LdproxySettings(Path.Combine(_resultDirectory, _ldProxyDirectory), _templatesDirectory,
+            return new LdProxySettings(Path.Combine(_resultDirectory, _ldProxyDirectory), _templatesDirectory,
                 textBoxLdProxyEpsgCode.Text, textBoxLdProxyServiceLabel.Text, _selectedPackage.Notes);
         }
 

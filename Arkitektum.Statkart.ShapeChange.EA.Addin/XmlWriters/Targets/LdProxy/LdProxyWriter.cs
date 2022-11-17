@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Xml;
 using Kartverket.ShapeChange.EA.Addin.Util;
 using static Kartverket.ShapeChange.EA.Addin.Resources.LdProxy;
@@ -7,7 +7,7 @@ namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 {
     internal static class LdProxyWriter
     {
-        public static void WriteLdProxyTarget(this XmlWriter writer, LdproxySettings settings)
+        public static void WriteLdProxyTarget(this XmlWriter writer, LdProxySettings settings)
         {
             writer.WriteTargetStartElement("de.interactive_instruments.ShapeChange.Target.Ldproxy2.Ldproxy2Target",
                 InputId);
