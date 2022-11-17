@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Xml;
 using Kartverket.ShapeChange.EA.Addin.Util;
 using static Kartverket.ShapeChange.EA.Addin.Resources.LdProxy;
@@ -21,7 +21,7 @@ namespace Kartverket.ShapeChange.EA.Addin.LdProxy
             writer.WriteTargetParameterElement("serviceConfigTemplatePath",
                 Path.Combine(settings.TemplatesDirectory, "serviceConfigTemplate.yml"));
             writer.WriteTargetParameterElement("defaultEncodingRule", "ldp_standard");
-            writer.WriteTargetParameterElement("objectIdentifierName", "objid");
+            writer.WriteTargetParameterElement("objectIdentifierName", settings.PrimaryKey);
             writer.WriteTargetParameterElement("serviceLabel", settings.ServiceLabel);
             writer.WriteTargetParameterElement("serviceDescription", settings.ServiceDescription);
             writer.WriteTargetParameterElement("dateFormat", "dd.MM.yyyy");

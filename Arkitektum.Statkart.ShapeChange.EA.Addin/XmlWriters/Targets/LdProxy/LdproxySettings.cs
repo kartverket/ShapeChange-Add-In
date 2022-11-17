@@ -1,4 +1,4 @@
-namespace Kartverket.ShapeChange.EA.Addin.LdProxy
+﻿namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 {
     internal class LdProxySettings : TargetBaseSettings
     {
@@ -6,14 +6,16 @@ namespace Kartverket.ShapeChange.EA.Addin.LdProxy
         public string Srid { get; }
         public string ServiceLabel { get; }
         public string ServiceDescription { get; }
+        public string PrimaryKey { get; }
 
         public LdProxySettings(string outputDirectory, string templatesDirectory, string srid, string serviceLabel,
-            string serviceDescription) : base(outputDirectory)
+            string serviceDescription, string primaryKey) : base(outputDirectory)
         {
             TemplatesDirectory = templatesDirectory;
             Srid = srid;
             ServiceLabel = serviceLabel;
             ServiceDescription = serviceDescription;
+            PrimaryKey = primaryKey;
         }
     }
 }
