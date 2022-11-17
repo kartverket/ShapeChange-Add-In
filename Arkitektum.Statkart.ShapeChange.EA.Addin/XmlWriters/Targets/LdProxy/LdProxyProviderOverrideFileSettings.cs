@@ -1,6 +1,6 @@
 ﻿namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 {
-    internal class LdProxyConfigurationFileSettings
+    internal class LdProxyProviderOverrideFileSettings
     {
         public string Id { get; set; }
         public ConnectionInfo ConnectionInfo { get; set; }

@@ -150,8 +150,8 @@ namespace Kartverket.ShapeChange.EA.Addin
                 CopyStandardShapeChangeConfigAndMappingFiles();
 
                 SetText("Write LdProxy overrides");
-                LdProxyConfigurationFileWriter.WriteProviderOverrides(Path.Combine(_resultDirectory, _ldProxyDirectory),
-                    CreateLdProxyConfigurationFileSettings());
+                LdProxyProviderOverrideFileWriter.WriteProviderOverrides(Path.Combine(_resultDirectory, _ldProxyDirectory),
+                    CreateProviderOverrideFileSettings());
 
                 SetText($"Write {ShapeChangeConfigurationXml}");
                 WriteConfig(shapeChangeConfigurationXmlFullFilename);
@@ -321,9 +321,9 @@ namespace Kartverket.ShapeChange.EA.Addin
                 textBoxLdProxyEpsgCode.Text, textBoxLdProxyServiceLabel.Text, _selectedPackage.Notes);
         }
 
-        private LdProxyConfigurationFileSettings CreateLdProxyConfigurationFileSettings()
+        private LdProxyProviderOverrideFileSettings CreateProviderOverrideFileSettings()
         {
-            return new LdProxyConfigurationFileSettings()
+            return new LdProxyProviderOverrideFileSettings()
             {
                 Id = _selectedPackage.Name.ToLower().Replace('-', '_').Replace('.', '_').Replace(' ', '_'),
                 ConnectionInfo = new ConnectionInfo

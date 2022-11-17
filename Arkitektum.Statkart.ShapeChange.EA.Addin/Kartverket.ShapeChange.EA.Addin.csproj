@@ -170,8 +170,8 @@
     </Compile>
     <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaSettings.cs" />
     <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaWriter.cs" />
-    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyConfigurationFileSettings.cs" />
-    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyConfigurationFileWriter.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileSettings.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileWriter.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyEncodingRulesWriter.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdproxySettings.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyWriter.cs" />

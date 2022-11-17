@@ -4,9 +4,9 @@ using static Kartverket.ShapeChange.EA.Addin.Resources.LdProxy;
 
 namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 {
-    internal static class LdProxyConfigurationFileWriter
+    internal static class LdProxyProviderOverrideFileWriter
     {
-        public static void WriteProviderOverrides(string resultDirectory, LdProxyConfigurationFileSettings settings)
+        public static void WriteProviderOverrides(string resultDirectory, LdProxyProviderOverrideFileSettings settings)
         {
             var configurationFileDirectoryPath = Path.Combine(resultDirectory, InputId, "data", "store", "overrides", "providers");
             
