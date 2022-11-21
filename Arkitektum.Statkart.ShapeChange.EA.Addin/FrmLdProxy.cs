@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using EA;
 using Kartverket.ShapeChange.EA.Addin.LdProxy;
 using Kartverket.ShapeChange.EA.Addin.Properties;
+using Kartverket.ShapeChange.EA.Addin.Util;
 using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 using static Kartverket.ShapeChange.EA.Addin.Resources.FileNameResources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
@@ -364,20 +365,20 @@ namespace Kartverket.ShapeChange.EA.Addin
                 buttonLogOpenLog.Enabled = false;
                 buttonTransform.Enabled = false;
                 buttonClose.Enabled = false;
-                buttonLogOpenResult.Enabled = false;
+                buttonLogOpenResult.Deactivate();
                 textBoxLog.Text = "";
                 tabControl.SelectedTab = tabPageLog;
 
                 var bw = new BackgroundWorker();
                 bw.DoWork += BackgroundWorker_DoWork;
                 bw.RunWorkerCompleted += delegate
-                                             {
-                                                 progressBar.Visible = false;
-                                                 buttonLogOpenLog.Enabled = true;
-                                                 buttonTransform.Enabled = true;
-                                                 buttonClose.Enabled = true;
-                                                 buttonLogOpenResult.Enabled = true;
-                                             };
+                {
+                    progressBar.Visible = false;
+                    buttonLogOpenLog.Enabled = true;
+                    buttonTransform.Enabled = true;
+                    buttonClose.Enabled = true;
+                    buttonLogOpenResult.Activate();
+                };
                 bw.RunWorkerAsync();
             }
             else
@@ -424,6 +425,11 @@ namespace Kartverket.ShapeChange.EA.Addin
         private void TextBoxLdProxyServiceLabel_Leave(object sender, EventArgs e)
         {
             UpdateOrAddTaggedValue("SOSI_presentasjonsnavn", (sender as TextBox).Text);
+        }
+
+        private void buttonLogOpenResult_Click(object sender, EventArgs e)
+        {
+            Process.Start("explorer.exe", Path.Combine(_resultDirectory, _ldProxyDirectory, InputId, "data"));
         }
     }
 }
