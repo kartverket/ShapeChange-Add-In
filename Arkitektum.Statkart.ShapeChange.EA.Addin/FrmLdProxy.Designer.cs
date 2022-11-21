@@ -80,7 +80,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // buttonTransform
             // 
-            this.buttonTransform.Location = new System.Drawing.Point(862, 18);
+            this.buttonTransform.Location = new System.Drawing.Point(716, 18);
             this.buttonTransform.Name = "buttonTransform";
             this.buttonTransform.Size = new System.Drawing.Size(95, 23);
             this.buttonTransform.TabIndex = 11;
@@ -92,14 +92,14 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             this.progressBar.Location = new System.Drawing.Point(16, 443);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(941, 23);
+            this.progressBar.Size = new System.Drawing.Size(795, 23);
             this.progressBar.TabIndex = 1;
             this.progressBar.Visible = false;
             // 
             // buttonClose
             // 
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(862, 47);
+            this.buttonClose.Location = new System.Drawing.Point(716, 47);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(95, 23);
             this.buttonClose.TabIndex = 12;
@@ -109,7 +109,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // buttonSettings
             // 
-            this.buttonSettings.Location = new System.Drawing.Point(862, 102);
+            this.buttonSettings.Location = new System.Drawing.Point(716, 102);
             this.buttonSettings.Name = "buttonSettings";
             this.buttonSettings.Size = new System.Drawing.Size(95, 23);
             this.buttonSettings.TabIndex = 13;
@@ -123,7 +123,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // buttonHelp
             // 
-            this.buttonHelp.Location = new System.Drawing.Point(862, 410);
+            this.buttonHelp.Location = new System.Drawing.Point(716, 410);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(95, 23);
             this.buttonHelp.TabIndex = 14;
@@ -139,7 +139,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabPageLog.Location = new System.Drawing.Point(4, 22);
             this.tabPageLog.Name = "tabPageLog";
             this.tabPageLog.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLog.Size = new System.Drawing.Size(833, 399);
+            this.tabPageLog.Size = new System.Drawing.Size(690, 399);
             this.tabPageLog.TabIndex = 1;
             this.tabPageLog.Text = "Log";
             this.tabPageLog.UseVisualStyleBackColor = true;
@@ -150,28 +150,29 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
             this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxLog.Size = new System.Drawing.Size(735, 298);
+            this.textBoxLog.Size = new System.Drawing.Size(677, 298);
             this.textBoxLog.TabIndex = 0;
             // 
             // buttonLogOpenLog
             // 
-            this.buttonLogOpenLog.Location = new System.Drawing.Point(638, 314);
+            this.buttonLogOpenLog.Location = new System.Drawing.Point(580, 314);
             this.buttonLogOpenLog.Name = "buttonLogOpenLog";
             this.buttonLogOpenLog.Size = new System.Drawing.Size(104, 23);
-            this.buttonLogOpenLog.TabIndex = 201;
+            this.buttonLogOpenLog.TabIndex = 1001;
             this.buttonLogOpenLog.Text = "Open logfile";
             this.buttonLogOpenLog.UseVisualStyleBackColor = true;
             this.buttonLogOpenLog.Click += new System.EventHandler(this.ButtonLog_Click);
             // 
             // buttonLogOpenResult
             // 
-            this.buttonLogOpenResult.Location = new System.Drawing.Point(527, 314);
+            this.buttonLogOpenResult.Location = new System.Drawing.Point(469, 314);
             this.buttonLogOpenResult.Name = "buttonLogOpenResult";
             this.buttonLogOpenResult.Size = new System.Drawing.Size(104, 23);
-            this.buttonLogOpenResult.TabIndex = 200;
+            this.buttonLogOpenResult.TabIndex = 1000;
             this.buttonLogOpenResult.Text = "Open result";
             this.buttonLogOpenResult.UseVisualStyleBackColor = true;
             this.buttonLogOpenResult.Visible = false;
+            this.buttonLogOpenResult.Click += new System.EventHandler(this.buttonLogOpenResult_Click);
             // 
             // tabPageProjectProps
             // 
@@ -189,7 +190,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabPageProjectProps.Location = new System.Drawing.Point(4, 22);
             this.tabPageProjectProps.Name = "tabPageProjectProps";
             this.tabPageProjectProps.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProjectProps.Size = new System.Drawing.Size(833, 399);
+            this.tabPageProjectProps.Size = new System.Drawing.Size(690, 399);
             this.tabPageProjectProps.TabIndex = 0;
             this.tabPageProjectProps.Text = "Properties";
             this.tabPageProjectProps.UseVisualStyleBackColor = true;
@@ -208,7 +209,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyServiceLabel.Location = new System.Drawing.Point(96, 101);
             this.textBoxLdProxyServiceLabel.Name = "textBoxLdProxyServiceLabel";
             this.textBoxLdProxyServiceLabel.Size = new System.Drawing.Size(297, 20);
-            this.textBoxLdProxyServiceLabel.TabIndex = 1002;
+            this.textBoxLdProxyServiceLabel.TabIndex = 108;
             this.textBoxLdProxyServiceLabel.Leave += new System.EventHandler(this.TextBoxLdProxyServiceLabel_Leave);
             // 
             // labelLdProxyServiceLabel
@@ -217,7 +218,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyServiceLabel.Location = new System.Drawing.Point(14, 104);
             this.labelLdProxyServiceLabel.Name = "labelLdProxyServiceLabel";
             this.labelLdProxyServiceLabel.Size = new System.Drawing.Size(74, 13);
-            this.labelLdProxyServiceLabel.TabIndex = 1003;
+            this.labelLdProxyServiceLabel.TabIndex = 107;
             this.labelLdProxyServiceLabel.Text = "Service Name";
             this.labelLdProxyServiceLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -228,10 +229,10 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.groupBoxCoordinates.Controls.Add(this.labelLdProxyAxisOrder);
             this.groupBoxCoordinates.Controls.Add(this.textBoxLdProxyEpsgCode);
             this.groupBoxCoordinates.Controls.Add(this.labelLdProxyEpsgCode);
-            this.groupBoxCoordinates.Location = new System.Drawing.Point(12, 149);
+            this.groupBoxCoordinates.Location = new System.Drawing.Point(310, 138);
             this.groupBoxCoordinates.Name = "groupBoxCoordinates";
             this.groupBoxCoordinates.Size = new System.Drawing.Size(372, 74);
-            this.groupBoxCoordinates.TabIndex = 1004;
+            this.groupBoxCoordinates.TabIndex = 300;
             this.groupBoxCoordinates.TabStop = false;
             this.groupBoxCoordinates.Text = "Coordinate system";
             // 
@@ -253,7 +254,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.comboBoxLdProxyAxisOrder.Location = new System.Drawing.Point(84, 46);
             this.comboBoxLdProxyAxisOrder.Name = "comboBoxLdProxyAxisOrder";
             this.comboBoxLdProxyAxisOrder.Size = new System.Drawing.Size(190, 21);
-            this.comboBoxLdProxyAxisOrder.TabIndex = 404;
+            this.comboBoxLdProxyAxisOrder.TabIndex = 304;
             this.comboBoxLdProxyAxisOrder.Text = "LON_LAT";
             // 
             // labelLdProxyAxisOrder
@@ -262,7 +263,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyAxisOrder.Location = new System.Drawing.Point(25, 50);
             this.labelLdProxyAxisOrder.Name = "labelLdProxyAxisOrder";
             this.labelLdProxyAxisOrder.Size = new System.Drawing.Size(53, 13);
-            this.labelLdProxyAxisOrder.TabIndex = 403;
+            this.labelLdProxyAxisOrder.TabIndex = 303;
             this.labelLdProxyAxisOrder.Text = "Axis order";
             // 
             // textBoxLdProxyEpsgCode
@@ -270,7 +271,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyEpsgCode.Location = new System.Drawing.Point(84, 21);
             this.textBoxLdProxyEpsgCode.Name = "textBoxLdProxyEpsgCode";
             this.textBoxLdProxyEpsgCode.Size = new System.Drawing.Size(190, 20);
-            this.textBoxLdProxyEpsgCode.TabIndex = 402;
+            this.textBoxLdProxyEpsgCode.TabIndex = 302;
             this.textBoxLdProxyEpsgCode.Leave += new System.EventHandler(this.TextBoxLdProxyEpsgCode_Leave);
             // 
             // labelLdProxyEpsgCode
@@ -279,7 +280,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyEpsgCode.Location = new System.Drawing.Point(15, 24);
             this.labelLdProxyEpsgCode.Name = "labelLdProxyEpsgCode";
             this.labelLdProxyEpsgCode.Size = new System.Drawing.Size(63, 13);
-            this.labelLdProxyEpsgCode.TabIndex = 401;
+            this.labelLdProxyEpsgCode.TabIndex = 301;
             this.labelLdProxyEpsgCode.Text = "EPSG code";
             // 
             // groupBoxLdProxyDatabase
@@ -296,10 +297,10 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.groupBoxLdProxyDatabase.Controls.Add(this.labelLdProxyDbHost);
             this.groupBoxLdProxyDatabase.Controls.Add(this.textBoxLdproxyDbName);
             this.groupBoxLdProxyDatabase.Controls.Add(this.labelLdproxyDbName);
-            this.groupBoxLdProxyDatabase.Location = new System.Drawing.Point(390, 149);
+            this.groupBoxLdProxyDatabase.Location = new System.Drawing.Point(6, 138);
             this.groupBoxLdProxyDatabase.Name = "groupBoxLdProxyDatabase";
             this.groupBoxLdProxyDatabase.Size = new System.Drawing.Size(298, 189);
-            this.groupBoxLdProxyDatabase.TabIndex = 1001;
+            this.groupBoxLdProxyDatabase.TabIndex = 200;
             this.groupBoxLdProxyDatabase.TabStop = false;
             this.groupBoxLdProxyDatabase.Text = "Database settings";
             // 
@@ -326,7 +327,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyDbPrimaryKey.Location = new System.Drawing.Point(91, 122);
             this.textBoxLdProxyDbPrimaryKey.Name = "textBoxLdProxyDbPrimaryKey";
             this.textBoxLdProxyDbPrimaryKey.Size = new System.Drawing.Size(190, 20);
-            this.textBoxLdProxyDbPrimaryKey.TabIndex = 416;
+            this.textBoxLdProxyDbPrimaryKey.TabIndex = 210;
             this.textBoxLdProxyDbPrimaryKey.Text = "objid";
             // 
             // labelLdProxyDbPrimaryKey
@@ -335,7 +336,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyDbPrimaryKey.Location = new System.Drawing.Point(23, 125);
             this.labelLdProxyDbPrimaryKey.Name = "labelLdProxyDbPrimaryKey";
             this.labelLdProxyDbPrimaryKey.Size = new System.Drawing.Size(62, 13);
-            this.labelLdProxyDbPrimaryKey.TabIndex = 415;
+            this.labelLdProxyDbPrimaryKey.TabIndex = 209;
             this.labelLdProxyDbPrimaryKey.Text = "Primary Key";
             this.labelLdProxyDbPrimaryKey.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -345,7 +346,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyDbPassword.Location = new System.Drawing.Point(32, 99);
             this.labelLdProxyDbPassword.Name = "labelLdProxyDbPassword";
             this.labelLdProxyDbPassword.Size = new System.Drawing.Size(53, 13);
-            this.labelLdProxyDbPassword.TabIndex = 413;
+            this.labelLdProxyDbPassword.TabIndex = 207;
             this.labelLdProxyDbPassword.Text = "Password";
             this.labelLdProxyDbPassword.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -353,15 +354,16 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             this.textBoxLdProxyDbPassword.Location = new System.Drawing.Point(91, 96);
             this.textBoxLdProxyDbPassword.Name = "textBoxLdProxyDbPassword";
+            this.textBoxLdProxyDbPassword.PasswordChar = '*';
             this.textBoxLdProxyDbPassword.Size = new System.Drawing.Size(190, 20);
-            this.textBoxLdProxyDbPassword.TabIndex = 414;
+            this.textBoxLdProxyDbPassword.TabIndex = 208;
             // 
             // textBoxLdProxyDbUser
             // 
             this.textBoxLdProxyDbUser.Location = new System.Drawing.Point(91, 70);
             this.textBoxLdProxyDbUser.Name = "textBoxLdProxyDbUser";
             this.textBoxLdProxyDbUser.Size = new System.Drawing.Size(190, 20);
-            this.textBoxLdProxyDbUser.TabIndex = 412;
+            this.textBoxLdProxyDbUser.TabIndex = 206;
             this.textBoxLdProxyDbUser.Text = "postgres";
             // 
             // labelLdProxyDbUser
@@ -370,7 +372,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyDbUser.Location = new System.Drawing.Point(56, 73);
             this.labelLdProxyDbUser.Name = "labelLdProxyDbUser";
             this.labelLdProxyDbUser.Size = new System.Drawing.Size(29, 13);
-            this.labelLdProxyDbUser.TabIndex = 411;
+            this.labelLdProxyDbUser.TabIndex = 205;
             this.labelLdProxyDbUser.Text = "User";
             this.labelLdProxyDbUser.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -379,7 +381,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyDbHost.Location = new System.Drawing.Point(91, 18);
             this.textBoxLdProxyDbHost.Name = "textBoxLdProxyDbHost";
             this.textBoxLdProxyDbHost.Size = new System.Drawing.Size(190, 20);
-            this.textBoxLdProxyDbHost.TabIndex = 406;
+            this.textBoxLdProxyDbHost.TabIndex = 202;
             this.textBoxLdProxyDbHost.Text = "localhost";
             // 
             // labelLdProxyDbHost
@@ -388,7 +390,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdProxyDbHost.Location = new System.Drawing.Point(30, 21);
             this.labelLdProxyDbHost.Name = "labelLdProxyDbHost";
             this.labelLdProxyDbHost.Size = new System.Drawing.Size(55, 13);
-            this.labelLdProxyDbHost.TabIndex = 405;
+            this.labelLdProxyDbHost.TabIndex = 201;
             this.labelLdProxyDbHost.Text = "Hostname";
             this.labelLdProxyDbHost.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -397,7 +399,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdproxyDbName.Location = new System.Drawing.Point(91, 44);
             this.textBoxLdproxyDbName.Name = "textBoxLdproxyDbName";
             this.textBoxLdproxyDbName.Size = new System.Drawing.Size(190, 20);
-            this.textBoxLdproxyDbName.TabIndex = 410;
+            this.textBoxLdproxyDbName.TabIndex = 204;
             // 
             // labelLdproxyDbName
             // 
@@ -405,7 +407,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.labelLdproxyDbName.Location = new System.Drawing.Point(32, 47);
             this.labelLdproxyDbName.Name = "labelLdproxyDbName";
             this.labelLdproxyDbName.Size = new System.Drawing.Size(53, 13);
-            this.labelLdproxyDbName.TabIndex = 409;
+            this.labelLdproxyDbName.TabIndex = 203;
             this.labelLdproxyDbName.Text = "Database";
             this.labelLdproxyDbName.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -414,7 +416,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxPropsOutputDirectory.Enabled = false;
             this.textBoxPropsOutputDirectory.Location = new System.Drawing.Point(96, 69);
             this.textBoxPropsOutputDirectory.Name = "textBoxPropsOutputDirectory";
-            this.textBoxPropsOutputDirectory.Size = new System.Drawing.Size(728, 20);
+            this.textBoxPropsOutputDirectory.Size = new System.Drawing.Size(586, 20);
             this.textBoxPropsOutputDirectory.TabIndex = 106;
             // 
             // labelPropsOutputDirectory
@@ -443,7 +445,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxPropsEaProjectFile.Enabled = false;
             this.textBoxPropsEaProjectFile.Location = new System.Drawing.Point(96, 9);
             this.textBoxPropsEaProjectFile.Name = "textBoxPropsEaProjectFile";
-            this.textBoxPropsEaProjectFile.Size = new System.Drawing.Size(728, 20);
+            this.textBoxPropsEaProjectFile.Size = new System.Drawing.Size(586, 20);
             this.textBoxPropsEaProjectFile.TabIndex = 102;
             // 
             // labelPropsFeatureCatalogueName
@@ -473,7 +475,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(841, 425);
+            this.tabControl.Size = new System.Drawing.Size(698, 425);
             this.tabControl.TabIndex = 10;
             // 
             // FrmLdProxy
@@ -481,7 +483,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(966, 475);
+            this.ClientSize = new System.Drawing.Size(821, 475);
             this.Controls.Add(this.buttonHelp);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.buttonSettings);
