@@ -319,7 +319,7 @@ namespace Kartverket.ShapeChange.EA.Addin
         {
             return new LdProxySettings(Path.Combine(_resultDirectory, _ldProxyDirectory), _templatesDirectory,
                 textBoxLdProxyEpsgCode.Text, textBoxLdProxyServiceLabel.Text, _selectedPackage.Notes,
-                textBoxLdProxyDbPrimaryKey.Text);
+                textBoxLdProxyDbPrimaryKey.Text, textBoxLdProxyDbObjectId.Text);
         }
 
         private LdProxyProviderOverrideFileSettings CreateProviderOverrideFileSettings()

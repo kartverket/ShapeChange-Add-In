@@ -51,6 +51,8 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.textBoxLdProxyEpsgCode = new System.Windows.Forms.TextBox();
             this.labelLdProxyEpsgCode = new System.Windows.Forms.Label();
             this.groupBoxLdProxyDatabase = new System.Windows.Forms.GroupBox();
+            this.textBoxLdProxyDbObjectId = new System.Windows.Forms.TextBox();
+            this.labelLdProxyDbObjectId = new System.Windows.Forms.Label();
             this.textBoxLdProxyDbPrimaryKey = new System.Windows.Forms.TextBox();
             this.labelLdProxyDbPrimaryKey = new System.Windows.Forms.Label();
             this.labelLdProxyDbPassword = new System.Windows.Forms.Label();
@@ -282,6 +284,8 @@ namespace Kartverket.ShapeChange.EA.Addin
             // 
             // groupBoxLdProxyDatabase
             // 
+            this.groupBoxLdProxyDatabase.Controls.Add(this.textBoxLdProxyDbObjectId);
+            this.groupBoxLdProxyDatabase.Controls.Add(this.labelLdProxyDbObjectId);
             this.groupBoxLdProxyDatabase.Controls.Add(this.textBoxLdProxyDbPrimaryKey);
             this.groupBoxLdProxyDatabase.Controls.Add(this.labelLdProxyDbPrimaryKey);
             this.groupBoxLdProxyDatabase.Controls.Add(this.labelLdProxyDbPassword);
@@ -298,6 +302,24 @@ namespace Kartverket.ShapeChange.EA.Addin
             this.groupBoxLdProxyDatabase.TabIndex = 1001;
             this.groupBoxLdProxyDatabase.TabStop = false;
             this.groupBoxLdProxyDatabase.Text = "Database settings";
+            // 
+            // textBoxLdProxyDbObjectId
+            // 
+            this.textBoxLdProxyDbObjectId.Location = new System.Drawing.Point(91, 148);
+            this.textBoxLdProxyDbObjectId.Name = "textBoxLdProxyDbObjectId";
+            this.textBoxLdProxyDbObjectId.Size = new System.Drawing.Size(190, 20);
+            this.textBoxLdProxyDbObjectId.TabIndex = 212;
+            this.textBoxLdProxyDbObjectId.Text = "lokalid";
+            // 
+            // labelLdProxyDbObjectId
+            // 
+            this.labelLdProxyDbObjectId.AutoSize = true;
+            this.labelLdProxyDbObjectId.Location = new System.Drawing.Point(33, 151);
+            this.labelLdProxyDbObjectId.Name = "labelLdProxyDbObjectId";
+            this.labelLdProxyDbObjectId.Size = new System.Drawing.Size(52, 13);
+            this.labelLdProxyDbObjectId.TabIndex = 211;
+            this.labelLdProxyDbObjectId.Text = "Object ID";
+            this.labelLdProxyDbObjectId.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // textBoxLdProxyDbPrimaryKey
             // 
@@ -528,5 +550,7 @@ namespace Kartverket.ShapeChange.EA.Addin
         private System.Windows.Forms.Label labelLdProxyDbHost;
         private System.Windows.Forms.TextBox textBoxLdproxyDbName;
         private System.Windows.Forms.Label labelLdproxyDbName;
+        private System.Windows.Forms.TextBox textBoxLdProxyDbObjectId;
+        private System.Windows.Forms.Label labelLdProxyDbObjectId;
     }
 }
