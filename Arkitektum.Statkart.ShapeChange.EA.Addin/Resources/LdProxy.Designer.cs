@@ -68,5 +68,14 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
                 return ResourceManager.GetString("InputId", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LdProxy overrides.
+        /// </summary>
+        internal static string WriteLdProxyOverridesMessage {
+            get {
+                return ResourceManager.GetString("WriteLdProxyOverridesMessage", resourceCulture);
+            }
+        }
     }
 }

@@ -8,8 +8,11 @@ using System.Windows.Forms;
 using EA;
 using Kartverket.ShapeChange.EA.Addin.LdProxy;
 using Kartverket.ShapeChange.EA.Addin.Properties;
+using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 using static Kartverket.ShapeChange.EA.Addin.Resources.FileNameResources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
+using static Kartverket.ShapeChange.EA.Addin.Resources.LdProxy;
+using static Kartverket.ShapeChange.EA.Addin.Resources.Logging;
 using File = System.IO.File;
 
 namespace Kartverket.ShapeChange.EA.Addin
@@ -85,22 +88,77 @@ namespace Kartverket.ShapeChange.EA.Addin
             buttonLogOpenResult.Enabled = false;
         }
 
+        private void GenerateLdProxyFiles()
+        {
+            try
+            {
+                var shapeChangeConfigurationXmlFullFilename = Path.Combine(_configDirectory, ShapeChangeConfigurationXml);
+
+                EnsureRequiredDirectoriesExists();
+
+                LogText(logMessageStartConfig);
+
+                LogText(string.Format(logMessageCopyConfigFiles, _configDirectory));
+                CopyStandardShapeChangeConfigAndMappingFiles();
+
+                LogText(string.Format(WriteMessage, WriteLdProxyOverridesMessage));
+                LdProxyProviderOverrideFileWriter.WriteProviderOverrides(Path.Combine(_resultDirectory, _ldProxyDirectory),
+                    CreateProviderOverrideFileSettings());
+
+                LogText(string.Format(WriteMessage, ShapeChangeConfigurationXml));
+                WriteConfig(shapeChangeConfigurationXmlFullFilename);
+
+                LogText(string.Format(WriteMessage, RunShapeChangeBat));
+                WriteShapeChangeBat(shapeChangeConfigurationXmlFullFilename);
+
+                LogText(string.Format(RunShapeChangeMessage, DateTime.Now));
+
+                RunShapeChange(shapeChangeConfigurationXmlFullFilename);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                LogText(string.Format(WriteError, e.Message));
+            }
+        }
+
+        private void WriteConfig(string shapeChangeConfigFullFilename)
+        {
+            var writer = new ShapeChangeConfigurationFileWriter(shapeChangeConfigFullFilename, Encoding.UTF8);
+
+            writer.WriteInitialElements(CreateInputSettings());
+
+            writer.WriteStartElement("transformers");
+
+            writer.WriteLdProxyPreprocessingTransformers();
+
+            writer.WriteEndElement();
+
+            writer.WriteStartElement("targets");
+
+            writer.WriteLdProxyTarget(CreateLdProxySettings());
+
+            writer.WriteEndElement(); //close targets
+
+            writer.WriteClosingElements();
+        }
+
+
         private void HandleError(string errorMessage)
         {
             MessageBox.Show(errorMessage);
-            SetText($"Error: {errorMessage}");
+            LogText(string.Format(WriteError, errorMessage));
         }
 
         private void SetProperties()
         {
             foreach (TaggedValue taggedValue in _selectedPackage.Element.TaggedValues)
             {
-                switch (taggedValue.Name)
+                switch (taggedValue.Name.ToLower())
                 {
-                    case "epsgCode":
+                    case "epsgcode":
                         textBoxLdProxyEpsgCode.Text = taggedValue.Value;
                         break;
-                    case "SOSI_presentasjonsnavn":
                     case "sosi_presentasjonsnavn":
                         textBoxLdProxyServiceLabel.Text = taggedValue.Value;
                         break;
@@ -109,7 +167,7 @@ namespace Kartverket.ShapeChange.EA.Addin
 
             textBoxPropsEaProjectFile.Text = _eaProjectFilePath;
             textBoxPropsFeatureCatalogueName.Text = _selectedPackage.Name;
-            textBoxPropsOutputDirectory.Text = _resultDirectory;
+            textBoxPropsOutputDirectory.Text = Path.Combine(_resultDirectory, _ldProxyDirectory);
         }
 
         private bool ValidateEpsgCode()
@@ -134,40 +192,6 @@ namespace Kartverket.ShapeChange.EA.Addin
 
             errorProvider.SetError(textBoxLdProxyServiceLabel, "");
             return true;
-        }
-
-        private void GenerateLdProxyFiles()
-        {
-            try
-            {
-                var shapeChangeConfigurationXmlFullFilename = Path.Combine(_configDirectory, ShapeChangeConfigurationXml);
-
-                EnsureRequiredDirectoriesExists();
-
-                SetText(logMessageStartConfig);
-
-                SetText(string.Format(logMessageCopyConfigFiles, _configDirectory));
-                CopyStandardShapeChangeConfigAndMappingFiles();
-
-                SetText("Write LdProxy overrides");
-                LdProxyProviderOverrideFileWriter.WriteProviderOverrides(Path.Combine(_resultDirectory, _ldProxyDirectory),
-                    CreateProviderOverrideFileSettings());
-
-                SetText($"Write {ShapeChangeConfigurationXml}");
-                WriteConfig(shapeChangeConfigurationXmlFullFilename);
-
-                SetText($"Write {RunShapeChangeBat}");
-                WriteShapeChangeBat(shapeChangeConfigurationXmlFullFilename);
-
-                SetText(DateTime.Now + " - Run ShapeChange ...");
-
-                RunShapeChange(shapeChangeConfigurationXmlFullFilename);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                SetText("Error -> " + e.Message);
-            }
         }
 
         private void EnsureRequiredDirectoriesExists()
@@ -256,7 +280,7 @@ namespace Kartverket.ShapeChange.EA.Addin
 
         private void Proc_Exited(object sender, EventArgs e)
         {
-            SetText(DateTime.Now + " - Completed");
+            LogText(string.Format(CompletedMessage, DateTime.Now));
             //If LogFile exists, open and display to user
             var logFile = new FileInfo(Path.Combine(_resultDirectory, "log.html"));
             if (logFile.Exists)
@@ -265,48 +289,25 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
         }
 
-
         private void Proc_DataReceived(object sender, DataReceivedEventArgs e)
         {
-            SetText(e.Data);
+            LogText(e.Data);
         }
 
-        private void SetText(string text)
+        private void LogText(string text)
         {
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
             if (textBoxLog.InvokeRequired)
             {
-                SetTextCallback d = SetText;
+                SetTextCallback d = LogText;
                 Invoke(d, text);
             }
             else
             {
                 textBoxLog.AppendText($"{text}{Environment.NewLine}");
             }
-        }
-
-
-        private void WriteConfig(string shapeChangeConfigFullFilename)
-        {
-            var writer = new ShapeChangeConfigurationFileWriter(shapeChangeConfigFullFilename, Encoding.UTF8);
-
-            writer.WriteInitialElements(CreateInputSettings());
-
-            writer.WriteStartElement("transformers");
-
-            writer.WriteLdProxyPreprocessingTransformers();
-
-            writer.WriteEndElement();
-
-            writer.WriteStartElement("targets");
-
-            writer.WriteLdProxyTarget(CreateLdProxySettings());
-
-            writer.WriteEndElement(); //close targets
-
-            writer.WriteClosingElements();
         }
 
         private InputSettings CreateInputSettings()
@@ -336,6 +337,19 @@ namespace Kartverket.ShapeChange.EA.Addin
                     PathSyntax = new PathSyntax(textBoxLdProxyDbPrimaryKey.Text),
                 }
             };
+        }
+
+        private void UpdateOrAddTaggedValue(string tagName, string tagValue)
+        {
+            var selectedPackageElement = _selectedPackage.Element;
+
+            TaggedValue taggedValue = selectedPackageElement.TaggedValues.GetByName(tagName) ??
+                                      selectedPackageElement.TaggedValues.AddNew(tagName, "string");
+
+            taggedValue.Value = tagValue;
+            taggedValue.Update();
+            selectedPackageElement.Update();
+            selectedPackageElement.Refresh();
         }
 
         private void ButtonTransform_Click(object sender, EventArgs e)
@@ -372,19 +386,6 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
         }
 
-        private void UpdateOrAddTaggedValue(string tagName, string tagValue)
-        {
-            var selectedPackageElement = _selectedPackage.Element;
-
-            TaggedValue taggedValue = selectedPackageElement.TaggedValues.GetByName(tagName) ??
-                                      selectedPackageElement.TaggedValues.AddNew(tagName, "string");
-
-            taggedValue.Value = tagValue;
-            taggedValue.Update();
-            selectedPackageElement.Update();
-            selectedPackageElement.Refresh();
-        }
-        
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             GenerateLdProxyFiles();

@@ -144,6 +144,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LdProxy.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Logging.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logging.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\ControlExtensions.cs" />
     <Compile Include="XmlWriters\ShapeChangeConfigurationFileWriter.cs" />
     <Compile Include="XmlWriters\InputWriter.cs" />
     <Compile Include="XmlWriters\Targets\CodeList\CodeListSettings.cs" />
@@ -235,6 +241,10 @@
     <EmbeddedResource Include="Resources\LdProxy.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LdProxy.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Logging.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Logging.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

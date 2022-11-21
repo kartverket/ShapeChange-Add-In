@@ -117,13 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="WriteError" xml:space="preserve">
-    <value>Error -&gt; {0}</value>
+  <data name="CompletedMessage" xml:space="preserve">
+    <value>{0} - Completed</value>
+    <comment>{0}: DateTime stamp</comment>
   </data>
-  <data name="WrongPackageStereotypeCaption" xml:space="preserve">
-    <value>Missing data</value>
+  <data name="RunShapeChangeMessage" xml:space="preserve">
+    <value>{0} - Run ShapeChange ...</value>
+    <comment>{0}: DateTime stamp</comment>
   </data>
-  <data name="WrongPackageStereotypeMessage" xml:space="preserve">
-    <value>Please select a package with stereotype applicationSchema.</value>
+  <data name="WriteMessage" xml:space="preserve">
+    <value>Write {0}</value>
   </data>
 </root>

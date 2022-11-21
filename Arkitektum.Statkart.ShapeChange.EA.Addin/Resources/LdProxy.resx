@@ -120,4 +120,7 @@
   <data name="InputId" xml:space="preserve">
     <value>LDPROXY</value>
   </data>
+  <data name="WriteLdProxyOverridesMessage" xml:space="preserve">
+    <value>LdProxy overrides</value>
+  </data>
 </root>

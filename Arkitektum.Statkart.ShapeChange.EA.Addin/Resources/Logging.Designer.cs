@@ -22,14 +22,14 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ErrorMessages {
+    internal class Logging {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorMessages() {
+        internal Logging() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages", typeof(ErrorMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Kartverket.ShapeChange.EA.Addin.Resources.Logging", typeof(Logging).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,29 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error -&gt; {0}.
+        ///   Looks up a localized string similar to {0} - Completed.
         /// </summary>
-        internal static string WriteError {
+        internal static string CompletedMessage {
             get {
-                return ResourceManager.GetString("WriteError", resourceCulture);
+                return ResourceManager.GetString("CompletedMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing data.
+        ///   Looks up a localized string similar to {0} - Run ShapeChange ....
         /// </summary>
-        internal static string WrongPackageStereotypeCaption {
+        internal static string RunShapeChangeMessage {
             get {
-                return ResourceManager.GetString("WrongPackageStereotypeCaption", resourceCulture);
+                return ResourceManager.GetString("RunShapeChangeMessage", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select a package with stereotype applicationSchema..
+        ///   Looks up a localized string similar to Write {0}.
         /// </summary>
-        internal static string WrongPackageStereotypeMessage {
+        internal static string WriteMessage {
             get {
-                return ResourceManager.GetString("WrongPackageStereotypeMessage", resourceCulture);
+                return ResourceManager.GetString("WriteMessage", resourceCulture);
             }
         }
     }
