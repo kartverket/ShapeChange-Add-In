@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using EA;
 
@@ -71,15 +68,14 @@ namespace Kartverket.ShapeChange.EA.Addin
             switch (ItemName)
             {
                 case "&Transform...":
-                    //if (Repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema")
-                    //{
-                        frmGML frm = new frmGML();
-                        frm.SetRepository(Repository);
-                        frm.ShowDialog();
-                    //}
-                    //else
-                    //    MessageBox.Show("Please select a package with stereotype applicationSchema.",
-                    //                    "Missing data");
+                    if (Repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema")
+                    {
+                        var formGml = new frmGML();
+                        formGml.SetRepository(Repository);
+                        formGml.ShowDialog();
+                    }
+                    else
+                        MessageBox.Show("Please select a package with stereotype applicationSchema.", "Missing data");
                     
                     break;
                 
@@ -91,12 +87,11 @@ namespace Kartverket.ShapeChange.EA.Addin
                 //    break;
                 
                 case "About...":
-                    frmAbout anAbout = new frmAbout();
-                    anAbout.ShowDialog();
+                    var aboutForm = new frmAbout();
+                    aboutForm.ShowDialog();
                     break;
             }
         }
-
 
         public string WriteToOutputwindow(Repository repository, object args)
         {
@@ -105,11 +100,5 @@ namespace Kartverket.ShapeChange.EA.Addin
             repository.WriteOutput("System", melding, 0);
             return "";
         }
-
-        
-
-
-
-
     }
 }
