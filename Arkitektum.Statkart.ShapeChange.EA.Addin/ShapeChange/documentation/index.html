@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.17">
-<title>ShapeChange v2.12.0 Technical Documentation</title>
+<title>ShapeChange v2.13.0 Technical Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>ShapeChange v2.12.0 Technical Documentation</h1>
+<h1>ShapeChange v2.13.0 Technical Documentation</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of contents</div>
 <ul class="sectlevel1">
@@ -547,32 +547,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_json_schema_deprecated">5.9. JSON Schema (deprecated)</a></li>
 <li><a href="#_ldproxy_configuration">5.10. ldproxy configuration</a></li>
 <li><a href="#_ldproxy_configuration_old">5.11. ldproxy configuration (old)</a></li>
-<li><a href="#_model_export">5.12. Model export</a></li>
-<li><a href="#_ontology">5.13. Ontology</a>
+<li><a href="#_model_diff">5.12. Model diff</a></li>
+<li><a href="#_model_export">5.13. Model export</a></li>
+<li><a href="#_ontology">5.14. Ontology</a>
 <ul class="sectlevel3">
-<li><a href="#_uml_to_rdf_owl_based_on_iso_is_19150_2">5.13.1. UML to RDF OWL (based on ISO IS 19150-2)</a></li>
-<li><a href="#_uml_to_rdf_owl_based_on_iso_dis_19150_2">5.13.2. UML to RDF OWL (based on ISO DIS 19150-2)</a></li>
-<li><a href="#_uml_to_rdf_owl_based_on_ows_8_encoding_rule">5.13.3. UML to RDF OWL (based on OWS-8 encoding rule)</a></li>
+<li><a href="#_uml_to_rdf_owl_based_on_iso_is_19150_2">5.14.1. UML to RDF OWL (based on ISO IS 19150-2)</a></li>
+<li><a href="#_uml_to_rdf_owl_based_on_iso_dis_19150_2">5.14.2. UML to RDF OWL (based on ISO DIS 19150-2)</a></li>
+<li><a href="#_uml_to_rdf_owl_based_on_ows_8_encoding_rule">5.14.3. UML to RDF OWL (based on OWS-8 encoding rule)</a></li>
 </ul>
 </li>
-<li><a href="#_openapi_definition">5.14. OpenAPI definition</a></li>
-<li><a href="#_profile_transfer_to_ea_repository">5.15. Profile transfer to EA repository</a></li>
-<li><a href="#_replication_xml_schema">5.16. Replication XML schema</a></li>
-<li><a href="#_sql_ddl">5.17. SQL DDL</a></li>
-<li><a href="#_uml_model">5.18. UML model</a></li>
-<li><a href="#_xml_schema">5.19. XML Schema</a>
+<li><a href="#_openapi_definition">5.15. OpenAPI definition</a></li>
+<li><a href="#_profile_transfer_to_ea_repository">5.16. Profile transfer to EA repository</a></li>
+<li><a href="#_replication_xml_schema">5.17. Replication XML schema</a></li>
+<li><a href="#_sql_ddl">5.18. SQL DDL</a></li>
+<li><a href="#_uml_model">5.19. UML model</a></li>
+<li><a href="#_xml_schema">5.20. XML Schema</a>
 <ul class="sectlevel3">
-<li><a href="#_conversion_rule_basics">5.19.1. Conversion rule basics</a></li>
-<li><a href="#_gml_3_2_encoding_rule">5.19.2. GML 3.2 encoding rule</a></li>
-<li><a href="#_gml_3_3_encoding_rule">5.19.3. GML 3.3 encoding rule</a></li>
-<li><a href="#_iso_ts_19139_encoding_rule">5.19.4. ISO TS 19139 encoding rule</a></li>
-<li><a href="#_swe_common_data_model_2_0_encoding_rule">5.19.5. SWE Common data model 2.0 encoding rule</a></li>
-<li><a href="#_non_standard_conversion_rules">5.19.6. Non-standard conversion rules</a>
+<li><a href="#_conversion_rule_basics">5.20.1. Conversion rule basics</a></li>
+<li><a href="#_gml_3_2_encoding_rule">5.20.2. GML 3.2 encoding rule</a></li>
+<li><a href="#_gml_3_3_encoding_rule">5.20.3. GML 3.3 encoding rule</a></li>
+<li><a href="#_iso_ts_19139_encoding_rule">5.20.4. ISO TS 19139 encoding rule</a></li>
+<li><a href="#_swe_common_data_model_2_0_encoding_rule">5.20.5. SWE Common data model 2.0 encoding rule</a></li>
+<li><a href="#_non_standard_conversion_rules">5.20.6. Non-standard conversion rules</a>
 <ul class="sectlevel4">
-<li><a href="#_ocl_conversion_to_schematron_xslt2_query_binding">5.19.6.1. OCL conversion to schematron (xslt2 query binding)</a></li>
-<li><a href="#_ocl_conversion_to_schematron">5.19.6.2. OCL conversion to schematron</a></li>
-<li><a href="#_support_for_mixin_classes">5.19.6.3. Support for mixin classes</a></li>
-<li><a href="#_support_for_nillable_and_nilreason">5.19.6.4. Support for nillable and nilReason</a></li>
+<li><a href="#_ocl_conversion_to_schematron_xslt2_query_binding">5.20.6.1. OCL conversion to schematron (xslt2 query binding)</a></li>
+<li><a href="#_ocl_conversion_to_schematron">5.20.6.2. OCL conversion to schematron</a></li>
+<li><a href="#_support_for_mixin_classes">5.20.6.3. Support for mixin classes</a></li>
+<li><a href="#_support_for_nillable_and_nilreason">5.20.6.4. Support for nillable and nilReason</a></li>
 </ul>
 </li>
 </ul>
@@ -851,82 +852,86 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
 </div>
 <div class="sect2">
-<h3 id="_model_export"><a class="anchor" href="#_model_export"></a>5.12. <a href="targets/Model_Export.html">Model export</a></h3>
+<h3 id="_model_diff"><a class="anchor" href="#_model_diff"></a>5.12. <a href="targets/DiffTarget.html">Model diff</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_ontology"><a class="anchor" href="#_ontology"></a>5.13. <a href="targets/ontology/Ontology.html">Ontology</a></h3>
+<h3 id="_model_export"><a class="anchor" href="#_model_export"></a>5.13. <a href="targets/Model_Export.html">Model export</a></h3>
+
+</div>
+<div class="sect2">
+<h3 id="_ontology"><a class="anchor" href="#_ontology"></a>5.14. <a href="targets/ontology/Ontology.html">Ontology</a></h3>
 <div class="sect3">
-<h4 id="_uml_to_rdf_owl_based_on_iso_is_19150_2"><a class="anchor" href="#_uml_to_rdf_owl_based_on_iso_is_19150_2"></a>5.13.1. <a href="targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html">UML to RDF OWL (based on ISO IS 19150-2)</a></h4>
+<h4 id="_uml_to_rdf_owl_based_on_iso_is_19150_2"><a class="anchor" href="#_uml_to_rdf_owl_based_on_iso_is_19150_2"></a>5.14.1. <a href="targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html">UML to RDF OWL (based on ISO IS 19150-2)</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_uml_to_rdf_owl_based_on_iso_dis_19150_2"><a class="anchor" href="#_uml_to_rdf_owl_based_on_iso_dis_19150_2"></a>5.13.2. <a href="targets/ontology/UML_to_RDF_OWL_based_on_ISO_DIS_19150_2.html">UML to RDF OWL (based on ISO DIS 19150-2)</a></h4>
+<h4 id="_uml_to_rdf_owl_based_on_iso_dis_19150_2"><a class="anchor" href="#_uml_to_rdf_owl_based_on_iso_dis_19150_2"></a>5.14.2. <a href="targets/ontology/UML_to_RDF_OWL_based_on_ISO_DIS_19150_2.html">UML to RDF OWL (based on ISO DIS 19150-2)</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_uml_to_rdf_owl_based_on_ows_8_encoding_rule"><a class="anchor" href="#_uml_to_rdf_owl_based_on_ows_8_encoding_rule"></a>5.13.3. <a href="targets/ontology/UML_to_RDF_OWL_based_on_OWS_8_encoding_rule.html">UML to RDF OWL (based on OWS-8 encoding rule)</a></h4>
+<h4 id="_uml_to_rdf_owl_based_on_ows_8_encoding_rule"><a class="anchor" href="#_uml_to_rdf_owl_based_on_ows_8_encoding_rule"></a>5.14.3. <a href="targets/ontology/UML_to_RDF_OWL_based_on_OWS_8_encoding_rule.html">UML to RDF OWL (based on OWS-8 encoding rule)</a></h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_openapi_definition"><a class="anchor" href="#_openapi_definition"></a>5.14. <a href="targets/OpenAPI_Definition.html">OpenAPI definition</a></h3>
+<h3 id="_openapi_definition"><a class="anchor" href="#_openapi_definition"></a>5.15. <a href="targets/OpenAPI_Definition.html">OpenAPI definition</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_profile_transfer_to_ea_repository"><a class="anchor" href="#_profile_transfer_to_ea_repository"></a>5.15. <a href="targets/Profile_Transfer_to_EA_Repository.html">Profile transfer to EA repository</a></h3>
+<h3 id="_profile_transfer_to_ea_repository"><a class="anchor" href="#_profile_transfer_to_ea_repository"></a>5.16. <a href="targets/Profile_Transfer_to_EA_Repository.html">Profile transfer to EA repository</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_replication_xml_schema"><a class="anchor" href="#_replication_xml_schema"></a>5.16. <a href="targets/Replication_XML_Schema.html">Replication XML schema</a></h3>
+<h3 id="_replication_xml_schema"><a class="anchor" href="#_replication_xml_schema"></a>5.17. <a href="targets/Replication_XML_Schema.html">Replication XML schema</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_sql_ddl"><a class="anchor" href="#_sql_ddl"></a>5.17. <a href="targets/SQL_DDL.html">SQL DDL</a></h3>
+<h3 id="_sql_ddl"><a class="anchor" href="#_sql_ddl"></a>5.18. <a href="targets/SQL_DDL.html">SQL DDL</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_uml_model"><a class="anchor" href="#_uml_model"></a>5.18. <a href="targets/UML_model.html">UML model</a></h3>
+<h3 id="_uml_model"><a class="anchor" href="#_uml_model"></a>5.19. <a href="targets/UML_model.html">UML model</a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="_xml_schema"><a class="anchor" href="#_xml_schema"></a>5.19. <a href="targets/xml schema/XML_Schema.html">XML Schema</a></h3>
+<h3 id="_xml_schema"><a class="anchor" href="#_xml_schema"></a>5.20. <a href="targets/xml schema/XML_Schema.html">XML Schema</a></h3>
 <div class="sect3">
-<h4 id="_conversion_rule_basics"><a class="anchor" href="#_conversion_rule_basics"></a>5.19.1. <a href="targets/xml schema/Conversion_Rule_Basics.html">Conversion rule basics</a></h4>
+<h4 id="_conversion_rule_basics"><a class="anchor" href="#_conversion_rule_basics"></a>5.20.1. <a href="targets/xml schema/Conversion_Rule_Basics.html">Conversion rule basics</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_gml_3_2_encoding_rule"><a class="anchor" href="#_gml_3_2_encoding_rule"></a>5.19.2. <a href="targets/xml schema/GML_3.2_Encoding_Rule.html">GML 3.2 encoding rule</a></h4>
+<h4 id="_gml_3_2_encoding_rule"><a class="anchor" href="#_gml_3_2_encoding_rule"></a>5.20.2. <a href="targets/xml schema/GML_3.2_Encoding_Rule.html">GML 3.2 encoding rule</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_gml_3_3_encoding_rule"><a class="anchor" href="#_gml_3_3_encoding_rule"></a>5.19.3. <a href="targets/xml schema/GML_3.3_Encoding_Rule.html">GML 3.3 encoding rule</a></h4>
+<h4 id="_gml_3_3_encoding_rule"><a class="anchor" href="#_gml_3_3_encoding_rule"></a>5.20.3. <a href="targets/xml schema/GML_3.3_Encoding_Rule.html">GML 3.3 encoding rule</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_iso_ts_19139_encoding_rule"><a class="anchor" href="#_iso_ts_19139_encoding_rule"></a>5.19.4. <a href="targets/xml schema/ISO_TS_19139_Encoding_Rule.html">ISO TS 19139 encoding rule</a></h4>
+<h4 id="_iso_ts_19139_encoding_rule"><a class="anchor" href="#_iso_ts_19139_encoding_rule"></a>5.20.4. <a href="targets/xml schema/ISO_TS_19139_Encoding_Rule.html">ISO TS 19139 encoding rule</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_swe_common_data_model_2_0_encoding_rule"><a class="anchor" href="#_swe_common_data_model_2_0_encoding_rule"></a>5.19.5. <a href="targets/xml schema/SWE_Common_Data_Model_2.0_Encoding_Rule.html">SWE Common data model 2.0 encoding rule</a></h4>
+<h4 id="_swe_common_data_model_2_0_encoding_rule"><a class="anchor" href="#_swe_common_data_model_2_0_encoding_rule"></a>5.20.5. <a href="targets/xml schema/SWE_Common_Data_Model_2.0_Encoding_Rule.html">SWE Common data model 2.0 encoding rule</a></h4>
 
 </div>
 <div class="sect3">
-<h4 id="_non_standard_conversion_rules"><a class="anchor" href="#_non_standard_conversion_rules"></a>5.19.6. <a href="targets/xml schema/Non_Standard_Conversion_Rules.html">Non-standard conversion rules</a></h4>
+<h4 id="_non_standard_conversion_rules"><a class="anchor" href="#_non_standard_conversion_rules"></a>5.20.6. <a href="targets/xml schema/Non_Standard_Conversion_Rules.html">Non-standard conversion rules</a></h4>
 <div class="sect4">
-<h5 id="_ocl_conversion_to_schematron_xslt2_query_binding"><a class="anchor" href="#_ocl_conversion_to_schematron_xslt2_query_binding"></a>5.19.6.1. <a href="targets/xml schema/OCL_Conversion_to_Schematron_xslt2_query_binding.html">OCL conversion to schematron (xslt2 query binding)</a></h5>
-
-</div>
-<div class="sect4">
-<h5 id="_ocl_conversion_to_schematron"><a class="anchor" href="#_ocl_conversion_to_schematron"></a>5.19.6.2. <a href="targets/xml schema/OCL_Conversion_to_Schematron.html">OCL conversion to schematron</a></h5>
-
-</div>
-<div class="sect4">
-<h5 id="_support_for_mixin_classes"><a class="anchor" href="#_support_for_mixin_classes"></a>5.19.6.3. <a href="targets/xml schema/Support_for_Mixin_Classes.html">Support for mixin classes</a></h5>
+<h5 id="_ocl_conversion_to_schematron_xslt2_query_binding"><a class="anchor" href="#_ocl_conversion_to_schematron_xslt2_query_binding"></a>5.20.6.1. <a href="targets/xml schema/OCL_Conversion_to_Schematron_xslt2_query_binding.html">OCL conversion to schematron (xslt2 query binding)</a></h5>
 
 </div>
 <div class="sect4">
-<h5 id="_support_for_nillable_and_nilreason"><a class="anchor" href="#_support_for_nillable_and_nilreason"></a>5.19.6.4. <a href="targets/xml schema/Support_for_nillable_and_nilReason.html">Support for nillable and nilReason</a></h5>
+<h5 id="_ocl_conversion_to_schematron"><a class="anchor" href="#_ocl_conversion_to_schematron"></a>5.20.6.2. <a href="targets/xml schema/OCL_Conversion_to_Schematron.html">OCL conversion to schematron</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="_support_for_mixin_classes"><a class="anchor" href="#_support_for_mixin_classes"></a>5.20.6.3. <a href="targets/xml schema/Support_for_Mixin_Classes.html">Support for mixin classes</a></h5>
+
+</div>
+<div class="sect4">
+<h5 id="_support_for_nillable_and_nilreason"><a class="anchor" href="#_support_for_nillable_and_nilreason"></a>5.20.6.4. <a href="targets/xml schema/Support_for_nillable_and_nilReason.html">Support for nillable and nilReason</a></h5>
 
 </div>
 </div>
@@ -936,7 +941,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-25 13:53:07 +0100
+Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

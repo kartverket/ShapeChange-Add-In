@@ -717,12 +717,10 @@ or if they have tagged value "toCodelist"='false'.</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-This rule converts all enumerations within the model to code
-lists. If a restriction is desired, for example to enumerations that
-belong to the schemas selected for processing, or to specifically
-identified application schemas (e.g. identified by name or target
-namespace regex), the implementation would need to be enhanced (for
-example through new parameters).
+Up until ShapeChange v2.13.0, this rule converted all enumerations
+within the model to code lists. Now, the typical behavior applies, i.e. only
+enumerations in the schemas selected for processing are changed by the
+transformation.
 </td>
 </tr>
 </table>
@@ -1233,7 +1231,7 @@ types that shall be converted to feature types under
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-25 13:53:07 +0100
+Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>
