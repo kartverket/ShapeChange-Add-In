@@ -460,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/dist/net/shapechange/ShapeChange/2.12.0/ShapeChange-2.12.0.zip">Download ShapeChange (all platforms; version 2.12.0)</a> <a href="./Release_Notes.html">Release Notes</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/dist/net/shapechange/ShapeChange/2.13.0/ShapeChange-2.13.0.zip">Download ShapeChange (all platforms; version 2.13.0)</a> <a href="./Release_Notes.html">Release Notes</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
@@ -508,6 +508,18 @@ If you are searching for a 32bit JDK, take a look at the JDKs from <a href="http
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+This step can be skipped if you set system property java.library.path every time you invoke ShapeChange: <em>java -Djava.library.path="&lt;EA installation folder&gt;\Java API" -jar ShapeChange-2.13.0.jar (options) modelfile</em> This can be useful when you cannot copy the aforementioned dll files, e.g. because of missing administrator rights.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The latest version of ShapeChange has been tested with the 64bit OpenJDK 11 from Adoptium (more precisely: its predecessor AdoptOpenJDK).</p>
 </div></div></td>
@@ -527,7 +539,7 @@ If you are searching for a 32bit JDK, take a look at the JDKs from <a href="http
 <p>To test the installation, open a shell / DOS box and make the unzipped folder your current directory. Execute</p>
 </div>
 <div class="paragraph">
-<p><em>java -jar ShapeChange-2.12.0.jar -Dfile.encoding=UTF-8 -c <a href="https://shapechange.net/resources/test/testXMI.xml" class="bare">https://shapechange.net/resources/test/testXMI.xml</a></em></p>
+<p><em>java -Dfile.encoding=UTF-8 -jar ShapeChange-2.13.0.jar -c <a href="https://shapechange.net/resources/test/testXMI.xml" class="bare">https://shapechange.net/resources/test/testXMI.xml</a></em></p>
 </div>
 <div class="paragraph">
 <p>You should now see the following information message:</p>
@@ -555,7 +567,7 @@ If you are searching for a 32bit JDK, take a look at the JDKs from <a href="http
 <p>To test the access to Enterprise Architect models (note that this test requires Enterprise Architect and can be executed only on Windows), execute</p>
 </div>
 <div class="paragraph">
-<p><em>java -jar ShapeChange-2.12.0.jar -Dfile.encoding=UTF-8 -c <a href="https://shapechange.net/resources/test/testEA.xml" class="bare">https://shapechange.net/resources/test/testEA.xml</a></em></p>
+<p><em>java -Dfile.encoding=UTF-8 -jar ShapeChange-2.13.0.jar -c <a href="https://shapechange.net/resources/test/testEA.xml" class="bare">https://shapechange.net/resources/test/testEA.xml</a></em></p>
 </div>
 <div class="paragraph">
 <p>You should see the same results as in the XMI test, except that the results are written into the folder <em>test/ea</em>.</p>
@@ -577,7 +589,7 @@ If you are searching for a 32bit JDK, take a look at the JDKs from <a href="http
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-25 13:53:07 +0100
+Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>
