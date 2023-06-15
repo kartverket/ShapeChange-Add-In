@@ -465,12 +465,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A8F6A8B6E88D514418F22F58D1A4F1BC"
-        "OwnerKey" = "8:_70FE5AD640EA436985DC5D8CF88D87A0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_AC0BE6F49B12A64C627BD76B0F238ED9"
         "OwnerKey" = "8:_70FE5AD640EA436985DC5D8CF88D87A0"
         "MsmSig" = "8:_UNDEFINED"
@@ -706,6 +700,12 @@
         "Entry"
         {
         "MsmKey" = "8:_F949C1662D7953F81F780A1763F7E510"
+        "OwnerKey" = "8:_70FE5AD640EA436985DC5D8CF88D87A0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FB13B236DBF36786EF73B8DE6DD86623"
         "OwnerKey" = "8:_70FE5AD640EA436985DC5D8CF88D87A0"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3680,26 +3680,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A8F6A8B6E88D514418F22F58D1A4F1BC"
-            {
-            "SourcePath" = "8:Kartverket.ShapeChange.EA.Addin.tlb"
-            "TargetName" = "8:Kartverket.ShapeChange.EA.Addin.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_8E4D4EA7C37F4935B6856C5C88546C8D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AC0BE6F49B12A64C627BD76B0F238ED9"
             {
             "AssemblyRegister" = "3:1"
@@ -4898,6 +4878,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FB13B236DBF36786EF73B8DE6DD86623"
+            {
+            "SourcePath" = "8:Kartverket.ShapeChange.EA.Addin.tlb"
+            "TargetName" = "8:Kartverket.ShapeChange.EA.Addin.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_8E4D4EA7C37F4935B6856C5C88546C8D"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB78A06951EF1388013D6263C9C24A59"
             {
             "AssemblyRegister" = "3:1"
@@ -4974,15 +4974,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ShapeChange EA Add-In (x64)"
-        "ProductCode" = "8:{3D8EC98C-B1C3-4350-AF97-BAD9E0171B0F}"
-        "PackageCode" = "8:{E4806FFF-9BD9-4C1B-9B27-C355EA1D4E3E}"
+        "ProductCode" = "8:{00945308-BFC0-4148-A417-606821484DEC}"
+        "PackageCode" = "8:{1D29C851-DB27-4203-B69A-62152AECCACB}"
         "UpgradeCode" = "8:{AEAEF155-43DB-4EB3-8E4B-E14A54507105}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.1.0"
+        "ProductVersion" = "8:3.2.0"
         "Manufacturer" = "8:Statens kartverk"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/kartverket/ShapeChange-Add-In"
@@ -5787,7 +5787,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_70FE5AD640EA436985DC5D8CF88D87A0"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\Arkitektum.Statkart.ShapeChange.EA.Addin\\obj\\x64\\Release_x64\\Kartverket.ShapeChange.EA.Addin.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8E4D4EA7C37F4935B6856C5C88546C8D"
