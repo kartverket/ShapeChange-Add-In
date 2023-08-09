@@ -51,12 +51,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_08550BF1D801CA4EE392E88A9142F138"
-        "OwnerKey" = "8:_278D87B6DB7241F389D203B7C9CFED3C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_087A0775842A1061F628BCCD993E358C"
         "OwnerKey" = "8:_278D87B6DB7241F389D203B7C9CFED3C"
         "MsmSig" = "8:_UNDEFINED"
@@ -1653,26 +1647,6 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:TRUE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08550BF1D801CA4EE392E88A9142F138"
-            {
-            "SourcePath" = "8:Kartverket.ShapeChange.EA.Addin.tlb"
-            "TargetName" = "8:Kartverket.ShapeChange.EA.Addin.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_BBE5B0272E7941988E0762AA76E8E443"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
@@ -4974,15 +4948,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ShapeChange EA Add-In (x86)"
-        "ProductCode" = "8:{76FF2FF0-1068-4529-B4D2-19DBB18DA19B}"
-        "PackageCode" = "8:{2D0D1533-6AD1-411D-8F0D-DB933B17F967}"
+        "ProductCode" = "8:{0A999B93-9105-4BBE-8C82-214C9185A62B}"
+        "PackageCode" = "8:{0DDDA5E9-A90C-4EC3-9366-CA80D271E996}"
         "UpgradeCode" = "8:{238BDFCA-77FF-4C1D-914A-4A3C71BD1360}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:3.1.0"
+        "ProductVersion" = "8:3.2.0"
         "Manufacturer" = "8:Statens kartverk"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/kartverket/ShapeChange-Add-In"
