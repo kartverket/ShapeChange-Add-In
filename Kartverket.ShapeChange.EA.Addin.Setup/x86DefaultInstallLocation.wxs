@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder" Name="PFiles">
+				<Directory Id="ManufacturerFolder" Name="Kartverket">
+					<Directory Id="INSTALLFOLDER" Name="ShapeChange-Addin" />
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+</Wix>

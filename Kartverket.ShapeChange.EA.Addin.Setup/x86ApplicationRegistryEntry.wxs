@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+		<DirectoryRef Id="TARGETDIR">
+			<Component Id="AppRegistryEntry" Guid="77F1130A-539F-47C0-AAA7-98FCBCD72977">
+				<RegistryKey Root="HKCU"
+				             Key="Software">
+					<RegistryKey Key="Sparx Systems">
+						<RegistryKey Key="EAAddins">
+							<RegistryKey Key="ShapeChange">
+								<RegistryValue Type="string" Value="Kartverket.ShapeChange.EA.Addin.Main" KeyPath="yes"/>
+							</RegistryKey>
+						</RegistryKey>
+					</RegistryKey>
+				</RegistryKey>
+			</Component>
+		</DirectoryRef>
+	</Fragment>
+</Wix>
