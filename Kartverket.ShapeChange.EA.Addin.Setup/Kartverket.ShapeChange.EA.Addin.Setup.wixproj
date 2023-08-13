@@ -66,10 +66,10 @@
     <ProjectGuid>{90cec213-e499-4e06-a4a0-31e2aaa68198}</ProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_x64|x64' ">
-    <DefineConstants>SourceDir=$(SolutionDir)Arkitektum.Statkart.ShapeChange.EA.Addin\bin\x64\Release_x64</DefineConstants>
+    <DefineConstants>SourceDir=$(SolutionDir)\Arkitektum.Statkart.ShapeChange.EA.Addin\bin\x64\Release_x64</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_x86|x86' ">
-    <DefineConstants>SourceDir=$(SolutionDir)Arkitektum.Statkart.ShapeChange.EA.Addin\bin\x86\Release_x86</DefineConstants>
+    <DefineConstants>SourceDir=$(SolutionDir)\Arkitektum.Statkart.ShapeChange.EA.Addin\bin\x86\Release_x86</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent Condition=" '$(Platform)' == 'x86' ">"$(WIX)bin\heat.exe" dir "$(SolutionDir)\Arkitektum.Statkart.ShapeChange.EA.Addin\bin\$(PlatformName)\$(ConfigurationName)" -cg ProductComponents -gg -sreg -sfrag -srd -dr INSTALLFOLDER -var var.SourceDir -t $(Projectdir)Transforms.xslt -out $(Projectdir)ShapeChangeAddIn.wxs
