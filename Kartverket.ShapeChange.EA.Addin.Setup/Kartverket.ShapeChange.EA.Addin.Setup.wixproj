@@ -42,11 +42,11 @@
     <None Include="x86Product.wxs" />
     <None Include="x86ApplicationRegistryEntry.wxs" />
     <None Include="x86DefaultInstallLocation.wxs" />
-    <Compile Include="WixUI_CustomInstallDir.wxs" />
     <Compile Include="RegistryEntries.wxs" />
     <Compile Include="ShapeChangeAddIn.wxs" />
     <Content Include="banner.bmp" />
     <Content Include="dialog.bmp" />
+    <Content Include="gpl-3.0.rtf" />
     <Content Include="icon.ico" />
     <Content Include="ReadMe.txt" />
     <Content Include="Transforms.xslt" />
