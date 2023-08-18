@@ -557,6 +557,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#segmentSchematron">3.2.17. segmentSchematron</a></li>
 <li><a href="#skipXmlSchemaOutput">3.2.18. skipXmlSchemaOutput</a></li>
 <li><a href="#sortedOutput">3.2.19. sortedOutput</a></li>
+<li><a href="#writeXmlEncodingInfos">3.2.20. writeXmlEncodingInfos</a></li>
 </ul>
 </li>
 <li><a href="#Encoding_Rules">3.3. Encoding Rules</a></li>
@@ -1354,6 +1355,27 @@ with other models).</p>
 <p>Applies to Rule(s): <em>none – general behaviour</em></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="writeXmlEncodingInfos"><a class="anchor" href="#writeXmlEncodingInfos"></a>3.2.20. writeXmlEncodingInfos</h4>
+<div class="paragraph">
+<p>(since v2.13.0)</p>
+</div>
+<div class="paragraph">
+<p>Type: Boolean (true or false)</p>
+</div>
+<div class="paragraph">
+<p>Default Value: false</p>
+</div>
+<div class="paragraph">
+<p>Explanation: If "true", the target will also output
+<a href="./XML_Encoding_Infos.html">XML encoding infos</a>,
+one file for each schema it has processed. These information items can be used
+by other ShapeChange targets, for example the <a href="../ldproxy2.html">ldproxy2 target</a>.</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s): <em>none – general behaviour</em></p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="Encoding_Rules"><a class="anchor" href="#Encoding_Rules"></a>3.3. Encoding Rules</h3>
@@ -1924,7 +1946,7 @@ not possible.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-25 13:53:07 +0100
+Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product
+		Id="*"
+		Name="ShapeChange EA-Addin"
+		Language="1033"
+		Version="3.2.0"
+		Manufacturer="Kartverket"
+		UpgradeCode="f59fcb2a-4d48-4a40-81c5-5a8930dae2d7">
+		<Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" />
+
+		<?define Win64 = "no" ?>
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes" />
+
+		<Icon Id="icon.ico" SourceFile=".\icon.ico" />
+		<Property Id="ARPPRODUCTICON" Value="icon.ico" /> <!-- icon in add/remove programs in control panel-->
+
+		<WixVariable Id="WixUIBannerBmp" Value="banner.bmp" />
+		<WixVariable Id="WixUIDialogBmp" Value="dialog.bmp" />
+
+		<Feature Id="Kartverket.ShapeChange.EA.Addin" Title="ShapeChange EA-Addin" Level="1">
+			<ComponentGroupRef Id="RegistryEntries" />
+			<ComponentRef Id="AppRegistryEntry" />
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+		<UIRef Id="WixUI_CustomInstallDir" />
+	</Product>
+</Wix>

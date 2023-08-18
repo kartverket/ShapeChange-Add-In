@@ -546,29 +546,30 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#includeCodelistsAndEnumerations">2.3.6. includeCodelistsAndEnumerations</a></li>
 <li><a href="#includeCodeListURI">2.3.7. includeCodeListURI</a></li>
 <li><a href="#includeDiagrams">2.3.8. includeDiagrams</a></li>
-<li><a href="#includeVoidable">2.3.9. includeVoidable</a></li>
-<li><a href="#inheritedConstraints">2.3.10. inheritedConstraints</a></li>
-<li><a href="#inheritedProperties">2.3.11. inheritedProperties</a></li>
-<li><a href="#javaOptions">2.3.12. javaOptions</a></li>
-<li><a href="#logoFilePath">2.3.13. logoFilePath</a></li>
-<li><a href="#name">2.3.14. name</a></li>
-<li><a href="#noAlphabeticSortingForProperties">2.3.15. noAlphabeticSortingForProperties</a></li>
-<li><a href="#outputDirectory">2.3.16. outputDirectory</a></li>
-<li><a href="#outputFilename">2.3.17. outputFilename</a></li>
-<li><a href="#outputFormat">2.3.18. outputFormat</a></li>
-<li><a href="#package">2.3.19. package</a></li>
-<li><a href="#pathToJavaExecutable">2.3.20. pathToJavaExecutable</a></li>
-<li><a href="#producer">2.3.21. producer</a></li>
-<li><a href="#referenceModelFileNameOrConnectionString">2.3.22. referenceModelFileNameOrConnectionString</a></li>
-<li><a href="#referenceModelType">2.3.23. referenceModelType</a></li>
-<li><a href="#scope">2.3.24. scope</a></li>
-<li><a href="#versionDate">2.3.25. versionDate</a></li>
-<li><a href="#versionNumber">2.3.26. versionNumber</a></li>
-<li><a href="#xsldocxFile">2.3.27. xsldocxFile</a></li>
-<li><a href="#xslframeHtmlFileName">2.3.28. xslframeHtmlFileName</a></li>
-<li><a href="#xslhtmlFile">2.3.29. xslhtmlFile</a></li>
-<li><a href="#xsltPath">2.3.30. xsltPath</a></li>
-<li><a href="#xslTransformerFactory">2.3.31. xslTransformerFactory</a></li>
+<li><a href="#includeDiagramDocumentation">2.3.9. includeDiagramDocumentation</a></li>
+<li><a href="#includeVoidable">2.3.10. includeVoidable</a></li>
+<li><a href="#inheritedConstraints">2.3.11. inheritedConstraints</a></li>
+<li><a href="#inheritedProperties">2.3.12. inheritedProperties</a></li>
+<li><a href="#javaOptions">2.3.13. javaOptions</a></li>
+<li><a href="#logoFilePath">2.3.14. logoFilePath</a></li>
+<li><a href="#name">2.3.15. name</a></li>
+<li><a href="#noAlphabeticSortingForProperties">2.3.16. noAlphabeticSortingForProperties</a></li>
+<li><a href="#outputDirectory">2.3.17. outputDirectory</a></li>
+<li><a href="#outputFilename">2.3.18. outputFilename</a></li>
+<li><a href="#outputFormat">2.3.19. outputFormat</a></li>
+<li><a href="#package">2.3.20. package</a></li>
+<li><a href="#pathToJavaExecutable">2.3.21. pathToJavaExecutable</a></li>
+<li><a href="#producer">2.3.22. producer</a></li>
+<li><a href="#referenceModelFileNameOrConnectionString">2.3.23. referenceModelFileNameOrConnectionString</a></li>
+<li><a href="#referenceModelType">2.3.24. referenceModelType</a></li>
+<li><a href="#scope">2.3.25. scope</a></li>
+<li><a href="#versionDate">2.3.26. versionDate</a></li>
+<li><a href="#versionNumber">2.3.27. versionNumber</a></li>
+<li><a href="#xsldocxFile">2.3.28. xsldocxFile</a></li>
+<li><a href="#xslframeHtmlFileName">2.3.29. xslframeHtmlFileName</a></li>
+<li><a href="#xslhtmlFile">2.3.30. xslhtmlFile</a></li>
+<li><a href="#xsltPath">2.3.31. xsltPath</a></li>
+<li><a href="#xslTransformerFactory">2.3.32. xslTransformerFactory</a></li>
 </ul>
 </li>
 <li><a href="#Documentation_of_tagged_values">2.4. Documentation of tagged values</a></li>
@@ -1020,7 +1021,32 @@ model elements (
 </div>
 </div>
 <div class="sect3">
-<h4 id="includeVoidable"><a class="anchor" href="#includeVoidable"></a>2.3.9. includeVoidable</h4>
+<h4 id="includeDiagramDocumentation"><a class="anchor" href="#includeDiagramDocumentation"></a>2.3.9. includeDiagramDocumentation</h4>
+<div class="paragraph">
+<p>(since v2.13.0)</p>
+</div>
+<div class="paragraph">
+<p>Alias: <em>none</em></p>
+</div>
+<div class="paragraph">
+<p>Required / Optional: optional</p>
+</div>
+<div class="paragraph">
+<p>Type: Boolean</p>
+</div>
+<div class="paragraph">
+<p>Default Value: false</p>
+</div>
+<div class="paragraph">
+<p>Explanation: Indicates if the documentation of a diagram shall be included (
+<a href="./Feature_Catalogue.html#Inclusion_of_UML_Diagrams">more information</a>).</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s): <em>none – general behaviour</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="includeVoidable"><a class="anchor" href="#includeVoidable"></a>2.3.10. includeVoidable</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1042,7 +1068,7 @@ voidable shall be included in the documentation of the property.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="inheritedConstraints"><a class="anchor" href="#inheritedConstraints"></a>2.3.10. inheritedConstraints</h4>
+<h4 id="inheritedConstraints"><a class="anchor" href="#inheritedConstraints"></a>2.3.11. inheritedConstraints</h4>
 <div class="paragraph">
 <p>(since v2.7.0)</p>
 </div>
@@ -1069,7 +1095,7 @@ the constraints defined by the class, set this parameter to "false".</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="inheritedProperties"><a class="anchor" href="#inheritedProperties"></a>2.3.11. inheritedProperties</h4>
+<h4 id="inheritedProperties"><a class="anchor" href="#inheritedProperties"></a>2.3.12. inheritedProperties</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1091,7 +1117,7 @@ be output.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="javaOptions"><a class="anchor" href="#javaOptions"></a>2.3.12. javaOptions</h4>
+<h4 id="javaOptions"><a class="anchor" href="#javaOptions"></a>2.3.13. javaOptions</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1131,7 +1157,7 @@ source document.
 </div>
 </div>
 <div class="sect3">
-<h4 id="logoFilePath"><a class="anchor" href="#logoFilePath"></a>2.3.13. logoFilePath</h4>
+<h4 id="logoFilePath"><a class="anchor" href="#logoFilePath"></a>2.3.14. logoFilePath</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1169,7 +1195,7 @@ to define the path to the custom template).
 </div>
 </div>
 <div class="sect3">
-<h4 id="name"><a class="anchor" href="#name"></a>2.3.14. name</h4>
+<h4 id="name"><a class="anchor" href="#name"></a>2.3.15. name</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1190,7 +1216,7 @@ to define the path to the custom template).
 </div>
 </div>
 <div class="sect3">
-<h4 id="noAlphabeticSortingForProperties"><a class="anchor" href="#noAlphabeticSortingForProperties"></a>2.3.15. noAlphabeticSortingForProperties</h4>
+<h4 id="noAlphabeticSortingForProperties"><a class="anchor" href="#noAlphabeticSortingForProperties"></a>2.3.16. noAlphabeticSortingForProperties</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1226,7 +1252,7 @@ This parameter is ignored if a diff is performed.
 </div>
 </div>
 <div class="sect3">
-<h4 id="outputDirectory"><a class="anchor" href="#outputDirectory"></a>2.3.16. outputDirectory</h4>
+<h4 id="outputDirectory"><a class="anchor" href="#outputDirectory"></a>2.3.17. outputDirectory</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1248,7 +1274,7 @@ will be written.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="outputFilename"><a class="anchor" href="#outputFilename"></a>2.3.17. outputFilename</h4>
+<h4 id="outputFilename"><a class="anchor" href="#outputFilename"></a>2.3.18. outputFilename</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1270,7 +1296,7 @@ appropriate extension will be added depending on the output format.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="outputFormat"><a class="anchor" href="#outputFormat"></a>2.3.18. outputFormat</h4>
+<h4 id="outputFormat"><a class="anchor" href="#outputFormat"></a>2.3.19. outputFormat</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1326,7 +1352,7 @@ accordingly)</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="package"><a class="anchor" href="#package"></a>2.3.19. package</h4>
+<h4 id="package"><a class="anchor" href="#package"></a>2.3.20. package</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1352,7 +1378,7 @@ be specified or be left blank, if this is desired.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="pathToJavaExecutable"><a class="anchor" href="#pathToJavaExecutable"></a>2.3.20. pathToJavaExecutable</h4>
+<h4 id="pathToJavaExecutable"><a class="anchor" href="#pathToJavaExecutable"></a>2.3.21. pathToJavaExecutable</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1380,7 +1406,7 @@ execution – especially 'Xmx' – via the parameter
 </div>
 </div>
 <div class="sect3">
-<h4 id="producer"><a class="anchor" href="#producer"></a>2.3.21. producer</h4>
+<h4 id="producer"><a class="anchor" href="#producer"></a>2.3.22. producer</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1414,7 +1440,7 @@ according to ISO 19110.
 </div>
 </div>
 <div class="sect3">
-<h4 id="referenceModelFileNameOrConnectionString"><a class="anchor" href="#referenceModelFileNameOrConnectionString"></a>2.3.22. referenceModelFileNameOrConnectionString</h4>
+<h4 id="referenceModelFileNameOrConnectionString"><a class="anchor" href="#referenceModelFileNameOrConnectionString"></a>2.3.23. referenceModelFileNameOrConnectionString</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1450,7 +1476,7 @@ the working directory.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="referenceModelType"><a class="anchor" href="#referenceModelType"></a>2.3.23. referenceModelType</h4>
+<h4 id="referenceModelType"><a class="anchor" href="#referenceModelType"></a>2.3.24. referenceModelType</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1529,7 +1555,7 @@ repository, export it to SCXML, and then execute ShapeChange again using
 </div>
 </div>
 <div class="sect3">
-<h4 id="scope"><a class="anchor" href="#scope"></a>2.3.24. scope</h4>
+<h4 id="scope"><a class="anchor" href="#scope"></a>2.3.25. scope</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1551,7 +1577,7 @@ This may contain HTML markup and "[NEWLINE]" to separate paragraphs.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="versionDate"><a class="anchor" href="#versionDate"></a>2.3.25. versionDate</h4>
+<h4 id="versionDate"><a class="anchor" href="#versionDate"></a>2.3.26. versionDate</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1577,7 +1603,7 @@ date time with offset (e.g. 2018-11-20T11:27:12.06+01:00).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="versionNumber"><a class="anchor" href="#versionNumber"></a>2.3.26. versionNumber</h4>
+<h4 id="versionNumber"><a class="anchor" href="#versionNumber"></a>2.3.27. versionNumber</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1598,7 +1624,7 @@ date time with offset (e.g. 2018-11-20T11:27:12.06+01:00).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="xsldocxFile"><a class="anchor" href="#xsldocxFile"></a>2.3.27. xsldocxFile</h4>
+<h4 id="xsldocxFile"><a class="anchor" href="#xsldocxFile"></a>2.3.28. xsldocxFile</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1619,7 +1645,7 @@ date time with offset (e.g. 2018-11-20T11:27:12.06+01:00).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="xslframeHtmlFileName"><a class="anchor" href="#xslframeHtmlFileName"></a>2.3.28. xslframeHtmlFileName</h4>
+<h4 id="xslframeHtmlFileName"><a class="anchor" href="#xslframeHtmlFileName"></a>2.3.29. xslframeHtmlFileName</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1641,7 +1667,7 @@ HTML.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="xslhtmlFile"><a class="anchor" href="#xslhtmlFile"></a>2.3.29. xslhtmlFile</h4>
+<h4 id="xslhtmlFile"><a class="anchor" href="#xslhtmlFile"></a>2.3.30. xslhtmlFile</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1662,7 +1688,7 @@ HTML.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="xsltPath"><a class="anchor" href="#xsltPath"></a>2.3.30. xsltPath</h4>
+<h4 id="xsltPath"><a class="anchor" href="#xsltPath"></a>2.3.31. xsltPath</h4>
 <div class="paragraph">
 <p>Alias: xsltPfad</p>
 </div>
@@ -1684,7 +1710,7 @@ XSLT files are located.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="xslTransformerFactory"><a class="anchor" href="#xslTransformerFactory"></a>2.3.31. xslTransformerFactory</h4>
+<h4 id="xslTransformerFactory"><a class="anchor" href="#xslTransformerFactory"></a>2.3.32. xslTransformerFactory</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -2182,6 +2208,11 @@ resolution</p>
 figures in the resulting document by first pressing Ctrl+A (to select
 everything) and then F9 (to update everything).</p>
 </li>
+<li>
+<p>For frame HTML catalogues, the documentation of a diagram (e.g., set
+in Enterprise Architect in the diagram notes), can be included, by
+setting target parameter <strong>includeDiagramDocumentation</strong> to 'true'.</p>
+</li>
 </ul>
 </div>
 </td>
@@ -2193,7 +2224,7 @@ everything) and then F9 (to update everything).</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-02-25 13:53:07 +0100
+Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

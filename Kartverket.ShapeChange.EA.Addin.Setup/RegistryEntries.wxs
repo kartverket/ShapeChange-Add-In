@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER">
+            <Component Id="cmpC9B792B69B7F881DD3869362DD9A35F7" Guid="{BA224A9D-6DAD-4796-8AE5-70AD70EA2398}">
+                <Class Id="{12552F15-3BB9-32D9-8EB7-A2F198EEB282}" Context="InprocServer32" Description="Kartverket.ShapeChange.EA.Addin.frmAbout" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Kartverket.ShapeChange.EA.Addin.frmAbout" Description="Kartverket.ShapeChange.EA.Addin.frmAbout" />
+                </Class>
+                <Class Id="{549C56BA-8463-30B1-9ED4-2D00776FA8C9}" Context="InprocServer32" Description="Kartverket.ShapeChange.EA.Addin.frmGML" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Kartverket.ShapeChange.EA.Addin.frmGML" Description="Kartverket.ShapeChange.EA.Addin.frmGML" />
+                </Class>
+                <Class Id="{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}" Context="InprocServer32" Description="Kartverket.ShapeChange.EA.Addin.frmSettings" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Kartverket.ShapeChange.EA.Addin.frmSettings" Description="Kartverket.ShapeChange.EA.Addin.frmSettings" />
+                </Class>
+                <Class Id="{F6713BA8-6409-34E6-B566-4BD443B4CCE8}" Context="InprocServer32" Description="Kartverket.ShapeChange.EA.Addin.Main" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="Kartverket.ShapeChange.EA.Addin.Main" Description="Kartverket.ShapeChange.EA.Addin.Main" />
+                </Class>
+                <File Id="fil918CF61B239D817871A699438D825781" KeyPath="yes" Source="$(var.SourceDir)\Kartverket.ShapeChange.EA.Addin.dll" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32\3.2.0.0" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.frmAbout" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32\3.2.0.0" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32\3.2.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32\3.2.0.0" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.frmAbout" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{12552F15-3BB9-32D9-8EB7-A2F198EEB282}\InprocServer32" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32\3.2.0.0" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.frmGML" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32\3.2.0.0" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32\3.2.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32\3.2.0.0" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.frmGML" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{549C56BA-8463-30B1-9ED4-2D00776FA8C9}\InprocServer32" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32\3.2.0.0" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.frmSettings" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32\3.2.0.0" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32\3.2.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32\3.2.0.0" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.frmSettings" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F113EFEA-85AD-3CCC-8473-94CCA2E9EBA7}\InprocServer32" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32\3.2.0.0" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.Main" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32\3.2.0.0" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32\3.2.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32\3.2.0.0" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32" Name="Class" Value="Kartverket.ShapeChange.EA.Addin.Main" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32" Name="Assembly" Value="Kartverket.ShapeChange.EA.Addin, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c3a369e46458c924" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{F6713BA8-6409-34E6-B566-4BD443B4CCE8}\InprocServer32" Name="CodeBase" Value="file:///[#fil918CF61B239D817871A699438D825781]" Type="string" Action="write" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="RegistryEntries">
+            <ComponentRef Id="cmpC9B792B69B7F881DD3869362DD9A35F7" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>
