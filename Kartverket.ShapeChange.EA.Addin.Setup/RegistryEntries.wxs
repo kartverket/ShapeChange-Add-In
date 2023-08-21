@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER">
-            <Component Id="cmpC9B792B69B7F881DD3869362DD9A35F7" Guid="{BA224A9D-6DAD-4796-8AE5-70AD70EA2398}">
+            <Component Id="cmpC9B792B69B7F881DD3869362DD9A35F7" Guid="{12055E28-16B0-410A-B5DA-E93D45BA248A}">
                 <Class Id="{12552F15-3BB9-32D9-8EB7-A2F198EEB282}" Context="InprocServer32" Description="Kartverket.ShapeChange.EA.Addin.frmAbout" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="Kartverket.ShapeChange.EA.Addin.frmAbout" Description="Kartverket.ShapeChange.EA.Addin.frmAbout" />
                 </Class>
