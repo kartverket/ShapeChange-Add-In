@@ -642,7 +642,9 @@ namespace Kartverket.ShapeChange.EA.Addin
             var isValid = true;
             if (checkBoxCodeLists.Checked || checkBoxMakeXsd.Checked) 
             {
-                if (!ValidateEncoding() || !ValidateVersion() || !ValidateXmlns() || !ValidateXsdFile() || !ValidateTargetNamespace())
+                // We want all validations to evaluate in order to display all errors in the UI, therefore we do not
+                // use short-circuit OR operators (||) in the if-statement
+                if (!ValidateEncoding() | !ValidateVersion() | !ValidateXmlns() | !ValidateXsdFile() | !ValidateTargetNamespace())
                 {
                     isValid = false;
                 }
