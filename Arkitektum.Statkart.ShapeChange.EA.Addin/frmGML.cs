@@ -524,7 +524,6 @@ namespace Kartverket.ShapeChange.EA.Addin
                 
                 xmlTextWriter.WriteStartElement("Target");
                 xmlTextWriter.WriteAttributeString("class", "de.interactive_instruments.ShapeChange.Target.FeatureCatalogue.FeatureCatalogue");
-                xmlTextWriter.WriteEndAttribute();
                 xmlTextWriter.WriteAttributeString("mode", "enabled");
 
                 xmlTextWriter.WriteStartElement("targetParameter");
