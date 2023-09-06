@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using EA;
+using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 
 namespace Kartverket.ShapeChange.EA.Addin
 {
@@ -26,7 +27,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                     
                     return "-&ShapeChange";
                 case "-&ShapeChange":
-                    string[] ar = { "&Transform...", "About..." };
+                    string[] ar = { "&Transform GML...", "Generate &ldProxy files...", "About..." };
                     return ar;
             
             }
@@ -67,30 +68,42 @@ namespace Kartverket.ShapeChange.EA.Addin
         {
             switch (ItemName)
             {
-                case "&Transform...":
-                    if (Repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema")
+                case "&Transform GML...":
+                    if (SelectedPackageIsApplicationSchema(Repository))
                     {
                         var formGml = new frmGML();
                         formGml.SetRepository(Repository);
                         formGml.ShowDialog();
                     }
                     else
-                        MessageBox.Show("Please select a package with stereotype applicationSchema.", "Missing data");
-                    
+                    {
+                        MessageBox.Show(WrongPackageStereotypeMessage, WrongPackageStereotypeCaption);
+                    }
                     break;
-                
-                //case "Generer &WSDL...":
 
-                //    frmWsdlXsd frmWsdl = new frmWsdlXsd();
-                //    frmWsdl.SetRepository(Repository);
-                //    frmWsdl.ShowDialog();
-                //    break;
-                
+                case "Generate &ldProxy files...":
+                    if (SelectedPackageIsApplicationSchema(Repository))
+                    {
+                        var formLdProxy = new FrmLdProxy();
+                        formLdProxy.SetRepository(Repository);
+                        formLdProxy.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(WrongPackageStereotypeMessage, WrongPackageStereotypeCaption);
+                    }
+                    break;
+
                 case "About...":
                     var aboutForm = new frmAbout();
                     aboutForm.ShowDialog();
                     break;
             }
+        }
+
+        private bool SelectedPackageIsApplicationSchema(IDualRepository repository)
+        {
+            return repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema";
         }
 
         public string WriteToOutputwindow(Repository repository, object args)

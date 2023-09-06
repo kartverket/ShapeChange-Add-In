@@ -117,55 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="applicationDirectoryErrorMessage" xml:space="preserve">
-    <value>Unable to resolve application directory.</value>
+  <data name="CompletedMessage" xml:space="preserve">
+    <value>{0} - Completed</value>
+    <comment>{0}: DateTime stamp</comment>
   </data>
-  <data name="eaProjectDirectoryErrorMessage" xml:space="preserve">
-    <value>Unable to resolve EA project directory.</value>
+  <data name="RunShapeChangeMessage" xml:space="preserve">
+    <value>{0} - Run ShapeChange ...</value>
+    <comment>{0}: DateTime stamp</comment>
   </data>
-  <data name="featureCatalogueFeatureTerm" xml:space="preserve">
-    <value>Objekttype</value>
-  </data>
-  <data name="featureCatalogueTemplateFilename" xml:space="preserve">
-    <value>template.docx</value>
-  </data>
-  <data name="logMessageCopyConfigFiles" xml:space="preserve">
-    <value>Copy config files to {0}</value>
-  </data>
-  <data name="logMessageStartConfig" xml:space="preserve">
-    <value>Start config...</value>
-  </data>
-  <data name="missingTaggedValuesMessage" xml:space="preserve">
-    <value>Tagged values missing for correct generation. Please update tagged values.</value>
-  </data>
-  <data name="shapeChangeAddInHelpUrl" xml:space="preserve">
-    <value>https://kartverket.no/geodataarbeid/Standarder/SOSI/Programmer-og-verktoy/</value>
-  </data>
-  <data name="templatesDirectory" xml:space="preserve">
-    <value>templates</value>
-  </data>
-  <data name="validateEncodingErrorMessage" xml:space="preserve">
-    <value>Encoding must be set. I.e. 'iso19136_2007' or 'iso19136_2007_INSPIRE_Extensions'</value>
-  </data>
-  <data name="validateNamespaceErrorMessage" xml:space="preserve">
-    <value>Namespace must be set. I.e. http://skjema.geonorge.no/sosi/produktspesifikasjon/navn</value>
-  </data>
-  <data name="validateVersionErrorMessage" xml:space="preserve">
-    <value>Version must be set. I.e. 4.3 or 1.0RC</value>
-  </data>
-  <data name="validateXmlnsErrorMessage" xml:space="preserve">
-    <value>Xmlns must be set. Usually sosi</value>
-  </data>
-  <data name="validateXsdErrorMessage" xml:space="preserve">
-    <value>Xsd file must have a name. I.e. 'name.xsd'</value>
-  </data>
-  <data name="validateJsonBaseUriErrorMessage" xml:space="preserve">
-    <value>The JSON base URI must be set. I.e. http://skjema.geonorge.no/standard/geosynkronisering/1.3/json/</value>
-  </data>
-  <data name="validateEpsgCodeErrorMessage" xml:space="preserve">
-    <value>Epsg code must be set. I.e. 4258</value>
-  </data>
-  <data name="validateSosiRepresentationNameErrorMessage" xml:space="preserve">
-    <value>The name of the service</value>
+  <data name="WriteMessage" xml:space="preserve">
+    <value>Write {0}</value>
   </data>
 </root>
