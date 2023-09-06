@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -123,13 +123,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\XmlSchemaWriter.cs" />
-    <Compile Include="TargetSettings\XmlSchemaSettings.cs" />
-    <Compile Include="TargetSettings\CodelistDictionariesSettings.cs" />
-    <Compile Include="Extensions\CodelistDictionariesWriter.cs" />
-    <Compile Include="Extensions\FeatureCatalogueWriter.cs" />
-    <Compile Include="Extensions\XmlTextWriterExtensions.cs" />
-    <Compile Include="TargetSettings\FeatureCatalogueSettings.cs" />
     <Compile Include="FrmLdProxy.cs">
       <SubType>Form</SubType>
     </Compile>
