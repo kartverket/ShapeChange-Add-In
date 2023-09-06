@@ -120,6 +120,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\XmlSchemaWriter.cs" />
+    <Compile Include="TargetSettings\XmlSchemaSettings.cs" />
+    <Compile Include="TargetSettings\CodelistDictionariesSettings.cs" />
+    <Compile Include="Extensions\CodelistDictionariesWriter.cs" />
+    <Compile Include="Extensions\FeatureCatalogueWriter.cs" />
+    <Compile Include="Extensions\XmlTextWriterExtensions.cs" />
+    <Compile Include="TargetSettings\FeatureCatalogueSettings.cs" />
     <Compile Include="frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
