@@ -27,9 +27,20 @@
 			<ComponentGroupRef Id="RegistryEntries" />
 			<ComponentRef Id="AppRegistryEntry" />
 			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentRef Id="SSJavaCOMDll" />
 		</Feature>
 
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
 		<UIRef Id="WixUI_InstallDir" />
 	</Product>
+
+	<Fragment>
+		<DirectoryRef Id="TARGETDIR">
+			<Directory Id="SystemFolder" Name="SystemFolder">
+				<Component Id="SSJavaCOMDll" Guid="6B170612-F058-47A8-A7E6-8184237ED9AC">
+					<File Id="fil6BF2DE81F9666A9D47CF14E53936F8A6" KeyPath="yes" Source="..\Arkitektum.Statkart.ShapeChange.EA.Addin\Resources\SSJavaCOM.dll" />
+				</Component>
+			</Directory>
+		</DirectoryRef>
+	</Fragment>
 </Wix>
