@@ -161,3 +161,5 @@ $RECYCLE.BIN/
 # .vs directory
 .vs/
 Kartverket.ShapeChange.EA.Addin.Setup/ShapeChangeAddIn.wxs
+
+Kartverket.ShapeChange.EA.Addin.Setup/RegistryEntries.wxs
