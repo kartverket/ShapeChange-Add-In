@@ -5,8 +5,8 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using EA;
+using Kartverket.ShapeChange.EA.Addin.JsonSchema;
 using Kartverket.ShapeChange.EA.Addin.Properties;
 using static Kartverket.ShapeChange.EA.Addin.Resources.Common;
 using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
@@ -67,7 +67,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                 return;
             }
 
-            _resultDirectory = Path.Combine(eaDirectory, $"gmlTransform_{_repository.GetTreeSelectedPackage().Name}");
+            _resultDirectory = Path.Combine(eaDirectory, $"jsonSchema_{_repository.GetTreeSelectedPackage().Name}");
 
             SetProperties();
 
@@ -105,9 +105,6 @@ namespace Kartverket.ShapeChange.EA.Addin
                     case "jsonEncodingRule":
                         textBoxPropsJsonEncoding.Text = taggedValue.Value;
                         break;
-                    case "SOSI_produsent":
-                        //textBoxFeatureCatalogueProducer.Text = taggedValue.Value;
-                        break;
                 }
             }
 
@@ -124,19 +121,6 @@ namespace Kartverket.ShapeChange.EA.Addin
             textBoxPropsEaProjectFile.Text = _eaProjectFilePath;
             textBoxPropsFeatureCatalogueName.Text = selectedPackage.Name;
             textBoxPropsJsonDirectory.Text = _jsonDirectory;
-        }
-
-        private bool ValidateTargetNamespace()
-        {
-            var bStatus = true;
-            if (textBoxPropsTargetNamespace.Text == "")
-            {
-                errorProvider.SetError(textBoxPropsTargetNamespace, validateNamespaceErrorMessage);
-                bStatus = false;
-            }
-            else
-                errorProvider.SetError(textBoxPropsTargetNamespace, "");
-            return bStatus;
         }
 
         private bool ValidateSchemaFile()
@@ -165,20 +149,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             return bStatus;
         }
 
-        private bool ValidateEncoding()
-        {
-            var bStatus = true;
-            if (textBoxPropsJsonEncoding.Text == "")
-            {
-                errorProvider.SetError(textBoxPropsJsonEncoding, validateEncodingErrorMessage);
-                bStatus = false;
-            }
-            else
-                errorProvider.SetError(textBoxPropsJsonEncoding, "");
-            return bStatus;
-        }
-
-        private void GenerateGml()
+        private void GenerateJsonSchema()
         {
             try
             {
@@ -194,7 +165,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                 CopyStandardShapeChangeConfigAndMappingFiles();
 
                 SetText("Write ShapeChangeConfiguration.xml");
-                WriteConfig(shapeChangeConfigurationXmlFullFilename, textBoxPropsFeatureCatalogueName.Text, textBoxPropsJsonEncoding.Text);
+                WriteConfig(shapeChangeConfigurationXmlFullFilename);
 
                 SetText($"Write {shapeChangeBatFilename}");
                 WriteShapeChangeBat(shapeChangeBatFullFilename, shapeChangeConfigurationXmlFullFilename);
@@ -331,180 +302,24 @@ namespace Kartverket.ShapeChange.EA.Addin
         }
 
 
-        private void WriteConfig(string shapeChangeConfigFullFilename, string schemaName, string encodingRule)
+        private void WriteConfig(string shapeChangeConfigFullFilename)
         {
-            var xmlTextWriter = new XmlTextWriter(shapeChangeConfigFullFilename, Encoding.UTF8)
-            {
-                Formatting = Formatting.Indented,
-                Indentation = 2,
-                IndentChar = ' ',
-                QuoteChar = '"',
-            };
+            var writer = new ShapeChangeConfigurationFileWriter(shapeChangeConfigFullFilename, Encoding.UTF8);
 
-            xmlTextWriter.WriteStartDocument();
+            writer.WriteInitialElements(CreateInputSetting());
 
-            // Write first element
+            writer.WriteStartElement("targets");
 
-            xmlTextWriter.WriteStartElement("ShapeChangeConfiguration", "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
-            xmlTextWriter.WriteAttributeString("xmlns", "xi", null, "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-            xmlTextWriter.WriteAttributeString("xmlns", "sc", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
-            xmlTextWriter.WriteAttributeString("xsi", "schemaLocation", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd");
+            var jsonSchemaSettings = new JsonSchemaSettings(_jsonDirectory, _schemaVersion);
 
-            xmlTextWriter.WriteStartElement("input");
-            
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "inputModelType");
-            xmlTextWriter.WriteAttributeString("value", "EA7");
-            xmlTextWriter.WriteEndElement();
+            writer.WriteJsonSchemaTarget(jsonSchemaSettings);
 
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "inputFile");
-            xmlTextWriter.WriteAttributeString("value", _eaProjectFilePath);
-            xmlTextWriter.WriteEndElement();
+            writer.WriteEndElement(); //close targets
 
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "tmpDirectory");
-            xmlTextWriter.WriteAttributeString("value", _tmpDirectory);
-            xmlTextWriter.WriteEndElement();
+            writer.WriteEndElement();
 
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "appSchemaName");
-            xmlTextWriter.WriteAttributeString("value", schemaName);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "addTaggedValues");
-            xmlTextWriter.WriteAttributeString("value", "SOSI_navn,NVDB_ID,SOSI_verdi");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "representTaggedValues");
-            xmlTextWriter.WriteAttributeString("value", "alwaysVoid,neverVoid,Code,lastChange,appliesTo,SOSI_navn,NVDB_ID,SOSI_verdi,SOSI_presentasjonsnavn,SOSI_bildeAvModellElement");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("include", "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("href", Path.Combine(_configDirectory, "StandardAliases.xml"));
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement(); //close input
-
-            xmlTextWriter.WriteStartElement("log");
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "reportLevel");
-            xmlTextWriter.WriteAttributeString("value", Settings.Default.ReportLevel);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("parameter");
-            xmlTextWriter.WriteAttributeString("name", "logFile");
-            xmlTextWriter.WriteAttributeString("value", Path.Combine(_resultDirectory, "log.xml"));
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement(); //close log
-
-            xmlTextWriter.WriteStartElement("targets");
-
-            xmlTextWriter.WriteStartElement("Target");
-            xmlTextWriter.WriteAttributeString("class", "de.interactive_instruments.ShapeChange.Target.JSON.JsonSchemaTarget");
-            xmlTextWriter.WriteAttributeString("mode", "enabled");
-
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "outputDirectory");
-            xmlTextWriter.WriteAttributeString("value", _jsonDirectory);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "prettyPrint");
-            xmlTextWriter.WriteAttributeString("value", "true");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "sortedOutput");
-            xmlTextWriter.WriteAttributeString("value", "true");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "jsonBaseUri");
-            xmlTextWriter.WriteAttributeString("value", "http://sosi.geonorge.no/ShapeChangeAddIn/");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "jsonSchemaVersion");
-            xmlTextWriter.WriteAttributeString("value", _schemaVersion);
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("targetParameter");
-            xmlTextWriter.WriteAttributeString("name", "defaultEncodingRule");
-            xmlTextWriter.WriteAttributeString("value", "defaultJson");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("rules");
-
-            xmlTextWriter.WriteStartElement("EncodingRule");
-            xmlTextWriter.WriteAttributeString("name", "defaultJson");
-
-            xmlTextWriter.WriteStartElement("rule");
-            xmlTextWriter.WriteAttributeString("name", "rule-json-cls-basictype");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("rule");
-            xmlTextWriter.WriteAttributeString("name", "rule-json-cls-codelist-uri-format");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("rule");
-            xmlTextWriter.WriteAttributeString("name", "rule-json-cls-name-as-entityType");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement(); //EncodingRule
-            xmlTextWriter.WriteEndElement(); //rules
-
-            //Includes
-            xmlTextWriter.WriteStartElement("include", "http://www.w3.org/2001/XInclude");
-            xmlTextWriter.WriteAttributeString("href", "http://shapechange.net/resources/config/StandardMapEntries_JSON.xml");
-            xmlTextWriter.WriteEndElement();
-
-            //MapEntries
-            xmlTextWriter.WriteStartElement("mapEntries");
-
-            xmlTextWriter.WriteStartElement("MapEntry");
-            xmlTextWriter.WriteAttributeString("type", "Punkt");
-            xmlTextWriter.WriteAttributeString("rule", "*");
-            xmlTextWriter.WriteAttributeString("targetType", "https://geojson.org/schema/Point.json");
-            xmlTextWriter.WriteAttributeString("param", "geometry");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("MapEntry");
-            xmlTextWriter.WriteAttributeString("type", "Kurve");
-            xmlTextWriter.WriteAttributeString("rule", "*");
-            xmlTextWriter.WriteAttributeString("targetType", "https://geojson.org/schema/LineString.json");
-            xmlTextWriter.WriteAttributeString("param", "geometry");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("MapEntry");
-            xmlTextWriter.WriteAttributeString("type", "Flate");
-            xmlTextWriter.WriteAttributeString("rule", "*");
-            xmlTextWriter.WriteAttributeString("targetType", "https://geojson.org/schema/Polygon.json");
-            xmlTextWriter.WriteAttributeString("param", "geometry");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteStartElement("MapEntry");
-            xmlTextWriter.WriteAttributeString("type", "Sverm");
-            xmlTextWriter.WriteAttributeString("rule", "*");
-            xmlTextWriter.WriteAttributeString("targetType", "https://geojson.org/schema/MultiPoint.json");
-            xmlTextWriter.WriteAttributeString("param", "geometry");
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndElement(); //close Json
-
-            xmlTextWriter.WriteEndElement(); //close targets
-
-            xmlTextWriter.WriteEndElement();
-
-            xmlTextWriter.WriteEndDocument();
-            xmlTextWriter.Close();
+            writer.WriteEndDocument();
+            writer.Close();
         }
 
         private void ButtonTransform_Click(object sender, EventArgs e)
@@ -540,10 +355,16 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
         }
 
+        private InputSettings CreateInputSetting()
+        {
+            return new InputSettings(_resultDirectory, _eaProjectFilePath, _tmpDirectory, _configDirectory,
+                textBoxPropsSchemaName.Text, false);
+        }
+
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            GenerateGml();
+            GenerateJsonSchema();
         }
  
 

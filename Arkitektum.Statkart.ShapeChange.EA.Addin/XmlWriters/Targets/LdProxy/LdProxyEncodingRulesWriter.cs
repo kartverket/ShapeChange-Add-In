@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using Kartverket.ShapeChange.EA.Addin.Util;
 
 namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 {
@@ -17,13 +18,6 @@ namespace Kartverket.ShapeChange.EA.Addin.LdProxy
 
             writer.WriteEndElement();
 
-            writer.WriteEndElement();
-        }
-
-        private static void WriteRuleElement(this XmlWriter writer, string ruleName)
-        {
-            writer.WriteStartElement("rule");
-            writer.WriteAttributeString("name", ruleName);
             writer.WriteEndElement();
         }
     }

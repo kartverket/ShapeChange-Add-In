@@ -53,5 +53,12 @@ namespace Kartverket.ShapeChange.EA.Addin.Util
             writer.WriteAttributeString("href", hrefValue);
             writer.WriteEndElement();
         }
+
+        public static void WriteRuleElement(this XmlWriter writer, string ruleName)
+        {
+            writer.WriteStartElement("rule");
+            writer.WriteAttributeString("name", ruleName);
+            writer.WriteEndElement();
+        }
     }
 }

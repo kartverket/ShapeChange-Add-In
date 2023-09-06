@@ -11,11 +11,17 @@ namespace Kartverket.ShapeChange.EA.Addin.JsonSchema
 
             writer.WriteTargetParameterElement("outputDirectory", settings.OutputDirectory);
 
-            writer.WriteTargetParameterElement("jsonSchemaVersion", "OpenApi30");
+            writer.WriteTargetParameterElement("jsonSchemaVersion", settings.SchemaVersion);
 
             writer.WriteTargetParameterElement("prettyPrint", "true");
 
             writer.WriteTargetParameterElement("sortedOutput", "true");
+
+            writer.WriteTargetParameterElement("jsonBaseUri", "http://sosi.geonorge.no/ShapeChangeAddIn/");
+
+            writer.WriteTargetParameterElement("defaultEncodingRule", "defaultJson");
+
+            writer.WriteJsonSchemaEncodingRules();
 
             writer.WriteIncludeElement("http://shapechange.net/resources/config/StandardMapEntries_JSON.xml");
 

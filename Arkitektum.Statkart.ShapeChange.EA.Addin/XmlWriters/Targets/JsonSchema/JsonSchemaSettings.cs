@@ -2,8 +2,11 @@
 {
     internal class JsonSchemaSettings : TargetBaseSettings
     {
-        public JsonSchemaSettings(string outputDirectory) : base(outputDirectory)
+        public string SchemaVersion { get; set; }
+
+        public JsonSchemaSettings(string outputDirectory, string schemaVersion) : base(outputDirectory)
         {
+            SchemaVersion = schemaVersion;
         }
     }
 }

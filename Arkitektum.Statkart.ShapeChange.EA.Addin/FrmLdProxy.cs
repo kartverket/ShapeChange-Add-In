@@ -74,7 +74,7 @@ namespace Kartverket.ShapeChange.EA.Addin
 
             _selectedPackage = _repository.GetTreeSelectedPackage();
 
-            _resultDirectory = Path.Combine(eaDirectory, $"shapeChange_{_selectedPackage.Name}");
+            _resultDirectory = Path.Combine(eaDirectory, $"ldProxy_{_selectedPackage.Name}");
             _templatesDirectory = Path.Combine(_applicationDirectory, "templates");
             _ldProxyDirectory = "ldProxy";
             _configDirectory = Path.Combine(_resultDirectory, "config");

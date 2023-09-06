@@ -180,7 +180,9 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaMapEntryWriter.cs" />
     <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaSettings.cs" />
+    <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaEncodingRulesWriter.cs" />
     <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaWriter.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileSettings.cs" />
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileWriter.cs" />

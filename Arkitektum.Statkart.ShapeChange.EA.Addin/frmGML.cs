@@ -79,7 +79,7 @@ namespace Kartverket.ShapeChange.EA.Addin
 
             _selectedPackage = _repository.GetTreeSelectedPackage();
 
-            _resultDirectory = Path.Combine(eaDirectory, $"shapeChange_{_selectedPackage.Name}");
+            _resultDirectory = Path.Combine(eaDirectory, $"gmlTransform_{_selectedPackage.Name}");
             _featureCatalogueDirectory = Path.Combine(_resultDirectory, "FC");
             _templatesDirectory = Path.Combine(_applicationDirectory, "templates");
             _codeListDirectory = "CL";
