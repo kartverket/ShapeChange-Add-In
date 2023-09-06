@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -125,5 +125,23 @@
   </data>
   <data name="WrongPackageStereotypeMessage" xml:space="preserve">
     <value>Please select a package with stereotype applicationSchema.</value>
+  </data>
+  <data name="applicationDirectoryErrorMessage" xml:space="preserve">
+    <value>Unable to resolve application directory.</value>
+  </data>
+  <data name="eaProjectDirectoryErrorMessage" xml:space="preserve">
+    <value>Unable to resolve EA project directory.</value>
+  </data>
+  <data name="missingTaggedValuesMessage" xml:space="preserve">
+    <value>Tagged values missing for correct generation. Please update tagged values.</value>
+  </data>
+  <data name="unsupportedPackageStereotypeErrorMessage" xml:space="preserve">
+    <value>Please select a package with stereotype applicationSchema.</value>
+  </data>
+  <data name="unsupportedPackageStereotypeErrorTitle" xml:space="preserve">
+    <value>Missing data</value>
+  </data>
+  <data name="validateVersionErrorMessage" xml:space="preserve">
+    <value>Version must be set. I.e. '4.3' or '1.0RC'</value>
   </data>
 </root>

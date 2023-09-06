@@ -10,8 +10,11 @@ using Kartverket.ShapeChange.EA.Addin.FeatureCatalogue;
 using Kartverket.ShapeChange.EA.Addin.Properties;
 using Kartverket.ShapeChange.EA.Addin.CodeList;
 using Kartverket.ShapeChange.EA.Addin.XmlSchema;
+using static Kartverket.ShapeChange.EA.Addin.Resources.Common;
+using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 using static Kartverket.ShapeChange.EA.Addin.Resources.FileNameResources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
+using static Kartverket.ShapeChange.EA.Addin.Resources.LogMessages;
 using File = System.IO.File;
 
 namespace Kartverket.ShapeChange.EA.Addin

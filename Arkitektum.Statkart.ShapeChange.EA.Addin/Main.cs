@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using EA;
+using Kartverket.ShapeChange.EA.Addin.Resources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 
 namespace Kartverket.ShapeChange.EA.Addin
@@ -27,7 +28,7 @@ namespace Kartverket.ShapeChange.EA.Addin
                     
                     return "-&ShapeChange";
                 case "-&ShapeChange":
-                    string[] ar = { "&Transform GML...", "Generate &ldProxy files...", "About..." };
+                    string[] ar = { "&Transform GML...", "Generate &ldProxy files...", "Generate &JSON schema...", "About..." };
                     return ar;
             
             }
@@ -75,10 +76,6 @@ namespace Kartverket.ShapeChange.EA.Addin
                         formGml.SetRepository(Repository);
                         formGml.ShowDialog();
                     }
-                    else
-                    {
-                        MessageBox.Show(WrongPackageStereotypeMessage, WrongPackageStereotypeCaption);
-                    }
                     break;
 
                 case "Generate &ldProxy files...":
@@ -88,12 +85,16 @@ namespace Kartverket.ShapeChange.EA.Addin
                         formLdProxy.SetRepository(Repository);
                         formLdProxy.ShowDialog();
                     }
-                    else
-                    {
-                        MessageBox.Show(WrongPackageStereotypeMessage, WrongPackageStereotypeCaption);
-                    }
                     break;
 
+                case "Generate &JSON schema...":
+                    if (SelectedPackageIsApplicationSchema(Repository))
+                    {
+                        var formJson = new FrmJsonSchema();
+                        formJson.SetRepository(Repository);
+                        formJson.ShowDialog();
+                    }
+                    break;
                 case "About...":
                     var aboutForm = new frmAbout();
                     aboutForm.ShowDialog();
@@ -101,15 +102,19 @@ namespace Kartverket.ShapeChange.EA.Addin
             }
         }
 
-        private bool SelectedPackageIsApplicationSchema(IDualRepository repository)
+        private static bool SelectedPackageIsApplicationSchema(IDualRepository repository)
         {
-            return repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema";
+            if (repository.GetTreeSelectedPackage().StereotypeEx.ToLower() == "applicationschema")
+                return true;
+
+            MessageBox.Show(unsupportedPackageStereotypeErrorMessage, unsupportedPackageStereotypeErrorTitle);
+            return false;
         }
 
-        public string WriteToOutputwindow(Repository repository, object args)
+        public string WriteToOutputWindow(Repository repository, object args)
         {
-            string[] currentpackage = (string[])args;
-            string melding = currentpackage[0];
+            string[] currentPackage = (string[])args;
+            string melding = currentPackage[0];
             repository.WriteOutput("System", melding, 0);
             return "";
         }

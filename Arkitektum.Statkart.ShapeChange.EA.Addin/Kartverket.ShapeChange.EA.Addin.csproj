@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -169,6 +169,12 @@
     <Compile Include="frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmJsonSchema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJsonSchema.Designer.cs">
+      <DependentUpon>FrmJsonSchema.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGML.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,15 +202,35 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ErrorMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\formGml.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>formGml.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\FormJsonSchema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormJsonSchema.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\frmAbout.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>frmAbout.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\LogMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="XmlWriters\Targets\LdProxy\LdProxyPreprocessingTransformerWriter.cs" />
     <Compile Include="XmlWriters\Targets\TargetBaseSettings.cs" />
@@ -221,6 +247,10 @@
       <DependentUpon>FrmLdProxy.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmJsonSchema.resx">
+      <DependentUpon>FrmJsonSchema.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGML.resx">
       <DependentUpon>frmGML.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -228,6 +258,10 @@
     <EmbeddedResource Include="frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -241,6 +275,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>formGml.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\FormJsonSchema.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormJsonSchema.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\frmAbout.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>frmAbout.Designer.cs</LastGenOutput>
@@ -252,6 +290,10 @@
     <EmbeddedResource Include="Resources\Logging.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Logging.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LogMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

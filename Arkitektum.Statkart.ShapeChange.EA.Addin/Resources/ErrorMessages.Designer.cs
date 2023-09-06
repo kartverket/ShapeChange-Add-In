@@ -61,6 +61,60 @@ namespace Kartverket.ShapeChange.EA.Addin.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve application directory..
+        /// </summary>
+        internal static string applicationDirectoryErrorMessage {
+            get {
+                return ResourceManager.GetString("applicationDirectoryErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve EA project directory..
+        /// </summary>
+        internal static string eaProjectDirectoryErrorMessage {
+            get {
+                return ResourceManager.GetString("eaProjectDirectoryErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tagged values missing for correct generation. Please update tagged values..
+        /// </summary>
+        internal static string missingTaggedValuesMessage {
+            get {
+                return ResourceManager.GetString("missingTaggedValuesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a package with stereotype applicationSchema..
+        /// </summary>
+        internal static string unsupportedPackageStereotypeErrorMessage {
+            get {
+                return ResourceManager.GetString("unsupportedPackageStereotypeErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Missing data.
+        /// </summary>
+        internal static string unsupportedPackageStereotypeErrorTitle {
+            get {
+                return ResourceManager.GetString("unsupportedPackageStereotypeErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version must be set. I.e. &apos;4.3&apos; or &apos;1.0RC&apos;.
+        /// </summary>
+        internal static string validateVersionErrorMessage {
+            get {
+                return ResourceManager.GetString("validateVersionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error -&gt; {0}.
         /// </summary>
         internal static string WriteError {

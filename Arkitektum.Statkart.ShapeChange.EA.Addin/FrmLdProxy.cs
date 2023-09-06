@@ -9,16 +9,18 @@ using EA;
 using Kartverket.ShapeChange.EA.Addin.LdProxy;
 using Kartverket.ShapeChange.EA.Addin.Properties;
 using Kartverket.ShapeChange.EA.Addin.Util;
+using static Kartverket.ShapeChange.EA.Addin.Resources.Common;
 using static Kartverket.ShapeChange.EA.Addin.Resources.ErrorMessages;
 using static Kartverket.ShapeChange.EA.Addin.Resources.FileNameResources;
 using static Kartverket.ShapeChange.EA.Addin.Resources.formGml;
 using static Kartverket.ShapeChange.EA.Addin.Resources.LdProxy;
 using static Kartverket.ShapeChange.EA.Addin.Resources.Logging;
+using static Kartverket.ShapeChange.EA.Addin.Resources.LogMessages;
 using File = System.IO.File;
 
 namespace Kartverket.ShapeChange.EA.Addin
 {
-    public partial class FrmLdProxy: Form
+    public partial class FrmLdProxy : Form
     {
         private static Repository _repository;
         private Package _selectedPackage;
