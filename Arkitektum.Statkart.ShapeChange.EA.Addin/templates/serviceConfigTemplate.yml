@@ -1,0 +1,53 @@
+---
+apiVersion: 1
+metadata:
+  attribution: 'Kartverket'
+  contactName: Kartverket
+  contactEmail: tjenestedrift@kartverket.no
+  licenseName: Creative Commons BY 4.0 (CC BY 4.0)
+  licenseurl: https://creativecommons.org/licenses/by/4.0/
+api:
+- buildingBlock: COLLECTIONS
+  enabled: true
+  additionalLinks:
+  - rel: related
+    type: text/html
+    title: Kartverket
+    href: 'http://kartverket.no'
+    hreflang: 'no'
+  - rel: related
+    type: application/xml
+    title: Geonorgeportalen
+    href: 'http://www.geonorge.no'
+    hreflang: 'no'
+- buildingBlock: FILTER
+  enabled: true
+- buildingBlock: STYLES
+  enabled: true
+  styleEncodings:
+  - Mapbox
+  - HTML
+  styleInfosOnCollection: false
+  managerEnabled: false
+  validationEnabled: false
+  resourcesEnabled: false
+  resourceManagerEnabled: false
+  defaultStyle: default
+  webmapWithPopup: true
+  webmapWithLayerControl: false
+  layerControlAllLayers: false
+- buildingBlock: CRS
+  enabled: true
+  additionalCrs:
+  - code: 25832
+    forceAxisOrder: NONE
+  - code: 25833
+    forceAxisOrder: NONE
+  - code: 25834
+    forceAxisOrder: NONE
+  - code: 25835
+    forceAxisOrder: NONE
+  - code: 4326
+    forceAxisOrder: NONE
+  - code: 3857
+    forceAxisOrder: NONE

@@ -97,15 +97,19 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>ShapeChange.EA.Addin.StrongName.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.EA">
-      <HintPath>lib\Interop.EA.dll</HintPath>
+    <Reference Include="Interop.EA, Version=2.10.238.1, Culture=neutral, PublicKeyToken=d28e1c76302f6a17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Resources\Interop.EA.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.OpenApi, Version=1.6.7.0, Culture=neutral, PublicKeyToken=3f5743946376f042, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OpenApi.1.6.7\lib\netstandard2.0\Microsoft.OpenApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -113,18 +117,54 @@
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.InteropServices" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmLdProxy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLdProxy.Designer.cs">
+      <DependentUpon>FrmLdProxy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\ErrorMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\FileNameResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FileNameResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\LdProxy.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LdProxy.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Logging.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logging.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\ControlExtensions.cs" />
+    <Compile Include="XmlWriters\ShapeChangeConfigurationFileWriter.cs" />
+    <Compile Include="XmlWriters\InputWriter.cs" />
+    <Compile Include="XmlWriters\Targets\CodeList\CodeListSettings.cs" />
+    <Compile Include="XmlWriters\Targets\CodeList\CodeListWriter.cs" />
+    <Compile Include="XmlWriters\Targets\FeatureCatalogue\FeatureCatalogueSettings.cs" />
+    <Compile Include="XmlWriters\Targets\FeatureCatalogue\FeatureCatalogueWriter.cs" />
     <Compile Include="frmAbout.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmJsonSchema.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJsonSchema.Designer.cs">
+      <DependentUpon>FrmJsonSchema.cs</DependentUpon>
     </Compile>
     <Compile Include="frmGML.cs">
       <SubType>Form</SubType>
@@ -138,6 +178,16 @@
     <Compile Include="frmSettings.Designer.cs">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaMapEntryWriter.cs" />
+    <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaSettings.cs" />
+    <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaEncodingRulesWriter.cs" />
+    <Compile Include="XmlWriters\Targets\JsonSchema\JsonSchemaWriter.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileSettings.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyProviderOverrideFileWriter.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyEncodingRulesWriter.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxySettings.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyWriter.cs" />
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyMapEntryWriter.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -145,20 +195,48 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Common.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Common.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\formGml.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>formGml.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\FormJsonSchema.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormJsonSchema.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\frmAbout.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>frmAbout.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\LogMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LogMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="XmlWriters\Targets\LdProxy\LdProxyPreprocessingTransformerWriter.cs" />
+    <Compile Include="XmlWriters\Targets\TargetBaseSettings.cs" />
+    <Compile Include="XmlWriters\Targets\XmlSchema\XmlSchemaSettings.cs" />
+    <Compile Include="Util\XmlWriterExtensions.cs" />
+    <Compile Include="XmlWriters\Targets\XmlSchema\XmlSchemaWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLdProxy.resx">
+      <DependentUpon>FrmLdProxy.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmJsonSchema.resx">
+      <DependentUpon>FrmJsonSchema.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGML.resx">
@@ -169,13 +247,41 @@
       <DependentUpon>frmSettings.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ErrorMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\FileNameResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileNameResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\formGml.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>formGml.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\FormJsonSchema.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormJsonSchema.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\frmAbout.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>frmAbout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LdProxy.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LdProxy.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Logging.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Logging.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LogMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -183,11 +289,19 @@
       <TransformOnBuild>true</TransformOnBuild>
     </None>
     <None Include="gpl-3.0.rtf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="ShapeChange.EA.Addin.StrongName.snk" />
+    <Content Include="Resources\Interop.EA.dll" />
+    <Content Include="templates\cfgTemplate.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="templates\serviceConfigTemplate.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\*.xsl">
@@ -207,7 +321,9 @@
     <Content Include="ShapeChange\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="templates\template.docx" />
+    <Content Include="templates\template.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup Condition="'$(Platform)' == 'x86'">
     <None Include="Resources\SSJavaCOM.dll" />
