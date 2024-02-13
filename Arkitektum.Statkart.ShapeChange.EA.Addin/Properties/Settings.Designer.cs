@@ -73,7 +73,7 @@ namespace Kartverket.ShapeChange.EA.Addin.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ShapeChange\\ShapeChange-2.13.0.jar")]
+        [global::System.Configuration.DefaultSettingValueAttribute("ShapeChange\\ShapeChange-2.14.0.jar")]
         public string ShapeChangeJar {
             get {
                 return ((string)(this["ShapeChangeJar"]));

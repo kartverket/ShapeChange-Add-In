@@ -15,7 +15,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ShapeChangeJar" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ShapeChange\ShapeChange-2.13.0.jar</Value>
+      <Value Profile="(Default)">ShapeChange\ShapeChange-2.14.0.jar</Value>
     </Setting>
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
