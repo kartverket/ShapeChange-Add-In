@@ -537,7 +537,8 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#Class">2.1. Class</a></li>
 <li><a href="#Rules">2.2. Rules</a>
 <ul class="sectlevel3">
-<li><a href="#rule-trf-taggedValue-inheritance">2.2.1. rule-trf-taggedValue-inheritance</a></li>
+<li><a href="#rule-trf-taggedValue-createOriginalSchemaInformationTags">2.2.1. rule-trf-taggedValue-createOriginalSchemaInformationTags</a></li>
+<li><a href="#rule-trf-taggedValue-inheritance">2.2.2. rule-trf-taggedValue-inheritance</a></li>
 </ul>
 </li>
 <li><a href="#Parameters">2.3. Parameters</a>
@@ -604,7 +605,53 @@ transformation.</p>
 <div class="sect2">
 <h3 id="Rules"><a class="anchor" href="#Rules"></a>2.2. Rules</h3>
 <div class="sect3">
-<h4 id="rule-trf-taggedValue-inheritance"><a class="anchor" href="#rule-trf-taggedValue-inheritance"></a>2.2.1. rule-trf-taggedValue-inheritance</h4>
+<h4 id="rule-trf-taggedValue-createOriginalSchemaInformationTags"><a class="anchor" href="#rule-trf-taggedValue-createOriginalSchemaInformationTags"></a>2.2.1. rule-trf-taggedValue-createOriginalSchemaInformationTags</h4>
+<div class="paragraph">
+<p>For all classes and properties of the schemas selected for processing,
+this rule sets a number of tagged values:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>class:</p>
+</li>
+<li>
+<p><em>originalSchemaName</em> - name of the (application) schema package which owns the class</p>
+</li>
+<li>
+<p><em>originalClassName</em> - the class name</p>
+</li>
+<li>
+<p>property:</p>
+</li>
+<li>
+<p><em>originalSchemaName</em> - name of the (application) schema package which owns the property (more specifically, the class that owns that property)</p>
+</li>
+<li>
+<p><em>originalInClassName</em> - name of the class which owns the property</p>
+</li>
+<li>
+<p><em>originalPropertyName</em> - the property name</p>
+</li>
+<li>
+<p><em>originalPropertyMultiplicity</em> - the property multiplicity</p>
+</li>
+<li>
+<p><em>originalPropertyValueType</em> - the property value type</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The information is kept by subsequent transformations (like
+<a href="./Flattener.html">Flattener</a> rules, which might otherwise set such tags),
+and can especially be useful for targets which need to encode information
+about the origin of transformed model elements. An example is the SqlDdl
+target, which can use the information to generate
+<a href="../targets/SQL_DDL.html#SQL_Encoding_Infos">SQL encoding infos</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rule-trf-taggedValue-inheritance"><a class="anchor" href="#rule-trf-taggedValue-inheritance"></a>2.2.2. rule-trf-taggedValue-inheritance</h4>
 <div class="paragraph">
 <p>Copies the tagged values specified via configuration parameter
 <a href="./Tagged_Value_Transformer.html#taggedValueInheritanceGeneralList"><em>taggedValueInheritanceGeneralList</em></a>
@@ -856,7 +903,7 @@ then it will be ignored in the latter.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
+Last updated 2023-11-28 15:37:01 +0100
 </div>
 </div>
 </body>

@@ -577,10 +577,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#maxNameLength">2.4.9. maxNameLength</a></li>
 <li><a href="#nameOfTaggedValueToDetermineFieldLength">2.4.10. nameOfTaggedValueToDetermineFieldLength</a></li>
 <li><a href="#outputDirectory">2.4.11. outputDirectory</a></li>
-<li><a href="#reflexiveRelationshipFieldSuffix">2.4.12. reflexiveRelationshipFieldSuffix</a></li>
-<li><a href="#shortNameByTaggedValue">2.4.13. shortNameByTaggedValue</a></li>
-<li><a href="#valueRangeExcludedBoundaryDelta">2.4.14. valueRangeExcludedBoundaryDelta</a></li>
-<li><a href="#workspaceTemplate">2.4.15. workspaceTemplate</a></li>
+<li><a href="#outputFilename">2.4.12. outputFilename</a></li>
+<li><a href="#reflexiveRelationshipFieldSuffix">2.4.13. reflexiveRelationshipFieldSuffix</a></li>
+<li><a href="#shortNameByTaggedValue">2.4.14. shortNameByTaggedValue</a></li>
+<li><a href="#valueRangeExcludedBoundaryDelta">2.4.15. valueRangeExcludedBoundaryDelta</a></li>
+<li><a href="#workspaceTemplate">2.4.16. workspaceTemplate</a></li>
 </ul>
 </li>
 <li><a href="#Configuration_Example">2.5. Configuration Example</a></li>
@@ -1530,7 +1531,26 @@ workspace (UML) model will be created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="reflexiveRelationshipFieldSuffix"><a class="anchor" href="#reflexiveRelationshipFieldSuffix"></a>2.4.12. reflexiveRelationshipFieldSuffix</h4>
+<h4 id="outputFilename"><a class="anchor" href="#outputFilename"></a>2.4.12. outputFilename</h4>
+<div class="paragraph">
+<p>Required / Optional: Required</p>
+</div>
+<div class="paragraph">
+<p>Type: String</p>
+</div>
+<div class="paragraph">
+<p>Default Value: The name of the schema</p>
+</div>
+<div class="paragraph">
+<p>Explanation: The name of the ArcGIS workspace model file (can be
+without file extension).</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s): none – default behavior</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reflexiveRelationshipFieldSuffix"><a class="anchor" href="#reflexiveRelationshipFieldSuffix"></a>2.4.13. reflexiveRelationshipFieldSuffix</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -1553,7 +1573,7 @@ relationship property as a &lt;&lt;Field&gt;&gt;.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="shortNameByTaggedValue"><a class="anchor" href="#shortNameByTaggedValue"></a>2.4.13. shortNameByTaggedValue</h4>
+<h4 id="shortNameByTaggedValue"><a class="anchor" href="#shortNameByTaggedValue"></a>2.4.14. shortNameByTaggedValue</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -1574,7 +1594,7 @@ ArcGIS workspace.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="valueRangeExcludedBoundaryDelta"><a class="anchor" href="#valueRangeExcludedBoundaryDelta"></a>2.4.14. valueRangeExcludedBoundaryDelta</h4>
+<h4 id="valueRangeExcludedBoundaryDelta"><a class="anchor" href="#valueRangeExcludedBoundaryDelta"></a>2.4.15. valueRangeExcludedBoundaryDelta</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1598,7 +1618,7 @@ the lower and/or upper boundary comparison operator is not inclusive
 </div>
 </div>
 <div class="sect3">
-<h4 id="workspaceTemplate"><a class="anchor" href="#workspaceTemplate"></a>2.4.15. workspaceTemplate</h4>
+<h4 id="workspaceTemplate"><a class="anchor" href="#workspaceTemplate"></a>2.4.16. workspaceTemplate</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1662,7 +1682,7 @@ be local or an online resource).</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
+Last updated 2023-11-28 15:37:01 +0100
 </div>
 </div>
 </body>

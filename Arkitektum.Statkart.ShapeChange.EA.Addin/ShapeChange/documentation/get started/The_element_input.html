@@ -1858,6 +1858,25 @@ element</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Many target parameters define a template for constructing
+a string, which uses specific markings for descriptors, to be replaced
+with the actual descriptor value(s). An example is the
+<a href="../targets/xml schema/XML_Schema.html#documentationTemplate">documentationTemplate</a>
+parameter of the XML Schema target. An example of using the descriptor
+'alias' in such a template is: "[[alias]]". Since ShapeChange v2.14.0,
+the value 'name' can be used as well (i.e., "[[name]]"). This adds the
+name of the UML model element to the resulting string.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Examples:</p>
 </div>
@@ -2015,7 +2034,7 @@ package.</p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
+Last updated 2023-11-28 15:37:01 +0100
 </div>
 </div>
 </body>
