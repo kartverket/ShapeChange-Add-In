@@ -5,7 +5,7 @@
 		Id="*"
 		Name="ShapeChange EA-Addin (64-bit)"
 		Language="1033"
-		Version="3.2.0"
+		Version="3.4.0"
 		Manufacturer="Kartverket"
 		UpgradeCode="165ef374-b8c4-4aa8-8c77-49ae95fb2663">
 		<Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" Platform="x64" />
