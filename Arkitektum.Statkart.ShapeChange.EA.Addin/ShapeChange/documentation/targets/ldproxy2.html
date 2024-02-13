@@ -541,8 +541,10 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#ldproxy2_schemaconversionrules_schemapackage_providerconfig">2.3.1. Provider Configuration</a></li>
 <li><a href="#ldproxy2_schemaconversionrules_schemapackage_serviceconfig">2.3.2. Service Configuration</a>
 <ul class="sectlevel4">
-<li><a href="#ldproxy2_GML_output">2.3.2.1. GML Output</a></li>
-<li><a href="#ldproxy2_queryables">2.3.2.2. Queryables</a></li>
+<li><a href="#ldproxy2_building_block_features_gml">2.3.2.1. Features - GML</a></li>
+<li><a href="#ldproxy2_building_block_features_geojson">2.3.2.2. Features - GeoJSON</a></li>
+<li><a href="#ldproxy2_building_block_features_jsonfg">2.3.2.3. Features - JSON-FG</a></li>
+<li><a href="#ldproxy2_queryables">2.3.2.4. Queryables</a></li>
 </ul>
 </li>
 </ul>
@@ -592,6 +594,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#ldproxy2_schemaconversionrules_associationclass">2.6. Association Class</a></li>
 <li><a href="#ldproxy2_schemaconversionrules_constraint">2.7. Constraints</a></li>
 <li><a href="#ldproxy2_schemaconversionrules_additionalrules">2.8. Additional rules</a></li>
+<li><a href="#ldproxy2_schemaconversionrules_specificrules">2.9. Specific rules</a>
+<ul class="sectlevel3">
+<li><a href="#ldproxy2_schemaconversionrules_specificrules_genericvaluetypes">2.9.1. Conversion of generic value types</a></li>
+<li><a href="#ldproxy2_schemaconversionrules_specificrules_coretable">2.9.2. Coretable Approach</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#ldproxy2_encodingrules">3. Encoding Rules</a></li>
@@ -973,7 +981,7 @@ If a single API (provider and service configuration) shall be created for each s
 </div>
 </li>
 <li>
-<p>nativeTimeZone: value of target parameter <em>nativeTimeZone</em>; default: the default system time zone</p>
+<p>nativeTimeZone: value of target parameter <em>nativeTimeZone</em>; default: NONE</p>
 <div class="ulist">
 <ul>
 <li>
@@ -984,6 +992,9 @@ If a single API (provider and service configuration) shall be created for each s
 </li>
 <li>
 <p>types: will be populated as described in section <a href="#ldproxy2_schemaconversionrules_types">Types</a></p>
+</li>
+<li>
+<p>fragments: will be generated if target parameter <em>enableFragments</em> is set to true. For further details, see section <a href="#ldproxy2_schemaconversionrules_types_inheritance_and_specialization">Inheritance and Specialization</a>.</p>
 </li>
 </ul>
 </div>
@@ -1047,8 +1058,8 @@ The deployment-specific values of the <code>connectionInfo</code> member - i.e. 
 <p>collections: will be populated as described in section <a href="#ldproxy2_schemaconversionrules_types">Types</a>.</p>
 </li>
 <li>
-<p>If target parameter <em>enableGmlOutput</em> is 'true' (default being 'false'), then api building blocks
-as described in subsection <a href="#ldproxy2_GML_output">GML Output</a> are added to the service configuration.</p>
+<p>If target parameter <em>enableGmlOutput</em> is 'true' (default being 'false'), then API building blocks
+as described in subsection <a href="#ldproxy2_building_block_features_gml">Features - GML</a> are added to the service configuration.</p>
 </li>
 </ul>
 </div>
@@ -1065,13 +1076,27 @@ Members of the service configuration, whose value is equal to the default value 
 </table>
 </div>
 <div class="sect4">
-<h5 id="ldproxy2_GML_output"><a class="anchor" href="#ldproxy2_GML_output"></a>2.3.2.1. GML Output</h5>
+<h5 id="ldproxy2_building_block_features_gml"><a class="anchor" href="#ldproxy2_building_block_features_gml"></a>2.3.2.1. Features - GML</h5>
 <div class="paragraph">
-<p>Version 3.3.0 of ldproxy supports encoding data as GML. The
-<a href="https://docs.ldproxy.net/services/building-blocks/gml.html">ldproxy documentation</a> describes the
-necessary ldproxy configuration items. The ShapeChange ldproxy2 target supports generating
-these ldproxy configuration items. By setting target parameter <em>enableGmlOutput</em>
-to 'true', these items are generated.</p>
+<p>Version 3.3.0 of ldproxy supports encoding data as GML. The documentation of
+ldproxy building block Features - GML describes relevant configuration items.
+By setting target parameter <em>enableFeaturesGml</em> to 'true',
+ShapeChange will add ldproxy building block
+<a href="https://docs.ldproxy.net/services/building-blocks/features_-_gml.html">Features - GML</a>
+to the service configuration as enabled.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The initial name of the target parameter was <em>enableGmlOutput</em>. For backwards compatibility of existing ShapeChange configurations, the old parameter name is supported
+as an alias for <em>enableFeaturesGml</em>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The target thereby needs to know how application schema elements shall be represented in
@@ -1079,10 +1104,10 @@ XML. In other words, it needs to know how the desired XML encoding looks like. T
 information can be generated by the <a href="./xml schema/XML_Schema.html">XmlSchema target</a>,
 if parameter <em>writeXmlEncodingInfos</em> is set to 'true' there. The format of the XML
 encoding infos generated by the XmlSchema target is documented <a href="./xml schema/XML_Encoding_Infos.html">here</a>. The XML encoding infos need to be placed within the <code>advancedProcessConfigurations</code>
-element of the ldproxy2 target configuration. The ShapeChange workflow may thus need to be
+element of the ldproxy target configuration. The ShapeChange workflow may thus need to be
 run twice - first, to generate XML schemas and their XML encoding infos, and then to
 derive the ldproxy configuration files, using the XML encoding infos in the configuration
-of the ldproxy2 target. The following example shows how this is done:</p>
+of the ldproxy target. The following example shows how this is done:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1158,7 +1183,7 @@ of the ldproxy2 target. The following example shows how this is done:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The ldproxy2 target attempts to identify the XML encoding of a particular model element as follows:</p>
+<p>The ldproxy target attempts to identify the XML encoding of a particular model element as follows:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1168,12 +1193,14 @@ can be significantly different to the one from which the XML schema has been der
 and class to which a property belonged in the input model can be changed by flattening inheritance
 and flattening complex types. The same applies to the property name - it may also be changed by a
 transformation. If inheritance or complex types have been flattened, the original class, schema, as
-well property name can be documented in tagged values <em>originalSchemaName</em>, <em>originalInClassName</em>,
+well as property name can be documented in tagged values <em>originalSchemaName</em>, <em>originalInClassName</em>,
 and <em>originalPropertyName</em>. For further details as to which properties exactly are tagged this
-way, see the documentation of the Flattener transformation rules <a href="../transformations/Flattener.html#rule-trf-cls-flatten-inheritance">rule-trf-cls-flatten-inheritance</a>
+way, see the documentation of the Tagged Value transformation rule
+<a href="../transformations/Tagged_Value_Transformer.html#rule-trf-taggedValue-createOriginalSchemaInformationTags">rule-trf-taggedValue-createOriginalSchemaInformationTags</a>, as well as the Flattener transformation rules
+<a href="../transformations/Flattener.html#rule-trf-cls-flatten-inheritance">rule-trf-cls-flatten-inheritance</a>
 and <a href="../transformations/Flattener.html#rule-trf-prop-flatten-types">rule-trf-prop-flatten-types</a>.
 If these tags are set, they are used when looking up the XML namespace and XML name of a model element.
-Otherwise, the name of the model element, in case of a property also the the class that owns it, as
+Otherwise, the name of the model element, in case of a property also the class that owns it, as
 well as the schema are taken directly from the model.</p>
 </li>
 <li>
@@ -1201,7 +1228,7 @@ tag <em>originalPropertyName</em> has a value; in that case, that value is used.
 </ul>
 </div>
 <div class="paragraph">
-<p>The target creates a general GML api building block in the service configuration. It contains
+<p>The target creates a general GML API building block in the service configuration. It contains
 the following members:</p>
 </div>
 <div class="ulist">
@@ -1216,7 +1243,7 @@ are encoded within the <code>applicationNamespaces</code> member.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>NOTE: The ldproxy2 target can process multiple application schemas at once, and the result are single
+<p>NOTE: The ldproxy target can process multiple application schemas at once, and the result are single
 provider and service configuration files (among others, like codelist definitions). Here, the
 <a href="../get started/The_element_input.html#mainAppSchema"><em>mainAppSchema</em></a> (input) parameter and
 concept comes into play. If multiple schemas are processed, the one that shall be used as the default
@@ -1234,12 +1261,12 @@ a warning is issued and the first schema that is processed by the target is chos
 <li>
 <p>For the XML namespace of the main application schema, the schema location from the XML
 encoding infos is used. If no location can be found this way, it is assumed that the XML schema
-for this namespace shall be hosted by ldproxy itself. In that case, api building block RESOURCES
+for this namespace shall be hosted by ldproxy itself. In that case, API building block RESOURCES
 is enabled, and the schema location value will be <code>{{serviceUrl}}/resources/</code> + the value of tag
 <em>xsdDocument</em> of the main application schema. Example: <code>{{serviceUrl}}/resources/myschema.xsd</code></p>
 </li>
 <li>
-<p>For all other XML namespaces that apply to the model elements processed by the ldproxy2 target,
+<p>For all other XML namespaces that apply to the model elements processed by the ldproxy target,
 if the namespace definitions in the XML encoding infos define schema locations, then they are added.</p>
 </li>
 </ul>
@@ -1326,7 +1353,37 @@ is omitted, if the XML namespace is the same as the default namespace).</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="ldproxy2_queryables"><a class="anchor" href="#ldproxy2_queryables"></a>2.3.2.2. Queryables</h5>
+<h5 id="ldproxy2_building_block_features_geojson"><a class="anchor" href="#ldproxy2_building_block_features_geojson"></a>2.3.2.2. Features - GeoJSON</h5>
+<div class="paragraph">
+<p>By setting target parameter <em>enableFeaturesGeoJson</em> to 'true',
+ShapeChange will add ldproxy building block
+<a href="https://docs.ldproxy.net/de/services/building-blocks/features_-_geojson.html">Features - GeoJSON</a>
+to the service configuration as enabled.</p>
+</div>
+<div class="paragraph">
+<p>Currently, specific configuration items for this building block are added
+through the <a href="#ldproxy2_schemaconversionrules_specificrules_genericvaluetypes">Conversion of generic value types</a>.
+In the future, generation of additional configuration items for this
+building block can be supported.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ldproxy2_building_block_features_jsonfg"><a class="anchor" href="#ldproxy2_building_block_features_jsonfg"></a>2.3.2.3. Features - JSON-FG</h5>
+<div class="paragraph">
+<p>By setting target parameter <em>enableFeaturesJsonFg</em> to 'true',
+ShapeChange will add ldproxy building block
+<a href="https://docs.ldproxy.net/de/services/building-blocks/features_-_json-fg.html">Features - JSON-FG</a>
+to the service configuration as enabled.</p>
+</div>
+<div class="paragraph">
+<p>Currently, specific configuration items for this building block are added
+through the <a href="#ldproxy2_schemaconversionrules_specificrules_genericvaluetypes">Conversion of generic value types</a>.
+In the future, generation of additional configuration items for this
+building block can be supported.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="ldproxy2_queryables"><a class="anchor" href="#ldproxy2_queryables"></a>2.3.2.4. Queryables</h5>
 <div class="paragraph">
 <p>If the main application schema matches <code>rule-ldp2-all-queryables</code>,
 the target creates a QUERYABLES building block in the service configuration.
@@ -1337,21 +1394,18 @@ It just contains the member <code>enabled: true</code>.</p>
 the target checks which, if any, of the properties have a name - current or original - equal
 to one of the names provided by target parameter <code>queryables</code> (the parameter value is a
 comma-separated list of property names; no default value is defined). If at least one such property
-was found, the target creates a <code>queryables</code> member in the FEATURES_CORE building block
+was found, the target creates a <code>queryables</code> member in the QUERYABLES building block
 in the service configuration of the collection (adding that building block if necessary), with:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>member <code>spatial</code> and an array of the names of all queryable properties that map to GEOMETRY;</p>
-</li>
-<li>
-<p>member <code>temporal</code> and an array of the names of all queryable properties that either map to DATE or map to DATETIME; and</p>
-</li>
-<li>
-<p>member <code>other</code> and an array of the names of all other queryable properties. By default,
-<code>.title</code> is added to the names of all queryable association roles (meaning that queries will be
+<p>member <code>included</code> and an array of the names of all queryable properties. If a queryable association role does NOT match <em>rule-ldp2-all-linkObjectAsFeatureRef</em>, then <code>.title</code> is added to
+the role name (meaning that queries will be
 performed on the <code>title</code>-value of the link object that is encoded for an association role).</p>
+</li>
+<li>
+<p>member <code>pathSeparator</code> and value DOT.</p>
 </li>
 </ul>
 </div>
@@ -1404,7 +1458,6 @@ specific tag, to be set on a type, which would provide the names of queryable pr
 12
 13
 14
-15
 </pre></td>
   <td class="code"><pre><span class="key">collections</span>:
   <span class="key">featuretype</span>:
@@ -1412,15 +1465,14 @@ specific tag, to be set on a type, which would provide the names of queryable pr
     <span class="key">label</span>: <span class="string"><span class="content">featuretype</span></span>
     <span class="key">enabled</span>: <span class="string"><span class="content">true</span></span>
     <span class="key">api</span>:
-    - <span class="string"><span class="content">buildingBlock: FEATURES_CORE</span></span>
-      <span class="key">queryables</span>:
-        <span class="key">spatial</span>:
-        - <span class="string"><span class="content">attPoint</span></span>
-        <span class="key">temporal</span>:
-        - <span class="string"><span class="content">attDate</span></span>
-        <span class="key">other</span>:
-        - <span class="string"><span class="content">attInt</span></span>
-        - <span class="string"><span class="content">roleFTtoT.title</span></span></pre></td>
+    - <span class="string"><span class="content">buildingBlock: QUERYABLES</span></span>
+      <span class="key">included</span>:
+      - <span class="string"><span class="content">attDate</span></span>
+      - <span class="string"><span class="content">attInt</span></span>
+      - <span class="string"><span class="content">attPoint</span></span>
+      - <span class="string"><span class="content">roleFTtoT_Subtype.title</span></span>
+      - <span class="string"><span class="content">roleFTtoT_Type.title</span></span>
+      <span class="key">pathSeparator</span>: <span class="string"><span class="content">DOT</span></span></pre></td>
 </tr></table></code></pre>
 </div>
 </div>
@@ -1435,7 +1487,7 @@ specific tag, to be set on a type, which would provide the names of queryable pr
 <p>Application schemas typically use types from other schemas, for example the types defined by ISO 19103 and ISO 19107. External types can be used as value types of properties, and as supertypes for types defined in the application schema that is being converted.</p>
 </div>
 <div class="paragraph">
-<p>Whenever an external type is used, its implementation details are needed. An external type must be implemented as one of the types supported by ldproxy, or as a link. The target type of a map entry must therefore be one of:</p>
+<p>Whenever an external type is used, its implementation details are needed. An external type must be implemented as one of the types supported by ldproxy, or as a link / feature reference. The target type of a map entry must therefore be one of:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1547,54 +1599,34 @@ The semantic validation (a pre-processing step executed by ShapeChange upon load
 </ul>
 </div>
 </li>
-</ul>
-</div>
+<li>
+<p>Characteristic: <em>tableName</em> (optional): Name of the database table that represents the mapped type. Is used to construct source paths, for cases in which a property with the mapped type as value type has a maximum multiplicity greater than one (which typically results in the use of an associative table, in which the mapped type must be represented with a foreign key field). The characteristic reflects the <a href="./SQL_DDL.html#Parameter_table">map entry parameter table</a> of the SQL DDL target. If the database schema has been created with such a mapping, then a corresponding mapping is likely required for the ldproxy target.</p>
+</li>
+<li>
+<p>Characteristic: <em>representedCategory</em> (optional): The value identifies the category of the conceptual type that is identified by the map entry. Recognized values are: <code>datatype</code> and <code>codelist</code>. Primarily required for correctly creating source paths.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>A future enhancement of this target may include additional configuration elements that provide further details about the database representation of a certain type or property from the application schema, such as table and column names, or even whole source paths for ldproxy. This could go as far as providing such information for a specific combination of class and property (e.g. to support complex datatype conversion rules from the SqlDdl target).</p>
-</div>
-<div class="paragraph">
-<p>The SqlDdl target could then be enhanced to generate map entries and these additional configuration elements - for subsequent use within the ldproxy target. That would improve overall ShapeChange usability (since manual configuration work would be reduced significantly), as well as the consistency between the SqlDdl and ldproxy targets.</p>
-</div>
-</td>
-</tr>
-</table>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
 <h4 id="ldproxy2_schemaconversionrules_types_abstractness"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_abstractness"></a>2.4.2. Abstractness</h4>
 <div class="paragraph">
-<p>Abstract types are not converted to individual provider type definitions.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Use the Flattener transformation to flatten inheritance. In some cases, where the abstract type only occurs as value type of a property, mapping the abstract type can also be a solution.
-</td>
-</tr>
-</table>
+<p>Abstract types are not converted to individual provider type definitions.
+However, if target parameter <em>enableFragments</em> is set to <code>true</code>, then
+abstract types will be converted to fragment definitions.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="ldproxy2_schemaconversionrules_types_inheritance_and_specialization"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_inheritance_and_specialization"></a>2.4.3. Inheritance and Specialization</h4>
 <div class="paragraph">
-<p>Conversion of inheritance relationships is not supported by the target.</p>
+<p>Since v2.14.0, conversion of inheritance relationships is supported by the target,
+if target parameter <em>enableFragments</em> is set to <code>true</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1603,7 +1635,579 @@ Use the Flattener transformation to flatten inheritance. In some cases, where th
 <div class="title">Note</div>
 </td>
 <td class="content">
-Transform such relationships before executing the ldproxy target (e.g. use the Flattener transformation to flatten inheritance).
+Before v2.14.0, such relationships had to be transformed,
+before executing the ldproxy target
+(e.g. use the Flattener transformation to flatten inheritance).
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>With fragments enabled, the provider configuration contains type definitions
+as well as fragment definitions. The fragment definitions thereby define the
+structure of a type in detail: object type, documentation, properties, etc.
+However, source path information is only contained for cases in which the path
+is a simple column name within the source table of the current context (e.g.,
+a type definition). For other cases, the source path is
+encoded within the type definition.</p>
+</div>
+<div class="paragraph">
+<p>If a type has supertypes, then the fragment definition of the type merges
+the fragment definitions of these supertypes, as well as the schema of the
+properties directly owned by the type. If a class only has a single
+supertype, then a direct <code>schema</code> reference (to the fragment definition
+of the supertype) is used. If the class has multiple
+supertypes, the <code>merge</code> keyword is used to encode the necessary references.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Multiple inheritance is only supported if no (direct or indirect)
+supertype of the class uses multiple inheritance! This is currently a
+restriction of ldproxy regarding the <code>merge</code> keyword.</p>
+</div>
+<div class="paragraph">
+<p>The <code>merge</code> keyword results in a shallow merge, where property override
+applies. That reflects the property override in UML, i.e., a property
+defined in a subclass overrides the definition of a property with same
+name that is defined in a (direct or indirect) superclass. Be aware,
+though, that the <code>schema</code> reference results in a deep merge. Property
+overrides in the application schema may lead to unexpected results there.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>In case of multiple inheritance, the merge items are encoded in a way
+that reflects the order in which the XML Schema target encodes supertype
+properties (also taking into account mixin encoding). This is an important
+aspect when <a href="#ldproxy2_building_block_features_gml">Features - GML</a> shall be supported by the resulting
+ldproxy configuration.</p>
+</div>
+<div class="paragraph">
+<p>A type definition references the according fragment definition via a <code>schema</code> member.
+The type definition encodes the source path to identify the objects of that type.
+It also provides source paths for all properties directly owned or inherited
+by the type, for non-simple cases (as described before, simple cases are encoded
+in the fragment definition). Furthermore, if the value(s) of a property can be
+encoded in the database in multiple ways - for example because of
+multiplicity being flattened (like a property with max multiplicity 2),
+and the property values thus being SQL encoded by multiple separate columns,
+or because the property value type has subtypes, and each subtype is SQL encoded
+in a separate table - the property is typically encoded (in the type definition)
+as a FEATURE_REF using the ldproxy keyword <code>concat</code> or <code>coalesce</code>. The former is used
+if the maximum multiplicity of the property is greater than one, the latter if it is
+equal to one. Further details on the encoding of a FEATURE_REF are given <a href="#feature_ref">here</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The following example is from one of the ShapeChange unit tests.
+The ShapeChange configuration and results of that test are available <a href="https://github.com/ShapeChange/ShapeChange/tree/master/src/test/resources/ldproxy2/fragmentsConcatCoalesce">here</a>,
+while the model is available
+<a href="https://github.com/ShapeChange/ShapeChange/tree/master/src/test/resources/sql/sqlEncodingInfos">here</a>.
+The example only shows an extract of the whole unit test.
+</td>
+</tr>
+</table>
+</div>
+<div id="img_ldproxy2_inheritance_and_specialization_example" class="imageblock text-center">
+<div class="content">
+<img src="./../images/ldp2_inheritance_example.png" alt="ldp2 inheritance example">
+</div>
+<div class="title">Figure 1. Example schema with inheritance structures, to illustrate fragment encoding</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="yml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+</pre></td>
+  <td class="code"><pre><span class="key">collections</span>:
+  <span class="key">t8_class1</span>:
+    <span class="key">sourcePath</span>: <span class="string"><span class="content">/t8_class1</span></span>
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class1</span></span>
+    <span class="key">properties</span>:
+      <span class="key">pMixA2Mult</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1_id]t8_class1_pmixa2mult/pmixa2mult</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+      <span class="key">attC1Mult</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1_id]t8_class1_attc1mult/attc1mult</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+      <span class="key">role1to2</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1_id]t8_class1_role1to2_t8_class2sub/t8_class2sub_id</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">refType</span>: <span class="string"><span class="content">t8_class2sub</span></span>
+    <span class="key">schema</span>: <span class="string"><span class="content">'#/fragments/t8_class1'</span></span>
+  <span class="key">t8_class1sub</span>:
+    <span class="key">sourcePath</span>: <span class="string"><span class="content">/t8_class1sub</span></span>
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class1Sub</span></span>
+    <span class="key">properties</span>:
+      <span class="key">pMixA2Mult</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1sub_id]t8_class1sub_pmixa2mult/pmixa2mult</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+      <span class="key">attC1Mult</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1sub_id]t8_class1sub_attc1mult/attc1mult</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+      <span class="key">role1to2</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1sub_id]t8_class1sub_role1to2_t8_class2sub/t8_class2sub_id</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">refType</span>: <span class="string"><span class="content">t8_class2sub</span></span>
+      <span class="key">attC1SubMult</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t8_class1sub_id]t8_class1sub_attc1submult/attc1submult</span><span class="delimiter">&quot;</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">STRING</span></span>
+    <span class="key">schema</span>: <span class="string"><span class="content">'#/fragments/t8_class1sub'</span></span>
+  <span class="key">t8_class2sub</span>:
+    <span class="key">sourcePath</span>: <span class="string"><span class="content">/t8_class2sub</span></span>
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class2Sub</span></span>
+    <span class="key">properties</span>:
+      <span class="key">role2to1</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+        <span class="key">concat</span>:
+        - <span class="string"><span class="content">sourcePath: &quot;[_id=t8_class2sub_id]t8_class1_role1to2_t8_class2sub/t8_class1_id&quot;</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+          <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+          <span class="key">refType</span>: <span class="string"><span class="content">t8_class1</span></span>
+        - <span class="string"><span class="content">sourcePath: &quot;[_id=t8_class2sub_id]t8_class1sub_role1to2_t8_class2sub/t8_class1sub_id&quot;</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+          <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+          <span class="key">refType</span>: <span class="string"><span class="content">t8_class1sub</span></span>
+    <span class="key">schema</span>: <span class="string"><span class="content">'#/fragments/t8_class2sub'</span></span>
+<span class="key">fragments</span>:
+  <span class="key">t8_class1</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Class1</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class1</span></span>
+    <span class="key">properties</span>:
+      <span class="key">oid</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">_id</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">role</span>: <span class="string"><span class="content">ID</span></span>
+      <span class="key">attC1</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">attc1</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">attC1</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+      <span class="key">attC1Mult</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">attC1Mult</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+          <span class="key">minOccurrence</span>: <span class="string"><span class="content">1</span></span>
+      <span class="key">role1to2</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">role1to2</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+          <span class="key">minOccurrence</span>: <span class="string"><span class="content">1</span></span>
+    <span class="key">schema</span>: <span class="string"><span class="content">'#/fragments/t8_mixin_b'</span></span>
+  <span class="key">t8_class1sub</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Class1Sub</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class1Sub</span></span>
+    <span class="key">merge</span>:
+    - <span class="string"><span class="content">schema: '#/fragments/t8_class1'</span></span>
+    - <span class="string"><span class="content">schema: '#/fragments/t8_mixin_c'</span></span>
+    - <span class="string"><span class="content">schema: '#/fragments/t8_mixin_d'</span></span>
+    - <span class="string"><span class="content">properties:</span><span class="content">
+        attC1Sub:
+          sourcePath: attc1sub
+          type: STRING
+          label: attC1Sub
+          constraints:
+            required: true
+        attC1SubMult:
+          type: VALUE_ARRAY
+          valueType: STRING
+          label: attC1SubMult
+          constraints:
+            required: true
+            minOccurrence: 1</span></span>
+  <span class="key">t8_class2</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Class2</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class2</span></span>
+    <span class="key">properties</span>:
+      <span class="key">oid</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">_id</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">role</span>: <span class="string"><span class="content">ID</span></span>
+      <span class="key">attC2</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">attc2</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">FLOAT</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">attC2</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+      <span class="key">role2to1</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">FEATURE_REF_ARRAY</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">role2to1</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">minOccurrence</span>: <span class="string"><span class="content">0</span></span>
+  <span class="key">t8_class2sub</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Class2Sub</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Class2Sub</span></span>
+    <span class="key">properties</span>:
+      <span class="key">attC2Sub</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">attc2sub</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">BOOLEAN</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">attC2Sub</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+    <span class="key">schema</span>: <span class="string"><span class="content">'#/fragments/t8_class2'</span></span>
+  <span class="key">t8_mixin_a</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Mixin_A</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Mixin_A</span></span>
+    <span class="key">properties</span>:
+      <span class="key">pMixA1</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">pmixa1</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">pMixA1</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+      <span class="key">pMixA2</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">pmixa2</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">BOOLEAN</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">pMixA2</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+      <span class="key">pMixA2Mult</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE_ARRAY</span></span>
+        <span class="key">valueType</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">pMixA2Mult</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+          <span class="key">minOccurrence</span>: <span class="string"><span class="content">1</span></span>
+  <span class="key">t8_mixin_b</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Mixin_B</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Mixin_B</span></span>
+    <span class="key">properties</span>:
+      <span class="key">pMixB</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">pmixb</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">FLOAT</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">pMixB</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+    <span class="key">schema</span>: <span class="string"><span class="content">'#/fragments/t8_mixin_a'</span></span>
+  <span class="key">t8_mixin_c</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Mixin_C</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Mixin_C</span></span>
+    <span class="key">properties</span>:
+      <span class="key">pMixC</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">pmixc</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">pMixC</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">t8_mixin_d</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">T8_Mixin_D</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">T8_Mixin_D</span></span>
+    <span class="key">properties</span>:
+      <span class="key">pMixD</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">pmixd</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">pMixD</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div id="ldproxy2_sql_encoding_infos" class="paragraph">
+<p>The representation of certain model elements in the underlying database
+can vary significantly. It is therefore highly recommended to
+provide the ldproxy target with
+<a href="./SQL_DDL.html#SQL_Encoding_Infos">SQL encoding infos</a> (available since v2.14.0).
+They can be produced by the SQL DDL target. The encoding infos can be
+provided via the <code>advancedProcessConfigurations</code> element of the ldproxy target configuration.
+The following example shows how that can be done:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+</pre></td>
+  <td class="code"><pre><span class="tag">&lt;Target</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">de.interactive_instruments.ShapeChange.Target.Ldproxy2.Ldproxy2Target</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">inputs</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">TRF_END</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+  <span class="tag">&lt;advancedProcessConfigurations&gt;</span>
+    <span class="tag">&lt;xi:include</span> <span class="attribute-name">href</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">./config/SqlEncodingInfos.xml</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+    <span class="comment">&lt;!-- ... --&gt;</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The ShapeChange workflow may need to be
+run twice - first, to generate the database schema and the SQL encoding infos,
+and then to derive the ldproxy configuration files, using the SQL encoding infos
+in the configuration of the ldproxy target.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The <code>advancedProcessConfigurations</code> element may contain multiple includes,
+for example one for the SQL encoding infos, and one for the XML encoding infos.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+Only provide SQL encoding infos that match the underlying database schema!
+If additional SQL encoding infos are provided for schema elements, with tables and
+source paths that simply do not exist in the database schema, the resulting ldproxy
+configuration may be incorrect. Concat or coalesce members may have been created
+erroneously. A use case where this is important is profiling: if multiple profiles
+are created for the same application schema, and an individual database schema is
+created for each profile, then do NOT configure a single ldproxy target with the
+according profile models as inputs, and the SQL encoding info XML files from all profiles
+included in that target configuration! Instead, configure one ldproxy target for
+each profile - only including the SQL encoding infos generated for the corresponding
+database schema.
 </td>
 </tr>
 </table>
@@ -1617,6 +2221,14 @@ Transform such relationships before executing the ldproxy target (e.g. use the F
 <div class="paragraph">
 <p>The name of the database table is determined as follows:</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>If <a href="#ldproxy2_sql_encoding_infos">SQL encoding infos</a> are configured, the target looks
+up the table name there.</p>
+</li>
+<li>
+<p>Otherwise, the target constructs a table name itself:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1647,6 +2259,9 @@ Transform such relationships before executing the ldproxy target (e.g. use the F
 </li>
 </ul>
 </div>
+</li>
+</ul>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1655,17 +2270,7 @@ Transform such relationships before executing the ldproxy target (e.g. use the F
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In the future:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Conversion rules can be defined to modify the default naming behavior.</p>
-</li>
-<li>
-<p>Additional configuration entries can be defined with which the table name for a UML type can explicitly be provided (e.g. as resulting from execution of the SqlDdl target, and the database schema created by it).</p>
-</li>
-</ul>
+<p>In the future, conversion rules can be defined to modify the default naming behavior.</p>
 </div>
 </td>
 </tr>
@@ -1675,7 +2280,7 @@ Transform such relationships before executing the ldproxy target (e.g. use the F
 <div class="sect3">
 <h4 id="ldproxy2_schemaconversionrules_types_featureandobjecttype"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_featureandobjecttype"></a>2.4.5. Feature and Object Type</h4>
 <div class="paragraph">
-<p>In the conceptual model, feature and object types represent objects that have identity. That differentiates these types from, for example, data types. Other than that, feature and object types - in the following summarily called types with identity - are encoded as top-level <a href="#ldproxy2_schemaconversionrules_types_featureandobjecttype_providertype">type definitions within the provider configuration</a> as well as <a href="#ldproxy2_schemaconversionrules_types_featureandobjecttype_servicecollection">collection definitions in the service configuration</a>.</p>
+<p>In the conceptual model, feature and object types represent objects that have identity. That differentiates these types from, for example, data types. Other than that, feature and object types - in the following called <em>types with identity</em> - are encoded as top-level <a href="#ldproxy2_schemaconversionrules_types_featureandobjecttype_providertype">type (and potentially also fragment) definitions within the provider configuration</a> as well as <a href="#ldproxy2_schemaconversionrules_types_featureandobjecttype_servicecollection">collection definitions in the service configuration</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1716,7 +2321,19 @@ A future enhancement of the ldproxy target could introduce mechanisms for suppre
 <div class="sect4">
 <h5 id="ldproxy2_schemaconversionrules_types_featureandobjecttype_providertype"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_featureandobjecttype_providertype"></a>2.4.5.1. Provider Type Definition</h5>
 <div class="paragraph">
-<p>The name of the type definition is the class name, in lower case.</p>
+<p>The name of the definition is the class name. The name can be formatted, as defined by
+target parameter <em>collectionIdFormat</em> (default value is 'lowerCase'). Supported parameter
+values are:</p>
+</div>
+<div id="collectionIdFormat" class="ulist">
+<ul>
+<li>
+<p>none - no formatting is applied; can be useful for the <a href="#ldproxy2_schemaconversionrules_specificrules_coretable">Coretable Approach</a>.</p>
+</li>
+<li>
+<p>lowerCase - The name is converted to lower case, using the English locale.</p>
+</li>
+</ul>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1731,7 +2348,7 @@ ISO 19109 requires class names to be unique within the scope of a single applica
 </table>
 </div>
 <div class="paragraph">
-<p>The following information items are encoded for the type definition within the provider configuration:</p>
+<p>The following information items are encoded within the provider configuration:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1739,7 +2356,7 @@ ISO 19109 requires class names to be unique within the scope of a single applica
 <p>type: OBJECT</p>
 </li>
 <li>
-<p>objectType: original name of the type</p>
+<p>objectType: original name of the type (taken from tagged value <em>originalClassName</em>, if present, otherwise it is the class name as found in the - potentially transformed and thus altered - model)</p>
 </li>
 <li>
 <p>sourcePath: "/" + {<a href="#ldproxy2_schemaconversionrules_types_database_table_names">table_name</a>}</p>
@@ -1755,11 +2372,26 @@ ISO 19109 requires class names to be unique within the scope of a single applica
 </li>
 </ul>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If target parameter <em>enableFragments</em> is set to <code>true</code>, type AND fragment
+definitions are encoded. For further details, see section <a href="#ldproxy2_schemaconversionrules_schemapackage_providerconfig">Provider Configuration</a>.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect4">
 <h5 id="ldproxy2_schemaconversionrules_types_featureandobjecttype_servicecollection"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_featureandobjecttype_servicecollection"></a>2.4.5.2. Service Collection Definition</h5>
 <div class="paragraph">
-<p>The name of the collection definition is the class name, in lower case. It is therefore equal to the name of the provider type definition.</p>
+<p>The name of the collection definition is the class name, formatted according to
+target parameter <a href="#collectionIdFormat">[collectionIdFormat]</a>. It is therefore equal to the name of
+the provider type definition.</p>
 </div>
 <div class="paragraph">
 <p>The following information items are encoded for the collection definition within the service configuration:</p>
@@ -1801,7 +2433,7 @@ ISO 19109 requires class names to be unique within the scope of a single applica
 <div class="title">Note</div>
 </td>
 <td class="content">
-Currently, specific api conversion behavior is only defined for the Features HTML API-Module. In the future, the definition of queryables and sortables can be added (using the Features Core and Sorting API-Modules).
+Currently, specific API conversion behavior is only defined for the Features HTML API-Module. In the future, the definition of queryables and sortables can be added.
 </td>
 </tr>
 </table>
@@ -1818,7 +2450,8 @@ Currently, specific api conversion behavior is only defined for the Features HTM
 <div class="ulist">
 <ul>
 <li>
-<p>If <em>rule-ldp2-cls-identifierStereotype</em> applies to the type, and the type has an &lt;&lt;identifier&gt;&gt; property, then that property will be encoded as such an object identifier.</p>
+<p>If <em>rule-ldp2-cls-identifierStereotype</em> applies to the type, and the type - or one of its supertypes -
+has an &lt;&lt;identifier&gt;&gt; property, then that property will be encoded as such an object identifier.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1842,7 +2475,9 @@ Currently, specific api conversion behavior is only defined for the Features HTM
 <div class="title">Note</div>
 </td>
 <td class="content">
-If a type has multiple identifier properties, none of them is used as object identifier (because no informed choice can be made). An error will be logged. The target will create an identifier member.
+If a type has multiple identifier properties (directly owned and/or inherited),
+none of them is used as object identifier (because no informed choice can be made).
+An error will be logged. The target will create an identifier member.
 </td>
 </tr>
 </table>
@@ -1860,7 +2495,8 @@ If a type has multiple identifier properties, none of them is used as object ide
 <div class="title">Note</div>
 </td>
 <td class="content">
-Relevant geometry properties must directly be defined by the type with identity. In other words, the target does not look at geometry properties in inlined (data) types when searching for the primary geometry.
+Relevant geometry properties must directly be defined by the type with identity (or one of its supertypes).
+In other words, the target does not look at geometry properties in inlined (data) types when searching for the primary geometry.
 </td>
 </tr>
 </table>
@@ -1928,7 +2564,7 @@ The ldproxy target expects all geometry properties to have a maximum multiplicit
 <div class="ulist">
 <ul>
 <li>
-<p>Use of <em>defaultInstant</em> and <em>defaultIntervalStart</em> / <em>defaultIntervalEnd</em> are mutually exclusive. If <em>defaultInstant</em> is <code>true</code> on one of these properties then the other tags must not be <code>true</code>, and vice-versa. An error will be logged if that is not the case.</p>
+<p>Use of <em>defaultInstant</em> and <em>defaultIntervalStart</em> / <em>defaultIntervalEnd</em> are mutually exclusive. If <em>defaultInstant</em> is <code>true</code> on one of these properties, then the other tags must not be <code>true</code>, and vice-versa. An error will be logged if that is not the case.</p>
 </li>
 <li>
 <p>If <em>defaultInstant</em> is <code>true</code> on one property, then the according property will be encoded with <code>role: PRIMARY_INSTANT</code>. If more than one such property was found, an error will be logged.</p>
@@ -2006,7 +2642,10 @@ Additional temporal properties are encoded like all other UML properties.
 <div class="sect3">
 <h4 id="ldproxy2_schemaconversionrules_types_datatype"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_datatype"></a>2.4.6. Data Type</h4>
 <div class="paragraph">
-<p>A &lt;&lt;dataType&gt;&gt; is not converted to a top-level provider type definition. Instead, the type definition for the data type is encoded whenever a property, whose value type is the data type, is encoded.</p>
+<p>By default, a &lt;&lt;dataType&gt;&gt; is not converted to a top-level provider type definition. Instead,
+the data type will be encoded as a fragment definition (if fragments are enabled,
+i.e. target parameter <em>enableFragments</em> = <code>true</code>), and the type definition for the
+data type is encoded whenever a property, whose value type is the data type, is encoded.</p>
 </div>
 <div class="paragraph">
 <p>The following information items are encoded for the type definition of the &lt;&lt;dataType&gt;&gt;:</p>
@@ -2017,10 +2656,24 @@ Additional temporal properties are encoded like all other UML properties.
 <p>type: OBJECT or OBJECT_ARRAY (depending on the multiplicity; for further details, see <a href="#ldproxy2_schemaconversionrules_properties_propertytype">Property Type</a>)</p>
 </li>
 <li>
-<p>objectType: original name of the data type</p>
+<p>objectType: original name of the data type (taken from tagged value <em>originalClassName</em>, if present, otherwise it is the class name as found in the - potentially transformed and thus altered - model)</p>
 </li>
 <li>
-<p>sourcePath: as defined for datatype valued properties in section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths">Source Paths</a></p>
+<p>sourcePath: as determined from configured <a href="#ldproxy2_sql_encoding_infos">SQL encoding infos</a>,
+or as defined for data type valued properties in section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths">Source Paths</a></p>
+</li>
+<li>
+<p>In fragment definitions:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>label: value as derived using the <em>labelTemplate</em> (see the <a href="#ldproxy2_schemaconversionrules_documentation">documentation</a> section for further details)</p>
+</li>
+<li>
+<p>description: value as derived using the <em>descriptionTemplate</em> (see the <a href="#ldproxy2_schemaconversionrules_documentation">documentation</a> section for further details)</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>properties: as documented in section <a href="#ldproxy2_schemaconversionrules_properties">Properties</a></p>
@@ -2034,19 +2687,7 @@ Additional temporal properties are encoded like all other UML properties.
 <div class="title">Note</div>
 </td>
 <td class="content">
-Computation of label and description from the data type descriptors is not relevant. The reason is that a data type will always be inlined in a provider type definition, and then only label and description for the property - which has the data type as value type - are encoded.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Although not recommended, data types can have circular dependencies on each other. The ldproxy target does not support such dependencies (because it would lead to an infinite loop of inlined data type definitions). If a circular dependency is detected by the target, it will report an error - and not encode the property that would cause this circular dependency.
+Although not recommended, data types can have circular dependencies on each other. The ldproxy target does not support such dependencies (because it can lead to an infinite loop of inlined data type definitions). If a circular dependency is detected by the target, it will report an error - and not encode the property that would cause this circular dependency.
 </td>
 </tr>
 </table>
@@ -2055,7 +2696,8 @@ Although not recommended, data types can have circular dependencies on each othe
 <div class="sect3">
 <h4 id="ldproxy2_schemaconversionrules_types_mixin"><a class="anchor" href="#ldproxy2_schemaconversionrules_types_mixin"></a>2.4.7. Mixin Type</h4>
 <div class="paragraph">
-<p>Since inheritance is not supported by the ldproxy target, mixins are not supported either. Apply a model transformation to flatten inheritance if your model contains mixin types.</p>
+<p>Since v2.14.0, mixins are supported, if target parameter <em>enableFragments</em> is set to <code>true</code>.
+For further details, see section <a href="#ldproxy2_schemaconversionrules_types_inheritance_and_specialization">Inheritance and Specialization</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2284,7 +2926,7 @@ The ldproxy target does not support the conversion of basic types yet. This sect
 <div class="title">Note</div>
 </td>
 <td class="content">
-In the future, ways to convert restrictions defined by basic types could be defined, using the <em>constraints</em> member (with enum, min, max, or regex). Constraints supported by ldproxy are documented <a href="https://github.com/interactive-instruments/ldproxy/blob/master/docs/de/configuration/providers/constraints.md">here</a>.
+In the future, ways to convert restrictions defined by basic types could be defined, using the <em>constraints</em> member (with enum, min, max, or regex). Constraints supported by ldproxy are documented <a href="https://docs.ldproxy.net/providers/details/constraints.html">here</a>.
 </td>
 </tr>
 </table>
@@ -2294,7 +2936,7 @@ In the future, ways to convert restrictions defined by basic types could be defi
 <div class="sect2">
 <h3 id="ldproxy2_schemaconversionrules_properties"><a class="anchor" href="#ldproxy2_schemaconversionrules_properties"></a>2.5. Properties</h3>
 <div class="paragraph">
-<p>The following sections describe how a property from a type with identity or a data type is converted by the ldproxy target.</p>
+<p>The following sections describe how a property from a type with identity, mixin, or data type is converted by the ldproxy target.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2303,7 +2945,7 @@ In the future, ways to convert restrictions defined by basic types could be defi
 <div class="title">Note</div>
 </td>
 <td class="content">
-The order in which the properties of a type with identity or a data type are encoded in the provider type definition is defined by the <em>sequenceNumber</em> tagged values of these properties.
+The order in which the properties are encoded in the provider definition(s) is defined by the <em>sequenceNumber</em> tagged values of these properties.
 </td>
 </tr>
 </table>
@@ -2323,18 +2965,31 @@ The conversion of properties from other kinds of classifiers, especially enumera
 <div class="sect3">
 <h4 id="ldproxy2_schemaconversionrules_properties_sourcepaths"><a class="anchor" href="#ldproxy2_schemaconversionrules_properties_sourcepaths"></a>2.5.1. Source Paths</h4>
 <div class="paragraph">
-<p>The type definition within an ldproxy feature provider configuration describes the full encoding of a particular object type. Inlined property values can lead to a complex structure, especially when the type of a property is a complex &lt;&lt;dataType&gt;&gt;. In order to extract the values for populating the information items of an actual object, ldproxy needs to know the so called source paths. Such a path starts with the name of a database table at the top-level provider type definition. For the properties within a given type definition, the source path construction then depends on the actual representation of the property and its value type within the database.</p>
+<p>The type definition within an ldproxy feature provider configuration (including any fragment definitions) describes the full encoding of a particular object type. Inlined property values can lead to a complex structure, especially when the type of a property is a complex &lt;&lt;dataType&gt;&gt;. In order to extract the values for populating the information items of an actual object, ldproxy needs to know the so called source paths. Such a path starts with the name of a database table at the top-level provider type definition. For the properties within a given type definition, the source path construction then depends on the actual representation of the property and its value type within the database.</p>
 </div>
 <div class="paragraph">
-<p>A crucial aspect of the property representation in the database is the name of the according table column. Section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths_columnname">Database Column Name</a> defines how that name is constructed.</p>
-</div>
-<div class="paragraph">
-<p>With the column name, a statement can be created to access the value(s) of the property. That statement may include table joins. The necessary conversion behavior is defined in section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths_accesspropertyvalues">Accessing Property Values</a>.</p>
+<p>The target first tries to look up the source path for a given property in
+configured <a href="#ldproxy2_sql_encoding_infos">SQL encoding infos</a>.
+If no encoding infos are available, the target constructs the path itself.
+A crucial aspect thereby is the name of the table column that represents the
+property in the database. Section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths_columnname">Database Column Name</a> defines how that name is constructed by the target. With the column name, a statement can be created to access the value(s) of the property. That statement may include table joins. The necessary conversion behavior is defined in section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths_accesspropertyvalues">Accessing Property Values</a>.</p>
 </div>
 <div class="sect4">
 <h5 id="ldproxy2_schemaconversionrules_properties_sourcepaths_columnname"><a class="anchor" href="#ldproxy2_schemaconversionrules_properties_sourcepaths_columnname"></a>2.5.1.1. Database Column Name</h5>
 <div class="paragraph">
 <p>Whenever a property from the application schema is encoded within an ldproxy provider configuration, the name of the database column that represents that property is required for constructing source paths.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The target will first attempt to identify the source path from <a href="#ldproxy2_sql_encoding_infos">SQL encoding infos</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>The name is determined as follows:</p>
@@ -2357,7 +3012,10 @@ The conversion of properties from other kinds of classifiers, especially enumera
 <div class="ulist">
 <ul>
 <li>
-<p>the property belongs to a reflexive association, and the column belongs to an associative table, then the value of target parameter <em>associativeTableColumnSuffix</em> (with default value being the value of target parameter <em>primaryKeyColumn</em>) is used as suffix</p>
+<p>the property belongs to a reflexive association, and the column belongs to an associative table, then the value of target parameter <em>associativeTableColumnSuffix</em> (with default value being the value of target parameter <em>primaryKeyColumn</em>) is used as suffix;</p>
+</li>
+<li>
+<p>otherwise, if the property belongs to a reflexive association, and target parameter <em>reflexiveRelationshipFieldSuffix</em> has a non-blank value (with default being the empty string), then that value is used as suffix;</p>
 </li>
 <li>
 <p>otherwise, the value of target parameter <em>foreignKeyColumnSuffix</em> (with default value being the empty string) is used as suffix</p>
@@ -2393,17 +3051,7 @@ The conversion of properties from other kinds of classifiers, especially enumera
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In the future:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Conversion rules can be defined to modify the default naming behavior.</p>
-</li>
-<li>
-<p>Additional configuration entries can be defined with which the column name for a UML property can explicitly be provided (e.g. as resulting from execution of the SqlDdl target, and the database schema created by it).</p>
-</li>
-</ul>
+<p>In the future, conversion rules can be defined to modify the default naming behavior.</p>
 </div>
 </td>
 </tr>
@@ -2415,17 +3063,34 @@ The conversion of properties from other kinds of classifiers, especially enumera
 <div class="paragraph">
 <p>Constructing the source path within a property definition for accessing the property value(s) must consider the type of relationship between the property and its value type, the category of the property value type, the representation of the property value(s) in the database, and type mappings defined in the configuration.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Since v2.14.0, the target first attempts to look up the source path
+for a property in the <a href="#ldproxy2_sql_encoding_infos">SQL encoding infos</a>,
+taking into account the current encoding context (especially the table that
+represents the type for which the property is encoded). If no source
+path was found that way, the target constructs a source path itself,
+as described in this section.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>If the property value type is mapped to a simple type or a geometry type, or if the value type is an enumeration or code list (that does NOT match <em>rule-ldp2-cls-codelist-byTable</em>), source paths are constructed as shown in <a href="#img_ldproxy2_property_access_simpletypes_default">Figure 1</a>.</p>
+<p>If the property value type is mapped to a simple type or a geometry type, or if the value type is an enumeration or code list (that does NOT match <em>rule-ldp2-cls-codelist-byTable</em>), source paths are constructed as shown in <a href="#img_ldproxy2_property_access_simpletypes_default">Figure 2</a>.</p>
 </div>
 <div id="img_ldproxy2_property_access_simpletypes_default" class="imageblock text-center">
 <div class="content">
 <img src="./../images/ldp2_simple_types_default_source_path_encoding.png" alt="ldp2 simple types default source path encoding">
 </div>
-<div class="title">Figure 1. Default source path construction for value types that are mapped to simple and geometry types</div>
+<div class="title">Figure 2. Default source path construction for value types that are mapped to simple and geometry types</div>
 </div>
 <div class="paragraph">
-<p>The abbreviations used in <a href="#img_ldproxy2_property_access_simpletypes_default">Figure 1</a> (as well as in the following figures) thereby mean the following:</p>
+<p>The abbreviations used in <a href="#img_ldproxy2_property_access_simpletypes_default">Figure 2</a> (as well as in the following figures) thereby mean the following:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2489,22 +3154,22 @@ to the encoding rule.
 </table>
 </div>
 <div class="paragraph">
-<p>Otherwise, if the property value type is a code list that does match <em>rule-ldp2-cls-codelist-byTable</em>, then the target assumes that the code list is represented in the SQL database by a table. In that case, source paths are constructed as shown in <a href="#img_ldproxy2_property_access_codelist_bytable">Figure 2</a>.</p>
+<p>Otherwise, if the property value type is a code list that does match <em>rule-ldp2-cls-codelist-byTable</em>, the target assumes that the code list is represented in the SQL database by a table. In that case, source paths are constructed as shown in <a href="#img_ldproxy2_property_access_codelist_bytable">Figure 3</a>.</p>
 </div>
 <div id="img_ldproxy2_property_access_codelist_bytable" class="imageblock text-center">
 <div class="content">
 <img src="./../images/ldp2_codelist_bytable_source_path_encoding.png" alt="ldp2 codelist bytable source path encoding">
 </div>
-<div class="title">Figure 2. Source path construction for code list value types that match <em>rule-ldp2-cls-codelist-byTable</em></div>
+<div class="title">Figure 3. Source path construction for code list value types that match <em>rule-ldp2-cls-codelist-byTable</em></div>
 </div>
 <div class="paragraph">
-<p>Otherwise, if the property value type is mapped to LINK, the target assumes that the property representation in the database is an identifier, with which a reference to the actual object can be constructed. That reference will be encoded as a link-object (for further details, see section <a href="#ldproxy2_schemaconversionrules_properties_propertytype">Property Type</a>). If the maximum multiplicity is greater than 1, the target assumes that an associative table exists in the database. Source paths are then constructed as shown in <a href="#img_ldproxy2_property_access_mapped_types_default">Figure 3</a>.</p>
+<p>Otherwise, if the property value type is mapped to LINK, the target assumes that the property representation in the database is an identifier, with which a reference to the actual object can be constructed. That reference will be encoded as a link-object (for further details, see section <a href="#ldproxy2_schemaconversionrules_properties_propertytype">Property Type</a>). If the maximum multiplicity is greater than 1, the target assumes that an associative table exists in the database. Source paths are then constructed as shown in <a href="#img_ldproxy2_property_access_mapped_types_default">Figure 4</a>.</p>
 </div>
 <div id="img_ldproxy2_property_access_mapped_types_default" class="imageblock text-center">
 <div class="content">
 <img src="./../images/ldp2_mapped_types_default_source_path_encoding.png" alt="ldp2 mapped types default source path encoding">
 </div>
-<div class="title">Figure 3. Default source path construction for value types that are mapped to LINK</div>
+<div class="title">Figure 4. Default source path construction for value types that are mapped to LINK</div>
 </div>
 <div class="paragraph">
 <p>Otherwise, if the property value type is a data type, and:</p>
@@ -2512,10 +3177,10 @@ to the encoding rule.
 <div class="ulist">
 <ul>
 <li>
-<p>the data type matches <em>rule-ldp2-cls-data-types-oneToMany-severalTables</em>, then source paths are constructed as shown in <a href="#img_ldproxy2_property_access_datatypes_onetomany_severaltables">Figure 4</a>,</p>
+<p>the data type matches <em>rule-ldp2-cls-data-types-oneToMany-severalTables</em>, then source paths are constructed as shown in <a href="#img_ldproxy2_property_access_datatypes_onetomany_severaltables">Figure 5</a>;</p>
 </li>
 <li>
-<p>otherwise source paths are constructed as shown in <a href="#img_ldproxy2_property_access_datatypes_default">Figure 5</a></p>
+<p>otherwise, source paths are constructed as shown in <a href="#img_ldproxy2_property_access_datatypes_default">Figure 6</a></p>
 </li>
 </ul>
 </div>
@@ -2523,28 +3188,28 @@ to the encoding rule.
 <div class="content">
 <img src="./../images/ldp2_data_types_source_path_encoding_onetomany_severaltables.png" alt="ldp2 data types source path encoding onetomany severaltables">
 </div>
-<div class="title">Figure 4. Source path construction for value types that are data types and match <em>rule-ldp2-cls-data-types-oneToMany-severalTables</em></div>
+<div class="title">Figure 5. Source path construction for value types that are data types and match <em>rule-ldp2-cls-data-types-oneToMany-severalTables</em></div>
 </div>
 <div id="img_ldproxy2_property_access_datatypes_default" class="imageblock text-center">
 <div class="content">
 <img src="./../images/ldp2_data_types_default_source_path_encoding.png" alt="ldp2 data types default source path encoding">
 </div>
-<div class="title">Figure 5. Default source path construction for value types that are data types</div>
+<div class="title">Figure 6. Default source path construction for value types that are data types</div>
 </div>
 <div class="paragraph">
-<p>Otherwise, if the property value type is a type with identity, which are implemented as link objects, source paths are constructed as shown in <a href="#img_ldproxy2_property_access_types_with_identity_default">Figure 6</a> and <a href="#img_ldproxy2_property_access_reflexive_association_type_with_identity_default">Figure 7</a>.</p>
+<p>Otherwise, if the property value type is a type with identity, which are implemented as link objects, and the property does NOT match rule-ldp2-all-linkObjectAsFeatureRef, source paths are constructed as shown in <a href="#img_ldproxy2_property_access_types_with_identity_default">Figure 7</a> and <a href="#img_ldproxy2_property_access_reflexive_association_type_with_identity_default">Figure 8</a>.</p>
 </div>
 <div id="img_ldproxy2_property_access_types_with_identity_default" class="imageblock text-center">
 <div class="content">
 <img src="./../images/ldp2_types_with_identity_default_source_path_encoding.png" alt="ldp2 types with identity default source path encoding">
 </div>
-<div class="title">Figure 6. Default source path construction for value types that are types with identity</div>
+<div class="title">Figure 7. Default source path construction for value types that are types with identity</div>
 </div>
 <div id="img_ldproxy2_property_access_reflexive_association_type_with_identity_default" class="imageblock text-center">
 <div class="content">
 <img src="./../images/ldp2_reflexive_association_source_path_encoding.png" alt="ldp2 reflexive association source path encoding">
 </div>
-<div class="title">Figure 7. Default source path construction for reflexive associations for a type with identity</div>
+<div class="title">Figure 8. Default source path construction for reflexive associations for a type with identity</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2557,6 +3222,21 @@ The default source path construction behavior makes assumptions about the naming
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>Otherwise, if the property value type is a type with identity, which are implemented as feature references, i.e., the property DOES match rule-ldp2-all-linkObjectAsFeatureRef, source paths are constructed as shown in <a href="#img_ldproxy2_property_access_types_with_identity_feature_ref">Figure 9</a> and <a href="#img_ldproxy2_property_access_reflexive_association_type_with_identity_feature_ref">Figure 10</a>.</p>
+</div>
+<div id="img_ldproxy2_property_access_types_with_identity_feature_ref" class="imageblock text-center">
+<div class="content">
+<img src="./../images/ldp2_types_with_identity_feature_ref_source_path_encoding.png" alt="ldp2 types with identity feature ref source path encoding">
+</div>
+<div class="title">Figure 9. Feature reference source path construction for value types that are types with identity</div>
+</div>
+<div id="img_ldproxy2_property_access_reflexive_association_type_with_identity_feature_ref" class="imageblock text-center">
+<div class="content">
+<img src="./../images/ldp2_reflexive_association_feature_ref_source_path_encoding.png" alt="ldp2 reflexive association feature ref source path encoding">
+</div>
+<div class="title">Figure 10. Feature reference source path construction for reflexive associations for a type with identity</div>
 </div>
 </div>
 </div>
@@ -2582,7 +3262,17 @@ The default source path construction behavior makes assumptions about the naming
 </div>
 </li>
 <li>
-<p>the value type is mapped to LINK or implemented as a link object, then the <code>type</code> is OBJECT_ARRAY, and a link object is created in the property definition as defined <a href="#link_object">below</a>.</p>
+<p>the value type is mapped to LINK or a type with identity, and:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the property matches <em>rule-ldp2-all-linkObjectAsFeatureRef</em>, the value type is encoded as a feature reference, the <code>type</code> is FEATURE_REF_ARRAY, and either <code>refUriTemplate</code> is added, or a <code>refType</code> with the identifier of the value type. Further details on the encoding of a FEATURE_REF are given <a href="#feature_ref">here</a>.</p>
+</li>
+<li>
+<p>otherwise, the value type is implemented as a link object, the <code>type</code> is OBJECT_ARRAY, and a link object is created in the property definition as defined <a href="#link_object">below</a>.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2604,7 +3294,17 @@ The default source path construction behavior makes assumptions about the naming
 <p>Otherwise, if the value type is implemented as OBJECT but is not a type with identity (so most likely it is a data type), <code>type</code> simply is OBJECT.</p>
 </li>
 <li>
-<p>Otherwise, if the value type is mapped to LINK, or a type with identity that itself is implemented as OBJECT, <code>type</code> is OBJECT and a link object is created in the property definition, as defined <a href="#link_object">below</a>.</p>
+<p>Otherwise, if the value type is mapped to LINK, or a type with identity, and:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>the property matches <em>rule-ldp2-all-linkObjectAsFeatureRef</em>, the value type is encoded as a feature reference, the <code>type</code> is FEATURE_REF, and either <code>refUriTemplate</code> is added, or a <code>refType</code> with the identifier of the value type. Further details on the encoding of a FEATURE_REF are given <a href="#feature_ref">here</a>.</p>
+</li>
+<li>
+<p>otherwise, the value type is implemented as a link object, the <code>type</code> is OBJECT, and a link object is created in the property definition as defined <a href="#link_object">below</a>.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2643,7 +3343,7 @@ contains the name of an attribute of the value type), and that attribute of the 
 is optional (i.e., it has a minimum multiplicity of 0), then: a) <code>sourcePaths</code> is used instead of <code>sourcePath</code>, and b) the name of the primary key column for (the table representing the) value type is added as another source path value - to be used as fallback in case that the title attribute on the value type has no value.</p>
 </li>
 <li>
-<p>NOTE: If tag <em>ldpTitleAttribute</em> is defined on a supertype, the ShapeChange workflow should include the <a href="../transformations/Tagged_Value_Transformer.html">tagged value transformer</a>, with <a href="../transformations/Tagged_Value_Transformer.html#rule-trf-taggedValue-inheritance">rule-trf-taggedValue-inheritance</a> to ensure that tag <em>ldpTitleAttribute</em> is copied to all subtypes. That will ensure that the ldproxy target can find the tag on all subtypes.</p>
+<p>NOTE: If tag <em>ldpTitleAttribute</em> is defined on a supertype, and the ShapeChange workflow includes the <a href="../transformations/Flattener.html#rule-trf-cls-flatten-inheritance">Flattener for transforming inheritance</a>, then the workflow should also include the <a href="../transformations/Tagged_Value_Transformer.html">tagged value transformer</a>, with <a href="../transformations/Tagged_Value_Transformer.html#rule-trf-taggedValue-inheritance">rule-trf-taggedValue-inheritance</a> to ensure that tag <em>ldpTitleAttribute</em> is copied to all subtypes - before inheritance hierarchies are flattened. That will ensure that the ldproxy target can find the tag on all subtypes, even though inheritance hierarchies have been flattened.</p>
 </li>
 </ul>
 </div>
@@ -2672,7 +3372,186 @@ is optional (i.e., it has a minimum multiplicity of 0), then: a) <code>sourcePat
 <div class="ulist">
 <ul>
 <li>
-<p><code>stringFormat</code>: Either the URL template from the map entry, if one is defined for the property value type, or '{{serviceUrl}}/collections/{value_type_name}/items/{{value}}', where value_type_name is the name of the value type, in lower case (and {{serviceUrl}} as well as {{value}} will automatically be replaced by ldproxy).</p>
+<p><code>stringFormat</code>: Either the URL template from the map entry, if one is defined for the property value type, or '{{serviceUrl}}/collections/{value_type_name}/items/{{value}}', where value_type_name is the name of the value type (formatted according to target parameter <a href="#collectionIdFormat">[collectionIdFormat]</a>) (and {{serviceUrl}} as well as {{value}} will automatically be replaced by ldproxy).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="feature_ref" class="paragraph">
+<p>The definition of a FEATURE_REF within a property definition is as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If only a single source path was determined: <code>sourcePath</code>, as defined for
+the property (for details,
+see section <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths">Source Paths</a>)</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NOTE: If a specific title is defined for the value type, then the source path
+is for the actual value of the FEATURE_REF. Otherwise, it is the identifier of the
+referenced feature (which can be a foreign key column).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>type: FEATURE_REF</code>, if the maximum multiplicity of the property is 1,
+otherwise <code>type: FEATURE_REF_ARRAY</code></p>
+</li>
+<li>
+<p>If the value type is mapped to LINK: <code>refUriTemplate</code> is added,
+with the template value being determined like the stringFormat-transformation
+of a <a href="#link_object">link object href-member</a>.</p>
+</li>
+<li>
+<p>Otherwise, i.e., the value type is NOT mapped to LINK, it depends:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If a single source path was determined for the FEATURE_REF:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>refType</code> is added, with the identifier of the value type as value.</p>
+</li>
+<li>
+<p>If tag <em>ldpTitleAttribute</em> on the value type has a valid value (i.e., it
+contains the name of an attribute of the value type), then <code>properties</code> with two members
+is added:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Member <code>id</code>, with:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sourcePath</code>: path for the ID member of the value type</p>
+</li>
+<li>
+<p><code>type</code>: ldproxy type which corresponds to the type of the identifier</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Member <code>title</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sourcePath</code>: path for the title attribute of the value type</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NOTE: If tag <em>ldpTitleAttribute</em> on the value type has a valid value (i.e., it
+contains the name of an attribute of the value type), and that attribute of the value type
+is optional (i.e., it has a minimum multiplicity of 0), then:
+a) <code>sourcePaths</code> is used instead of <code>sourcePath</code>, and
+b) the name of the primary key column for (the table representing the)
+value type is added as another source path value - to be used as
+fallback in case that the title attribute on the value type has no value.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>type</code>: ldproxy type which corresponds to the type of the title attribute.</p>
+</li>
+<li>
+<p><code>label</code>: {value type name} + "-title"</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Otherwise, i.e., we have a single source path and tag <em>ldpTitleAttribute</em>
+on the value type does NOT have a valid value:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>valueType</code> is added, with the ldproxy type of the ID member in the value type definition.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Otherwise, i.e., multiple source paths were determined for the FEATURE_REF:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If the source paths all have the same value - which can happen
+in cases where features are stored in the same place, and an additional type
+discriminator field exists in the data store - like in
+the <a href="#ldproxy2_schemaconversionrules_specificrules_coretable">Coretable Approach</a>, or if tag <em>ldpTypeAttribute</em>
+on the the value type has a valid value:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>properties</code> with a <code>type</code> member is added:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>sourcePath</code> of that <code>type</code> member is the path to the type discriminator field.</p>
+</li>
+<li>
+<p>Another <code>type</code> member defines the type of the discriminator value (typically STRING).</p>
+</li>
+<li>
+<p>An enum constraint is added, with one value per relevant type identifier.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>If tag <em>ldpTitleAttribute</em> on the value type has a valid value, <code>id</code> and <code>title</code>
+members are also encoded within the <code>properties</code> member, as described before.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Otherwise, i.e. multiple source paths with different value were determined:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>concat</code> or <code>coalesce</code> is used to encode the individual source
+path options. The former is used if the maximum multiplicity of
+the property is greater than one, the latter if it is equal to one.
+An example is shown in section
+<a href="#ldproxy2_schemaconversionrules_types_inheritance_and_specialization">Inheritance and Specialization</a>.</p>
+</li>
+<li>
+<p>Per case within <code>concat</code> or <code>coalesce</code>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sourcePath</code>: One of the source path values.</p>
+</li>
+<li>
+<p><code>refType</code> is added, with value being the identifier of the actual
+(value) type that is targeted by the source path.</p>
+</li>
+<li>
+<p>If tag <em>ldpTitleAttribute</em> on the value type has a valid value, <code>id</code> and <code>title</code>
+members are encoded within a <code>properties</code> member, as described before.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2822,7 +3701,7 @@ Currently, the only items covered are transformations within the Features HTML A
 <div class="sect2">
 <h3 id="ldproxy2_schemaconversionrules_associationclass"><a class="anchor" href="#ldproxy2_schemaconversionrules_associationclass"></a>2.6. Association Class</h3>
 <div class="paragraph">
-<p>There is no native represention for association classes in ldproxy. For schemas that include association classes, a transformation of association classes as defined by GML 3.3 and implemented by the <a href="../transformations/Association_Class_Mapper.html">ShapeChange Association Class Mapper</a> should be used.</p>
+<p>There is no native representation for association classes in ldproxy. For schemas that include association classes, a transformation of association classes as defined by GML 3.3 and implemented by the <a href="../transformations/Association_Class_Mapper.html">ShapeChange Association Class Mapper</a> should be used.</p>
 </div>
 </div>
 <div class="sect2">
@@ -2861,6 +3740,513 @@ If a property is encountered whose value type is not encoded (<em>rule-ldp2-all-
 </table>
 </div>
 </div>
+<div class="sect2">
+<h3 id="ldproxy2_schemaconversionrules_specificrules"><a class="anchor" href="#ldproxy2_schemaconversionrules_specificrules"></a>2.9. Specific rules</h3>
+<div class="sect3">
+<h4 id="ldproxy2_schemaconversionrules_specificrules_genericvaluetypes"><a class="anchor" href="#ldproxy2_schemaconversionrules_specificrules_genericvaluetypes"></a>2.9.1. Conversion of generic value types</h4>
+<div class="paragraph">
+<p>(since v2.14.0)</p>
+</div>
+<div class="paragraph">
+<p>Some domains use constructs like the one shown in
+<a href="#img_ldproxy2_specific_rules_generic_value_types">Figure 11</a>
+to add extension points to their feature types. The generic attributes
+shown in this example contain a name and a (simple) value. They provide
+a specific place for adding further information in a key-value-pair based fashion.</p>
+</div>
+<div id="img_ldproxy2_specific_rules_generic_value_types" class="imageblock text-center">
+<div class="content">
+<img src="./../images/ldp2_specificrules_genericvaluetypes.png" alt="ldp2 specificrules genericvaluetypes">
+</div>
+<div class="title">Figure 11. Example schema with generic value types</div>
+</div>
+<div class="paragraph">
+<p>There is a specific solution for supporting such structures with ldproxy.</p>
+</div>
+<div class="paragraph">
+<p>The according conversion is enabled using <em>rule-ldp2-cls-genericValueType</em>.
+The conversion rule is applied for a &lt;&lt;dataType&gt;&gt; whose name is contained in the
+(comma-separated) value of target parameter <em>genericValueTypes</em>. The subtypes will
+automatically be taken into account (so do not list them in the parameter value).
+For the example, <code>genericValueTypes=GenerAttribute</code> would thus suffice.</p>
+</div>
+<div class="paragraph">
+<p>The provider configuration for FT4 would contain the definitions listed in
+<a href="#example_ldproxy2_specific_rules_generic_value_types_provider">Listing 3</a>.</p>
+</div>
+<div id="example_ldproxy2_specific_rules_generic_value_types_provider" class="listingblock">
+<div class="title">Listing 3. Generic value type encoding in the provider configuration</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="YAML"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+</pre></td>
+  <td class="code"><pre>  <span class="key">someGenerAttribute</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">GenerAttribute</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">GenerAttribute</span></span>
+    <span class="key">description</span>: <span class="string"><span class="content">The description of type GenerAttribute.</span></span>
+    <span class="key">properties</span>:
+      <span class="key">name</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">name</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">name</span></span>
+        <span class="key">description</span>: <span class="string"><span class="content">Description of attribute 'name'.</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+      <span class="key">dataType</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">datatype</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">data type</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+          <span class="key">enum</span>:
+          - <span class="string"><span class="content">IntegerAttribute</span></span>
+          - <span class="string"><span class="content">DoubleAttribute</span></span>
+          - <span class="string"><span class="content">StringAttribute</span></span>
+          - <span class="string"><span class="content">DateAttribute</span></span>
+          - <span class="string"><span class="content">UrlAttribute</span></span>
+      <span class="key">value</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">value</span></span>
+        <span class="key">coalesce</span>:
+        - <span class="string"><span class="content">sourcePath: value_integer</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        - <span class="string"><span class="content">sourcePath: value_double</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">FLOAT</span></span>
+        - <span class="string"><span class="content">sourcePath: value_string</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        - <span class="string"><span class="content">sourcePath: value_date</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">DATE</span></span>
+        - <span class="string"><span class="content">sourcePath: value_uri</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+  <span class="key">otherGenerAttribute</span>:
+    <span class="key">type</span>: <span class="string"><span class="content">OBJECT_ARRAY</span></span>
+    <span class="key">objectType</span>: <span class="string"><span class="content">GenerAttribute</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">GenerAttribute</span></span>
+    <span class="key">description</span>: <span class="string"><span class="content">The description of type GenerAttribute.</span></span>
+    <span class="key">properties</span>:
+      <span class="key">name</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">name</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">name</span></span>
+        <span class="key">description</span>: <span class="string"><span class="content">Description of attribute 'name'.</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+      <span class="key">dataType</span>:
+        <span class="key">sourcePath</span>: <span class="string"><span class="content">datatype</span></span>
+        <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">data type</span></span>
+        <span class="key">constraints</span>:
+          <span class="key">required</span>: <span class="string"><span class="content">true</span></span>
+          <span class="key">enum</span>:
+          - <span class="string"><span class="content">IntegerAttribute</span></span>
+          - <span class="string"><span class="content">DoubleAttribute</span></span>
+          - <span class="string"><span class="content">StringAttribute</span></span>
+          - <span class="string"><span class="content">DateAttribute</span></span>
+          - <span class="string"><span class="content">UrlAttribute</span></span>
+      <span class="key">value</span>:
+        <span class="key">type</span>: <span class="string"><span class="content">VALUE</span></span>
+        <span class="key">label</span>: <span class="string"><span class="content">value</span></span>
+        <span class="key">coalesce</span>:
+        - <span class="string"><span class="content">sourcePath: value_IntegerAttribute</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">INTEGER</span></span>
+        - <span class="string"><span class="content">sourcePath: value_double</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">FLOAT</span></span>
+        - <span class="string"><span class="content">sourcePath: value_string</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span>
+        - <span class="string"><span class="content">sourcePath: value_DateAttribute</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">DATE</span></span>
+        - <span class="string"><span class="content">sourcePath: value_UrlAttribute</span></span>
+          <span class="key">type</span>: <span class="string"><span class="content">STRING</span></span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>sourcePath</code> values within value.coalesce are constructed using the template
+<code>{attribute name} + "_" + {suffix}</code> - where the suffix default is the name of the attribute
+value type. That default can be overwritten by setting tagged value
+<em>ldpGenericValueTypeSuffix</em> on the attribute. In the example, that is the case for
+the attributes StringAttribute.value as well as DoubleAttribute.value.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If fragments are enabled (target parameter <code>enableFragments = true</code>), a single
+fragment definition for GenerAttribute would be created, and referenced in the
+definitions of someGenerAttribute and otherGenerAttribute.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The <code>sourcePath</code> for someGenerAttribute and otherGenerAttribute is not shown in
+<a href="#example_ldproxy2_specific_rules_generic_value_types_provider">Listing 3</a>. The path would
+be constructed as usual for any data type valued property. For further details,
+see <a href="#ldproxy2_schemaconversionrules_properties_sourcepaths">Source Paths</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<em>rule-ldp2-cls-genericValueType</em> only looks for a single attribute that
+is common to all subtypes of the classes identified by target
+parameter <em>genericValueTypes</em>. Additional properties of these subtypes are ignored!
+Also, if multiple common properties exist, all will be ignored (and an error logged)!
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The primary purpose of the <code>dataType</code> property is to support compliant GML output.
+The enumeration is constructed with the names of the subtypes of the generic value
+type.
+If building block <a href="#ldproxy2_building_block_features_gml">Features - GML</a> is enabled,
+then the service configuration
+would declare <code>variableObjectElementNames</code> (one per generic value type)
+for building block GML, as shown in the following example.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="YAML"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td>
+  <td class="code"><pre>- <span class="string"><span class="content">buildingBlock: GML</span></span>
+  <span class="key">enabled</span>: <span class="string"><span class="content">true</span></span>
+  <span class="key">variableObjectElementNames</span>:
+    <span class="key">GenerAttribute</span>:
+      <span class="key">property</span>: <span class="string"><span class="content">dataType</span></span>
+      <span class="key">mapping</span>:
+        <span class="key">IntegerAttribute</span>: <span class="string"><span class="content">ns:IntegerAttribute</span></span>
+        <span class="key">DoubleAttribute</span>: <span class="string"><span class="content">ns:DoubleAttribute</span></span>
+        <span class="key">StringAttribute</span>: <span class="string"><span class="content">ns:StringAttribute</span></span>
+        <span class="key">DateAttribute</span>: <span class="string"><span class="content">ns:DateAttribute</span></span>
+        <span class="key">UrlAttribute</span>: <span class="string"><span class="content">ns:UrlAttribute</span></span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The namespace prefixes in the mappings are automatically determined by ShapeChange.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Furthermore, in the <a href="#ldproxy2_building_block_features_geojson">Features - GeoJSON</a> and
+<a href="#ldproxy2_building_block_features_jsonfg">Features - JSON-FG</a> building blocks, if enabled,
+a transformation is added to remove property <code>dataType</code> from the according output. Example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="YAML"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td>
+  <td class="code"><pre>  <span class="key">ft4</span>:
+    <span class="key">id</span>: <span class="string"><span class="content">ft4</span></span>
+    <span class="key">label</span>: <span class="string"><span class="content">ft4</span></span>
+    <span class="key">enabled</span>: <span class="string"><span class="content">true</span></span>
+    <span class="key">api</span>:
+    - <span class="string"><span class="content">buildingBlock: GEO_JSON</span></span>
+      <span class="key">transformations</span>:
+        <span class="key">otherGenerAttribute.dataType</span>:
+        - <span class="string"><span class="content">remove: ALWAYS</span></span>
+        <span class="key">someGenerAttribute.dataType</span>:
+        - <span class="string"><span class="content">remove: ALWAYS</span></span>
+    - <span class="string"><span class="content">buildingBlock: JSON_FG</span></span>
+      <span class="key">transformations</span>:
+        <span class="key">otherGenerAttribute.dataType</span>:
+        - <span class="string"><span class="content">remove: ALWAYS</span></span>
+        <span class="key">someGenerAttribute.dataType</span>:
+        - <span class="string"><span class="content">remove: ALWAYS</span></span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="ldproxy2_schemaconversionrules_specificrules_coretable"><a class="anchor" href="#ldproxy2_schemaconversionrules_specificrules_coretable"></a>2.9.2. Coretable Approach</h4>
+<div class="paragraph">
+<p>(since v2.14.0)</p>
+</div>
+<div class="paragraph">
+<p>Application schemas can be quite extensive, and can have classes with
+quite complex structure. Managing data for that schema in a relational database
+can be a daunting and demanding task - especially if the database schema
+is also complex (lots of tables, lots of columns, lots of foreign key and
+other constraints). Furthermore, changes in the application schema structure,
+during application schema development, or between application schema versions,
+require complex database updates. The <em>coretable approach</em> is a way to mitigate the level
+of complexity. In this approach, the database schema only consists of two tables:
+a coretable with one entry per object (each object MUST have a globally unique identifier),
+and a separate references table, where the object references are managed.</p>
+</div>
+<div class="paragraph">
+<p>To signal that the coretable approach applies, include
+<em>rule-ldp2-all-coretable</em> in the encoding rule.</p>
+</div>
+<div class="paragraph">
+<p>The coretable is defined as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The table name is given by target parameter <em>coretable</em> (default value is 'features').</p>
+</li>
+<li>
+<p>The table must have a separate primary key column (integer valued). The column
+name is given by target parameter <em>coretablePkColumn</em> (default value is 'pk').</p>
+</li>
+<li>
+<p>The table has a column with the object identifiers. The identifiers are used
+in object references, and must be unique (at least within the coretable; UUIDs would be
+suitable, for example). The column name is given by target parameter <em>coretableIdColumn</em>
+(default value is the value of target parameter <em>primaryKeyColumn</em>). The ldproxy type
+of the column is defined via target parameter <em>coretableIdColumnLdproxyType</em> (default
+is 'INTEGER').</p>
+</li>
+<li>
+<p>The table also has a column in which the name of the feature type of an object is
+encoded. The name is equal to the ldproxy collection ID for that feature type.
+The column name is defined via
+target parameter <em>coretableFeatureTypeColumn</em> (default value is 'featuretype').</p>
+</li>
+<li>
+<p>The table must have a <code>properties</code> column with JSON-encoded value. This column
+is used to encode all object properties, including object references from data types, but
+typically not object references from or between types with identity.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If a data type is encoded, then any object reference it may have is encoded within
+the JSON properties as well - NOT in the high priority reference column of the coretable
+or within the references table. The encoding follows the rules for FEATURE_REFs laid out
+<a href="#feature_ref">here</a>. However, the source path is just the name of the property that
+represents the object reference.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>NOTE: This encoding does NOT take into account all possibilities of the JSON encoding
+with <a href="./JSON_Schema.html#rule-json-all-featureRefs">rule-json-all-featureRefs</a>,
+JSON Schema target parameters <code>featureRelProfiles=rel-as-key`</code>, and (potentially also)
+<code>featureRefWithAnyCollectionId=true</code>. The source path would need to be followed by <code>/featureId</code>
+if either multiple collections are targeted by the property value type (i.e., the
+value type is a supertype, with multiple non-abstract types in the subtype hierarchy),
+or some target parameter that reflected the JSON Schema target parameter
+<em>featureRefWithAnyCollectionId</em> was set to true. The encoding of <code>/featureId</code> may be
+added in a future version of the ldproxy target.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>NOTE: The JSON object does not have an additional
+level of nesting, like in the case of a GeoJSON-encoded feature. The object properties
+are directly encoded as members of the JSON object (data type values would of course
+lead to some level of nesting).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The table has a column to store the
+<a href="#ldproxy2_schemaconversionrules_types_primarygeometry">primary geometry</a> of the object.
+The column name is given by target parameter <em>coretableGeometryColumn</em> (default value
+is 'geom').</p>
+</li>
+<li>
+<p>The table may have additional columns (for example, to identify the application schema version),
+which will be ignored by ldproxy.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The references table is defined as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The table name is given by target parameter <em>coretableRelationsTable</em>
+(default value is 'references').</p>
+</li>
+<li>
+<p>The table must have a separate primary key column, whose name
+is given by target parameter <em>coretablePkColumn</em> (like in the coretable itself, see above).</p>
+</li>
+<li>
+<p>The table has two columns with the identifiers of the objects that participate
+in an object-object relationship. The object-object relationship is typically
+modeled as an association. For a uni-directional association, the direction
+of the association is unimportant. The owner of the navigable association role
+automatically is identified as the source of the relationship, and the association role
+automatically is seen as the target role. However, for a bi-directional
+association, the direction in which the association was modeled does matter,
+because source and target must be encoded in separate and distinct columns within the references table.
+In the bi-directional case, the class that is the source of the association is the source
+of the relationship, and the other class is the target. The association role that is navigable
+from the source is the target role, and the other association role is the source role.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The column that contains the identifier of the source object is defined by target parameter
+<em>coretableIdColumn</em> (like in the coretable itself, see above).</p>
+</li>
+<li>
+<p>The column that contains the identifier of the target object is defined by target parameter
+<em>coretableRefColumn</em> (default value is 'ref').</p>
+</li>
+<li>
+<p>The ldproxy type of both columns is defined by target parameter <em>coretableIdColumnLdproxyType</em>
+(like in the coretable itself, see above).</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The references table also has two columns in which the names of the
+target and the source roles are encoded (for a uni-directional association,
+only the target role name is provided):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The name of the column with the target role is defined by target parameter
+<em>coretableRelationNameColumn</em> (default value is 'rel').</p>
+</li>
+<li>
+<p>The name of the column with the source role is defined by target parameter
+<em>coretableInverseRelationNameColumn</em> (default value is 'rel_inv').</p>
+</li>
+<li>
+<p>The ldproxy type of both columns is 'STRING'.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The ldproxy target will create appropriate configurations for this particular database schema.</p>
+</div>
+<div class="paragraph">
+<p>The coretable approach supports object references whose sources are data types.
+However, such references MUST be encoded within the JSON-properties. They cannot be
+represented in the references table.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -2874,7 +4260,7 @@ If a property is encountered whose value type is not encoded (<em>rule-ldp2-all-
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
+Last updated 2023-11-28 15:37:01 +0100
 </div>
 </div>
 </body>
