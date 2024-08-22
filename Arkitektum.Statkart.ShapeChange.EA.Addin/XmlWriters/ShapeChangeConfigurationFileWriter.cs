@@ -29,7 +29,7 @@ namespace Kartverket.ShapeChange.EA.Addin
             WriteAttributeString("xmlns", "xi", null, "http://www.w3.org/2001/XInclude");
             WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
             WriteAttributeString("xmlns", "sc", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1");
-            WriteAttributeString("xsi", "schemaLocation", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd");
+            WriteAttributeString("xsi", "schemaLocation", null, "http://www.interactive-instruments.de/ShapeChange/Configuration/1.1 http://shapechange.net/resources/schema/ShapeChangeConfiguration_3.0.0.xsd");
 
             this.WriteInputElement(inputSettings);
 
