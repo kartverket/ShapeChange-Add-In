@@ -1,0 +1,37 @@
+# nonk8s
+apiVersion: "backstage.io/v1alpha1"
+kind: "Component"
+metadata:
+  name: "ShapeChange-Add-In"
+  tags:
+  - "private"
+spec:
+  type: "service"
+  lifecycle: "production"
+  owner: "standardisering"
+---
+apiVersion: "backstage.io/v1alpha1"
+kind: "Group"
+metadata:
+  name: "security_champion_ShapeChange-Add-In"
+  title: "Security Champion ShapeChange-Add-In"
+spec:
+  type: "security_champion"
+  parent: "it_security_champions"
+  members:
+  - "toreJohnsen"
+  children:
+  - "resource:ShapeChange-Add-In"
+---
+apiVersion: "backstage.io/v1alpha1"
+kind: "Resource"
+metadata:
+  name: "ShapeChange-Add-In"
+  links:
+  - url: "https://github.com/kartverket/ShapeChange-Add-In"
+    title: "ShapeChange-Add-In på GitHub"
+spec:
+  type: "repo"
+  owner: "security_champion_ShapeChange-Add-In"
+  dependencyOf:
+  - "component:ShapeChange-Add-In"
