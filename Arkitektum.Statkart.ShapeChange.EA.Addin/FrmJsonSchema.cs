@@ -85,13 +85,13 @@ namespace Kartverket.ShapeChange.EA.Addin
         private void SetProperties()
         {
             var selectedPackage = _repository.GetTreeSelectedPackage();
-
+            textBoxPropsSchemaName.Text = selectedPackage.Name;
             foreach (TaggedValue taggedValue in selectedPackage.Element.TaggedValues)
             {
                 switch (taggedValue.Name)
                 {
                     case "xsdDocument":
-                        textBoxPropsSchemaName.Text = taggedValue.Value;
+                        //textBoxPropsSchemaName.Text = taggedValue.Value;
                         break;
                     case "targetNamespace":
                         textBoxPropsTargetNamespace.Text = taggedValue.Value;
