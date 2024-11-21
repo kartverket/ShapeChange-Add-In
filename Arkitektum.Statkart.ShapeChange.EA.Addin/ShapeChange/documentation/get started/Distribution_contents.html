@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Distribution contents</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -519,9 +516,9 @@ Public License v3.</p></td>
 is required to process XMI 1.0 models in ShapeChange.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">test/test.eap</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">test/test.qea</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Test model in Enterprise Architect format. This
-is a copy of <a href="https://shapechange.net/resources/test/test.eap" class="bare">https://shapechange.net/resources/test/test.eap</a>.</p></td>
+is a copy of <a href="https://shapechange.net/resources/test/test.qea" class="bare">https://shapechange.net/resources/test/test.qea</a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -545,8 +542,7 @@ contained in a specific distribution
 <div class="sectionbody">
 <div class="paragraph">
 <p>All other resources that are commonly accessed by ShapeChange are
-available on shapechange.net in the
-<a href="https://shapechange.net/resources/">resources folder</a>. These are:</p>
+available on shapechange.net in the resources folder. These are:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -568,8 +564,7 @@ be included in project configuration files using XInclude. More details
 on configuration files are described
 <a href="../get started/Configuration.html">here</a>. Example
 configuration files can be found in the
-<a href="https://shapechange.net/resources/test/">test folder</a> and the
-<a href="https://shapechange.net/resources/examples/">examples folder</a>.</p></td>
+<a href="https://shapechange.net/resources/test/">test folder</a>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/config/DescriptorSourcesInspire.xml">config/DescriptorSourcesInspire.xml</a></p></td>
@@ -587,8 +582,8 @@ double-clicking the JAR file.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/config/StandardAliases.xml">config/StandardAliases.xml</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This file specifies typical aliases for well-known stereotypes and is
 typically included in a project configuration file. This also handles
-different writing styles for stereotype names e.g. &lt;&lt;featureType&gt;&gt; vs.
-&lt;&lt;Feature Type&gt;&gt;. Additional aliases may be specified in a project
+different writing styles for stereotype names e.g. «featureType» vs.
+«Feature Type». Additional aliases may be specified in a project
 configuration file.</p></td>
 </tr>
 <tr>
@@ -631,10 +626,6 @@ configurations - or added to these central mapping files.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/config/StandardMapEntries_gmlcov.xml">config/StandardMapEntries_gmlcov.xml</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Map entries for mapping types from the GMLCOV standard to their
 implementations.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/config/StandardMapEntries_gsip.xml">config/StandardMapEntries_gsip.xml</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Map entries for basic types according to the GSIP encoding rule</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/config/StandardMapEntries_iso19107-v21.xml">config/StandardMapEntries_iso19107-v21.xml</a></p></td>
@@ -748,16 +739,6 @@ file. Additional aliases may be specified in a project configuration
 file.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/dist/">dist</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Folder for
-the ShapeChange distribution files (JAR and ZIP archives).</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/example/">example</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Folder
-for examples.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/schema/">schema</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Folder
 for XML Schema documents</p></td>
@@ -804,7 +785,7 @@ resources to test a ShapeChange installation.</p></td>
 process XMI 1.0 models in ShapeChange.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/test.eap">test/test.eap</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/test.qea">test/test.qea</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Test model in Enterprise Architect format.</p></td>
 </tr>
 <tr>
@@ -830,19 +811,19 @@ result.</p></td>
 model.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/ea/test.html">test/ea/test.html</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/ea/INPUT/test.html">test/ea/INPUT/test.html</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTML feature catalogue derived from the Enterprise Architect test
 model. This file is identical to the one created from the XMI 1.o
 test model except for the internal element identifiers.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/ea/test.xsd">test/ea/test.xsd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/ea/INPUT/test.xsd">test/ea/INPUT/test.xsd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GML 3.2 application schema derived from the Enterprise Architect
 test model. This file is identical to the one created from the XMI
 1.o test model.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/xmi">test/xmi</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/xmi/">test/xmi</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Folder
 for sample output created during testing with the XMI 1.o test
 model. The contents of the directory is considered the reference
@@ -853,13 +834,13 @@ result.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Log file written during processing the XMI 1.o test model.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/xmi/test.html">test/xmi/test.html</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/xmi/INPUT/test.html">test/xmi/INPUT/test.html</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTML feature catalogue derived from the XMI 1.o test model. This
 file is identical to the one created from the Enterprise Architect test
 model except for the internal element identifiers.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/xmi/test.xsd">test/xmi/test.xsd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://shapechange.net/resources/test/xmi/INPUT/test.xsd">test/xmi/INPUT/test.xsd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GML 3.2 application schema derived from the XMI 1.o test model.
  This file is identical to the one created from the Enterprise
 Architect test model.</p></td>
@@ -898,11 +879,6 @@ catalogues (further details:
 </tbody>
 </table>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

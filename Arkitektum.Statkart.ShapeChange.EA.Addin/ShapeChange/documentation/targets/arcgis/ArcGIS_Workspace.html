@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>ArcGIS Workspace</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -577,10 +574,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#maxNameLength">2.4.9. maxNameLength</a></li>
 <li><a href="#nameOfTaggedValueToDetermineFieldLength">2.4.10. nameOfTaggedValueToDetermineFieldLength</a></li>
 <li><a href="#outputDirectory">2.4.11. outputDirectory</a></li>
-<li><a href="#reflexiveRelationshipFieldSuffix">2.4.12. reflexiveRelationshipFieldSuffix</a></li>
-<li><a href="#shortNameByTaggedValue">2.4.13. shortNameByTaggedValue</a></li>
-<li><a href="#valueRangeExcludedBoundaryDelta">2.4.14. valueRangeExcludedBoundaryDelta</a></li>
-<li><a href="#workspaceTemplate">2.4.15. workspaceTemplate</a></li>
+<li><a href="#outputFilename">2.4.12. outputFilename</a></li>
+<li><a href="#reflexiveRelationshipFieldSuffix">2.4.13. reflexiveRelationshipFieldSuffix</a></li>
+<li><a href="#shortNameByTaggedValue">2.4.14. shortNameByTaggedValue</a></li>
+<li><a href="#valueRangeExcludedBoundaryDelta">2.4.15. valueRangeExcludedBoundaryDelta</a></li>
+<li><a href="#workspaceTemplate">2.4.16. workspaceTemplate</a></li>
 </ul>
 </li>
 <li><a href="#Configuration_Example">2.5. Configuration Example</a></li>
@@ -651,7 +649,7 @@ elements may result in an exception (informing about an invalid type).
 <div class="paragraph">
 <p>For further information on the ArcGIS workspace model and the ArcGIS
 extension for Enterprise Architect, see
-<a href="http://www.sparxsystems.com/arcgis/" class="bare">http://www.sparxsystems.com/arcgis/</a></p>
+<a href="https://sparxsystems.com/arcgis/" class="bare">https://sparxsystems.com/arcgis/</a></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -745,7 +743,7 @@ consult the help contents of Enterprise Architect.</p>
 <div class="sect2">
 <h3 id="Template_File"><a class="anchor" href="#Template_File"></a>2.1. Template File</h3>
 <div class="paragraph">
-<p>This target requires a template .eap file. Per default, the target
+<p>This target requires a template .qea file. Per default, the target
 retrieves the template from <a href="https://shapechange.net/resources/templates/" class="bare">https://shapechange.net/resources/templates/</a>
 However, if desired, another location (online or local file) can also be
 specified via a target configuration parameter. During execution, the
@@ -840,10 +838,10 @@ rule-arcgis-prop-precision
 </table>
 </div>
 <div class="paragraph">
-<p>If this rule is enabled, then the precision of a &lt;&lt;field&gt;&gt; with a range
+<p>If this rule is enabled, then the precision of a «field» with a range
 domain as type, or with a simple esri type can be set via the tagged
 value 'precision' (on the property from the conceptual schema that is
-converted to the &lt;&lt;field&gt;&gt;; the tagged value must contain an integer
+converted to the «field»; the tagged value must contain an integer
 value).</p>
 </div>
 <div class="paragraph">
@@ -853,10 +851,10 @@ the default behavior applies, which is to set precision to:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>9 - for a &lt;&lt;field&gt;&gt; with type esriFieldTypeInteger</p>
+<p>9 - for a «field» with type esriFieldTypeInteger</p>
 </li>
 <li>
-<p>10 - for a &lt;&lt;field&gt;&gt; with type esriFieldTypeDouble</p>
+<p>10 - for a «field» with type esriFieldTypeDouble</p>
 </li>
 <li>
 <p>0 - for all other cases</p>
@@ -887,7 +885,7 @@ length).</p>
 <p>(since v2.6.0)</p>
 </div>
 <div class="paragraph">
-<p>Removes any &lt;&lt;CodedValueDomain&gt;&gt; from the ArcGIS workspace model that is
+<p>Removes any «CodedValueDomain» from the ArcGIS workspace model that is
 not used as value type in any field of one of the feature or table types
 contained in the model.</p>
 </div>
@@ -926,10 +924,10 @@ Until v2.3.0 this rule had the identifier rule-arcgis-prop-scale
 </table>
 </div>
 <div class="paragraph">
-<p>If this rule is enabled, then the scale of a &lt;&lt;field&gt;&gt; with a range
+<p>If this rule is enabled, then the scale of a «field» with a range
 domain as type, or with a simple esri type can be set via the tagged
 value 'scale' (on the property from the conceptual schema that is
-converted to the &lt;&lt;field&gt;&gt;; the tagged value must contain an integer
+converted to the «field»; the tagged value must contain an integer
 value).</p>
 </div>
 <div class="paragraph">
@@ -939,7 +937,7 @@ default behavior applies, which is to set precision to:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>6 - for a &lt;&lt;field&gt;&gt; with type esriFieldTypeDouble</p>
+<p>6 - for a «field» with type esriFieldTypeDouble</p>
 </li>
 <li>
 <p>0 - for all other cases</p>
@@ -963,7 +961,7 @@ default behavior applies, which is to set precision to:</p>
 <p>(since v2.4.0)</p>
 </div>
 <div class="paragraph">
-<p>Enables use of stereotype &lt;&lt;identifier&gt;&gt; on class attributes. If an
+<p>Enables use of stereotype «identifier» on class attributes. If an
 attribute with that stereotype belongs to a class, then it will be used
 as primary key (the OBJECTID field will still be generated).</p>
 </div>
@@ -974,9 +972,9 @@ as primary key (the OBJECTID field will still be generated).</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-Multiple &lt;&lt;identifier&gt;&gt; attributes per class are not supported. In
+Multiple «identifier» attributes per class are not supported. In
 such a case, ShapeChange will log a warning and use only one of them as
-primary key. If the maximum multiplicity of an &lt;&lt;identifier&gt;&gt; attribute
+primary key. If the maximum multiplicity of an «identifier» attribute
 is greater than 1, ShapeChange will log an error.
 </td>
 </tr>
@@ -1050,11 +1048,11 @@ values also specify a range domain for that property.</p>
 <p>(since v2.5.0)</p>
 </div>
 <div class="paragraph">
-<p>If this rule is included, then for each &lt;&lt;Field&gt;&gt; that represents a
+<p>If this rule is included, then for each «Field» that represents a
 property from the conceptual model with tagged value <em>sqlUnique</em> equal
 to (ignoring case) 'true' – but not for fields that participate in a
-relationship class, an &lt;&lt;AttributeIndex&gt;&gt; is created in the element that
-owns the &lt;&lt;Field&gt;&gt;. The name of the index is the name of the field with
+relationship class, an «AttributeIndex» is created in the element that
+owns the «Field». The name of the index is the name of the field with
 suffix "_IDX". The index references the field via the tagged value
 "Fields". The tagged values _IsAscending_ and <em>IsUnique</em> are set to
 true.</p>
@@ -1081,15 +1079,15 @@ further details, see the ArcGIS help.
 </div>
 <div class="paragraph">
 <p>If this rule is enabled, then an initial value of an attribute from the
-conceptual schema will also be set as initial value of the &lt;&lt;field&gt;&gt;
+conceptual schema will also be set as initial value of the «field»
 that represents that attribute in the resulting ArcGIS workspace model.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="rule-arcgis-prop-initialValueByAlias"><a class="anchor" href="#rule-arcgis-prop-initialValueByAlias"></a>2.3.13. rule-arcgis-prop-initialValueByAlias</h4>
 <div class="paragraph">
-<p>If this rule is enabled, the initial value for a &lt;&lt;DomainCodedValue&gt;&gt;,
-which is an attribute of a &lt;&lt;CodedValueDomain&gt;&gt; (that results from
+<p>If this rule is enabled, the initial value for a «DomainCodedValue»,
+which is an attribute of a «CodedValueDomain» (that results from
 conversion of enumerations and code lists from the application schema,
 is taken from the alias of the respective enums and codes, rather than
 from the initial value defined in the application schema.</p>
@@ -1102,15 +1100,15 @@ from the initial value defined in the application schema.</p>
 </div>
 <div class="paragraph">
 <p>If this rule is enabled, then the tagged value IsNullable of non-system
-&lt;&lt;field&gt;&gt;s in the ArcGIS workspace model are set as follows:</p>
+«field»s in the ArcGIS workspace model are set as follows:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>if the property from the conceptual schema is optional (minimum
-multiplicity &lt; 1), voidable (stereotype &lt;&lt;voidable&gt;&gt;), or nillable
+multiplicity &lt; 1), voidable (stereotype «voidable»), or nillable
 (tagged value 'nillable'='true') then it will be converted to a
-&lt;&lt;field&gt;&gt; with 'IsNullable'='true'</p>
+«field» with 'IsNullable'='true'</p>
 </li>
 <li>
 <p>otherwise 'IsNullable'='false'</p>
@@ -1119,7 +1117,7 @@ multiplicity &lt; 1), voidable (stereotype &lt;&lt;voidable&gt;&gt;), or nillabl
 </div>
 <div class="paragraph">
 <p>If this rule is not enabled, then the default behavior applies, which is
-to have 'IsNullable'='true' for all non-system &lt;&lt;field&gt;&gt;s.</p>
+to have 'IsNullable'='true' for all non-system «field»s.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1144,7 +1142,7 @@ If none of these rules apply, the length will be set to 0.</p>
 <div class="paragraph">
 <p>If this rule is enabled, ShapeChange will use the value of the tagged
 value 'size' (must be an integer) to populate the 'length' tagged value
-of the &lt;&lt;field&gt;&gt; that will represent the property in the ArcGIS model.</p>
+of the «field» that will represent the property in the ArcGIS model.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1158,7 +1156,7 @@ type esriFieldTypeString. If the value is 0 or empty, unlimited length
 is assumed - unless an OCL constraint exists that restricts the length
 for the property. That also means that this rule has precedence over an
 OCL constraint: if the tagged value 'size' has an integer value &gt; 1,
-then this value will be used as the length in the &lt;&lt;field&gt;&gt;.
+then this value will be used as the length in the «field».
 </td>
 </tr>
 </table>
@@ -1183,7 +1181,7 @@ then this value will be used as the length in the &lt;&lt;field&gt;&gt;.
 <p>If this rule is enabled, then - for properties with a code list or
 enumeration as value type - ShapeChange will use the value of the tagged
 value 'size' (must be an integer) to populate the 'length' tagged value
-of the &lt;&lt;field&gt;&gt; that will represent the property in the ArcGIS model.
+of the «field» that will represent the property in the ArcGIS model.
 This rule has higher priority than
 <a href="./ArcGIS_Workspace.html#rule-arcgis-prop-lengthFromCodesOrEnumsOfValueType">rule-arcgis-prop-lengthFromCodesOrEnumsOfValueType</a>.
 If none of these rules apply, the length will be set to 0.</p>
@@ -1207,12 +1205,12 @@ If none of these rules apply, the length will be set to 0.</p>
 <div class="paragraph">
 <p>If this rule is included, then a reflexive relationship (a property
 whose type is the class that owns the property) is converted to a
-&lt;&lt;Field&gt;&gt; with a field type suited for storing the ID of the referenced
+«Field» with a field type suited for storing the ID of the referenced
 class (e.g. <em>esriFieldTypeInteger</em> or <em>esriFieldTypeGUID</em>). The target
 parameter
 <a href="./ArcGIS_Workspace.html#reflexiveRelationshipFieldSuffix"><em>reflexiveRelationshipFieldSuffix</em></a>
 can be used to define a suffix that is added to the name of such a
-&lt;&lt;Field&gt;&gt;. This field can be used to store the ID of the object that is
+«Field». This field can be used to store the ID of the object that is
 the target of the reflexive relationship.</p>
 </div>
 <div class="admonitionblock note">
@@ -1224,7 +1222,7 @@ the target of the reflexive relationship.</p>
 <td class="content">
 If the reflexive relationship property has max cardinality &gt; 1,
 then this is not represented. ShapeChange will log a warning and convert
-the property to a single &lt;&lt;Field&gt;&gt;.
+the property to a single «Field».
 </td>
 </tr>
 </table>
@@ -1277,7 +1275,7 @@ encoding rule via this parameter.</p>
 </div>
 <div class="paragraph">
 <p>Explanation: Default length to set in the 'length' tagged value of
-&lt;&lt;field&gt;&gt;s that have a textual value, in case that the length is not
+«field»s that have a textual value, in case that the length is not
 specified otherwise.</p>
 </div>
 <div class="paragraph">
@@ -1491,7 +1489,7 @@ deployment environment is known.</p>
 </div>
 <div class="paragraph">
 <p>Explanation: Can be used to configure a different name for the tagged
-value that provides the length of a &lt;&lt;field&gt;&gt;.</p>
+value that provides the length of a «field».</p>
 </div>
 <div class="paragraph">
 <p>Applies to Rule(s):</p>
@@ -1530,7 +1528,26 @@ workspace (UML) model will be created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="reflexiveRelationshipFieldSuffix"><a class="anchor" href="#reflexiveRelationshipFieldSuffix"></a>2.4.12. reflexiveRelationshipFieldSuffix</h4>
+<h4 id="outputFilename"><a class="anchor" href="#outputFilename"></a>2.4.12. outputFilename</h4>
+<div class="paragraph">
+<p>Required / Optional: Required</p>
+</div>
+<div class="paragraph">
+<p>Type: String</p>
+</div>
+<div class="paragraph">
+<p>Default Value: The name of the schema</p>
+</div>
+<div class="paragraph">
+<p>Explanation: The name of the ArcGIS workspace model file (can be
+without file extension).</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s): none – default behavior</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="reflexiveRelationshipFieldSuffix"><a class="anchor" href="#reflexiveRelationshipFieldSuffix"></a>2.4.13. reflexiveRelationshipFieldSuffix</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -1545,7 +1562,7 @@ workspace (UML) model will be created.</p>
 </div>
 <div class="paragraph">
 <p>Explanation: Define the suffix to add when encoding a reflexive
-relationship property as a &lt;&lt;Field&gt;&gt;.</p>
+relationship property as a «Field».</p>
 </div>
 <div class="paragraph">
 <p>Applies to Rule(s):
@@ -1553,7 +1570,7 @@ relationship property as a &lt;&lt;Field&gt;&gt;.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="shortNameByTaggedValue"><a class="anchor" href="#shortNameByTaggedValue"></a>2.4.13. shortNameByTaggedValue</h4>
+<h4 id="shortNameByTaggedValue"><a class="anchor" href="#shortNameByTaggedValue"></a>2.4.14. shortNameByTaggedValue</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -1574,7 +1591,7 @@ ArcGIS workspace.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="valueRangeExcludedBoundaryDelta"><a class="anchor" href="#valueRangeExcludedBoundaryDelta"></a>2.4.14. valueRangeExcludedBoundaryDelta</h4>
+<h4 id="valueRangeExcludedBoundaryDelta"><a class="anchor" href="#valueRangeExcludedBoundaryDelta"></a>2.4.15. valueRangeExcludedBoundaryDelta</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1598,7 +1615,7 @@ the lower and/or upper boundary comparison operator is not inclusive
 </div>
 </div>
 <div class="sect3">
-<h4 id="workspaceTemplate"><a class="anchor" href="#workspaceTemplate"></a>2.4.15. workspaceTemplate</h4>
+<h4 id="workspaceTemplate"><a class="anchor" href="#workspaceTemplate"></a>2.4.16. workspaceTemplate</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -1610,7 +1627,7 @@ the lower and/or upper boundary comparison operator is not inclusive
 </div>
 <div class="paragraph">
 <p>Default Value:
-<a href="https://shapechange.net/resources/templates/ArcGISWorkspace_template.eap" class="bare">https://shapechange.net/resources/templates/ArcGISWorkspace_template.eap</a></p>
+<a href="https://shapechange.net/resources/templates/ArcGISWorkspace_template.qea" class="bare">https://shapechange.net/resources/templates/ArcGISWorkspace_template.qea</a></p>
 </div>
 <div class="paragraph">
 <p>Explanation: Path to the ArcGIS workspace UML model template file (can
@@ -1643,7 +1660,7 @@ be local or an online resource).</p>
   <td class="code"><pre> <span class="tag">&lt;Target</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">de.interactive_instruments.ShapeChange.Target.ArcGISWorkspace.ArcGISWorkspace</span><span class="delimiter">&quot;</span></span>
 <span class="error"> </span> <span class="attribute-name">inputs</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">flattenedModel</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">xmlns:xi</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.w3.org/2001/XInclude</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
   <span class="tag">&lt;targetParameter</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">defaultLength</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1024</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
-  <span class="tag">&lt;targetParameter</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">outputDirectory</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">output/ArcGISWorkspace/eap</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;targetParameter</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">outputDirectory</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">output/ArcGISWorkspace/qea</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
   <span class="tag">&lt;targetParameter</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">valueRangeExcludedBoundaryDelta</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0.001</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
   <span class="tag">&lt;rules&gt;</span>
     <span class="tag">&lt;EncodingRule</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">ArcGIS</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
@@ -1658,11 +1675,6 @@ be local or an online resource).</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

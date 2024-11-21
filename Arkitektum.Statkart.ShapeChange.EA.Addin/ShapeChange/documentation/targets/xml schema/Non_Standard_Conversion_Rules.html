@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Non-Standard Conversion Rules</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -622,7 +619,7 @@ use the following terms, too:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>basic type</strong>: classifier with the stereotype &lt;&lt;BasicType&gt;&gt;</p>
+<p><strong>basic type</strong>: classifier with the stereotype «BasicType»</p>
 </li>
 <li>
 <p><strong>derived property</strong>: property that is marked in the UML model as
@@ -899,7 +896,7 @@ transformation:</p>
 <div class="sect3">
 <h4 id="rule-xsd-cls-adeelement"><a class="anchor" href="#rule-xsd-cls-adeelement"></a>1.3.8. rule-xsd-cls-adeelement</h4>
 <div class="paragraph">
-<p>For classes with stereotype &lt;&lt;ADEElement&gt;&gt;, this conversion rule creates
+<p>For classes with stereotype «ADEElement», this conversion rule creates
 global CityGML property elements substitutable for the relevant
 _GenericApplicationPropertyOfXXX element of the CityGML supertype.</p>
 </div>
@@ -932,7 +929,7 @@ defined according to the multiplicity of the property.</p>
 <p>Example:</p>
 </div>
 <div class="paragraph">
-<p>&lt;&lt;basicType&gt;&gt; TransformationMatrix2x2 has property list: Real [4]
+<p>«basicType» TransformationMatrix2x2 has property list: Real [4]
 {sequence}</p>
 </div>
 <div class="paragraph">
@@ -1044,7 +1041,7 @@ identifiers:</p>
 <ul>
 <li>
 <p>NOTE: application/x.iso19139+xml is a preliminary identifier. It uses
-the <a href="https://tools.ietf.org/html/rfc6838#section-3.4">unregistered x.
+the <a href="https://datatracker.ietf.org/doc/html/rfc6838#section-3.4">unregistered x.
 Tree</a> as defined by IETF RFC 6838 - Media Type Specifications and
 Registration Procedures.</p>
 </li>
@@ -1289,7 +1286,7 @@ be present in the model.</p>
 </div>
 <div class="paragraph">
 <p>Encodes a property with codelist value type as specified by the
-<a href="http://portal.opengeospatial.org/files/?artifact_id=42729">GML simple
+<a href="https://portal.opengeospatial.org/files/?artifact_id=42729">GML simple
 features profile (OGC document number 10-100r3)</a>, section 8.4.4.14.</p>
 </div>
 <div class="admonitionblock note">
@@ -1302,7 +1299,7 @@ features profile (OGC document number 10-100r3)</a>, section 8.4.4.14.</p>
 This rule has originally been developed during OGC Testbed 13, to
 derive an XML Schema that is compliant to GML-SF level 0. For further
 details, see the OGC
-<a href="http://docs.opengeospatial.org/per/17-020r1.html">NAS Profiling
+<a href="https://docs.ogc.org/per/17-020r1.html">NAS Profiling
 Engineering Report</a> (OGC document number 17-020r1).
 </td>
 </tr>
@@ -1358,7 +1355,7 @@ deleted.
 <div class="sect3">
 <h4 id="rule-xsd-cls-local-enumeration"><a class="anchor" href="#rule-xsd-cls-local-enumeration"></a>1.3.19. rule-xsd-cls-local-enumeration</h4>
 <div class="paragraph">
-<p>&lt;&lt;enumeration&gt;&gt; and &lt;&lt;codeList&gt;&gt; classes are by-default converted to
+<p>«enumeration» and «codeList» classes are by-default converted to
 a <strong>named</strong> simpleType (for global scope). If this conversion rule is part
 of an encoding rule, these types are converted to
 an <strong>anonymous</strong> simpleType for local scope.</p>
@@ -1424,7 +1421,7 @@ also gml:AssociationGroup) either on a general or local scope.</p>
 <div class="sect3">
 <h4 id="rule-xsd-cls-okstra-fid"><a class="anchor" href="#rule-xsd-cls-okstra-fid"></a>1.3.26. rule-xsd-cls-okstra-fid</h4>
 <div class="paragraph">
-<p>Supports OKSTRA &lt;&lt;FachID&gt;&gt; classes</p>
+<p>Supports OKSTRA «FachID» classes</p>
 </div>
 </div>
 <div class="sect3">
@@ -1436,7 +1433,7 @@ also gml:AssociationGroup) either on a general or local scope.</p>
 <div class="sect3">
 <h4 id="rule-xsd-cls-okstra-schluesseltabelle"><a class="anchor" href="#rule-xsd-cls-okstra-schluesseltabelle"></a>1.3.28. rule-xsd-cls-okstra-schluesseltabelle</h4>
 <div class="paragraph">
-<p>Do not convert OKSTRA &lt;&lt;Schluesseltabelle&gt;&gt; classes to object elements
+<p>Do not convert OKSTRA «Schluesseltabelle» classes to object elements
 and do not process their properties; create a OKSTRA-specific property
 type</p>
 </div>
@@ -1448,7 +1445,7 @@ type</p>
 </div>
 <div class="paragraph">
 <p>If the direct supertype of a class is mapped to one of the ISO 19139
-namespaces (<a href="http://www.isotc211.org/2005/gco" class="bare">http://www.isotc211.org/2005/gco</a>, -gmd, -gmx, -gsr, -gss,
+namespaces (<a href="https://www.isotc211.org/2005/gco/" class="bare">https://www.isotc211.org/2005/gco/</a>, -gmd, -gmx, -gsr, -gss,
 -gts), then a gco:isoType attribute is added to the element that
 represents the class. The value of that attribute is the local name of
 the element to which the supertype is mapped.</p>
@@ -1473,7 +1470,7 @@ by ISO 19139. The rule is included in the named encoding rule
 <div class="paragraph">
 <p>This conversion rule suppresses object elements, local properties and
 property types, if the class has a tagged value 'suppress' with the
-value 'true' or a stereotype &lt;&lt;ADEElement&gt;&gt;. However, if Schematron
+value 'true' or a stereotype «ADEElement». However, if Schematron
 output is active, any constraints on the class will still be included in
 the Schematron schema.</p>
 </div>
@@ -1489,7 +1486,7 @@ CharacterString.</p>
 <div class="sect3">
 <h4 id="rule-xsd-cls-union-asGroup"><a class="anchor" href="#rule-xsd-cls-union-asGroup"></a>1.3.32. rule-xsd-cls-union-asGroup</h4>
 <div class="paragraph">
-<p>If a &lt;&lt;Union&gt;&gt; class has a tagged value "gmlAsGroup" with a value of
+<p>If a «Union» class has a tagged value "gmlAsGroup" with a value of
 "true", then the class is encoded as a <strong>global</strong> group which is
 referenced wherever a property is defined that has the union class as
 its value. (Note that this is only valid if it is clear from the context
@@ -1536,7 +1533,7 @@ element for each feature type represented by the union.</p>
 This rule has originally been developed during OGC Testbed 13, to
 derive an XML Schema that is compliant to GML-SF level 0. For further
 details, see the OGC
-<a href="http://docs.opengeospatial.org/per/17-020r1.html">NAS Profiling
+<a href="https://docs.ogc.org/per/17-020r1.html">NAS Profiling
 Engineering Report</a> (OGC document number 17-020r1).
 </td>
 </tr>
@@ -1574,7 +1571,7 @@ L5_3D, L6_3D</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>dgiwgGMLProfileSchema</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.dgiwg.org/gml/3.2/spatial/1.0/{X}" class="bare">http://schemas.dgiwg.org/gml/3.2/spatial/1.0/{X}</a>, with {X} being one
+<td class="tableblock halign-left valign-top"><p class="tableblock">http://schemas.dgiwg.org/gml/3.2/spatial/1.0/{X}, with {X} being one
 of: 2dGeometry.xsd,  3dGeometry.xsd,  2dComplex.xsd,  3dComplex.xsd,
 2dTopology.xsd, 3dTopology.xsd</p></td>
 </tr>
@@ -1629,7 +1626,7 @@ location at the according entry in the standard XML namespaces.
 <div class="paragraph">
 <p>Creates a schema annotation to indicate the GML-SF compliance level as
 defined by the
-<a href="http://portal.opengeospatial.org/files/?artifact_id=42729">GML simple
+<a href="https://portal.opengeospatial.org/files/?artifact_id=42729">GML simple
 features profile (OGC document number 10-100r3)</a>, section 7.4. The
 compliance level is read from tagged value <em>gmlsfComplianceLevel</em> on the
 application schema. Furthermore, the rule creates an import for the
@@ -1645,7 +1642,7 @@ gmlsfLevels.xsd, as defined by GML-SF section 8.3.2.</p>
 This rule has originally been developed during OGC Testbed 13, to
 derive an XML Schema that is compliant to GML-SF level 0. For further
 details, see the OGC
-<a href="http://docs.opengeospatial.org/per/17-020r1.html">NAS Profiling
+<a href="https://docs.ogc.org/per/17-020r1.html">NAS Profiling
 Engineering Report</a> (OGC document number 17-020r1).
 </td>
 </tr>
@@ -1657,14 +1654,14 @@ Engineering Report</a> (OGC document number 17-020r1).
 <div class="paragraph">
 <p>An application schema may contain OCL (Object Constraint Language)
 constraints related to the feature type or its attributes.  On the XML
-level, <a href="http://standards.iso.org/ittf/PubliclyAvailableStandards/c040833_ISO_IEC_19757-3_2006(E).zip">Schematron
+level, <a href="https://standards.iso.org/ittf/PubliclyAvailableStandards/c040833_ISO_IEC_19757-3_2006(E).zip">Schematron
 (ISO/IEC 19757-3:2006)</a> is used in most cases to express constraints.
 Schematron is already used by GML to express constraints that cannot be
 represented in XML Schema, and is currently considered the most
 appropriate language to express constraints on the XML level. Tools
 exist to process Schematron constraints and assert the compliance of an
 instance document with the specified constraints,
-e.g. <a href="http://schematron.com/front-page/the-schematron-skeleton-implementation/">here</a>.</p>
+e.g. <a href="https://github.com/Schematron/schematron">here</a>.</p>
 </div>
 <div class="paragraph">
 <p>ShapeChange includes a OCL 2.2 parser and Schematron code-generator,
@@ -1821,7 +1818,7 @@ created instead of using the standard GML property types.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>An attribute "&lt;&lt;voidable&gt;&gt; event : Event [1..*]" is converted to:</p>
+<p>An attribute "«voidable» event : Event [1..*]" is converted to:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1970,7 +1967,7 @@ type gml:ReferenceType.</p>
 This rule has originally been developed during OGC Testbed 13, to
 derive an XML Schema that is compliant to GML-SF level 0. For further
 details, see the OGC
-<a href="http://docs.opengeospatial.org/per/17-020r1.html">NAS Profiling
+<a href="https://docs.ogc.org/per/17-020r1.html">NAS Profiling
 Engineering Report</a> (OGC document number 17-020r1).
 </td>
 </tr>
@@ -1999,7 +1996,7 @@ facets according to the tagged values.</p>
 <p>(since v2.9.0)</p>
 </div>
 <div class="paragraph">
-<p>If a property has stereotype &lt;&lt;propertyMetadata&gt;&gt;, then the XML element
+<p>If a property has stereotype «propertyMetadata», then the XML element
 that represents this property will have an additional, optional XML
 attribute "metadata" of type xs:anyURI. The XML attribute can be used to
 reference a metadata object that applies to the property value.</p>
@@ -2011,7 +2008,7 @@ reference a metadata object that applies to the property value.</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-Full background on the property stereotype &lt;&lt;propertyMetadata&gt;&gt; is
+Full background on the property stereotype «propertyMetadata» is
 provided in the document <a href="../../media/UGAS19-D100_property_stereotypes.pdf">Property Stereotypes for Metadata</a>.
 </td>
 </tr>
@@ -2039,7 +2036,7 @@ properties are encoded as elements with type gml:ReferenceType.</p>
 This rule has originally been developed during OGC Testbed 13, to
 derive an XML Schema that is compliant to GML-SF level 0. For further
 details, see the OGC
-<a href="http://docs.opengeospatial.org/per/17-020r1.html">NAS Profiling
+<a href="https://docs.ogc.org/per/17-020r1.html">NAS Profiling
 Engineering Report</a> (OGC document number 17-020r1).
 </td>
 </tr>
@@ -2049,7 +2046,7 @@ Engineering Report</a> (OGC document number 17-020r1).
 <div class="sect3">
 <h4 id="rule-xsd-prop-nillable"><a class="anchor" href="#rule-xsd-prop-nillable"></a>1.3.48. rule-xsd-prop-nillable</h4>
 <div class="paragraph">
-<p>Converts properties with stereotype &lt;&lt;voidable&gt;&gt; - or alternatively with
+<p>Converts properties with stereotype «voidable» - or alternatively with
 a tagged value nillable set to 'true' - to property elements that are
 nillable.</p>
 </div>
@@ -2245,11 +2242,6 @@ XML element.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

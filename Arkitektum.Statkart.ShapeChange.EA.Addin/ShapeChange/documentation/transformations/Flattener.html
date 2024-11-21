@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Flattener</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -547,36 +544,37 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#rule-trf-cls-dissolve-mixins">2.2.8. rule-trf-cls-dissolve-mixins</a></li>
 <li><a href="#rule-trf-cls-flatten-inheritance">2.2.9. rule-trf-cls-flatten-inheritance</a></li>
 <li><a href="#rule-trf-cls-flatten-inheritance-add-attributes-at-bottom">2.2.10. rule-trf-cls-flatten-inheritance-add-attributes-at-bottom</a></li>
-<li><a href="#rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType">2.2.11. rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType</a></li>
-<li><a href="#rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes">2.2.12. rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes</a></li>
-<li><a href="#rule-trf-cls-flatten-inheritance-mergeLinkedDocuments">2.2.13. rule-trf-cls-flatten-inheritance-mergeLinkedDocuments</a></li>
-<li><a href="#rule-trf-cls-flatten-reverse-inheritance">2.2.14. rule-trf-cls-flatten-reverse-inheritance</a></li>
-<li><a href="#rule-trf-cls-non-default-geometry-to-feature-type">2.2.15. rule-trf-cls-non-default-geometry-to-feature-type</a></li>
-<li><a href="#rule-trf-cls-remove-inheritance-relationship">2.2.16. rule-trf-cls-remove-inheritance-relationship</a></li>
-<li><a href="#rule-trf-cls-replace-with-union-properties">2.2.17. rule-trf-cls-replace-with-union-properties</a></li>
-<li><a href="#rule-trf-prop-flatten-codelists">2.2.18. rule-trf-prop-flatten-codelists</a></li>
-<li><a href="#rule-trf-prop-flatten-directposition-typed-properties">2.2.19. rule-trf-prop-flatten-directposition-typed-properties</a></li>
-<li><a href="#rule-trf-prop-flatten-explicit-time-interval">2.2.20. rule-trf-prop-flatten-explicit-time-interval</a></li>
-<li><a href="#rule-trf-prop-flatten-homogeneousgeometries">2.2.21. rule-trf-prop-flatten-homogeneousgeometries</a></li>
-<li><a href="#rule-trf-prop-flatten-mediatype-typed-properties">2.2.22. rule-trf-prop-flatten-mediatype-typed-properties</a></li>
-<li><a href="#rule-trf-prop-flatten-measure-typed-properties">2.2.23. rule-trf-prop-flatten-measure-typed-properties</a></li>
-<li><a href="#rule-trf-prop-flatten-multiplicity">2.2.24. rule-trf-prop-flatten-multiplicity</a>
+<li><a href="#rule-trf-cls-flatten-inheritance-add-attributes-in-sequence">2.2.11. rule-trf-cls-flatten-inheritance-add-attributes-in-sequence</a></li>
+<li><a href="#rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType">2.2.12. rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType</a></li>
+<li><a href="#rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes">2.2.13. rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes</a></li>
+<li><a href="#rule-trf-cls-flatten-inheritance-mergeLinkedDocuments">2.2.14. rule-trf-cls-flatten-inheritance-mergeLinkedDocuments</a></li>
+<li><a href="#rule-trf-cls-flatten-reverse-inheritance">2.2.15. rule-trf-cls-flatten-reverse-inheritance</a></li>
+<li><a href="#rule-trf-cls-non-default-geometry-to-feature-type">2.2.16. rule-trf-cls-non-default-geometry-to-feature-type</a></li>
+<li><a href="#rule-trf-cls-remove-inheritance-relationship">2.2.17. rule-trf-cls-remove-inheritance-relationship</a></li>
+<li><a href="#rule-trf-cls-replace-with-union-properties">2.2.18. rule-trf-cls-replace-with-union-properties</a></li>
+<li><a href="#rule-trf-prop-flatten-codelists">2.2.19. rule-trf-prop-flatten-codelists</a></li>
+<li><a href="#rule-trf-prop-flatten-directposition-typed-properties">2.2.20. rule-trf-prop-flatten-directposition-typed-properties</a></li>
+<li><a href="#rule-trf-prop-flatten-explicit-time-interval">2.2.21. rule-trf-prop-flatten-explicit-time-interval</a></li>
+<li><a href="#rule-trf-prop-flatten-homogeneousgeometries">2.2.22. rule-trf-prop-flatten-homogeneousgeometries</a></li>
+<li><a href="#rule-trf-prop-flatten-mediatype-typed-properties">2.2.23. rule-trf-prop-flatten-mediatype-typed-properties</a></li>
+<li><a href="#rule-trf-prop-flatten-measure-typed-properties">2.2.24. rule-trf-prop-flatten-measure-typed-properties</a></li>
+<li><a href="#rule-trf-prop-flatten-multiplicity">2.2.25. rule-trf-prop-flatten-multiplicity</a>
 <ul class="sectlevel4">
-<li><a href="#Subrules">2.2.24.1. Subrules</a></li>
+<li><a href="#Subrules">2.2.25.1. Subrules</a></li>
 </ul>
 </li>
-<li><a href="#rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations">2.2.25. rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations</a></li>
-<li><a href="#rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold">2.2.26. rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold</a></li>
-<li><a href="#rule-trf-prop-flatten-ONINAs">2.2.27. rule-trf-prop-flatten-ONINAs</a></li>
-<li><a href="#rule-trf-prop-flatten-ONINAs-onlyRemoveReasons">2.2.28. rule-trf-prop-flatten-ONINAs-onlyRemoveReasons</a></li>
-<li><a href="#rule-trf-prop-flatten-types">2.2.29. rule-trf-prop-flatten-types</a></li>
-<li><a href="#rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin">2.2.30. rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin</a></li>
-<li><a href="#rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets">2.2.31. rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets</a></li>
-<li><a href="#rule-trf-prop-flatten-types-removeMappedTypes">2.2.32. rule-trf-prop-flatten-types-removeMappedTypes</a></li>
-<li><a href="#rule-trf-prop-optionality">2.2.33. rule-trf-prop-optionality</a></li>
-<li><a href="#rule-trf-prop-remove-name-and-code-component">2.2.34. rule-trf-prop-remove-name-and-code-component</a></li>
-<li><a href="#rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget">2.2.35. rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget</a></li>
-<li><a href="#rule-trf-prop-removeObjectToFeatureTypeNavigability">2.2.36. rule-trf-prop-removeObjectToFeatureTypeNavigability</a></li>
+<li><a href="#rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations">2.2.26. rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations</a></li>
+<li><a href="#rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold">2.2.27. rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold</a></li>
+<li><a href="#rule-trf-prop-flatten-ONINAs">2.2.28. rule-trf-prop-flatten-ONINAs</a></li>
+<li><a href="#rule-trf-prop-flatten-ONINAs-onlyRemoveReasons">2.2.29. rule-trf-prop-flatten-ONINAs-onlyRemoveReasons</a></li>
+<li><a href="#rule-trf-prop-flatten-types">2.2.30. rule-trf-prop-flatten-types</a></li>
+<li><a href="#rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin">2.2.31. rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin</a></li>
+<li><a href="#rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets">2.2.32. rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets</a></li>
+<li><a href="#rule-trf-prop-flatten-types-removeMappedTypes">2.2.33. rule-trf-prop-flatten-types-removeMappedTypes</a></li>
+<li><a href="#rule-trf-prop-optionality">2.2.34. rule-trf-prop-optionality</a></li>
+<li><a href="#rule-trf-prop-remove-name-and-code-component">2.2.35. rule-trf-prop-remove-name-and-code-component</a></li>
+<li><a href="#rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget">2.2.36. rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget</a></li>
+<li><a href="#rule-trf-prop-removeObjectToFeatureTypeNavigability">2.2.37. rule-trf-prop-removeObjectToFeatureTypeNavigability</a></li>
 </ul>
 </li>
 <li><a href="#A_Word_on_the_Order_of_Execution">2.3. A Word on the Order of Execution</a></li>
@@ -613,21 +611,23 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#maxOccurs">2.4.29. maxOccurs</a></li>
 <li><a href="#maxOccursForSpecificProperties">2.4.30. maxOccursForSpecificProperties</a></li>
 <li><a href="#measureTypes">2.4.31. measureTypes</a></li>
-<li><a href="#omitHomogeneousGeometriesForTypesWithSingleGeometryProperty">2.4.32. omitHomogeneousGeometriesForTypesWithSingleGeometryProperty</a></li>
-<li><a href="#removeInheritanceIncludeRegex">2.4.33. removeInheritanceIncludeRegex</a></li>
-<li><a href="#removeObjectToFeatureNavRegex">2.4.34. removeObjectToFeatureNavRegex</a></li>
-<li><a href="#removePropertyNameAndCodeComponent">2.4.35. removePropertyNameAndCodeComponent</a></li>
-<li><a href="#removeType">2.4.36. removeType</a></li>
-<li><a href="#replaceUnionExcludeRegex">2.4.37. replaceUnionExcludeRegex</a></li>
-<li><a href="#simpleBaseTypes">2.4.38. simpleBaseTypes</a></li>
-<li><a href="#separatorForGeometryTypeSuffix">2.4.39. separatorForGeometryTypeSuffix</a></li>
-<li><a href="#separatorForPropertyFromNonUnion">2.4.40. separatorForPropertyFromNonUnion</a></li>
-<li><a href="#separatorForPropertyFromUnion">2.4.41. separatorForPropertyFromUnion</a></li>
-<li><a href="#separatorForPropertyIndexNumber">2.4.42. separatorForPropertyIndexNumber</a></li>
-<li><a href="#setMinCardinalityToZeroWhenMergingUnion">2.4.43. setMinCardinalityToZeroWhenMergingUnion</a></li>
-<li><a href="#targetNamespaceSuffix">2.4.44. targetNamespaceSuffix</a></li>
-<li><a href="#typeEnumerationPropertyName">2.4.45. typeEnumerationPropertyName</a></li>
-<li><a href="#typeSuffixSeparator">2.4.46. typeSuffixSeparator</a></li>
+<li><a href="#measureUomTaggedValue">2.4.32. measureUomTaggedValue</a></li>
+<li><a href="#omitHomogeneousGeometriesForTypesWithSingleGeometryProperty">2.4.33. omitHomogeneousGeometriesForTypesWithSingleGeometryProperty</a></li>
+<li><a href="#removeInheritanceIncludeRegex">2.4.34. removeInheritanceIncludeRegex</a></li>
+<li><a href="#removeObjectToFeatureNavRegex">2.4.35. removeObjectToFeatureNavRegex</a></li>
+<li><a href="#removePropertyNameAndCodeComponent">2.4.36. removePropertyNameAndCodeComponent</a></li>
+<li><a href="#removeType">2.4.37. removeType</a></li>
+<li><a href="#replaceUnionExcludeRegex">2.4.38. replaceUnionExcludeRegex</a></li>
+<li><a href="#simpleBaseTypes">2.4.39. simpleBaseTypes</a></li>
+<li><a href="#separatorForGeometryTypeSuffix">2.4.40. separatorForGeometryTypeSuffix</a></li>
+<li><a href="#separatorForPropertyFromNonUnion">2.4.41. separatorForPropertyFromNonUnion</a></li>
+<li><a href="#separatorForPropertyFromUnion">2.4.42. separatorForPropertyFromUnion</a></li>
+<li><a href="#separatorForPropertyIndexNumber">2.4.43. separatorForPropertyIndexNumber</a></li>
+<li><a href="#setMinCardinalityToZeroWhenMergingUnion">2.4.44. setMinCardinalityToZeroWhenMergingUnion</a></li>
+<li><a href="#targetNamespaceSuffix">2.4.45. targetNamespaceSuffix</a></li>
+<li><a href="#typeEnumerationPropertyName">2.4.46. typeEnumerationPropertyName</a></li>
+<li><a href="#typeSuffixSeparator">2.4.47. typeSuffixSeparator</a></li>
+<li><a href="#uomSuffixSeparator">2.4.48. uomSuffixSeparator</a></li>
 </ul>
 </li>
 <li><a href="#Sample_Configurations">2.5. Sample Configurations</a>
@@ -846,9 +846,24 @@ value. This behavior can be turned off via the configuration parameter
 <div class="title">Note</div>
 </td>
 <td class="content">
-At the moment this rule only updates names of classes and
+<div class="ulist">
+<ul>
+<li>
+<p>At the moment this rule only updates names of classes and
 properties (attributes and association roles) in the application schema.
-It does not modify names of associations or packages.
+It does not modify names of associations or packages.</p>
+</li>
+<li>
+<p>(since v2.14.0) If the name of a class is replaced with a code value, and tagged value
+<em>originalClassName</em> is blank, then tag <em>originalClassName</em> is set, with the
+class name as value (i.e., the name before it was replaced by the code value).
+The same is done for property names, but using tag <em>originalPropertyName</em>.
+These information items can be useful in subsequent
+processing, such as when the <a href="../targets/ldproxy2.html">ldproxy2 target</a>
+is set to generate configurations that support GML output.</p>
+</li>
+</ul>
+</div>
 </td>
 </tr>
 </table>
@@ -1062,12 +1077,14 @@ is set to generate configurations that support GML output.</p>
 <p>Before inheritance structures are actually flattened, all properties that
 belong to classes within the schemas selected for processing are analyzed:
 If the class that owns the property is a supertype, then the following tags
-are set on the property: <em>originalSchemaName</em> (with the name of the schema
+are set on the property (unless they already have a non-blank value):
+<em>originalSchemaName</em> (with the name of the schema
 to which the class that owns the property belongs), and <em>originalInClassName</em>
 (with the name of the class that owns the property). In addition, if the
 property is an association role, and the value type of the role is a supertype,
 then tag <em>originalPropertyName</em> is set on the role (with the name of the role
-as value). Again, these information items can be useful in subsequent
+as value; unless the tag already has a non-blank value).
+Again, these information items can be useful in subsequent
 processing, such as when the <a href="../targets/ldproxy2.html">ldproxy2 target</a>
 is set to generate configurations that support GML output.</p>
 </li>
@@ -1182,7 +1199,48 @@ instead of at the top.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType"></a>2.2.11. rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType</h4>
+<h4 id="rule-trf-cls-flatten-inheritance-add-attributes-in-sequence"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-add-attributes-in-sequence"></a>2.2.11. rule-trf-cls-flatten-inheritance-add-attributes-in-sequence</h4>
+<div class="paragraph">
+<p>(since v2.14.0)</p>
+</div>
+<div class="paragraph">
+<p>Behavior: If this rule is enabled, then attributes and also
+association roles that are copied from a supertype to a subtype during the execution of
+<a href="./Flattener.html#rule-trf-cls-flatten-inheritance">rule-trf-cls-flatten-inheritance</a>
+will be be merged into the sequence of existing properties according to their sequence
+number, instead of at the top.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>This rule can be useful in (rare) cases where sequence numbers were chosen in a way
+that prevents conflicts with sequence numbers of subtypes (and other supertypes of
+these subtypes). In other words, this rule can be useful for cases in which the
+scope of tagged value <em>sequenceNumber</em> is not restricted to a class, but instead
+reaches over multiple classes. Be warned that such an overarching scope can be
+complex to maintain and get right, and that it is NOT the default scope assumed by
+ShapeChange.</p>
+</li>
+<li>
+<p>This rule has lower priority than
+<a href="./Flattener.html#rule-trf-cls-flatten-inheritance-add-attributes-at-bottom">rule-trf-cls-flatten-inheritance-add-attributes-at-bottom</a></p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType"></a>2.2.12. rule-trf-cls-flatten-inheritance-associationRoleNameUsingCodeOfValueType</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -1209,7 +1267,7 @@ the code value)</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes"></a>2.2.12. rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes</h4>
+<h4 id="rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes"></a>2.2.13. rule-trf-cls-flatten-inheritance-ignore-arcgis-subtypes</h4>
 <div class="paragraph">
 <p>(available since v2.6.0)</p>
 </div>
@@ -1228,7 +1286,7 @@ target.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-flatten-inheritance-mergeLinkedDocuments"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-mergeLinkedDocuments"></a>2.2.13. rule-trf-cls-flatten-inheritance-mergeLinkedDocuments</h4>
+<h4 id="rule-trf-cls-flatten-inheritance-mergeLinkedDocuments"><a class="anchor" href="#rule-trf-cls-flatten-inheritance-mergeLinkedDocuments"></a>2.2.14. rule-trf-cls-flatten-inheritance-mergeLinkedDocuments</h4>
 <div class="paragraph">
 <p>(available since v2.5.0)</p>
 </div>
@@ -1268,7 +1326,7 @@ can be used to prepare linked documents before merging.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-flatten-reverse-inheritance"><a class="anchor" href="#rule-trf-cls-flatten-reverse-inheritance"></a>2.2.14. rule-trf-cls-flatten-reverse-inheritance</h4>
+<h4 id="rule-trf-cls-flatten-reverse-inheritance"><a class="anchor" href="#rule-trf-cls-flatten-reverse-inheritance"></a>2.2.15. rule-trf-cls-flatten-reverse-inheritance</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -1379,7 +1437,7 @@ clients to access your data.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-non-default-geometry-to-feature-type"><a class="anchor" href="#rule-trf-cls-non-default-geometry-to-feature-type"></a>2.2.15. rule-trf-cls-non-default-geometry-to-feature-type</h4>
+<h4 id="rule-trf-cls-non-default-geometry-to-feature-type"><a class="anchor" href="#rule-trf-cls-non-default-geometry-to-feature-type"></a>2.2.16. rule-trf-cls-non-default-geometry-to-feature-type</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -1433,7 +1491,7 @@ where each type only has a single geometric property.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-remove-inheritance-relationship"><a class="anchor" href="#rule-trf-cls-remove-inheritance-relationship"></a>2.2.16. rule-trf-cls-remove-inheritance-relationship</h4>
+<h4 id="rule-trf-cls-remove-inheritance-relationship"><a class="anchor" href="#rule-trf-cls-remove-inheritance-relationship"></a>2.2.17. rule-trf-cls-remove-inheritance-relationship</h4>
 <div class="paragraph">
 <p>Removes inheritance relationships of classes to the classes whose name
 matches the regular expression provided by parameter
@@ -1477,7 +1535,7 @@ omitted, a warning will be logged and the rule not executed)</p></td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-cls-replace-with-union-properties"><a class="anchor" href="#rule-trf-cls-replace-with-union-properties"></a>2.2.17. rule-trf-cls-replace-with-union-properties</h4>
+<h4 id="rule-trf-cls-replace-with-union-properties"><a class="anchor" href="#rule-trf-cls-replace-with-union-properties"></a>2.2.18. rule-trf-cls-replace-with-union-properties</h4>
 <div class="paragraph">
 <p>(available since 2.2.0)</p>
 </div>
@@ -1523,9 +1581,9 @@ from the model.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-codelists"><a class="anchor" href="#rule-trf-prop-flatten-codelists"></a>2.2.18. rule-trf-prop-flatten-codelists</h4>
+<h4 id="rule-trf-prop-flatten-codelists"><a class="anchor" href="#rule-trf-prop-flatten-codelists"></a>2.2.19. rule-trf-prop-flatten-codelists</h4>
 <div class="paragraph">
-<p>Switches the type of each property that is of a &lt;&lt;codeList&gt;&gt; type to
+<p>Switches the type of each property that is of a «codeList» type to
 CharacterString. Removes the code list classes from the model.</p>
 </div>
 <div class="admonitionblock note">
@@ -1543,7 +1601,7 @@ for processing.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-directposition-typed-properties"><a class="anchor" href="#rule-trf-prop-flatten-directposition-typed-properties"></a>2.2.19. rule-trf-prop-flatten-directposition-typed-properties</h4>
+<h4 id="rule-trf-prop-flatten-directposition-typed-properties"><a class="anchor" href="#rule-trf-prop-flatten-directposition-typed-properties"></a>2.2.20. rule-trf-prop-flatten-directposition-typed-properties</h4>
 <div class="paragraph">
 <p>(since v2.11)</p>
 </div>
@@ -1587,7 +1645,7 @@ have effect.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-explicit-time-interval"><a class="anchor" href="#rule-trf-prop-flatten-explicit-time-interval"></a>2.2.20. rule-trf-prop-flatten-explicit-time-interval</h4>
+<h4 id="rule-trf-prop-flatten-explicit-time-interval"><a class="anchor" href="#rule-trf-prop-flatten-explicit-time-interval"></a>2.2.21. rule-trf-prop-flatten-explicit-time-interval</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -1616,7 +1674,7 @@ also to its code, if it has one).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-homogeneousgeometries"><a class="anchor" href="#rule-trf-prop-flatten-homogeneousgeometries"></a>2.2.21. rule-trf-prop-flatten-homogeneousgeometries</h4>
+<h4 id="rule-trf-prop-flatten-homogeneousgeometries"><a class="anchor" href="#rule-trf-prop-flatten-homogeneousgeometries"></a>2.2.22. rule-trf-prop-flatten-homogeneousgeometries</h4>
 <div class="paragraph">
 <p>This rule ensures that a feature type only uses a single type of
 geometry. If a feature type has properties with different geometry type,
@@ -1841,7 +1899,7 @@ mapping was defined.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-mediatype-typed-properties"><a class="anchor" href="#rule-trf-prop-flatten-mediatype-typed-properties"></a>2.2.22. rule-trf-prop-flatten-mediatype-typed-properties</h4>
+<h4 id="rule-trf-prop-flatten-mediatype-typed-properties"><a class="anchor" href="#rule-trf-prop-flatten-mediatype-typed-properties"></a>2.2.23. rule-trf-prop-flatten-mediatype-typed-properties</h4>
 <div class="paragraph">
 <p>(since v2.11)</p>
 </div>
@@ -1865,7 +1923,7 @@ media type registry</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-measure-typed-properties"><a class="anchor" href="#rule-trf-prop-flatten-measure-typed-properties"></a>2.2.23. rule-trf-prop-flatten-measure-typed-properties</h4>
+<h4 id="rule-trf-prop-flatten-measure-typed-properties"><a class="anchor" href="#rule-trf-prop-flatten-measure-typed-properties"></a>2.2.24. rule-trf-prop-flatten-measure-typed-properties</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -1941,7 +1999,7 @@ representation of measure typed properties.</p>
 </li>
 <li>
 <p>The rule has originally been developed as part of the work in the
-<a href="https://www.ogc.org/projects/initiatives/ugas-2020">OGC UML-to-GML
+<a href="https://www.ogc.org/initiatives/ugas-2020/">OGC UML-to-GML
 Application Schema Pilot (UGAS-2020)</a>. See the project report for
 further details on the application of the rule,
 <a href="https://docs.ogc.org/per/20-012.html#_measure">section 7.3.2.2.1
@@ -1955,7 +2013,7 @@ Measure</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-multiplicity"><a class="anchor" href="#rule-trf-prop-flatten-multiplicity"></a>2.2.24. rule-trf-prop-flatten-multiplicity</h4>
+<h4 id="rule-trf-prop-flatten-multiplicity"><a class="anchor" href="#rule-trf-prop-flatten-multiplicity"></a>2.2.25. rule-trf-prop-flatten-multiplicity</h4>
 <div class="paragraph">
 <p>This rule applies to each property P with cardinality greater than one.
 Copies of P are added to the class so that the class has as many P
@@ -2058,7 +2116,7 @@ multiplicity less than or equal to 1 will be kept as-is.
 </ul>
 </div>
 <div class="sect4">
-<h5 id="Subrules"><a class="anchor" href="#Subrules"></a>2.2.24.1. Subrules</h5>
+<h5 id="Subrules"><a class="anchor" href="#Subrules"></a>2.2.25.1. Subrules</h5>
 <div class="paragraph">
 <p>The following rules can be used to further modify the behavior of
 multiplicity flattening:</p>
@@ -2076,7 +2134,7 @@ multiplicity flattening:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations"><a class="anchor" href="#rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations"></a>2.2.25. rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations</h4>
+<h4 id="rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations"><a class="anchor" href="#rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations"></a>2.2.26. rule-trf-prop-flatten-multiplicity-keepBiDirectionalAssociations</h4>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2114,7 +2172,7 @@ a bi-directional association.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold"><a class="anchor" href="#rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold"></a>2.2.26. rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold</h4>
+<h4 id="rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold"><a class="anchor" href="#rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold"></a>2.2.27. rule-trf-prop-flatten-multiplicity-withMaxMultiplicityThreshold</h4>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -2182,7 +2240,7 @@ rule does not have any effect)</p></td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-ONINAs"><a class="anchor" href="#rule-trf-prop-flatten-ONINAs"></a>2.2.27. rule-trf-prop-flatten-ONINAs</h4>
+<h4 id="rule-trf-prop-flatten-ONINAs"><a class="anchor" href="#rule-trf-prop-flatten-ONINAs"></a>2.2.28. rule-trf-prop-flatten-ONINAs</h4>
 <div class="paragraph">
 <p>Switches the type of all properties with type of name XxxReason to the
 type of the "value" property (that belongs to XxxReason; most often it
@@ -2202,7 +2260,7 @@ enumeration BooleanWithONINA (enums: false, true, noInformation,
 notApplicable, other) to the model (in the package where the
 BooleanReason resides) and switches all properties in the application
 schema with type BooleanReason to use the type BooleanWithONINA.The
-Flattener also removes all XxxReason &lt;&lt;union&gt;&gt; classes.</p>
+Flattener also removes all XxxReason «union» classes.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2238,7 +2296,7 @@ attributes, not association roles.
 </table>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-ONINAs-onlyRemoveReasons"><a class="anchor" href="#rule-trf-prop-flatten-ONINAs-onlyRemoveReasons"></a>2.2.28. rule-trf-prop-flatten-ONINAs-onlyRemoveReasons</h4>
+<h4 id="rule-trf-prop-flatten-ONINAs-onlyRemoveReasons"><a class="anchor" href="#rule-trf-prop-flatten-ONINAs-onlyRemoveReasons"></a>2.2.29. rule-trf-prop-flatten-ONINAs-onlyRemoveReasons</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2263,7 +2321,7 @@ Once this modification is complete, all "Reason" unions are removed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-types"><a class="anchor" href="#rule-trf-prop-flatten-types"></a>2.2.29. rule-trf-prop-flatten-types</h4>
+<h4 id="rule-trf-prop-flatten-types"><a class="anchor" href="#rule-trf-prop-flatten-types"></a>2.2.30. rule-trf-prop-flatten-types</h4>
 <div class="paragraph">
 <p>This rule flattens complex model structures.</p>
 </div>
@@ -2351,7 +2409,9 @@ are flattened are ignored.</p>
 during <a href="./Flattener.html#rule-trf-cls-flatten-inheritance">inheritance flattening</a>,
 when creating unions that represent
 supertypes), then tag <em>originalPropertyName</em> is added to the
-property copy, with the name of property (P1) as value. That information
+property copy, with the name of property (P1) as value - unless property (P1)
+has a non-blank value for the tag (if such a value exists, then it is set
+as the tag value on the property copy). That information
 is used, for example, by the <a href="../targets/ldproxy2.html">ldproxy2 target</a>,
 when creating configuration items for generating GML output.</p>
 </li>
@@ -2511,7 +2571,7 @@ details.
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;&lt;property&gt;&gt; p: ClassB [1..3]</p>
+<p>«property» p: ClassB [1..3]</p>
 </li>
 </ul>
 </div>
@@ -2521,10 +2581,10 @@ details.
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;&lt;property&gt;&gt; prop1: Integer [1..*]</p>
+<p>«property» prop1: Integer [1..*]</p>
 </li>
 <li>
-<p>&lt;&lt;property&gt;&gt; prop2: Boolean [0..3]</p>
+<p>«property» prop2: Boolean [0..3]</p>
 </li>
 </ul>
 </div>
@@ -2537,10 +2597,10 @@ details.
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;&lt;property&gt;&gt; p.prop1: Integer [1..*]</p>
+<p>«property» p.prop1: Integer [1..*]</p>
 </li>
 <li>
-<p>&lt;&lt;property&gt;&gt; p.prop2: Boolean [0..9]</p>
+<p>«property» p.prop2: Boolean [0..9]</p>
 </li>
 </ul>
 </div>
@@ -2556,7 +2616,7 @@ details.
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;&lt;property&gt;&gt; pA: ClassB</p>
+<p>«property» pA: ClassB</p>
 </li>
 </ul>
 </div>
@@ -2566,10 +2626,10 @@ details.
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;&lt;property&gt;&gt; pB1: Integer</p>
+<p>«property» pB1: Integer</p>
 </li>
 <li>
-<p>&lt;&lt;property&gt;&gt; pB2: Boolean</p>
+<p>«property» pB2: Boolean</p>
 </li>
 </ul>
 </div>
@@ -2582,10 +2642,10 @@ details.
 <div class="ulist">
 <ul>
 <li>
-<p>&lt;&lt;property&gt;&gt; pB1: Integer</p>
+<p>«property» pB1: Integer</p>
 </li>
 <li>
-<p>&lt;&lt;property&gt;&gt; pB2: Boolean</p>
+<p>«property» pB2: Boolean</p>
 </li>
 </ul>
 </div>
@@ -2643,13 +2703,13 @@ not contain the component "pA".</p>
 <p>Map Entries:</p>
 </div>
 <div class="paragraph">
-<p>If a property has a &lt;&lt;dataType&gt;&gt; or &lt;&lt;type&gt;&gt; as its type and a process
+<p>If a property has a «dataType» or «type» as its type and a process
 map entry defines a target type for this type, then the type of the
 property is switched to that target type.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin"><a class="anchor" href="#rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin"></a>2.2.30. rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin</h4>
+<h4 id="rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin"><a class="anchor" href="#rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin"></a>2.2.31. rule-trf-prop-flatten-types-ignoreSelfReferenceByPropertyWithAssociationClassOrigin</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2663,7 +2723,7 @@ tagged values have the same value, then property P2 is not copied.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets"><a class="anchor" href="#rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets"></a>2.2.31. rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets</h4>
+<h4 id="rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets"><a class="anchor" href="#rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets"></a>2.2.32. rule-trf-prop-flatten-types-ignoreUnionsRepresentingFeatureTypeSets</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2675,7 +2735,7 @@ also not removed at the end of processing <em>rule-trf-prop-flatten-types</em>.<
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-flatten-types-removeMappedTypes"><a class="anchor" href="#rule-trf-prop-flatten-types-removeMappedTypes"></a>2.2.32. rule-trf-prop-flatten-types-removeMappedTypes</h4>
+<h4 id="rule-trf-prop-flatten-types-removeMappedTypes"><a class="anchor" href="#rule-trf-prop-flatten-types-removeMappedTypes"></a>2.2.33. rule-trf-prop-flatten-types-removeMappedTypes</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2686,7 +2746,7 @@ of the flattener transformation are removed at the end of processing
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-optionality"><a class="anchor" href="#rule-trf-prop-optionality"></a>2.2.33. rule-trf-prop-optionality</h4>
+<h4 id="rule-trf-prop-optionality"><a class="anchor" href="#rule-trf-prop-optionality"></a>2.2.34. rule-trf-prop-optionality</h4>
 <div class="paragraph">
 <p>Sets all model properties that are of a type identified by the
 enforceOptionality parameter to optional.</p>
@@ -2728,7 +2788,7 @@ will be logged and the rule not executed)</p></td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-remove-name-and-code-component"><a class="anchor" href="#rule-trf-prop-remove-name-and-code-component"></a>2.2.34. rule-trf-prop-remove-name-and-code-component</h4>
+<h4 id="rule-trf-prop-remove-name-and-code-component"><a class="anchor" href="#rule-trf-prop-remove-name-and-code-component"></a>2.2.35. rule-trf-prop-remove-name-and-code-component</h4>
 <div class="paragraph">
 <p>(Alias: rule-trf-prop-remove-name-and-alias-component)</p>
 </div>
@@ -2765,7 +2825,7 @@ empty, the model simply won&#8217;t be changed.</p></td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget"><a class="anchor" href="#rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget"></a>2.2.35. rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget</h4>
+<h4 id="rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget"><a class="anchor" href="#rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget"></a>2.2.36. rule-trf-prop-removeNavigabilityBasedOnIsFlatTarget</h4>
 <div class="paragraph">
 <p>If a navigable association role has <em>isFlatTarget</em> tagged value set to
 <em>true</em> then it will be removed from the model. More specifically:</p>
@@ -2807,7 +2867,7 @@ are no longer navigable) a warning will be logged.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-trf-prop-removeObjectToFeatureTypeNavigability"><a class="anchor" href="#rule-trf-prop-removeObjectToFeatureTypeNavigability"></a>2.2.36. rule-trf-prop-removeObjectToFeatureTypeNavigability</h4>
+<h4 id="rule-trf-prop-removeObjectToFeatureTypeNavigability"><a class="anchor" href="#rule-trf-prop-removeObjectToFeatureTypeNavigability"></a>2.2.37. rule-trf-prop-removeObjectToFeatureTypeNavigability</h4>
 <div class="paragraph">
 <p>If the name of an object type matches the regular expression given via
 the configuration parameter <em>removeObjectToFeatureNavRegex</em>, then each
@@ -3651,7 +3711,7 @@ expression are subject to inheritance flattening via
 </div>
 <div class="paragraph">
 <p>If set to 'false', object type classes (with no stereotype or stereotype
-&lt;&lt;type&gt;&gt;) will not be flattened by <em>rule-trf-prop-flatten-types</em>.</p>
+«type») will not be flattened by <em>rule-trf-prop-flatten-types</em>.</p>
 </div>
 <div class="paragraph">
 <p>Applies to Rule(s)</p>
@@ -4157,7 +4217,40 @@ processed by
 </div>
 </div>
 <div class="sect3">
-<h4 id="omitHomogeneousGeometriesForTypesWithSingleGeometryProperty"><a class="anchor" href="#omitHomogeneousGeometriesForTypesWithSingleGeometryProperty"></a>2.4.32. omitHomogeneousGeometriesForTypesWithSingleGeometryProperty</h4>
+<h4 id="measureUomTaggedValue"><a class="anchor" href="#measureUomTaggedValue"></a>2.4.32. measureUomTaggedValue</h4>
+<div class="paragraph">
+<p>(since v2.10)</p>
+</div>
+<div class="paragraph">
+<p>Alias: <em>none</em></p>
+</div>
+<div class="paragraph">
+<p>Type: String</p>
+</div>
+<div class="paragraph">
+<p>Default Value: <em>none</em></p>
+</div>
+<div class="paragraph">
+<p>Behavior: Defines the name of the unit of measure tagged value in
+subrule
+<em>rule-trf-prop-flatten-measure-typed-properties-fixed-uom-suffix</em> of
+<a href="./Flattener.html#rule-trf-prop-flatten-measure-typed-properties">rule-trf-prop-flatten-measure-typed-properties</a>.</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s)</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Subrule
+<em>rule-trf-prop-flatten-measure-typed-properties-fixed-uom-suffix</em> of
+<a href="./Flattener.html#rule-trf-prop-flatten-measure-typed-properties">rule-trf-prop-flatten-measure-typed-properties</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="omitHomogeneousGeometriesForTypesWithSingleGeometryProperty"><a class="anchor" href="#omitHomogeneousGeometriesForTypesWithSingleGeometryProperty"></a>2.4.33. omitHomogeneousGeometriesForTypesWithSingleGeometryProperty</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4187,7 +4280,7 @@ other words: they already have homogeneous geometry).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="removeInheritanceIncludeRegex"><a class="anchor" href="#removeInheritanceIncludeRegex"></a>2.4.33. removeInheritanceIncludeRegex</h4>
+<h4 id="removeInheritanceIncludeRegex"><a class="anchor" href="#removeInheritanceIncludeRegex"></a>2.4.34. removeInheritanceIncludeRegex</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4217,7 +4310,7 @@ words: the class is disconnected from its subtypes.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="removeObjectToFeatureNavRegex"><a class="anchor" href="#removeObjectToFeatureNavRegex"></a>2.4.34. removeObjectToFeatureNavRegex</h4>
+<h4 id="removeObjectToFeatureNavRegex"><a class="anchor" href="#removeObjectToFeatureNavRegex"></a>2.4.35. removeObjectToFeatureNavRegex</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4247,7 +4340,7 @@ from the object type.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="removePropertyNameAndCodeComponent"><a class="anchor" href="#removePropertyNameAndCodeComponent"></a>2.4.35. removePropertyNameAndCodeComponent</h4>
+<h4 id="removePropertyNameAndCodeComponent"><a class="anchor" href="#removePropertyNameAndCodeComponent"></a>2.4.36. removePropertyNameAndCodeComponent</h4>
 <div class="paragraph">
 <p>Alias: removePropertyNameAndAliasComponent</p>
 </div>
@@ -4295,7 +4388,7 @@ expression can be escaped accordingly.
 </div>
 </div>
 <div class="sect3">
-<h4 id="removeType"><a class="anchor" href="#removeType"></a>2.4.36. removeType</h4>
+<h4 id="removeType"><a class="anchor" href="#removeType"></a>2.4.37. removeType</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4324,7 +4417,7 @@ this parameter will be removed from the model.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="replaceUnionExcludeRegex"><a class="anchor" href="#replaceUnionExcludeRegex"></a>2.4.37. replaceUnionExcludeRegex</h4>
+<h4 id="replaceUnionExcludeRegex"><a class="anchor" href="#replaceUnionExcludeRegex"></a>2.4.38. replaceUnionExcludeRegex</h4>
 <div class="paragraph">
 <p>(available since 2.2.0)</p>
 </div>
@@ -4358,7 +4451,7 @@ Flattener.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="simpleBaseTypes"><a class="anchor" href="#simpleBaseTypes"></a>2.4.38. simpleBaseTypes</h4>
+<h4 id="simpleBaseTypes"><a class="anchor" href="#simpleBaseTypes"></a>2.4.39. simpleBaseTypes</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4386,7 +4479,7 @@ Flattener.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="separatorForGeometryTypeSuffix"><a class="anchor" href="#separatorForGeometryTypeSuffix"></a>2.4.39. separatorForGeometryTypeSuffix</h4>
+<h4 id="separatorForGeometryTypeSuffix"><a class="anchor" href="#separatorForGeometryTypeSuffix"></a>2.4.40. separatorForGeometryTypeSuffix</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4416,7 +4509,7 @@ geometry type suffix while applying
 </div>
 </div>
 <div class="sect3">
-<h4 id="separatorForPropertyFromNonUnion"><a class="anchor" href="#separatorForPropertyFromNonUnion"></a>2.4.40. separatorForPropertyFromNonUnion</h4>
+<h4 id="separatorForPropertyFromNonUnion"><a class="anchor" href="#separatorForPropertyFromNonUnion"></a>2.4.41. separatorForPropertyFromNonUnion</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4449,7 +4542,7 @@ default value will be used.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="separatorForPropertyFromUnion"><a class="anchor" href="#separatorForPropertyFromUnion"></a>2.4.41. separatorForPropertyFromUnion</h4>
+<h4 id="separatorForPropertyFromUnion"><a class="anchor" href="#separatorForPropertyFromUnion"></a>2.4.42. separatorForPropertyFromUnion</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4485,7 +4578,7 @@ default value will be used.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="separatorForPropertyIndexNumber"><a class="anchor" href="#separatorForPropertyIndexNumber"></a>2.4.42. separatorForPropertyIndexNumber</h4>
+<h4 id="separatorForPropertyIndexNumber"><a class="anchor" href="#separatorForPropertyIndexNumber"></a>2.4.43. separatorForPropertyIndexNumber</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4514,7 +4607,7 @@ index number while flattening multiplicity.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="setMinCardinalityToZeroWhenMergingUnion"><a class="anchor" href="#setMinCardinalityToZeroWhenMergingUnion"></a>2.4.43. setMinCardinalityToZeroWhenMergingUnion</h4>
+<h4 id="setMinCardinalityToZeroWhenMergingUnion"><a class="anchor" href="#setMinCardinalityToZeroWhenMergingUnion"></a>2.4.44. setMinCardinalityToZeroWhenMergingUnion</h4>
 <div class="paragraph">
 <p>(available since 2.2.0)</p>
 </div>
@@ -4553,7 +4646,7 @@ parameter to false (the default is true).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="targetNamespaceSuffix"><a class="anchor" href="#targetNamespaceSuffix"></a>2.4.44. targetNamespaceSuffix</h4>
+<h4 id="targetNamespaceSuffix"><a class="anchor" href="#targetNamespaceSuffix"></a>2.4.45. targetNamespaceSuffix</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4578,7 +4671,7 @@ transformation result.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="typeEnumerationPropertyName"><a class="anchor" href="#typeEnumerationPropertyName"></a>2.4.45. typeEnumerationPropertyName</h4>
+<h4 id="typeEnumerationPropertyName"><a class="anchor" href="#typeEnumerationPropertyName"></a>2.4.46. typeEnumerationPropertyName</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -4609,7 +4702,7 @@ can represent.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="typeSuffixSeparator"><a class="anchor" href="#typeSuffixSeparator"></a>2.4.46. typeSuffixSeparator</h4>
+<h4 id="typeSuffixSeparator"><a class="anchor" href="#typeSuffixSeparator"></a>2.4.47. typeSuffixSeparator</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -4634,6 +4727,40 @@ to the name/code of a property that is moved by
 <ul>
 <li>
 <p><a href="./Flattener.html#rule-trf-cls-flatten-reverse-inheritance">rule-trf-cls-flatten-reverse-inheritance</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="uomSuffixSeparator"><a class="anchor" href="#uomSuffixSeparator"></a>2.4.48. uomSuffixSeparator</h4>
+<div class="paragraph">
+<p>(since v2.10)</p>
+</div>
+<div class="paragraph">
+<p>Alias: <em>none</em></p>
+</div>
+<div class="paragraph">
+<p>Type: String</p>
+</div>
+<div class="paragraph">
+<p>Default Value: "_"</p>
+</div>
+<div class="paragraph">
+<p>Behavior: Defines the separator to be put between the name
+of P and the uom symbol suffix in
+subrule
+<em>rule-trf-prop-flatten-measure-typed-properties-fixed-uom-suffix</em> of
+<a href="./Flattener.html#rule-trf-prop-flatten-measure-typed-properties">rule-trf-prop-flatten-measure-typed-properties</a>.</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s)</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Subrule
+<em>rule-trf-prop-flatten-measure-typed-properties-fixed-uom-suffix</em> of
+<a href="./Flattener.html#rule-trf-prop-flatten-measure-typed-properties">rule-trf-prop-flatten-measure-typed-properties</a></p>
 </li>
 </ul>
 </div>
@@ -5065,11 +5192,6 @@ to the name/code of a property that is moved by
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

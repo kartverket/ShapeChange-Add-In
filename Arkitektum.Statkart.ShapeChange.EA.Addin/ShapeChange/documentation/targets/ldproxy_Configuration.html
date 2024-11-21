@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>ldproxy Configuration</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -544,7 +541,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </li>
 <li><a href="#Configuration">3. Configuration</a>
 <ul class="sectlevel2">
-<li><a href="#ClassClass">3.1. <span id="Class">Class</span></a></li>
+<li><a href="#Class">3.1. Class</a></li>
 <li><a href="#Conversion_Rules">3.2. Conversion Rules</a>
 <ul class="sectlevel3">
 <li><a href="#rule-ldp-prop-all-datatype-relations-as-n-to-m-relations">3.2.1. rule-ldp-prop-all-datatype-relations-as-n-to-m-relations</a></li>
@@ -608,7 +605,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p><a href="https://interactive-instruments.github.io/ldproxy/">ldproxy</a> is a
 software tool to share spatial data according to the
 <a href="https://www.w3.org/TR/sdw-bp/">W3C/OGC Spatial Data on the Web Best
-Practices</a> and the <a href="https://github.com/opengeospatial/WFS_FES">draft OGC
+Practices</a> and the <a href="https://github.com/opengeospatial/ogcapi-features">draft OGC
 Web Feature Service standard</a>. ldproxy 1.3.0 supports two data sources:
 OGC Web Feature Services 2.0 and PostgreSQL/PostGIS databases
 (PostgreSQL versions 9.5, 9.6, 10.5; PostGIS version 2.4). The ldproxy
@@ -827,7 +824,7 @@ For example:</p>
 hostname that is reachable from the ldproxy docker container (see
 below). In a local test environment where the database is on the same
 machine, this would typically be "172.17.0.1" (except on macOS,
-<a href="https://docs.docker.com/docker-for-mac/networking/#use-cases-and-workarounds">where
+<a href="https://docs.docker.com/desktop/networking/#use-cases-and-workarounds">where
 it is "host.docker.internal"</a>).</p>
 </div>
 <div class="paragraph">
@@ -954,7 +951,7 @@ file <span class="underline red">ExternalAuthConfig</span> has to be provided,
 </div>
 <div class="paragraph">
 <p>See the
-<a href="http://interactive-instruments.github.io/ldproxy/book/07-security.html">ldproxy
+<a href="https://interactive-instruments.github.io/ldproxy/book/07-security.html">ldproxy
 documentation</a> for details.</p>
 </div>
 <div class="paragraph">
@@ -1088,11 +1085,11 @@ of the "config-store" directory.</p>
 </div>
 <div class="paragraph">
 <p>The published services are then available at
-<a href="http://localhost:7080/rest/services" class="bare">http://localhost:7080/rest/services</a>.</p>
+https://localhost:7080/rest/services.</p>
 </div>
 <div class="paragraph">
 <p>To change the external URL of a service, see the
-<a href="http://interactive-instruments.github.io/ldproxy/book/09-webserver.html">ldproxy
+<a href="https://interactive-instruments.github.io/ldproxy/book/09-webserver.html">ldproxy
 documentation</a>. Public services will typically hide the ldproxy manager.
 In this case, the value of the external URL (JSON path "$.externalUrl"
 in <span class="underline red">CoreServerConfig</span>) from "/rest/services" to the new value.</p>
@@ -1103,7 +1100,7 @@ in <span class="underline red">CoreServerConfig</span>) from "/rest/services" t
 <div class="paragraph">
 <p>If you encounter issues with the deployment, inspect the log files to
 determine the cause of the issue. See the
-<a href="http://interactive-instruments.github.io/ldproxy/book/08-logging.html">ldproxy
+<a href="https://interactive-instruments.github.io/ldproxy/book/08-logging.html">ldproxy
 documentation</a>.</p>
 </div>
 </div>
@@ -1122,7 +1119,7 @@ the future.</p>
 <h2 id="Configuration"><a class="anchor" href="#Configuration"></a>3. Configuration</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="ClassClass"><a class="anchor" href="#ClassClass"></a>3.1. <span id="Class">Class</span></h3>
+<h3 id="Class"><a class="anchor" href="#Class"></a>3.1. Class</h3>
 <div class="paragraph">
 <p>The class for the target implementation is
 <em>de.interactive_instruments.ShapeChange.Target.Ldproxy.Config</em></p>
@@ -2055,11 +2052,6 @@ in <a href="https://shapechange.net/resources/config/StandardLdproxyMapEntries.
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

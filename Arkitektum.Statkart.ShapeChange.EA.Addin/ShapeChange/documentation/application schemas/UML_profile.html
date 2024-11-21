@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>UML profile</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -515,7 +512,7 @@ be <a href="../get started/The_element_input.html">configured</a>.</p>
 </div>
 <div class="paragraph">
 <p>There is one additional stereotype, that can be applied to all model
-elements, &lt;&lt;retired&gt;&gt;. It can be used in UML models to indicate that a
+elements, «retired». It can be used in UML models to indicate that a
 model element has been retired and is only left in the model for
 compatibility with previous versions of the model. The stereotype
 currently does not have any impact on the standard ShapeChange output
@@ -547,24 +544,24 @@ subpackages of an application schema, is that no stereotype is applied.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Application Schema&gt;&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;applicationSchema&gt;&gt;, &lt;&lt;requirementsClass&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Application Schema»</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«applicationSchema», «requirementsClass»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An application schema according to ISO 19109 [ISO 19109].</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;bundle&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«bundle»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A package that is not an application schema and contains other packages [GSIP]. Usually mapped to no stereotype.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;leaf&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«leaf»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A package that is not an application schema and contains no packages. [ISO/TS 19103]. Usually mapped to no stereotype.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;schema&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«schema»</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A package that should be treated like &lt;&lt;Application Schema&gt;&gt; but does not contain feature types.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A package that should be treated like «Application Schema» but does not contain feature types.</p></td>
 </tr>
 </tbody>
 </table>
@@ -576,7 +573,7 @@ subpackages of an application schema, is that no stereotype is applied.</p>
 instances are plain objects with identity.</p>
 </div>
 <div class="paragraph">
-<p>The stereotype &lt;&lt;abstract&gt;&gt; is used by some models, but should be
+<p>The stereotype «abstract» is used by some models, but should be
 avoided. If a class is abstract, this must be indicated using the UML
 flag for abstractness, not the stereotype. If the stereotype is
 provided, it is ignored by ShapeChange.</p>
@@ -596,28 +593,28 @@ provided, it is ignored by ShapeChange.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;ADEElement&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«ADEElement»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Feature type in an CityGML Application Domain Extension (ADE) that contains only properties that are generic application extensions.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;AIXMExtension&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«AIXMExtension»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Type defined in an AIXM extension schema. It extends a specific feature or object type or all feature types usually from the core AIXM schema.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;attributeConcept&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«attributeConcept»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An attribute concept in a feature concept dictionary (see ISO 19126). If a feature type classifier has a dependency to an attribute concept classifier and a property of the same name ShapeChange will use the documentation of the concept as the documentation of the property if the documentation of the property is empty.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;BasicType&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«BasicType»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Marks a so called basic type, which can have a simple representation in one or more target encodings. It usually is a restriction of CharacterString or Number – or a structured version thereof (e.g. "one two three four" – or any other meaningful combination of such types that is supported by a given encoding).</p>
@@ -647,14 +644,14 @@ This stereotype has originally been defined for use with the XML Schema target.
 <div class="ulist">
 <ul>
 <li>
-<p>rule-xsd-cls-basictype is contained in the XSD encoding rule, and the UML type has the stereotype &lt;&lt;BasicType&gt;&gt;, or</p>
+<p>rule-xsd-cls-basictype is contained in the XSD encoding rule, and the UML type has the stereotype «BasicType», or</p>
 </li>
 <li>
 <p>the UML type is an object type, mixin type, or data type and has a supertype that is identified as a basic type through:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>the previous behavior (matching rule-xsd-cls-basictype and having stereotype &lt;&lt;BasicType&gt;&gt;), or</p>
+<p>the previous behavior (matching rule-xsd-cls-basictype and having stereotype «BasicType»), or</p>
 </li>
 <li>
 <p>an XSD map entry being defined for the supertype which does not have its xmlTypeType and xmlTypeContent attributes both set to 'complex' – either explicitly or by using the default values, which is 'complex' for both attributes.</p>
@@ -665,7 +662,7 @@ This stereotype has originally been defined for use with the XML Schema target.
 </ul>
 </div>
 <div class="paragraph">
-<p>Attempting to identify so called basic types in the conceptual model, and especially the use of stereotype &lt;&lt;BasicType&gt;&gt;, can be an issue if 1) XML Schema is not one of the target encodings (in which case the configuration of an XmlSchema target – potentially disabled - would be necessary to identify basic types while loading the model) and 2) one or more of the targets do not support so called basic types.</p>
+<p>Attempting to identify so called basic types in the conceptual model, and especially the use of stereotype «BasicType», can be an issue if 1) XML Schema is not one of the target encodings (in which case the configuration of an XmlSchema target – potentially disabled - would be necessary to identify basic types while loading the model) and 2) one or more of the targets do not support so called basic types.</p>
 </div>
 </td>
 </tr>
@@ -679,35 +676,35 @@ This stereotype has originally been defined for use with the XML Schema target.
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;CodeList&gt;&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;conceptScheme&gt;&gt; &lt;&lt;vocabulary&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«CodeList»</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«conceptScheme» «vocabulary»</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A code list. &lt;&lt;conceptScheme&gt;&gt; and &lt;&lt;vocabulary&gt;&gt; have been used to identify collections of enumerated values that may also have relationships like 'narrower'; for encoding purposes these are treated like code lists.</p>
+<p>A code list. «conceptScheme» and «vocabulary» have been used to identify collections of enumerated values that may also have relationships like 'narrower'; for encoding purposes these are treated like code lists.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;DataType&gt;&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;request&gt;&gt; &lt;&lt;response&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«DataType»</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«request» «response»</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A structured data type without identity [ISO/TS 19103]. The &lt;&lt;request&gt;&gt; and &lt;&lt;response&gt;&gt; stereotype were originally used in AFIS-ALKIS-ATKIS to distinguish data types for use in messages of services. For all encoding purposes these are treated as data types and are configured as aliases.</p>
+<p>A structured data type without identity [ISO/TS 19103]. The «request» and «response» stereotype were originally used in AFIS-ALKIS-ATKIS to distinguish data types for use in messages of services. For all encoding purposes these are treated as data types and are configured as aliases.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Enumeration&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Enumeration»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>An enumeration.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;FachId&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«FachId»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OKSTRA feature types where instances may be referenced through symbolic links. See the <a href="http://www.okstra.de/docs/n-dokumente/n0135.pdf">OKSTRA documentation (in German)</a>.</p>
+<p>OKSTRA feature types where instances may be referenced through symbolic links. See the <a href="https://www.okstra.de/docs/n-dokumente/n0135.pdf">OKSTRA documentation (in German)</a>.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;featureConcept&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«featureConcept»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A feature concept in a feature concept dictionary (see ISO 19126). If a feature type classifier has a
@@ -715,43 +712,43 @@ dependency to a feature concept classifier of the same name ShapeChange will use
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;FeatureType&gt;&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;feature&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«FeatureType»</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«feature»</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A feature type [ISO 19136]. Some schemas have used &lt;&lt;Feature&gt;&gt; so this has been added as an alias.</p>
+<p>A feature type [ISO 19136]. Some schemas have used «Feature» so this has been added as an alias.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Interface&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Interface»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>A type that is not directly instantiable but is used as an abstract collection of operation attribute and relation signatures. This stereotype should usually not be used in application schemas as &lt;&lt;interface&gt;&gt; classes are on a different conceptual level. In the encoding these will usually be treated as if no stereotype has been set.</p>
+<p>A type that is not directly instantiable but is used as an abstract collection of operation attribute and relation signatures. This stereotype should usually not be used in application schemas as «interface» classes are on a different conceptual level. In the encoding these will usually be treated as if no stereotype has been set.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Schluesseltabelle&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Schluesseltabelle»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>OKSTRA Schlüsseltabellen. See the <a href="http://www.okstra.de/docs/n-dokumente/n0135.pdf">OKSTRA documentation (in German)</a>.</p>
+<p>OKSTRA Schlüsseltabellen. See the <a href="https://www.okstra.de/docs/n-dokumente/n0135.pdf">OKSTRA documentation (in German)</a>.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Type&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Type»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A standard class instances are plain objects with identity. In the encoding these will usually be treated as if no
-stereotype has been set but can be useful when writing UML models (via the <a href="../targets/UML_model.html">UmlModel target</a>) when classes are augmented by profile-specific tagged values. For the purposes of meta-modeling &lt;&lt;Type&gt;&gt; has been deprecated in UML 2 and &lt;&lt;Interface&gt;&gt; should be used instead.</p>
+stereotype has been set but can be useful when writing UML models (via the <a href="../targets/UML_model.html">UmlModel target</a>) when classes are augmented by profile-specific tagged values. For the purposes of meta-modeling «Type» has been deprecated in UML 2 and «Interface» should be used instead.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Union&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Union»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A structured data type without identity where exactly one of the properties of the type is present in any instance [ISO/TS 19103].</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;valueConcept&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«valueConcept»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>A nominal value concept in a feature concept dictionary (see ISO 19126). If an enumeration has a dependency to an value concept classifier and an enumerant of the same name ShapeChange will use the documentation of the concept as the documentation of the enumerant if the documentation of the enumerant is empty.</p>
@@ -780,27 +777,27 @@ stereotype has been set but can be useful when writing UML models (via the <a hr
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;enum&gt;&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;enumerationLiteral&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«enum»</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«enumerationLiteral»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Typical stereotype for attribute of a code list or enumeration. Usually mapped to no stereotype but can be useful when writing UML models (via the <a href="../targets/UML_model.html">UmlModel target</a>).</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;identifier&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«identifier»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">An attribute with this stereotype is used to uniquely identify class objects. For database models the attribute represents a primary key field.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;property&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«property»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Typical stereotype for attribute or association role of a class that is not a code list or enumeration. Usually mapped to no stereotype but can be useful when writing UML models (via the <a href="../targets/UML_model.html">UmlModel target</a>) when properties are augmented by profile-specific tagged values.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;version&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«version»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If in an application schema an association role ends at a spatial object type this stereotype denotes that the value of the property is meant to be a specific version of the spatial object not the spatial object in general. [INSPIRE]</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;voidable&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«voidable»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">If a characteristic of an object is not present</p></td>
 </tr>
@@ -811,7 +808,7 @@ stereotype has been set but can be useful when writing UML models (via the <a hr
 <h4 id="Stereotypes_of_dependencies"><a class="anchor" href="#Stereotypes_of_dependencies"></a>1.1.4. Stereotypes of dependencies</h4>
 <div class="paragraph">
 <p>The standard case for dependencies is that no stereotype is applied. For
-package dependencies without a stereotype,&lt;&lt;import&gt;&gt; is implied (source:
+package dependencies without a stereotype,«import» is implied (source:
 ISO 19136:2007, section E.2.1.1.1).</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -829,7 +826,7 @@ ISO 19136:2007, section E.2.1.1.1).</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;import&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«import»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The model elements of the supplier package are imported.</p></td>
 </tr>
@@ -844,8 +841,8 @@ ISO 19136:2007, section E.2.1.1.1).</p>
 <td class="content">
 ShapeChange stores package dependencies without stereotypes. In
 other words, stereotypes on package dependencies are ignored (thus, it
-does not matter if such a dependency has the stereotype &lt;&lt;import&gt;&gt;,
-&lt;&lt;include&gt;&gt;, or any other stereotype). ShapeChange determines if an
+does not matter if such a dependency has the stereotype «import»,
+«include», or any other stereotype). ShapeChange determines if an
 application schema has a dependency on a different application schema by
 examining the target namespaces of both packages; if they are different,
 the two packages belong to different application schema - otherwise,
@@ -876,7 +873,7 @@ ShapeChange ignores stereotypes on generalizations.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;disjoint&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«disjoint»</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The constraint added to a set of generalization relationships indicates that an instance of the parent may be an instance of one and only one of the children within the set. This is implicitly assumed to be the case.</p></td>
 </tr>
@@ -1608,6 +1605,42 @@ SQL target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonPrimaryGeometry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To identify the primary geometry property of a feature type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-primaryGeometry">rule-json-cls-primaryGeometry</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonPrimaryInstant</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To identify the primary instant property of a feature type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-primaryTime">rule-json-cls-primaryTime</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonPrimaryInterval</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To identify the primary interval properties of a feature type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-primaryTime">rule-json-cls-primaryTime</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonPrimaryPlace</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">To identify the primary place property of a feature type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-primaryPlace">rule-json-cls-primaryPlace</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">language</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1649,6 +1682,24 @@ NOTE: This tagged value is the default source for descriptor 'legalBasis'.</p></
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxExclusive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define the maximum range (exclusive) of a (numeric) basic type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxInclusive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define the maximum range (inclusive) of a (numeric) basic type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">maxLength</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">class, property</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -1676,6 +1727,33 @@ NOTE: This tagged value is the default source for descriptor 'legalBasis'.</p></
 <td class="tableblock halign-left valign-top"><p class="tableblock">Identifies the type of the metadata that can be associated with the property (more specifically, its value(s)).</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TypeConverter transformation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../transformations/Type_Converter.html#rule-trf-propertyMetadata-stereotype-to-metadata-property">rule-trf-propertyMetadata-stereotype-to-metadata-property</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minExclusive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define the minimum range (exclusive) of a (numeric) basic type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minInclusive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define the minimum range (inclusive) of a (numeric) basic type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">minLength</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">class</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Define the minimum length of a (string-valued) basic type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
@@ -1798,7 +1876,7 @@ This tagged value is used by the SQL and ArcGIS workspace targets:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">owlDisjointProperties</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="http://docs.opengeospatial.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="https://docs.ogc.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used to define the OWL property axiom 'disjoint' for the OWL property that represents the UML property with this tagged value.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ontology target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-prop-propertyEnrichment">rule-owl-prop-propertyEnrichment</a></p></td>
@@ -1807,7 +1885,7 @@ This tagged value is used by the SQL and ArcGIS workspace targets:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">owlEquivalentProperties</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="http://docs.opengeospatial.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="https://docs.ogc.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used to define the OWL property axiom 'equivalent' for the OWL property that represents the UML property with this tagged value.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ontology target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-prop-propertyEnrichment">rule-owl-prop-propertyEnrichment</a></p></td>
@@ -1816,7 +1894,7 @@ This tagged value is used by the SQL and ArcGIS workspace targets:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">owlInverseProperties</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="http://docs.opengeospatial.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="https://docs.ogc.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used to define the OWL property axiom 'inverse' for the OWL property that represents the UML property with this tagged value.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ontology target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-prop-propertyEnrichment">rule-owl-prop-propertyEnrichment</a></p></td>
@@ -1825,7 +1903,7 @@ This tagged value is used by the SQL and ArcGIS workspace targets:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">owlLogicalCharacteristics</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="http://docs.opengeospatial.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="https://docs.ogc.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used to define the OWL property axioms 'functional', 'inverse-functional', 'reflexive', 'irreflexive', 'symmetric', 'asymmetric', and 'transitive' for the OWL property that represents the UML property with this tagged value.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ontology target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-prop-propertyEnrichment">rule-owl-prop-propertyEnrichment</a></p></td>
@@ -1834,7 +1912,7 @@ This tagged value is used by the SQL and ArcGIS workspace targets:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">owlSubPropertyOf</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="http://docs.opengeospatial.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC Testbed-14: Application Schema-based Ontology Development Engineering Report (OGC 18-032r2) - chapter <a href="https://docs.ogc.org/per/18-032r2.html#RDF_PropertyEnrichment">OWL Property Enrichment</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Used to define the OWL property axiom 'subPropertyOf' for the OWL property that represents the UML property with this tagged value.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ontology target</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/ontology/UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-prop-propertyEnrichment">rule-owl-prop-propertyEnrichment</a></p></td>
@@ -1899,7 +1977,9 @@ NOTE: <br>
 - The Profile Transfer EA target can be used to write profile definitions into schemas contained in an EA repository.<br>
 - The Application Schema Metadata target can be used to identify the profiles defined in a schema.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Profiler transformation, Model Export, Profile Transfer EA, and Application Schema Metadata targets</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../transformations/profiling/Profiler.adoc xref:../transformations/profiling/Profiling.adoc xref:../targets/Model_Export.html">Model export target</a><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../transformations/profiling/Profiler.html">Profiler</a><br>
+<a href="../transformations/profiling/Profiling.html">Profiling</a><br>
+<a href="../targets/Model_Export.html">Model export target</a><br>
 <a href="../targets/Profile_Transfer_to_EA_Repository.html">Profile transfer to EA target</a><br>
 <a href="../targets/Application_Schema_Metadata.html#rule-asm-all-identify-profiles">rule-asm-all-identify-profiles</a></p></td>
 </tr>
@@ -1922,10 +2002,12 @@ NOTE: The tagged value can be set by rule-trf-cls-createGeneralOutOfScopeConstra
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Define the maximum range of the property, or of a basic XML Schema type.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ArcGIS Workspace, SQL, CDB, XML Schema, and JSON Schema targets</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/SQL_DDL.html#rule-sql-cls-check-constraint-for-range xref:../targets/SQL_DDL.adoc#rule-sql-prop-check-constraint-for-range xref:../targets/arcgis/ArcGIS_Workspace.adoc#rule-arcgis-cls-rangeDomainFromTaggedValues">rule-arcgis-cls-rangeDomainFromTaggedValues</a><br>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/SQL_DDL.html#rule-sql-cls-check-constraint-for-range">rule-sql-cls-check-constraint-for-range</a><br>
+<a href="../targets/SQL_DDL.html#rule-sql-prop-check-constraint-for-range">rule-sql-prop-check-constraint-for-range</a><br>
+<a href="../targets/arcgis/ArcGIS_Workspace.html#rule-arcgis-cls-rangeDomainFromTaggedValues">rule-arcgis-cls-rangeDomainFromTaggedValues</a><br>
 <a href="../targets/xml schema/Non_Standard_Conversion_Rules.html#rule-xsd-prop-constrainingFacets">rule-xsd-prop-constrainingFacets</a><br>
 <a href="../targets/xml schema/Non_Standard_Conversion_Rules.html#rule-xsd-cls-basictype">rule-xsd-cls-basictype</a><br>
-<a href="http://docs.opengeospatial.org/per/17-020r1.html#CDB_DeriveAttributesDictionary">OGC Testbed-13: NAS Profiling Engineering Report - The CDB Geomatics Attributes Dictionary</a><br>
+<a href="https://docs.ogc.org/per/17-020r1.html#CDB_DeriveAttributesDictionary">OGC Testbed-13: NAS Profiling Engineering Report - The CDB Geomatics Attributes Dictionary</a><br>
 <a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
 </tr>
 <tr>
@@ -1940,7 +2022,7 @@ NOTE: The tagged value can be set by rule-trf-cls-createGeneralOutOfScopeConstra
 <a href="../targets/arcgis/ArcGIS_Workspace.html#rule-arcgis-cls-rangeDomainFromTaggedValues">rule-arcgis-cls-rangeDomainFromTaggedValues</a><br>
 <a href="../targets/xml schema/Non_Standard_Conversion_Rules.html#rule-xsd-prop-constrainingFacets">rule-xsd-prop-constrainingFacets</a><br>
 <a href="../targets/xml schema/Non_Standard_Conversion_Rules.html#rule-xsd-cls-basictype">rule-xsd-cls-basictype</a><br>
-<a href="http://docs.opengeospatial.org/per/17-020r1.html#CDB_DeriveAttributesDictionary">OGC Testbed-13: NAS Profiling Engineering Report - The CDB Geomatics Attributes Dictionary</a><br>
+<a href="https://docs.ogc.org/per/17-020r1.html#CDB_DeriveAttributesDictionary">OGC Testbed-13: NAS Profiling Engineering Report - The CDB Geomatics Attributes Dictionary</a><br>
 <a href="../targets/JSON_Schema.html#rule-json-cls-basictype">rule-json-cls-basictype</a></p></td>
 </tr>
 <tr>
@@ -2168,6 +2250,15 @@ NOTE: Deprecated tagged value 'xmlNamespace' is automatically mapped to 'targetN
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../transformations/Type_Converter.html#rule-trf-toFeatureType">rule-trf-toFeatureType</a></p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">unit</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">property</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Identifies the fixed unit of measure of the property.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Schema target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="../targets/JSON_Schema.html#rule-json-prop-measure">rule-json-prop-measure</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">uomResourceRepresentation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">package</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">schema, applicationSchema</p></td>
@@ -2182,7 +2273,7 @@ Default: \application/gml+xml;version=3.2\</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">package</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">schema, applicationSchema</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://portal.opengeospatial.org/files/?artifact_id=46324">document on the OGC portal</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Base URI of the units dictionary Example: http://metadata.ces.mil/mdr/ns/GSIP/uom/\</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Base URI of the units dictionary Example: https://metadata.ces.mil/mdr/ns/GSIP/uom/\</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -2601,11 +2692,6 @@ reported while reading the model.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>AIXM Schema Merger</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -562,7 +559,7 @@ extensions. An extension schema is a schema that:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Can define &lt;&lt;extension&gt;&gt; classes that extend:</p>
+<p>Can define «extension» classes that extend:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -575,7 +572,7 @@ extensions. An extension schema is a schema that:</p>
 </div>
 </li>
 <li>
-<p>Can define &lt;&lt;codelist&gt;&gt; classes that extend code lists from the core
+<p>Can define «codelist» classes that extend code lists from the core
 schema</p>
 </li>
 <li>
@@ -585,8 +582,8 @@ schema</p>
 </div>
 <div class="paragraph">
 <p>The objective of this approach is described in
-the <a href="http://www.aixm.aero/gallery/content/public/AIXM51/AIXM_Application_Schema_Generation-1.1.pdf">AIXM
-Application Schema Generation document</a>, section 1.3, as follows:</p>
+the AIXM Application Schema Generation document
+(no longer publicly available, it looks like), section 1.3, as follows:</p>
 </div>
 <div class="paragraph">
 <p><em>"The core AIXM model provides the definition of standardised
@@ -607,7 +604,7 @@ Some principles that regulate such extensions include:</em></p>
 the definition of the core AIXM XSD element with the same name (for that
 purpose, the AbstractSomeFeatureExtension element is provided in the
 core AIXM XSD). A consequence is that it is not possible to extend
-&lt;&lt;datatype&gt;&gt; classes. Only &lt;&lt;codelist&gt;&gt; may be extended.</em></p>
+«datatype» classes. Only «codelist» may be extended.</em></p>
 </li>
 <li>
 <p><em>An additional feature and objects shall follow the core AIXM
@@ -623,7 +620,7 @@ processor is able to ignore unknown extensions to core AIXM features.</p>
 <div class="paragraph">
 <p>With the AIXM extension mechanism, AIXM feature and object types
 conceptually own all the properties that are added to them via
-&lt;&lt;extension&gt;&gt; types.</p>
+«extension» types.</p>
 </div>
 <div class="paragraph">
 <p>This transformation merges AIXM extension schemas and the core schema.
@@ -711,7 +708,7 @@ parameters 'appSchemaName', 'appSchemaNameRegex' or
 <td class="tableblock halign-left valign-top"><p class="tableblock">(none – default behavior)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Optional</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.aixm.aero/schema/5.1" class="bare">http://www.aixm.aero/schema/5.1</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">http://www.aixm.aero/schema/5.1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The target namespace of the
 core AIXM schema.</p></td>
 </tr>
@@ -773,11 +770,6 @@ core AIXM schema.</p></td>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

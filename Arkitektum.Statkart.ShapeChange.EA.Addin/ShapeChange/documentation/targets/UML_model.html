@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>UML model</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -542,7 +539,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#documentationTemplate">3.2.2. documentationTemplate</a></li>
 <li><a href="#eaAuthor">3.2.3. eaAuthor</a></li>
 <li><a href="#eaStatus">3.2.4. eaStatus</a></li>
-<li><a href="#eapTemplate">3.2.5. eapTemplate</a></li>
+<li><a href="#eaTemplate">3.2.5. eaTemplate</a></li>
 <li><a href="#ignoreTaggedValuesRegex">3.2.6. ignoreTaggedValuesRegex</a></li>
 <li><a href="#includeAssociationOwnership">3.2.7. includeAssociationOwnership</a></li>
 <li><a href="#mergeConstraintCommentsIntoText">3.2.8. mergeConstraintCommentsIntoText</a></li>
@@ -619,9 +616,9 @@ should add a map entry to the configuration.</p>
 <td class="content">
 You also need to ensure that your UML Profile / MDG is available
 and active in the EA environment in which you execute ShapeChange. To do
-so, import the MDG with EA - to a template EAP which is used to write
+so, import the MDG with EA - to a template EA repository which is used to write
 the model (see target parameter
-<a href="./UML_model.html#eapTemplate"><em>eapTemplate</em></a>)
+<a href="./UML_model.html#eaTemplate"><em>eaTemplate</em></a>)
 and/or use 'Import To User', i.e. install the MDG locally.
 </td>
 </tr>
@@ -674,7 +671,7 @@ using the standard &lt;Target&gt; element.</p>
 3
 </pre></td>
   <td class="code"><pre><span class="tag">&lt;Target</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">de.interactive_instruments.ShapeChange.Target.EA.UmlModel</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">inputs</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Profile</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-  <span class="tag">&lt;targetParameter</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">modelFilename</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">output/Profile.eap</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+  <span class="tag">&lt;targetParameter</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">modelFilename</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">output/Profile.qea</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
 <span class="tag">&lt;/Target&gt;</span></pre></td>
 </tr></table></code></pre>
 </div>
@@ -772,9 +769,12 @@ encoding the UML model.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="eapTemplate"><a class="anchor" href="#eapTemplate"></a>3.2.5. eapTemplate</h4>
+<h4 id="eaTemplate"><a class="anchor" href="#eaTemplate"></a>3.2.5. eaTemplate</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
+</div>
+<div class="paragraph">
+<p>Alias: eapTemplate (this was the parameter name in ShapeChange v2.x)</p>
 </div>
 <div class="paragraph">
 <p>Required / Optional: optional</p>
@@ -786,7 +786,7 @@ encoding the UML model.</p>
 <p>Default Value: <em>none</em></p>
 </div>
 <div class="paragraph">
-<p>Explanation: Path to the EAP template file (can be local or an
+<p>Explanation: Path to the EA repository template file (can be local or an
 online resource).</p>
 </div>
 <div class="paragraph">
@@ -800,7 +800,7 @@ be available, this would fail if it is not configured in the EA
 environment where ShapeChange is executed. In that situation, you would
 want the UML Profile / MDG loaded into the EA repository to which the
 model is written. Such a repository can be provided as a template, and
-configured to be used by ShapeChange via the parameter <em>eapTemplate</em>.</p>
+configured to be used by ShapeChange via the parameter <em>eaTemplate</em>.</p>
 </div>
 <div class="paragraph">
 <p>Applies to Rule(s): <em>none – general behaviour</em></p>
@@ -882,10 +882,10 @@ comment delimiters.</p>
 <p>Type: String</p>
 </div>
 <div class="paragraph">
-<p>Default Value: ShapeChangeExport.eap</p>
+<p>Default Value: ShapeChangeExport.qea</p>
 </div>
 <div class="paragraph">
-<p>Explanation: The Enterprise architect EAP file to which the application
+<p>Explanation: The Enterprise architect EA repository file to which the application
 schema(s) are written.</p>
 </div>
 </div>
@@ -1163,11 +1163,6 @@ are described in the following sections.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

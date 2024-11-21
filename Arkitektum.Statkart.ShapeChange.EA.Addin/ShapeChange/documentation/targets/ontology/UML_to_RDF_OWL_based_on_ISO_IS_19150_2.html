@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>UML to RDF/OWL (based on ISO/IS 19150-2)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -659,7 +656,7 @@ execution of this target requires Java 8 or higher (tested with Java
 8).)</span></p>
 </div>
 <div class="paragraph">
-<p><a href="http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=57466">ISO/IS
+<p><a href="https://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=57466">ISO/IS
 19150-2</a> defines rules for mapping ISO geographic information UML models
 to OWL ontologies. This target derives an ontology representation from
 an application schema in UML based upon these rules.</p>
@@ -674,7 +671,7 @@ an application schema in UML based upon these rules.</p>
 A number of configuration options and extensions have been
 implemented. They are documented in detail in the <em>OGC Testbed 12
 ShapeChange Engineering Report</em>
-(<a href="http://docs.opengeospatial.org/per/16-020.html">OGC document number
+(<a href="https://docs.ogc.org/per/16-020.html">OGC document number
 16-020</a>). The report also documents which model transformations may need
 to be applied before executing this target, for example to transform
 association classes. Therefore, if you are looking for a complete
@@ -835,7 +832,7 @@ character as separator).</p>
 <div class="sect3">
 <h4 id="rule-owl-cls-codelist-19150-2"><a class="anchor" href="#rule-owl-cls-codelist-19150-2"></a>2.2.3. rule-owl-cls-codelist-19150-2</h4>
 <div class="paragraph">
-<p>If this rule is enabled then &lt;&lt;codeList&gt;&gt; UML classes are converted as
+<p>If this rule is enabled then «codeList» UML classes are converted as
 defined by ISO/IS 19150-2 (section 6.7.2) - except for the SKOS
 collection (for which a
 <a href="./UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-cls-codelist-19150-2-skos-collection">separate
@@ -881,7 +878,7 @@ different.</p>
 <div class="paragraph">
 <p>If this rule is enabled, and the code list (that is converted under
 <a href="./UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-cls-codelist-19150-2">rule-owl-cls-codelist-19150-2</a>)
-actually is an &lt;&lt;enumeration&gt;&gt; that is treated like a code list under
+actually is an «enumeration» that is treated like a code list under
 <a href="./UML_to_RDF_OWL_based_on_ISO_IS_19150_2.html#rule-owl-cls-enumerationAsCodelist"><em>rule-owl-cls-enumerationAsCodelist</em></a>,
 then an OWL ObjectOneOf class expression is defined for the OWL class
 representing the code list. The expression enumerates the named
@@ -908,7 +905,7 @@ subsequent versions of the ontology, we recommend moving the OWL class
 representing the code list to a namespace that is different from the
 application schema ontology namespace. This is explained in more detail
 in the OGC Testbed 12
-<a href="http://docs.opengeospatial.org/per/16-020.html">ShapeChange Engineering
+<a href="https://docs.ogc.org/per/16-020.html">ShapeChange Engineering
 Report</a> (OGC 16-020).</p>
 </li>
 <li>
@@ -956,7 +953,7 @@ the OWL ontology derived from the application schema.</p>
 <div class="paragraph">
 <p>Background: Communities often already manage their code lists outside of
 the application schema, SKOS being a prominent encoding. In such a case,
-&lt;&lt;codeList&gt;&gt; UML classes are contained in the application schema without
+«codeList» UML classes are contained in the application schema without
 declaring any specific code values. These classes serve as stubs. They
 can be used as value types for properties. In addition, they can - and
 should - provide links to the resource that represents the code list
@@ -985,7 +982,7 @@ type if:</p>
 <ul>
 <li>
 <p>rule-xsd-cls-basictype is contained in the XSD encoding rule, and
-the UML type has the stereotype &lt;&lt;BasicType&gt;&gt;, or</p>
+the UML type has the stereotype «BasicType», or</p>
 </li>
 <li>
 <p>the UML type is an object type, mixin type, or data type and has a
@@ -993,7 +990,7 @@ supertype that is identified as a basic type through:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>the previous behavior (matching rule-xsd-cls-basictype and having stereotype <a href="#BasicType">[BasicType]</a>), or</p>
+<p>the previous behavior (matching rule-xsd-cls-basictype and having stereotype «BasicType»), or</p>
 </li>
 <li>
 <p>an XSD map entry being defined for the supertype which does not
@@ -1082,7 +1079,7 @@ loaded as <em>mixin types</em>. A UML type is loaded as a mixin type if:</p>
 <p>the tagged value gmlMixin is set to true, or</p>
 </li>
 <li>
-<p>the type has the stereotype &lt;&lt;type&gt;&gt;, is abstract, and the tagged
+<p>the type has the stereotype «type», is abstract, and the tagged
 value gmlMixin is not set to false.</p>
 </li>
 </ul>
@@ -1114,7 +1111,7 @@ of particular UML types.
 <h4 id="rule-owl-cls-encode-objecttypes"><a class="anchor" href="#rule-owl-cls-encode-objecttypes"></a>2.2.15. rule-owl-cls-encode-objecttypes</h4>
 <div class="paragraph">
 <p>ShapeChange treats UML types without stereotype as plain objects with
-identity, called <em>object types</em>. UML types with stereotype &lt;&lt;type&gt;&gt; are
+identity, called <em>object types</em>. UML types with stereotype «type» are
 usually also treated this way.</p>
 </div>
 <div class="paragraph">
@@ -1231,7 +1228,7 @@ iso19150-2:isAbstract with value set to <em>true</em>.</p>
 <div class="sect3">
 <h4 id="rule-owl-cls-union"><a class="anchor" href="#rule-owl-cls-union"></a>2.2.20. rule-owl-cls-union</h4>
 <div class="paragraph">
-<p>This rule converts &lt;&lt;union&gt;&gt; types , preserving their semantics.</p>
+<p>This rule converts «union» types , preserving their semantics.</p>
 </div>
 <div class="paragraph">
 <p>The approach is based on a logical combination of unqualified
@@ -1276,7 +1273,7 @@ for P, then no values may be provided for the other new properties.</p>
 <li>
 <p>Combine the intersection class expressions within a single <em>union
 class expression</em>. This essentially represents the meaning of the
-&lt;&lt;union&gt;&gt;: if a value is given for one of the options, then there must
+«union»: if a value is given for one of the options, then there must
 not be values for the other options.</p>
 </li>
 </ul>
@@ -1311,7 +1308,7 @@ cardinality restriction for the applicable union property.
 </div>
 <div class="paragraph">
 <p>For further details, see the OGC Testbed 12
-<a href="http://docs.opengeospatial.org/per/16-020.html">ShapeChange Engineering
+<a href="https://docs.ogc.org/per/16-020.html">ShapeChange Engineering
 Report</a> (OGC 16-020).</p>
 </div>
 </div>
@@ -1366,7 +1363,7 @@ adjustment after the ontology has been created by ShapeChange).</p>
 <div class="paragraph">
 <p>If this rule is enabled, then each ontology imports the base ontology
 defined by ISO 19150-2 with IRI
-<a href="http://def.isotc211.org/iso19150-2/2012/base#" class="bare">http://def.isotc211.org/iso19150-2/2012/base#</a></p>
+https://def.isotc211.org/iso19150-2/2012/base#</p>
 </div>
 </div>
 <div class="sect3">
@@ -1581,7 +1578,7 @@ the configuration (more specifically: in PackageInfo elements) or in the
 tagged value "version" of the package. If no version information is
 found there, the version of the parent package is checked. If the parent
 package has version information, it is used for the child package.
-Because of this, &lt;&lt;leaf&gt;&gt; packages of an application schema usually have
+Because of this, «leaf» packages of an application schema usually have
 the same version as the application schema. This can be useful if
 ontologies are created for all packages within a given application
 schema.
@@ -1618,7 +1615,7 @@ the configuration (more specifically: in PackageInfo elements) or in the
 tagged value "version" of the package. If no version information is
 found there, the version of the parent package is checked. If the parent
 package has version information, it is used for the child package.
-Because of this, &lt;&lt;leaf&gt;&gt; packages of an application schema usually have
+Because of this, «leaf» packages of an application schema usually have
 the same version as the application schema. This can be useful if
 ontologies are created for all packages within a given application
 schema.
@@ -1731,8 +1728,8 @@ roles) into OWL properties is enabled or disabled by respectively
 including or excluding <em>rule-owl-prop-general</em> in the encoding rule.</p>
 </div>
 <div class="paragraph">
-<p>However, this rule does not apply to UML properties of &lt;&lt;codeList&gt;&gt; and
-&lt;&lt;enumeration&gt;&gt; types, because the rules defined to convert those types
+<p>However, this rule does not apply to UML properties of «codeList» and
+«enumeration» types, because the rules defined to convert those types
 specify if and how their properties - i.e., listed values - are
 converted.</p>
 </div>
@@ -1927,7 +1924,7 @@ encoded with an unqualified cardinality restriction.</p>
 </div>
 <div class="paragraph">
 <p>Enables property enrichment as documented in the <em>OGC Testbed-14:
-<a href="http://docs.opengeospatial.org/per/18-032r2.html">Application
+<a href="https://docs.ogc.org/per/18-032r2.html">Application
 Schema-based Ontology Development Engineering Report</a></em> (OGC 18-032r2).</p>
 </div>
 </div>
@@ -2111,7 +2108,7 @@ automatically be derived by ShapeChange, for example using
 <div class="ulist">
 <ul>
 <li>
-<p>Once the encoding is available, the &lt;&lt;codeList&gt;&gt; UML classes can be
+<p>Once the encoding is available, the «codeList» UML classes can be
 transformed into stubs to reference the externally managed encoding.
 This approach supports the transition to an application schema where all
 code lists used by the schema are managed externally. In this case, it
@@ -4089,7 +4086,7 @@ in configuration files.</p>
 </div>
 <div class="paragraph">
 <p>As documented in the OGC Testbed-14:
-<a href="http://docs.opengeospatial.org/per/18-032r2.html">Application
+<a href="https://docs.ogc.org/per/18-032r2.html">Application
 Schema-based Ontology Development Engineering Report</a> (OGC 18-032r2),
 ShapeChange supports the creation of new, general RDF/OWL properties.
 Such properties are defined in the configuration using the
@@ -4214,11 +4211,6 @@ Report.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>SQL DDL</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -568,145 +565,151 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#Replication_Schema">4.3. Replication Schema</a></li>
 </ul>
 </li>
-<li><a href="#Configuration">5. Configuration</a>
+<li><a href="#SQL_Encoding_Infos">5. SQL Encoding Infos</a>
 <ul class="sectlevel2">
-<li><a href="#Class">5.1. Class</a></li>
-<li><a href="#Rules">5.2. Rules</a>
-<ul class="sectlevel3">
-<li><a href="#rule-sql-all-associativetables">5.2.1. rule-sql-all-associativetables</a></li>
-<li><a href="#rule-sql-all-associativeTablesWithSeparatePkField">5.2.2. rule-sql-all-associativeTablesWithSeparatePkField</a></li>
-<li><a href="#rule-sql-all-check-constraint-naming-oracle-default">5.2.3. rule-sql-all-check-constraint-naming-oracle-default</a></li>
-<li><a href="#rule-sql-all-check-constraint-naming-pearsonhash">5.2.4. rule-sql-all-check-constraint-naming-pearsonhash</a></li>
-<li><a href="#rule-sql-all-check-constraint-naming-postgresql-default">5.2.5. rule-sql-all-check-constraint-naming-postgresql-default</a></li>
-<li><a href="#rule-sql-all-check-constraint-naming-sqlserver-default">5.2.6. rule-sql-all-check-constraint-naming-sqlserver-default</a></li>
-<li><a href="#rule-sql-all-constraintNameUsingShortName">5.2.7. rule-sql-all-constraintNameUsingShortName</a></li>
-<li><a href="#rule-sql-all-databaseModel">5.2.8. rule-sql-all-databaseModel</a></li>
-<li><a href="#rule-sql-all-documentationViaExplicitCommentStatements">5.2.9. rule-sql-all-documentationViaExplicitCommentStatements</a></li>
-<li><a href="#rule-sql-all-exclude-abstract">5.2.10. rule-sql-all-exclude-abstract</a></li>
-<li><a href="#rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys">5.2.11. rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys</a></li>
-<li><a href="#rule-sql-all-foreign-key-oracle-naming-style">5.2.12. rule-sql-all-foreign-key-oracle-naming-style</a></li>
-<li><a href="#rule-sql-all-foreign-key-pearsonhash-naming">5.2.13. rule-sql-all-foreign-key-pearsonhash-naming</a></li>
-<li><a href="#rule-sql-all-indexNameUsingShortName">5.2.14. rule-sql-all-indexNameUsingShortName</a></li>
-<li><a href="#rule-sql-all-normalizing-ignore-case">5.2.15. rule-sql-all-normalizing-ignore-case</a></li>
-<li><a href="#rule-sql-all-normalizing-lower-case">5.2.16. rule-sql-all-normalizing-lower-case</a></li>
-<li><a href="#rule-sql-all-normalizing-oracle">5.2.17. rule-sql-all-normalizing-oracle</a></li>
-<li><a href="#rule-sql-all-normalizing-sqlserver">5.2.18. rule-sql-all-normalizing-sqlserver</a></li>
-<li><a href="#rule-sql-all-normalizing-upper-case">5.2.19. rule-sql-all-normalizing-upper-case</a></li>
-<li><a href="#rule-sql-all-notEncoded">5.2.20. rule-sql-all-notEncoded</a></li>
-<li><a href="#rule-sql-all-precisionAndScale">5.2.21. rule-sql-all-precisionAndScale</a></li>
-<li><a href="#rule-sql-all-replicationSchema">5.2.22. rule-sql-all-replicationSchema</a></li>
-<li><a href="#rule-sql-all-representTaggedValues">5.2.23. rule-sql-all-representTaggedValues</a></li>
-<li><a href="#rule-sql-all-schemas">5.2.24. rule-sql-all-schemas</a></li>
-<li><a href="#rule-sql-all-suppressDocumentationViaInlineComments">5.2.25. rule-sql-all-suppressDocumentationViaInlineComments</a></li>
-<li><a href="#rule-sql-cls-check-constraint-for-range">5.2.26. rule-sql-cls-check-constraint-for-range</a></li>
-<li><a href="#rule-sql-cls-code-lists">5.2.27. rule-sql-cls-code-lists</a></li>
-<li><a href="#rule-sql-cls-code-lists-pods">5.2.28. rule-sql-cls-code-lists-pods</a></li>
-<li><a href="#rule-sql-cls-data-types">5.2.29. rule-sql-cls-data-types</a></li>
-<li><a href="#rule-sql-cls-data-types-oneToMany-oneTable">5.2.30. rule-sql-cls-data-types-oneToMany-oneTable</a></li>
-<li><a href="#rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase">5.2.31. rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase</a></li>
-<li><a href="#rule-sql-cls-data-types-oneToMany-severalTables">5.2.32. rule-sql-cls-data-types-oneToMany-severalTables</a></li>
-<li><a href="#rule-sql-cls-feature-types">5.2.33. rule-sql-cls-feature-types</a></li>
-<li><a href="#rule-sql-cls-identifierStereotype">5.2.34. rule-sql-cls-identifierStereotype</a></li>
-<li><a href="#rule-sql-cls-object-types">5.2.35. rule-sql-cls-object-types</a></li>
-<li><a href="#rule-sql-cls-references-to-external-types">5.2.36. rule-sql-cls-references-to-external-types</a></li>
-<li><a href="#rule-sql-prop-check-constraint-for-range">5.2.37. rule-sql-prop-check-constraint-for-range</a></li>
-<li><a href="#rule-sql-prop-check-constraints-for-enumerations">5.2.38. rule-sql-prop-check-constraints-for-enumerations</a></li>
-<li><a href="#rule-sql-prop-check-constraint-restrictTimeOfDate">5.2.39. rule-sql-prop-check-constraint-restrictTimeOfDate</a></li>
-<li><a href="#rule-sql-prop-exclude-derived">5.2.40. rule-sql-prop-exclude-derived</a></li>
-<li><a href="#rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType">5.2.41. rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType</a></li>
-<li><a href="#rule-sql-prop-replicationSchema-geometryAnnotation">5.2.42. rule-sql-prop-replicationSchema-geometryAnnotation</a></li>
-<li><a href="#rule-sql-prop-replicationSchema-maxLength-from-size">5.2.43. rule-sql-prop-replicationSchema-maxLength-from-size</a></li>
-<li><a href="#rule-sql-prop-replicationSchema-nillable">5.2.44. rule-sql-prop-replicationSchema-nillable</a></li>
-<li><a href="#rule-sql-prop-replicationSchema-optional">5.2.45. rule-sql-prop-replicationSchema-optional</a></li>
-<li><a href="#rule-sql-prop-uniqueConstraints">5.2.46. rule-sql-prop-uniqueConstraints</a></li>
+<li><a href="#SQL_Encoding_InfosExample">5.1. Example</a></li>
 </ul>
 </li>
-<li><a href="#Parameters">5.3. Parameters</a>
+<li><a href="#Configuration">6. Configuration</a>
+<ul class="sectlevel2">
+<li><a href="#Class">6.1. Class</a></li>
+<li><a href="#Rules">6.2. Rules</a>
 <ul class="sectlevel3">
-<li><a href="#applyForeignKeyColumnSuffixesInAssociativeTables">5.3.1. applyForeignKeyColumnSuffixesInAssociativeTables</a></li>
-<li><a href="#codeNameColumnDocumentation">5.3.2. codeNameColumnDocumentation</a></li>
-<li><a href="#codeNameColumnName">5.3.3. codeNameColumnName</a></li>
-<li><a href="#codeNameSize">5.3.4. codeNameSize</a></li>
-<li><a href="#codeStatusCLColumnDocumentation">5.3.5. codeStatusCLColumnDocumentation</a></li>
-<li><a href="#codeStatusCLLength">5.3.6. codeStatusCLLength</a></li>
-<li><a href="#codeStatusCLType">5.3.7. codeStatusCLType</a></li>
-<li><a href="#codeStatusNotesColumnDocumentation">5.3.8. codeStatusNotesColumnDocumentation</a></li>
-<li><a href="#codeSupercedesColumnDocumentation">5.3.9. codeSupercedesColumnDocumentation</a></li>
-<li><a href="#createDocumentation">5.3.10. createDocumentation</a></li>
-<li><a href="#createReferences">5.3.11. createReferences</a></li>
-<li><a href="#dataModelEapPath">5.3.12. dataModelEapPath</a></li>
-<li><a href="#dataModelEstablishPackageHierarchy">5.3.13. dataModelEstablishPackageHierarchy</a></li>
-<li><a href="#dataModelPatternPath">5.3.14. dataModelPatternPath</a></li>
-<li><a href="#databaseSystem">5.3.15. databaseSystem</a></li>
-<li><a href="#dbOwner">5.3.16. dbOwner</a></li>
-<li><a href="#dbVersion">5.3.17. dbVersion</a></li>
-<li><a href="#defaultEncodingRule">5.3.18. defaultEncodingRule</a></li>
-<li><a href="#deletePreExistingDataModelPackage">5.3.19. deletePreExistingDataModelPackage</a></li>
-<li><a href="#descriptorsForCodelist">5.3.20. descriptorsForCodelist</a></li>
-<li><a href="#documentationNoValue">5.3.21. documentationNoValue</a></li>
-<li><a href="#documentationTemplate">5.3.22. documentationTemplate</a></li>
-<li><a href="#eaAuthor">5.3.23. eaAuthor</a></li>
-<li><a href="#eaStatus">5.3.24. eaStatus</a></li>
-<li><a href="#fileDdlBottom">5.3.25. fileDdlBottom</a></li>
-<li><a href="#fileDdlTop">5.3.26. fileDdlTop</a></li>
-<li><a href="#foreignKeyColumnDatatype">5.3.27. foreignKeyColumnDatatype</a></li>
-<li><a href="#foreignKeyColumnSuffix">5.3.28. foreignKeyColumnSuffix</a></li>
-<li><a href="#foreignKeyColumnSuffixCodelist">5.3.29. foreignKeyColumnSuffixCodelist</a></li>
-<li><a href="#foreignKeyColumnSuffixDatatype">5.3.30. foreignKeyColumnSuffixDatatype</a></li>
-<li><a href="#foreignKeyDeferrable">5.3.31. foreignKeyDeferrable</a></li>
-<li><a href="#foreignKeyInitialConstraintMode">5.3.32. foreignKeyInitialConstraintMode</a></li>
-<li><a href="#foreignKeyOnDelete">5.3.33. foreignKeyOnDelete</a></li>
-<li><a href="#foreignKeyOnUpdate">5.3.34. foreignKeyOnUpdate</a></li>
-<li><a href="#geometryDimension">5.3.35. geometryDimension</a></li>
-<li><a href="#idColumnName">5.3.36. idColumnName</a></li>
-<li><a href="#lengthQualifier">5.3.37. lengthQualifier</a></li>
-<li><a href="#maxNameLength">5.3.38. maxNameLength</a></li>
-<li><a href="#nameForCodeStatusCLColumn">5.3.39. nameForCodeStatusCLColumn</a></li>
-<li><a href="#nameForCodeStatusNotesColumn">5.3.40. nameForCodeStatusNotesColumn</a></li>
-<li><a href="#nameForCodeSupercedesColumn">5.3.41. nameForCodeSupercedesColumn</a></li>
-<li><a href="#oneToManyReferenceColumnName">5.3.42. oneToManyReferenceColumnName</a></li>
-<li><a href="#outputDirectory">5.3.43. outputDirectory</a></li>
-<li><a href="#postgreSqlRole">5.3.44. postgreSqlRole</a></li>
-<li><a href="#primaryKeySpecification">5.3.45. primaryKeySpecification</a></li>
-<li><a href="#primaryKeySpecificationCodelist">5.3.46. primaryKeySpecificationCodelist</a></li>
-<li><a href="#reflexiveRelationshipFieldSuffix">5.3.47. reflexiveRelationshipFieldSuffix</a></li>
-<li><a href="#removeEmptyLinesInDdlOutput">5.3.48. removeEmptyLinesInDdlOutput</a></li>
-<li><a href="#replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType">5.3.49. replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType</a></li>
-<li><a href="#replicationSchemaObjectIdentifierFieldType">5.3.50. replicationSchemaObjectIdentifierFieldType</a></li>
-<li><a href="#replicationSchemaForeignKeyFieldType">5.3.51. replicationSchemaForeignKeyFieldType</a></li>
-<li><a href="#replicationSchemaTargetNamespaceSuffix">5.3.52. replicationSchemaTargetNamespaceSuffix</a></li>
-<li><a href="#sdoDimElements">5.3.53. sdoDimElements</a></li>
-<li><a href="#separateCodeInsertStatementsByCodelistType">5.3.54. separateCodeInsertStatementsByCodelistType</a></li>
-<li><a href="#separateSpatialIndexStatements">5.3.55. separateSpatialIndexStatements</a></li>
-<li><a href="#shortNameByTaggedValue">5.3.56. shortNameByTaggedValue</a></li>
-<li><a href="#size">5.3.57. size</a></li>
-<li><a href="#srid">5.3.58. srid</a></li>
-<li><a href="#tablespace">5.3.59. tablespace</a></li>
+<li><a href="#rule-sql-all-associativetables">6.2.1. rule-sql-all-associativetables</a></li>
+<li><a href="#rule-sql-all-associativeTablesWithSeparatePkField">6.2.2. rule-sql-all-associativeTablesWithSeparatePkField</a></li>
+<li><a href="#rule-sql-all-check-constraint-naming-oracle-default">6.2.3. rule-sql-all-check-constraint-naming-oracle-default</a></li>
+<li><a href="#rule-sql-all-check-constraint-naming-pearsonhash">6.2.4. rule-sql-all-check-constraint-naming-pearsonhash</a></li>
+<li><a href="#rule-sql-all-check-constraint-naming-postgresql-default">6.2.5. rule-sql-all-check-constraint-naming-postgresql-default</a></li>
+<li><a href="#rule-sql-all-check-constraint-naming-sqlserver-default">6.2.6. rule-sql-all-check-constraint-naming-sqlserver-default</a></li>
+<li><a href="#rule-sql-all-constraintNameUsingShortName">6.2.7. rule-sql-all-constraintNameUsingShortName</a></li>
+<li><a href="#rule-sql-all-databaseModel">6.2.8. rule-sql-all-databaseModel</a></li>
+<li><a href="#rule-sql-all-documentationViaExplicitCommentStatements">6.2.9. rule-sql-all-documentationViaExplicitCommentStatements</a></li>
+<li><a href="#rule-sql-all-exclude-abstract">6.2.10. rule-sql-all-exclude-abstract</a></li>
+<li><a href="#rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys">6.2.11. rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys</a></li>
+<li><a href="#rule-sql-all-foreign-key-oracle-naming-style">6.2.12. rule-sql-all-foreign-key-oracle-naming-style</a></li>
+<li><a href="#rule-sql-all-foreign-key-pearsonhash-naming">6.2.13. rule-sql-all-foreign-key-pearsonhash-naming</a></li>
+<li><a href="#rule-sql-all-indexNameUsingShortName">6.2.14. rule-sql-all-indexNameUsingShortName</a></li>
+<li><a href="#rule-sql-all-normalizing-ignore-case">6.2.15. rule-sql-all-normalizing-ignore-case</a></li>
+<li><a href="#rule-sql-all-normalizing-lower-case">6.2.16. rule-sql-all-normalizing-lower-case</a></li>
+<li><a href="#rule-sql-all-normalizing-oracle">6.2.17. rule-sql-all-normalizing-oracle</a></li>
+<li><a href="#rule-sql-all-normalizing-sqlserver">6.2.18. rule-sql-all-normalizing-sqlserver</a></li>
+<li><a href="#rule-sql-all-normalizing-upper-case">6.2.19. rule-sql-all-normalizing-upper-case</a></li>
+<li><a href="#rule-sql-all-notEncoded">6.2.20. rule-sql-all-notEncoded</a></li>
+<li><a href="#rule-sql-all-precisionAndScale">6.2.21. rule-sql-all-precisionAndScale</a></li>
+<li><a href="#rule-sql-all-replicationSchema">6.2.22. rule-sql-all-replicationSchema</a></li>
+<li><a href="#rule-sql-all-representTaggedValues">6.2.23. rule-sql-all-representTaggedValues</a></li>
+<li><a href="#rule-sql-all-schemas">6.2.24. rule-sql-all-schemas</a></li>
+<li><a href="#rule-sql-all-suppressDocumentationViaInlineComments">6.2.25. rule-sql-all-suppressDocumentationViaInlineComments</a></li>
+<li><a href="#rule-sql-cls-check-constraint-for-range">6.2.26. rule-sql-cls-check-constraint-for-range</a></li>
+<li><a href="#rule-sql-cls-code-lists">6.2.27. rule-sql-cls-code-lists</a></li>
+<li><a href="#rule-sql-cls-code-lists-pods">6.2.28. rule-sql-cls-code-lists-pods</a></li>
+<li><a href="#rule-sql-cls-data-types">6.2.29. rule-sql-cls-data-types</a></li>
+<li><a href="#rule-sql-cls-data-types-oneToMany-oneTable">6.2.30. rule-sql-cls-data-types-oneToMany-oneTable</a></li>
+<li><a href="#rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase">6.2.31. rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase</a></li>
+<li><a href="#rule-sql-cls-data-types-oneToMany-severalTables">6.2.32. rule-sql-cls-data-types-oneToMany-severalTables</a></li>
+<li><a href="#rule-sql-cls-feature-types">6.2.33. rule-sql-cls-feature-types</a></li>
+<li><a href="#rule-sql-cls-identifierStereotype">6.2.34. rule-sql-cls-identifierStereotype</a></li>
+<li><a href="#rule-sql-cls-object-types">6.2.35. rule-sql-cls-object-types</a></li>
+<li><a href="#rule-sql-cls-references-to-external-types">6.2.36. rule-sql-cls-references-to-external-types</a></li>
+<li><a href="#rule-sql-prop-check-constraint-for-range">6.2.37. rule-sql-prop-check-constraint-for-range</a></li>
+<li><a href="#rule-sql-prop-check-constraints-for-enumerations">6.2.38. rule-sql-prop-check-constraints-for-enumerations</a></li>
+<li><a href="#rule-sql-prop-check-constraint-restrictTimeOfDate">6.2.39. rule-sql-prop-check-constraint-restrictTimeOfDate</a></li>
+<li><a href="#rule-sql-prop-exclude-derived">6.2.40. rule-sql-prop-exclude-derived</a></li>
+<li><a href="#rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType">6.2.41. rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType</a></li>
+<li><a href="#rule-sql-prop-replicationSchema-geometryAnnotation">6.2.42. rule-sql-prop-replicationSchema-geometryAnnotation</a></li>
+<li><a href="#rule-sql-prop-replicationSchema-maxLength-from-size">6.2.43. rule-sql-prop-replicationSchema-maxLength-from-size</a></li>
+<li><a href="#rule-sql-prop-replicationSchema-nillable">6.2.44. rule-sql-prop-replicationSchema-nillable</a></li>
+<li><a href="#rule-sql-prop-replicationSchema-optional">6.2.45. rule-sql-prop-replicationSchema-optional</a></li>
+<li><a href="#rule-sql-prop-uniqueConstraints">6.2.46. rule-sql-prop-uniqueConstraints</a></li>
 </ul>
 </li>
-<li><a href="#Map_Entries">5.4. Map Entries</a>
+<li><a href="#Parameters">6.3. Parameters</a>
 <ul class="sectlevel3">
-<li><a href="#type">5.4.1. type</a></li>
-<li><a href="#rule">5.4.2. rule</a></li>
-<li><a href="#targetType">5.4.3. targetType</a></li>
-<li><a href="#param">5.4.4. param</a>
+<li><a href="#applyForeignKeyColumnSuffixesInAssociativeTables">6.3.1. applyForeignKeyColumnSuffixesInAssociativeTables</a></li>
+<li><a href="#codeNameColumnDocumentation">6.3.2. codeNameColumnDocumentation</a></li>
+<li><a href="#codeNameColumnName">6.3.3. codeNameColumnName</a></li>
+<li><a href="#codeNameSize">6.3.4. codeNameSize</a></li>
+<li><a href="#codeStatusCLColumnDocumentation">6.3.5. codeStatusCLColumnDocumentation</a></li>
+<li><a href="#codeStatusCLLength">6.3.6. codeStatusCLLength</a></li>
+<li><a href="#codeStatusCLType">6.3.7. codeStatusCLType</a></li>
+<li><a href="#codeStatusNotesColumnDocumentation">6.3.8. codeStatusNotesColumnDocumentation</a></li>
+<li><a href="#codeSupercedesColumnDocumentation">6.3.9. codeSupercedesColumnDocumentation</a></li>
+<li><a href="#createDocumentation">6.3.10. createDocumentation</a></li>
+<li><a href="#createReferences">6.3.11. createReferences</a></li>
+<li><a href="#dataModelEaRepositoryPath">6.3.12. dataModelEaRepositoryPath</a></li>
+<li><a href="#dataModelEstablishPackageHierarchy">6.3.13. dataModelEstablishPackageHierarchy</a></li>
+<li><a href="#dataModelPatternPath">6.3.14. dataModelPatternPath</a></li>
+<li><a href="#databaseSystem">6.3.15. databaseSystem</a></li>
+<li><a href="#dbOwner">6.3.16. dbOwner</a></li>
+<li><a href="#dbVersion">6.3.17. dbVersion</a></li>
+<li><a href="#defaultEncodingRule">6.3.18. defaultEncodingRule</a></li>
+<li><a href="#deletePreExistingDataModelPackage">6.3.19. deletePreExistingDataModelPackage</a></li>
+<li><a href="#descriptorsForCodelist">6.3.20. descriptorsForCodelist</a></li>
+<li><a href="#documentationNoValue">6.3.21. documentationNoValue</a></li>
+<li><a href="#documentationTemplate">6.3.22. documentationTemplate</a></li>
+<li><a href="#eaAuthor">6.3.23. eaAuthor</a></li>
+<li><a href="#eaStatus">6.3.24. eaStatus</a></li>
+<li><a href="#fileDdlBottom">6.3.25. fileDdlBottom</a></li>
+<li><a href="#fileDdlTop">6.3.26. fileDdlTop</a></li>
+<li><a href="#foreignKeyColumnDatatype">6.3.27. foreignKeyColumnDatatype</a></li>
+<li><a href="#foreignKeyColumnSuffix">6.3.28. foreignKeyColumnSuffix</a></li>
+<li><a href="#foreignKeyColumnSuffixCodelist">6.3.29. foreignKeyColumnSuffixCodelist</a></li>
+<li><a href="#foreignKeyColumnSuffixDatatype">6.3.30. foreignKeyColumnSuffixDatatype</a></li>
+<li><a href="#foreignKeyDeferrable">6.3.31. foreignKeyDeferrable</a></li>
+<li><a href="#foreignKeyInitialConstraintMode">6.3.32. foreignKeyInitialConstraintMode</a></li>
+<li><a href="#foreignKeyOnDelete">6.3.33. foreignKeyOnDelete</a></li>
+<li><a href="#foreignKeyOnUpdate">6.3.34. foreignKeyOnUpdate</a></li>
+<li><a href="#geometryDimension">6.3.35. geometryDimension</a></li>
+<li><a href="#idColumnName">6.3.36. idColumnName</a></li>
+<li><a href="#lengthQualifier">6.3.37. lengthQualifier</a></li>
+<li><a href="#maxNameLength">6.3.38. maxNameLength</a></li>
+<li><a href="#nameForCodeStatusCLColumn">6.3.39. nameForCodeStatusCLColumn</a></li>
+<li><a href="#nameForCodeStatusNotesColumn">6.3.40. nameForCodeStatusNotesColumn</a></li>
+<li><a href="#nameForCodeSupercedesColumn">6.3.41. nameForCodeSupercedesColumn</a></li>
+<li><a href="#oneToManyReferenceColumnName">6.3.42. oneToManyReferenceColumnName</a></li>
+<li><a href="#outputDirectory">6.3.43. outputDirectory</a></li>
+<li><a href="#postgreSqlRole">6.3.44. postgreSqlRole</a></li>
+<li><a href="#primaryKeySpecification">6.3.45. primaryKeySpecification</a></li>
+<li><a href="#primaryKeySpecificationCodelist">6.3.46. primaryKeySpecificationCodelist</a></li>
+<li><a href="#reflexiveRelationshipFieldSuffix">6.3.47. reflexiveRelationshipFieldSuffix</a></li>
+<li><a href="#removeEmptyLinesInDdlOutput">6.3.48. removeEmptyLinesInDdlOutput</a></li>
+<li><a href="#replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType">6.3.49. replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType</a></li>
+<li><a href="#replicationSchemaObjectIdentifierFieldType">6.3.50. replicationSchemaObjectIdentifierFieldType</a></li>
+<li><a href="#replicationSchemaForeignKeyFieldType">6.3.51. replicationSchemaForeignKeyFieldType</a></li>
+<li><a href="#replicationSchemaTargetNamespaceSuffix">6.3.52. replicationSchemaTargetNamespaceSuffix</a></li>
+<li><a href="#sdoDimElements">6.3.53. sdoDimElements</a></li>
+<li><a href="#separateCodeInsertStatementsByCodelistType">6.3.54. separateCodeInsertStatementsByCodelistType</a></li>
+<li><a href="#separateSpatialIndexStatements">6.3.55. separateSpatialIndexStatements</a></li>
+<li><a href="#shortNameByTaggedValue">6.3.56. shortNameByTaggedValue</a></li>
+<li><a href="#size">6.3.57. size</a></li>
+<li><a href="#srid">6.3.58. srid</a></li>
+<li><a href="#tablespace">6.3.59. tablespace</a></li>
+<li><a href="#writeSqlEncodingInfos">6.3.60. writeSqlEncodingInfos</a></li>
+</ul>
+</li>
+<li><a href="#Map_Entries">6.4. Map Entries</a>
+<ul class="sectlevel3">
+<li><a href="#type">6.4.1. type</a></li>
+<li><a href="#rule">6.4.2. rule</a></li>
+<li><a href="#targetType">6.4.3. targetType</a></li>
+<li><a href="#param">6.4.4. param</a>
 <ul class="sectlevel4">
-<li><a href="#Parameter_defaultValue">5.4.4.1. Parameter: defaultValue</a></li>
-<li><a href="#Parameter_length">5.4.4.2. Parameter: length</a></li>
-<li><a href="#Parameter_geometry">5.4.4.3. Parameter: geometry</a></li>
-<li><a href="#Parameter_precision">5.4.4.4. Parameter: precision</a></li>
-<li><a href="#Parameter_table">5.4.4.5. Parameter: table</a></li>
+<li><a href="#Parameter_defaultValue">6.4.4.1. Parameter: defaultValue</a></li>
+<li><a href="#Parameter_length">6.4.4.2. Parameter: length</a></li>
+<li><a href="#Parameter_geometry">6.4.4.3. Parameter: geometry</a></li>
+<li><a href="#Parameter_precision">6.4.4.4. Parameter: precision</a></li>
+<li><a href="#Parameter_table">6.4.4.5. Parameter: table</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#Configuration_Examples">6. Configuration Examples</a>
+<li><a href="#Configuration_Examples">7. Configuration Examples</a>
 <ul class="sectlevel2">
-<li><a href="#DDL">6.1. DDL</a></li>
-<li><a href="#Configuration_Examples_Replication_Schema">6.2. Replication Schema</a></li>
-<li><a href="#Configuration_Examples_Database_Model">6.3. Database Model</a></li>
+<li><a href="#DDL">7.1. DDL</a></li>
+<li><a href="#Configuration_Examples_Replication_Schema">7.2. Replication Schema</a></li>
+<li><a href="#Configuration_Examples_Database_Model">7.3. Database Model</a></li>
 </ul>
 </li>
 </ul>
@@ -861,7 +864,7 @@ applied to the model.</p>
 <div class="paragraph">
 <p>For example, if the application schema contains classes whose name is a
 SQL keyword (see
-<a href="http://www.postgresql.org/docs/current/static/sql-keywords-appendix.html">this
+<a href="https://www.postgresql.org/docs/current/sql-keywords-appendix.html">this
 list</a>, for example), the
 <a href="../transformations/Naming_Modifier.html">Naming
 Modifier</a> transformation can be applied to change the names of these
@@ -952,7 +955,7 @@ target generates CREATE TABLE statements:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If an &lt;&lt;identifier&gt;&gt; attribute is defined for a type in the
+<p>If an «identifier» attribute is defined for a type in the
 conceptual schema (see
 <a href="./SQL_DDL.html#rule-sql-cls-identifierStereotype"><em>rule-sql-cls-identifierStereotype</em></a>)
 then the column that represents that attribute will be the primary key
@@ -1588,7 +1591,7 @@ the value is either 'immediate' (the default) or 'deferred'</p>
 <p>PostgreSQL: supported - see the <a href="https://www.postgresql.org/docs/current/sql-createtable.html">PostgreSQL documentation</a></p>
 </li>
 <li>
-<p>SQL Server: not supported - see the <a href="https://docs.microsoft.com/en-us/openspecs/sql_standards/ms-tsqliso02/70d6050a-28c7-4fae-a205-200ccb363522">SQL Server Transact-SQL ISO/IEC 9075-2 Standards Support Document</a></p>
+<p>SQL Server: not supported - see the <a href="https://learn.microsoft.com/en-us/openspecs/sql_standards/ms-tsqliso02/70d6050a-28c7-4fae-a205-200ccb363522">SQL Server Transact-SQL ISO/IEC 9075-2 Standards Support Document</a></p>
 </li>
 <li>
 <p>SQLite: supported - see the <a href="https://www.sqlite.org/foreignkeys.html#fk_deferred">SQLite documentation on deferred foreign key constraints</a>.</p>
@@ -1603,8 +1606,8 @@ the value is either 'immediate' (the default) or 'deferred'</p>
 </td>
 <td class="content">
 According to the Enterprise Architect documentation for database modeling (v15.2),
-specifically the pages on <a href="https://sparxsystems.com/enterprise_architect_user_guide/15.2/model_domains/constraints2.html">database table constraints / indexes</a> and
-<a href="https://sparxsystems.com/enterprise_architect_user_guide/15.2/model_domains/foreignkeys.html">foreign keys</a>,
+specifically the pages on <a href="https://sparxsystems.com/enterprise_architect_user_guide/16.1/modeling_domains/constraints2.html">database table constraints / indexes</a> and
+<a href="https://sparxsystems.com/enterprise_architect_user_guide/16.1/modeling_domains/foreignkeys.html">foreign keys</a>,
 EA database models do not contain constraint checking options.
 </td>
 </tr>
@@ -2356,17 +2359,374 @@ are ignored, for example foreign key constraints.
 </div>
 </div>
 <div class="sect1">
-<h2 id="Configuration"><a class="anchor" href="#Configuration"></a>5. Configuration</h2>
+<h2 id="SQL_Encoding_Infos"><a class="anchor" href="#SQL_Encoding_Infos"></a>5. SQL Encoding Infos</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(since v2.14.0)</p>
+</div>
+<div class="paragraph">
+<p>The primary purpose of the SQL DDL target is to encode a given
+application schema as a database schema. However, the way in which certain
+model elements are represented by the database schema may be of
+interest for additional applications. For example, the
+<a href="./ldproxy2.html">ldproxy target</a> can use it to determine
+source path information when encoding an application schema as ldproxy
+configuration files. When the SQL DDL target parameter
+<a href="./SQL_DDL.html#writeSqlEncodingInfos">writeSqlEncodingInfos</a>
+is set to <code>true</code>, the target will create an XML file with details
+about the database representation of model elements, based upon
+the generated database schema.
+The name of that file has suffix <code>_SqlEncodingInfos.xml</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Information about the origin of a schema element, such as the
+original name of a class or property (before the name was modified by
+a model transformation), can be taken into account, if according
+tagged values are set. These tags can be added to the model via the
+<a href="../transformations/Tagged_Value_Transformer.html">tagged value transformer</a>,
+more specifically via its transformation
+<a href="../transformations/Tagged_Value_Transformer.html#rule-trf-taggedValue-createOriginalSchemaInformationTags">rule-trf-taggedValue-createOriginalSchemaInformationTags</a>
+(which also documents the names of relevant tags).</p>
+</div>
+<div class="paragraph">
+<p>Care must be taken, however, when attempting to match elements of a
+transformed model with elements from the original model. Certain
+model transformations can alter the model in a way where tracing
+back to the original model elements is not feasible (or where the
+necessary tracing mechanics would need to be designed first). An
+example is <a href="../transformations/Flattener.html#rule-trf-prop-flatten-types">flattening of complex types</a>.
+There, the semantics of properties is getting mixed, when creating copies
+of value type properties. The only exception are unions that
+represent feature type sets, such as those that are generated when
+flattening inheritance.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The SQL encoding infos are contained in XML element <code>SqlEncodingInfos</code>.
+Its structure is defined in the
+<a href="https://shapechange.net/resources/schema/ShapeChangeConfiguration.xsd">ShapeChange Configuration XML Schema</a>.
+The two main components are <code>SqlClassEncodingInfo</code> and <code>SqlPropertyEncodingInfo</code> elements.</p>
+</div>
+<div class="paragraph">
+<p>A <code>SqlClassEncodingInfo</code> element has the following XML attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>schemaName (required): Name of the schema to which the class belongs
+(in the model encoded by the SqlDdl target).</p>
+</li>
+<li>
+<p>originalSchemaName (optional): Name of the schema to which the class
+originally belonged. Can be omitted, if the value is the same as schemaName.</p>
+</li>
+<li>
+<p>className (required): Class name (in the model encoded by the SqlDdl
+target).</p>
+</li>
+<li>
+<p>originalClassName (optional): Name of the class in the original schema.
+Can be omitted, if the value is the same as className.</p>
+</li>
+<li>
+<p>tableName (optional): Identifier of the database table that represents
+the class. Multiple SqlClassEncodingInfo elements may exist with same
+className but different tableName. That can be the case if the class is
+represented by multiple, property usage specific tables.</p>
+</li>
+<li>
+<p>databaseSchema (optional): Identifier of the database schema, in which
+the table is defined. Can be omitted if no particular schema is defined
+for the table.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A <code>SqlPropertyEncodingInfo</code> element has the following XML attributes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>schemaName (required): Name of the schema to which the property belongs
+(in the model encoded by the SqlDdl target).</p>
+</li>
+<li>
+<p>originalSchemaName (optional): Name of the schema to which the property
+originally belonged. Can be omitted, if the value is the same as schemaName.</p>
+</li>
+<li>
+<p>propertyName (required): Property name (in the model encoded by the
+SqlDdl target).</p>
+</li>
+<li>
+<p>originalPropertyName (optional): Name of the property in the original schema.
+Can be omitted, if the value is the same as propertyName.</p>
+</li>
+<li>
+<p>inClassName (required): Name of the class that owns the property (in the
+model encoded by the SqlDdl target).</p>
+</li>
+<li>
+<p>originalInClassName (optional): Name of the class that owned the
+property in the original schema. Can be omitted, if the value is the
+same as inClassName.</p>
+</li>
+<li>
+<p>propertyValueType (required): Name of the property value type (in the
+model encoded by the SqlDdl target).</p>
+</li>
+<li>
+<p>originalPropertyValueType (optional): Name of the property value type
+in the original schema. Can be omitted, if the value is the same as
+propertyValueType.</p>
+</li>
+<li>
+<p>propertyMultiplicity (required): Multiplicity of the property (in the
+model encoded by the SqlDdl target).</p>
+</li>
+<li>
+<p>originalPropertyMultiplicity (optional): Multiplicity of the property
+in the original schema. Can be omitted, if the value is the same as
+propertyMultiplicity.</p>
+</li>
+<li>
+<p>sourceTable (required): Name of the database table that provides the
+context for the sourcePath.</p>
+</li>
+<li>
+<p>sourceTableSchema (optional): Identifier of the database schema, in
+which the sourceTable is defined. Can be omitted if no particular
+schema is defined for the sourceTable.</p>
+</li>
+<li>
+<p>valueSourcePath (required): Path expression (in syntax used by the
+<a href="./ldproxy2.html">ldproxy target</a>) that is used to access the property
+values in the database.</p>
+</li>
+<li>
+<p>idSourcePath (optional): Path expression (in syntax used by the
+<a href="./ldproxy2.html">ldproxy target</a>) that is used to access the database
+identifiers, i.e., the primary keys, of (complex) property values in the database.
+Can be omitted for cases in which the property values are
+simple, such as strings and integers.</p>
+</li>
+<li>
+<p>idValueType (optional): Type of value provided by the idSourcePath,
+if one is defined. Either <code>string</code> or <code>integer</code> (default value).</p>
+</li>
+<li>
+<p>targetTable (optional): Name of the database table that the source path
+evaluates to. Can be omitted, if no such table exists - then the source
+path typically resolves to a simple value contained in a field within the source
+table, not to a complex value in another table.</p>
+</li>
+<li>
+<p>targetTableSchema (optional): Identifier of the database schema, in
+which the targetTable is defined. Can be omitted if no particular
+schema is defined for the targetTable.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="SQL_Encoding_InfosExample"><a class="anchor" href="#SQL_Encoding_InfosExample"></a>5.1. Example</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The following example is from one of the ShapeChange unit tests.
+The model, configuration, and results of that test are available
+<a href="https://github.com/ShapeChange/ShapeChange/tree/master/src/test/resources/sql/sqlEncodingInfos">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="xml"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+</pre></td>
+  <td class="code"><pre><span class="tag">&lt;SqlEncodingInfos</span> <span class="attribute-name">xmlns</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.interactive-instruments.de/ShapeChange/Configuration/1.1</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+   <span class="tag">&lt;modelElementEncodings&gt;</span>
+      <span class="tag">&lt;SqlClassEncodingInfo</span> <span class="attribute-name">className</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">tableName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class1</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlClassEncodingInfo</span> <span class="attribute-name">className</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class2</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">tableName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class2</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="comment">&lt;!-- ... ---&gt;</span>
+      <span class="tag">&lt;SqlClassEncodingInfo</span> <span class="attribute-name">className</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">tableName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlClassEncodingInfo</span> <span class="attribute-name">className</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class4</span><span class="delimiter">&quot;</span></span>
+                            <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                            <span class="attribute-name">tableName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1_p4_t3_class4</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlClassEncodingInfo</span> <span class="attribute-name">className</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class4</span><span class="delimiter">&quot;</span></span>
+                            <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                            <span class="attribute-name">tableName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1_p9_t3_class4</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="comment">&lt;!-- ... --&gt;</span>
+      <span class="tag">&lt;SqlPropertyEncodingInfo</span> <span class="attribute-name">inClassName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyValueType</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Integer</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">sourceTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">valueSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p1</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlPropertyEncodingInfo</span> <span class="attribute-name">idSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t3_class1_id]t3_class1_p4_t3_class4/_id</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">inClassName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1..*</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0..*</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p4_t3_Class4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyValueType</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">sourceTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">targetTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1_p4_t3_class4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">valueSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t3_class1_id]t3_class1_p4_t3_class4</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlPropertyEncodingInfo</span> <span class="attribute-name">idSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t3_class1_id]t3_class1_p9_t3_class4/_id</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">inClassName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p9</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0..1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p9_t3_Class4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyValueType</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T3_Class4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">sourceTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">targetTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t3_class1_p9_t3_class4</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">valueSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t3_class1_id]t3_class1_p9_t3_class4</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlPropertyEncodingInfo</span> <span class="attribute-name">idSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t1_class1_id]t1_class1_pa1/t1_class2_id</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">inClassName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0..*</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pA1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyValueType</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">sourceTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">targetTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">valueSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[_id=t1_class1_id]t1_class1_pa1/[t1_class2_id=_id]t1_class2</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlPropertyEncodingInfo</span> <span class="attribute-name">idSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pb6_1_fk</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">inClassName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1..2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pB6</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pB6_1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyValueType</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">sourceTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">targetTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">valueSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[pb6_1_fk=_id]t1_class1</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="tag">&lt;SqlPropertyEncodingInfo</span> <span class="attribute-name">idSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pb6_2_fk</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">inClassName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">1..2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">originalPropertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pB6</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyMultiplicity</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">0..1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">pB6_2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">propertyValueType</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">T1_Class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">schemaName</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Test</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">sourceTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class2</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">targetTable</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">t1_class1</span><span class="delimiter">&quot;</span></span>
+                               <span class="attribute-name">valueSourcePath</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">[pb6_2_fk=_id]t1_class1</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+      <span class="comment">&lt;!-- ... --&gt;</span>
+   <span class="tag">&lt;/modelElementEncodings&gt;</span>
+<span class="tag">&lt;/SqlEncodingInfos&gt;</span></pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Configuration"><a class="anchor" href="#Configuration"></a>6. Configuration</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="Class"><a class="anchor" href="#Class"></a>5.1. Class</h3>
+<h3 id="Class"><a class="anchor" href="#Class"></a>6.1. Class</h3>
 <div class="paragraph">
 <p>The class for the target implementation is
 <em>de.interactive_instruments.ShapeChange.Target.SQL.SqlDdl.</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Rules"><a class="anchor" href="#Rules"></a>5.2. Rules</h3>
+<h3 id="Rules"><a class="anchor" href="#Rules"></a>6.2. Rules</h3>
 <div class="paragraph">
 <p>An &lt;EncodingRule&gt; element defines an encoding rule.</p>
 </div>
@@ -2450,7 +2810,7 @@ conversion process.</p>
 <p>The following sections list the rules that are supported by this target.</p>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-associativetables"><a class="anchor" href="#rule-sql-all-associativetables"></a>5.2.1. rule-sql-all-associativetables</h4>
+<h4 id="rule-sql-all-associativetables"><a class="anchor" href="#rule-sql-all-associativetables"></a>6.2.1. rule-sql-all-associativetables</h4>
 <div class="paragraph">
 <p>This rule ensures that associative tables are created for cases in which
 an n:m relationship exists between types.</p>
@@ -2490,7 +2850,7 @@ property name</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-associativeTablesWithSeparatePkField"><a class="anchor" href="#rule-sql-all-associativeTablesWithSeparatePkField"></a>5.2.2. rule-sql-all-associativeTablesWithSeparatePkField</h4>
+<h4 id="rule-sql-all-associativeTablesWithSeparatePkField"><a class="anchor" href="#rule-sql-all-associativeTablesWithSeparatePkField"></a>6.2.2. rule-sql-all-associativeTablesWithSeparatePkField</h4>
 <div class="paragraph">
 <p>(since v2.13.0)</p>
 </div>
@@ -2510,7 +2870,7 @@ PK-field, similar to how such a PK-field is generated for a
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-check-constraint-naming-oracle-default"><a class="anchor" href="#rule-sql-all-check-constraint-naming-oracle-default"></a>5.2.3. rule-sql-all-check-constraint-naming-oracle-default</h4>
+<h4 id="rule-sql-all-check-constraint-naming-oracle-default"><a class="anchor" href="#rule-sql-all-check-constraint-naming-oracle-default"></a>6.2.3. rule-sql-all-check-constraint-naming-oracle-default</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2547,7 +2907,7 @@ characters.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-check-constraint-naming-pearsonhash"><a class="anchor" href="#rule-sql-all-check-constraint-naming-pearsonhash"></a>5.2.4. rule-sql-all-check-constraint-naming-pearsonhash</h4>
+<h4 id="rule-sql-all-check-constraint-naming-pearsonhash"><a class="anchor" href="#rule-sql-all-check-constraint-naming-pearsonhash"></a>6.2.4. rule-sql-all-check-constraint-naming-pearsonhash</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2592,7 +2952,7 @@ characters.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-check-constraint-naming-postgresql-default"><a class="anchor" href="#rule-sql-all-check-constraint-naming-postgresql-default"></a>5.2.5. rule-sql-all-check-constraint-naming-postgresql-default</h4>
+<h4 id="rule-sql-all-check-constraint-naming-postgresql-default"><a class="anchor" href="#rule-sql-all-check-constraint-naming-postgresql-default"></a>6.2.5. rule-sql-all-check-constraint-naming-postgresql-default</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2604,7 +2964,7 @@ characters.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-check-constraint-naming-sqlserver-default"><a class="anchor" href="#rule-sql-all-check-constraint-naming-sqlserver-default"></a>5.2.6. rule-sql-all-check-constraint-naming-sqlserver-default</h4>
+<h4 id="rule-sql-all-check-constraint-naming-sqlserver-default"><a class="anchor" href="#rule-sql-all-check-constraint-naming-sqlserver-default"></a>6.2.6. rule-sql-all-check-constraint-naming-sqlserver-default</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2632,7 +2992,7 @@ name length does not exceed 128 characters.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-constraintNameUsingShortName"><a class="anchor" href="#rule-sql-all-constraintNameUsingShortName"></a>5.2.7. rule-sql-all-constraintNameUsingShortName</h4>
+<h4 id="rule-sql-all-constraintNameUsingShortName"><a class="anchor" href="#rule-sql-all-constraintNameUsingShortName"></a>6.2.7. rule-sql-all-constraintNameUsingShortName</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -2648,7 +3008,7 @@ If no short name is specified, the usual naming conventions apply.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-databaseModel"><a class="anchor" href="#rule-sql-all-databaseModel"></a>5.2.8. rule-sql-all-databaseModel</h4>
+<h4 id="rule-sql-all-databaseModel"><a class="anchor" href="#rule-sql-all-databaseModel"></a>6.2.8. rule-sql-all-databaseModel</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -2658,7 +3018,7 @@ Enterprise Architect repository.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-documentationViaExplicitCommentStatements"><a class="anchor" href="#rule-sql-all-documentationViaExplicitCommentStatements"></a>5.2.9. rule-sql-all-documentationViaExplicitCommentStatements</h4>
+<h4 id="rule-sql-all-documentationViaExplicitCommentStatements"><a class="anchor" href="#rule-sql-all-documentationViaExplicitCommentStatements"></a>6.2.9. rule-sql-all-documentationViaExplicitCommentStatements</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2683,13 +3043,13 @@ used when producing DDL for SQLite.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-exclude-abstract"><a class="anchor" href="#rule-sql-all-exclude-abstract"></a>5.2.10. rule-sql-all-exclude-abstract</h4>
+<h4 id="rule-sql-all-exclude-abstract"><a class="anchor" href="#rule-sql-all-exclude-abstract"></a>6.2.10. rule-sql-all-exclude-abstract</h4>
 <div class="paragraph">
 <p>If this rule is enabled, abstract classes will be ignored by the target.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys"><a class="anchor" href="#rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys"></a>5.2.11. rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys</h4>
+<h4 id="rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys"><a class="anchor" href="#rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys"></a>6.2.11. rule-sql-all-explicitlyEncodePkReferencedColumnInForeignKeys</h4>
 <div class="paragraph">
 <p>(since v2.13.0)</p>
 </div>
@@ -2710,7 +3070,7 @@ used when producing DDL for SQLite.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-foreign-key-oracle-naming-style"><a class="anchor" href="#rule-sql-all-foreign-key-oracle-naming-style"></a>5.2.12. rule-sql-all-foreign-key-oracle-naming-style</h4>
+<h4 id="rule-sql-all-foreign-key-oracle-naming-style"><a class="anchor" href="#rule-sql-all-foreign-key-oracle-naming-style"></a>6.2.12. rule-sql-all-foreign-key-oracle-naming-style</h4>
 <div class="paragraph">
 <p>(since v2.3.0)</p>
 </div>
@@ -2759,7 +3119,7 @@ still ensure that the name is unique.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-foreign-key-pearsonhash-naming"><a class="anchor" href="#rule-sql-all-foreign-key-pearsonhash-naming"></a>5.2.13. rule-sql-all-foreign-key-pearsonhash-naming</h4>
+<h4 id="rule-sql-all-foreign-key-pearsonhash-naming"><a class="anchor" href="#rule-sql-all-foreign-key-pearsonhash-naming"></a>6.2.13. rule-sql-all-foreign-key-pearsonhash-naming</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2813,7 +3173,7 @@ characters.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-indexNameUsingShortName"><a class="anchor" href="#rule-sql-all-indexNameUsingShortName"></a>5.2.14. rule-sql-all-indexNameUsingShortName</h4>
+<h4 id="rule-sql-all-indexNameUsingShortName"><a class="anchor" href="#rule-sql-all-indexNameUsingShortName"></a>6.2.14. rule-sql-all-indexNameUsingShortName</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -2828,7 +3188,7 @@ If no short name is specified, the usual naming conventions apply.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-normalizing-ignore-case"><a class="anchor" href="#rule-sql-all-normalizing-ignore-case"></a>5.2.15. rule-sql-all-normalizing-ignore-case</h4>
+<h4 id="rule-sql-all-normalizing-ignore-case"><a class="anchor" href="#rule-sql-all-normalizing-ignore-case"></a>6.2.15. rule-sql-all-normalizing-ignore-case</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2837,7 +3197,7 @@ If no short name is specified, the usual naming conventions apply.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-normalizing-lower-case"><a class="anchor" href="#rule-sql-all-normalizing-lower-case"></a>5.2.16. rule-sql-all-normalizing-lower-case</h4>
+<h4 id="rule-sql-all-normalizing-lower-case"><a class="anchor" href="#rule-sql-all-normalizing-lower-case"></a>6.2.16. rule-sql-all-normalizing-lower-case</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2874,7 +3234,7 @@ limit will be truncated.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-normalizing-oracle"><a class="anchor" href="#rule-sql-all-normalizing-oracle"></a>5.2.17. rule-sql-all-normalizing-oracle</h4>
+<h4 id="rule-sql-all-normalizing-oracle"><a class="anchor" href="#rule-sql-all-normalizing-oracle"></a>6.2.17. rule-sql-all-normalizing-oracle</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2898,7 +3258,7 @@ follows:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-normalizing-sqlserver"><a class="anchor" href="#rule-sql-all-normalizing-sqlserver"></a>5.2.18. rule-sql-all-normalizing-sqlserver</h4>
+<h4 id="rule-sql-all-normalizing-sqlserver"><a class="anchor" href="#rule-sql-all-normalizing-sqlserver"></a>6.2.18. rule-sql-all-normalizing-sqlserver</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2930,7 +3290,7 @@ Case is not modified.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-normalizing-upper-case"><a class="anchor" href="#rule-sql-all-normalizing-upper-case"></a>5.2.19. rule-sql-all-normalizing-upper-case</h4>
+<h4 id="rule-sql-all-normalizing-upper-case"><a class="anchor" href="#rule-sql-all-normalizing-upper-case"></a>6.2.19. rule-sql-all-normalizing-upper-case</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2967,7 +3327,7 @@ limit will be truncated.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-notEncoded"><a class="anchor" href="#rule-sql-all-notEncoded"></a>5.2.20. rule-sql-all-notEncoded</h4>
+<h4 id="rule-sql-all-notEncoded"><a class="anchor" href="#rule-sql-all-notEncoded"></a>6.2.20. rule-sql-all-notEncoded</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -2995,7 +3355,7 @@ href="https://shapechange.net/resources/config/StandardRules.xml" /&gt;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-precisionAndScale"><a class="anchor" href="#rule-sql-all-precisionAndScale"></a>5.2.21. rule-sql-all-precisionAndScale</h4>
+<h4 id="rule-sql-all-precisionAndScale"><a class="anchor" href="#rule-sql-all-precisionAndScale"></a>6.2.21. rule-sql-all-precisionAndScale</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3009,7 +3369,7 @@ datatype is not changed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-replicationSchema"><a class="anchor" href="#rule-sql-all-replicationSchema"></a>5.2.22. rule-sql-all-replicationSchema</h4>
+<h4 id="rule-sql-all-replicationSchema"><a class="anchor" href="#rule-sql-all-replicationSchema"></a>6.2.22. rule-sql-all-replicationSchema</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3020,7 +3380,7 @@ schema is derived.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-representTaggedValues"><a class="anchor" href="#rule-sql-all-representTaggedValues"></a>5.2.23. rule-sql-all-representTaggedValues</h4>
+<h4 id="rule-sql-all-representTaggedValues"><a class="anchor" href="#rule-sql-all-representTaggedValues"></a>6.2.23. rule-sql-all-representTaggedValues</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -3035,7 +3395,7 @@ automatically written by ShapeChange are needed in a database model.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-schemas"><a class="anchor" href="#rule-sql-all-schemas"></a>5.2.24. rule-sql-all-schemas</h4>
+<h4 id="rule-sql-all-schemas"><a class="anchor" href="#rule-sql-all-schemas"></a>6.2.24. rule-sql-all-schemas</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -3104,7 +3464,7 @@ be used as schema name. If that is also blank, the string "fixme" will be used.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-all-suppressDocumentationViaInlineComments"><a class="anchor" href="#rule-sql-all-suppressDocumentationViaInlineComments"></a>5.2.25. rule-sql-all-suppressDocumentationViaInlineComments</h4>
+<h4 id="rule-sql-all-suppressDocumentationViaInlineComments"><a class="anchor" href="#rule-sql-all-suppressDocumentationViaInlineComments"></a>6.2.25. rule-sql-all-suppressDocumentationViaInlineComments</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3115,7 +3475,7 @@ comments. This rule overrides parameter
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-check-constraint-for-range"><a class="anchor" href="#rule-sql-cls-check-constraint-for-range"></a>5.2.26. rule-sql-cls-check-constraint-for-range</h4>
+<h4 id="rule-sql-cls-check-constraint-for-range"><a class="anchor" href="#rule-sql-cls-check-constraint-for-range"></a>6.2.26. rule-sql-cls-check-constraint-for-range</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -3128,7 +3488,7 @@ values are empty, the check constraint is not created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-code-lists"><a class="anchor" href="#rule-sql-cls-code-lists"></a>5.2.27. rule-sql-cls-code-lists</h4>
+<h4 id="rule-sql-cls-code-lists"><a class="anchor" href="#rule-sql-cls-code-lists"></a>6.2.27. rule-sql-cls-code-lists</h4>
 <div class="paragraph">
 <p>Tables are generated for code lists. The first column will contain the
 initial value of the code, if set – otherwise, it will contain the code
@@ -3200,7 +3560,7 @@ appropriate for the given code list).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-code-lists-pods"><a class="anchor" href="#rule-sql-cls-code-lists-pods"></a>5.2.28. rule-sql-cls-code-lists-pods</h4>
+<h4 id="rule-sql-cls-code-lists-pods"><a class="anchor" href="#rule-sql-cls-code-lists-pods"></a>6.2.28. rule-sql-cls-code-lists-pods</h4>
 <div class="paragraph">
 <p>(since v2.3.0)</p>
 </div>
@@ -3307,13 +3667,13 @@ identified by the configuration parameter
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-data-types"><a class="anchor" href="#rule-sql-cls-data-types"></a>5.2.29. rule-sql-cls-data-types</h4>
+<h4 id="rule-sql-cls-data-types"><a class="anchor" href="#rule-sql-cls-data-types"></a>6.2.29. rule-sql-cls-data-types</h4>
 <div class="paragraph">
 <p>Ensures that table creation statements are generated for data types.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-data-types-oneToMany-oneTable"><a class="anchor" href="#rule-sql-cls-data-types-oneToMany-oneTable"></a>5.2.30. rule-sql-cls-data-types-oneToMany-oneTable</h4>
+<h4 id="rule-sql-cls-data-types-oneToMany-oneTable"><a class="anchor" href="#rule-sql-cls-data-types-oneToMany-oneTable"></a>6.2.30. rule-sql-cls-data-types-oneToMany-oneTable</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3375,7 +3735,7 @@ rule-sql-cls-data-types-oneToMany-severalTables.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase"><a class="anchor" href="#rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase"></a>5.2.31. rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase</h4>
+<h4 id="rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase"><a class="anchor" href="#rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase"></a>6.2.31. rule-sql-cls-data-types-oneToMany-oneTable-ignoreSingleValuedCase</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3393,7 +3753,7 @@ attribute, which is not allowed by the conceptual model.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-data-types-oneToMany-severalTables"><a class="anchor" href="#rule-sql-cls-data-types-oneToMany-severalTables"></a>5.2.32. rule-sql-cls-data-types-oneToMany-severalTables</h4>
+<h4 id="rule-sql-cls-data-types-oneToMany-severalTables"><a class="anchor" href="#rule-sql-cls-data-types-oneToMany-severalTables"></a>6.2.32. rule-sql-cls-data-types-oneToMany-severalTables</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3439,18 +3799,18 @@ This rule has higher priority than
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-feature-types"><a class="anchor" href="#rule-sql-cls-feature-types"></a>5.2.33. rule-sql-cls-feature-types</h4>
+<h4 id="rule-sql-cls-feature-types"><a class="anchor" href="#rule-sql-cls-feature-types"></a>6.2.33. rule-sql-cls-feature-types</h4>
 <div class="paragraph">
 <p>Ensures that table creation statements are generated for feature types.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-identifierStereotype"><a class="anchor" href="#rule-sql-cls-identifierStereotype"></a>5.2.34. rule-sql-cls-identifierStereotype</h4>
+<h4 id="rule-sql-cls-identifierStereotype"><a class="anchor" href="#rule-sql-cls-identifierStereotype"></a>6.2.34. rule-sql-cls-identifierStereotype</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
 <div class="paragraph">
-<p>Enables use of stereotype &lt;&lt;identifier&gt;&gt; on class attributes. If an
+<p>Enables use of stereotype «identifier» on class attributes. If an
 attribute with that stereotype belongs to a class, then the column to
 represent that attribute will be used as primary key (and no extra
 identifier column will be generated).</p>
@@ -3462,9 +3822,9 @@ identifier column will be generated).</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-Multiple &lt;&lt;identifier&gt;&gt; attributes per class are not supported. In
+Multiple «identifier» attributes per class are not supported. In
 such a case, ShapeChange will log a warning and use only one of them as
-primary key. If the maximum multiplicity of an &lt;&lt;identifier&gt;&gt; attribute
+primary key. If the maximum multiplicity of an «identifier» attribute
 is greater than 1, ShapeChange will log an error.
 </td>
 </tr>
@@ -3472,13 +3832,13 @@ is greater than 1, ShapeChange will log an error.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-object-types"><a class="anchor" href="#rule-sql-cls-object-types"></a>5.2.35. rule-sql-cls-object-types</h4>
+<h4 id="rule-sql-cls-object-types"><a class="anchor" href="#rule-sql-cls-object-types"></a>6.2.35. rule-sql-cls-object-types</h4>
 <div class="paragraph">
 <p>Ensures that table creation statements are generated for object types.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-cls-references-to-external-types"><a class="anchor" href="#rule-sql-cls-references-to-external-types"></a>5.2.36. rule-sql-cls-references-to-external-types</h4>
+<h4 id="rule-sql-cls-references-to-external-types"><a class="anchor" href="#rule-sql-cls-references-to-external-types"></a>6.2.36. rule-sql-cls-references-to-external-types</h4>
 <div class="paragraph">
 <p>If this rule is enabled, then a property whose type is neither covered
 by a type mapping entry nor contained in the currently processed schema
@@ -3488,7 +3848,7 @@ field is encoded using a textual data type.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-check-constraint-for-range"><a class="anchor" href="#rule-sql-prop-check-constraint-for-range"></a>5.2.37. rule-sql-prop-check-constraint-for-range</h4>
+<h4 id="rule-sql-prop-check-constraint-for-range"><a class="anchor" href="#rule-sql-prop-check-constraint-for-range"></a>6.2.37. rule-sql-prop-check-constraint-for-range</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -3502,14 +3862,14 @@ created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-check-constraints-for-enumerations"><a class="anchor" href="#rule-sql-prop-check-constraints-for-enumerations"></a>5.2.38. rule-sql-prop-check-constraints-for-enumerations</h4>
+<h4 id="rule-sql-prop-check-constraints-for-enumerations"><a class="anchor" href="#rule-sql-prop-check-constraints-for-enumerations"></a>6.2.38. rule-sql-prop-check-constraints-for-enumerations</h4>
 <div class="paragraph">
 <p>Ensures that CHECK constraints are created for fields representing
 enumeration values.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-check-constraint-restrictTimeOfDate"><a class="anchor" href="#rule-sql-prop-check-constraint-restrictTimeOfDate"></a>5.2.39. rule-sql-prop-check-constraint-restrictTimeOfDate</h4>
+<h4 id="rule-sql-prop-check-constraint-restrictTimeOfDate"><a class="anchor" href="#rule-sql-prop-check-constraint-restrictTimeOfDate"></a>6.2.39. rule-sql-prop-check-constraint-restrictTimeOfDate</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3543,13 +3903,13 @@ DDL for the Oracle database system.
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-exclude-derived"><a class="anchor" href="#rule-sql-prop-exclude-derived"></a>5.2.40. rule-sql-prop-exclude-derived</h4>
+<h4 id="rule-sql-prop-exclude-derived"><a class="anchor" href="#rule-sql-prop-exclude-derived"></a>6.2.40. rule-sql-prop-exclude-derived</h4>
 <div class="paragraph">
 <p>If this rule is enabled derived properties will be ignored.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType"><a class="anchor" href="#rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType"></a>5.2.41. rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType</h4>
+<h4 id="rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType"><a class="anchor" href="#rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType"></a>6.2.41. rule-sql-prop-replicationSchema-documentation-fieldWithUnlimitedLengthCharacterDataType</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3562,7 +3922,7 @@ configuration parameter
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-replicationSchema-geometryAnnotation"><a class="anchor" href="#rule-sql-prop-replicationSchema-geometryAnnotation"></a>5.2.42. rule-sql-prop-replicationSchema-geometryAnnotation</h4>
+<h4 id="rule-sql-prop-replicationSchema-geometryAnnotation"><a class="anchor" href="#rule-sql-prop-replicationSchema-geometryAnnotation"></a>6.2.42. rule-sql-prop-replicationSchema-geometryAnnotation</h4>
 <div class="paragraph">
 <p>(since v2.7.0)</p>
 </div>
@@ -3587,7 +3947,7 @@ parameter}&lt;/sc:srid&gt;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-replicationSchema-maxLength-from-size"><a class="anchor" href="#rule-sql-prop-replicationSchema-maxLength-from-size"></a>5.2.43. rule-sql-prop-replicationSchema-maxLength-from-size</h4>
+<h4 id="rule-sql-prop-replicationSchema-maxLength-from-size"><a class="anchor" href="#rule-sql-prop-replicationSchema-maxLength-from-size"></a>6.2.43. rule-sql-prop-replicationSchema-maxLength-from-size</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3597,7 +3957,7 @@ restricted using a maxLength restriction.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-replicationSchema-nillable"><a class="anchor" href="#rule-sql-prop-replicationSchema-nillable"></a>5.2.44. rule-sql-prop-replicationSchema-nillable</h4>
+<h4 id="rule-sql-prop-replicationSchema-nillable"><a class="anchor" href="#rule-sql-prop-replicationSchema-nillable"></a>6.2.44. rule-sql-prop-replicationSchema-nillable</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3608,7 +3968,7 @@ elements that represent columns without a NOT NULL restriction
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-replicationSchema-optional"><a class="anchor" href="#rule-sql-prop-replicationSchema-optional"></a>5.2.45. rule-sql-prop-replicationSchema-optional</h4>
+<h4 id="rule-sql-prop-replicationSchema-optional"><a class="anchor" href="#rule-sql-prop-replicationSchema-optional"></a>6.2.45. rule-sql-prop-replicationSchema-optional</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -3620,7 +3980,7 @@ elements.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule-sql-prop-uniqueConstraints"><a class="anchor" href="#rule-sql-prop-uniqueConstraints"></a>5.2.46. rule-sql-prop-uniqueConstraints</h4>
+<h4 id="rule-sql-prop-uniqueConstraints"><a class="anchor" href="#rule-sql-prop-uniqueConstraints"></a>6.2.46. rule-sql-prop-uniqueConstraints</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -3631,7 +3991,7 @@ representing a property with tagged value <em>sqlUnique</em> = true.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Parameters"><a class="anchor" href="#Parameters"></a>5.3. Parameters</h3>
+<h3 id="Parameters"><a class="anchor" href="#Parameters"></a>6.3. Parameters</h3>
 <div class="paragraph">
 <p>The &lt;targetParameters&gt; recognized for this target are described in the
 following sections.</p>
@@ -3662,7 +4022,7 @@ parameter value should be added via the input parameter
 </table>
 </div>
 <div class="sect3">
-<h4 id="applyForeignKeyColumnSuffixesInAssociativeTables"><a class="anchor" href="#applyForeignKeyColumnSuffixesInAssociativeTables"></a>5.3.1. applyForeignKeyColumnSuffixesInAssociativeTables</h4>
+<h4 id="applyForeignKeyColumnSuffixesInAssociativeTables"><a class="anchor" href="#applyForeignKeyColumnSuffixesInAssociativeTables"></a>6.3.1. applyForeignKeyColumnSuffixesInAssociativeTables</h4>
 <div class="paragraph">
 <p>(since v2.10.0)</p>
 </div>
@@ -3686,7 +4046,7 @@ suffix for fields in associative tables that reference other tables.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeNameColumnDocumentation"><a class="anchor" href="#codeNameColumnDocumentation"></a>5.3.2. codeNameColumnDocumentation</h4>
+<h4 id="codeNameColumnDocumentation"><a class="anchor" href="#codeNameColumnDocumentation"></a>6.3.2. codeNameColumnDocumentation</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -3711,7 +4071,7 @@ code.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeNameColumnName"><a class="anchor" href="#codeNameColumnName"></a>5.3.3. codeNameColumnName</h4>
+<h4 id="codeNameColumnName"><a class="anchor" href="#codeNameColumnName"></a>6.3.3. codeNameColumnName</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -3736,7 +4096,7 @@ database system.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeNameSize"><a class="anchor" href="#codeNameSize"></a>5.3.4. codeNameSize</h4>
+<h4 id="codeNameSize"><a class="anchor" href="#codeNameSize"></a>6.3.4. codeNameSize</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -3760,7 +4120,7 @@ table that contains the name of a code.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeStatusCLColumnDocumentation"><a class="anchor" href="#codeStatusCLColumnDocumentation"></a>5.3.5. codeStatusCLColumnDocumentation</h4>
+<h4 id="codeStatusCLColumnDocumentation"><a class="anchor" href="#codeStatusCLColumnDocumentation"></a>6.3.5. codeStatusCLColumnDocumentation</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -3785,7 +4145,7 @@ column CODE_STATUS_CL column added by
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeStatusCLLength"><a class="anchor" href="#codeStatusCLLength"></a>5.3.6. codeStatusCLLength</h4>
+<h4 id="codeStatusCLLength"><a class="anchor" href="#codeStatusCLLength"></a>6.3.6. codeStatusCLLength</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -3809,7 +4169,7 @@ in case that the code status type is an enumeration.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeStatusCLType"><a class="anchor" href="#codeStatusCLType"></a>5.3.7. codeStatusCLType</h4>
+<h4 id="codeStatusCLType"><a class="anchor" href="#codeStatusCLType"></a>6.3.7. codeStatusCLType</h4>
 <div class="paragraph">
 <p>Required / Optional: optional</p>
 </div>
@@ -3830,7 +4190,7 @@ CODE_STATUS_CL column added by
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeStatusNotesColumnDocumentation"><a class="anchor" href="#codeStatusNotesColumnDocumentation"></a>5.3.8. codeStatusNotesColumnDocumentation</h4>
+<h4 id="codeStatusNotesColumnDocumentation"><a class="anchor" href="#codeStatusNotesColumnDocumentation"></a>6.3.8. codeStatusNotesColumnDocumentation</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -3855,7 +4215,7 @@ column CODE_STATUS_NOTES column added by
 </div>
 </div>
 <div class="sect3">
-<h4 id="codeSupercedesColumnDocumentation"><a class="anchor" href="#codeSupercedesColumnDocumentation"></a>5.3.9. codeSupercedesColumnDocumentation</h4>
+<h4 id="codeSupercedesColumnDocumentation"><a class="anchor" href="#codeSupercedesColumnDocumentation"></a>6.3.9. codeSupercedesColumnDocumentation</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -3880,7 +4240,7 @@ column CODE_SUPERCEDES column added by
 </div>
 </div>
 <div class="sect3">
-<h4 id="createDocumentation"><a class="anchor" href="#createDocumentation"></a>5.3.10. createDocumentation</h4>
+<h4 id="createDocumentation"><a class="anchor" href="#createDocumentation"></a>6.3.10. createDocumentation</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -3903,7 +4263,7 @@ comments, else false. This behavior can be overridden via
 </div>
 </div>
 <div class="sect3">
-<h4 id="createReferences"><a class="anchor" href="#createReferences"></a>5.3.11. createReferences</h4>
+<h4 id="createReferences"><a class="anchor" href="#createReferences"></a>6.3.11. createReferences</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -3943,9 +4303,12 @@ further details on SQLite foreign key support, see
 </div>
 </div>
 <div class="sect3">
-<h4 id="dataModelEapPath"><a class="anchor" href="#dataModelEapPath"></a>5.3.12. dataModelEapPath</h4>
+<h4 id="dataModelEaRepositoryPath"><a class="anchor" href="#dataModelEaRepositoryPath"></a>6.3.12. dataModelEaRepositoryPath</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
+</div>
+<div class="paragraph">
+<p>Alias: dataModelEapPath (this was the parameter name in ShapeChange v2.x)</p>
 </div>
 <div class="paragraph">
 <p>Required / Optional: optional</p>
@@ -3954,18 +4317,18 @@ further details on SQLite foreign key support, see
 <p>Type: String</p>
 </div>
 <div class="paragraph">
-<p>Default Value: none (a new EAP would be created in the output
+<p>Default Value: none (a new EA repository would be created in the output
 directory)</p>
 </div>
 <div class="paragraph">
 <p>Explanation: This parameter can be used to provide the path to the
-EAP file in which the data model shall be created. If the value is a
+EA repository file in which the data model shall be created. If the value is a
 URL, the file will be copied to the output directory. If the value is a
 path to a local file, that file will be used. If the local file
 (including the directory structure) does not exist yet, it will be
 created. The parameter can be used to write data models for different
-DBMSs into the same EAP file, rather than having them written into
-different EAPs. To achieve this, simply specify a local .eap file using
+DBMSs into the same EA repository file, rather than having them written into
+different EA repositories. To achieve this, simply specify a local EA repository file using
 this parameter in the SQL DDL target configurations via which the DBMS
 specific data models are created.</p>
 </div>
@@ -3975,7 +4338,7 @@ specific data models are created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="dataModelEstablishPackageHierarchy"><a class="anchor" href="#dataModelEstablishPackageHierarchy"></a>5.3.13. dataModelEstablishPackageHierarchy</h4>
+<h4 id="dataModelEstablishPackageHierarchy"><a class="anchor" href="#dataModelEstablishPackageHierarchy"></a>6.3.13. dataModelEstablishPackageHierarchy</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -4005,7 +4368,7 @@ associative tables) will still be created inside the tables package.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="dataModelPatternPath"><a class="anchor" href="#dataModelPatternPath"></a>5.3.14. dataModelPatternPath</h4>
+<h4 id="dataModelPatternPath"><a class="anchor" href="#dataModelPatternPath"></a>6.3.14. dataModelPatternPath</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -4029,7 +4392,7 @@ contains the database model pattern XMI templates</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="databaseSystem"><a class="anchor" href="#databaseSystem"></a>5.3.15. databaseSystem</h4>
+<h4 id="databaseSystem"><a class="anchor" href="#databaseSystem"></a>6.3.15. databaseSystem</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4102,7 +4465,7 @@ v3.28.0 and SpatiaLite v4.3.0a.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="dbOwner"><a class="anchor" href="#dbOwner"></a>5.3.16. dbOwner</h4>
+<h4 id="dbOwner"><a class="anchor" href="#dbOwner"></a>6.3.16. dbOwner</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -4126,7 +4489,7 @@ database owner. For example, for PostgreSQL, one could set this to
 </div>
 </div>
 <div class="sect3">
-<h4 id="dbVersion"><a class="anchor" href="#dbVersion"></a>5.3.17. dbVersion</h4>
+<h4 id="dbVersion"><a class="anchor" href="#dbVersion"></a>6.3.17. dbVersion</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -4150,7 +4513,7 @@ database version. For example, for Oracle, one could set this to
 </div>
 </div>
 <div class="sect3">
-<h4 id="defaultEncodingRule"><a class="anchor" href="#defaultEncodingRule"></a>5.3.18. defaultEncodingRule</h4>
+<h4 id="defaultEncodingRule"><a class="anchor" href="#defaultEncodingRule"></a>6.3.18. defaultEncodingRule</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4174,7 +4537,7 @@ the custom encoding rule via this parameter.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletePreExistingDataModelPackage"><a class="anchor" href="#deletePreExistingDataModelPackage"></a>5.3.19. deletePreExistingDataModelPackage</h4>
+<h4 id="deletePreExistingDataModelPackage"><a class="anchor" href="#deletePreExistingDataModelPackage"></a>6.3.19. deletePreExistingDataModelPackage</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -4191,7 +4554,7 @@ the custom encoding rule via this parameter.</p>
 <p>Explanation: When creating a database model, ShapeChange loads
 DBMS specific templates into an EA repository (which is either created
 on the fly, or taken from a configured location). These templates add
-&lt;&lt;DataModel&gt;&gt; packages with specific names to the repository. If such a
+«DataModel» packages with specific names to the repository. If such a
 package already exists, ShapeChange will create another package with the
 same name (but different GUIDs for its contents). This could cause
 confusion. To avoid any confusion, ShapeChange can delete a pre-existing
@@ -4204,7 +4567,7 @@ via the template. To do so, set this parameter to true.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="descriptorsForCodelist"><a class="anchor" href="#descriptorsForCodelist"></a>5.3.20. descriptorsForCodelist</h4>
+<h4 id="descriptorsForCodelist"><a class="anchor" href="#descriptorsForCodelist"></a>6.3.20. descriptorsForCodelist</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4295,7 +4658,7 @@ identifier may have</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="documentationNoValue"><a class="anchor" href="#documentationNoValue"></a>5.3.21. documentationNoValue</h4>
+<h4 id="documentationNoValue"><a class="anchor" href="#documentationNoValue"></a>6.3.21. documentationNoValue</h4>
 <div class="paragraph">
 <p>(since 2.0.2)</p>
 </div>
@@ -4322,7 +4685,7 @@ for more information about descriptors.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="documentationTemplate"><a class="anchor" href="#documentationTemplate"></a>5.3.22. documentationTemplate</h4>
+<h4 id="documentationTemplate"><a class="anchor" href="#documentationTemplate"></a>6.3.22. documentationTemplate</h4>
 <div class="paragraph">
 <p>(since 2.0.2)</p>
 </div>
@@ -4370,7 +4733,7 @@ for more information about descriptors.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="eaAuthor"><a class="anchor" href="#eaAuthor"></a>5.3.23. eaAuthor</h4>
+<h4 id="eaAuthor"><a class="anchor" href="#eaAuthor"></a>6.3.23. eaAuthor</h4>
 <div class="paragraph">
 <p>(since v2.9.0)</p>
 </div>
@@ -4393,7 +4756,7 @@ Rule(s): <a href="./SQL_DDL.html#rule-sql-all-databaseModel">rule-sql-all-datab
 </div>
 </div>
 <div class="sect3">
-<h4 id="eaStatus"><a class="anchor" href="#eaStatus"></a>5.3.24. eaStatus</h4>
+<h4 id="eaStatus"><a class="anchor" href="#eaStatus"></a>6.3.24. eaStatus</h4>
 <div class="paragraph">
 <p>(since v2.9.0)</p>
 </div>
@@ -4416,7 +4779,7 @@ Rule(s): <a href="./SQL_DDL.html#rule-sql-all-databaseModel">rule-sql-all-datab
 </div>
 </div>
 <div class="sect3">
-<h4 id="fileDdlBottom"><a class="anchor" href="#fileDdlBottom"></a>5.3.25. fileDdlBottom</h4>
+<h4 id="fileDdlBottom"><a class="anchor" href="#fileDdlBottom"></a>6.3.25. fileDdlBottom</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4436,7 +4799,7 @@ bottom of DDL files produced by the target. This parameter is optional.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="fileDdlTop"><a class="anchor" href="#fileDdlTop"></a>5.3.26. fileDdlTop</h4>
+<h4 id="fileDdlTop"><a class="anchor" href="#fileDdlTop"></a>6.3.26. fileDdlTop</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4456,7 +4819,7 @@ top of DDL files produced by the target. This parameter is optional.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyColumnDatatype"><a class="anchor" href="#foreignKeyColumnDatatype"></a>5.3.27. foreignKeyColumnDatatype</h4>
+<h4 id="foreignKeyColumnDatatype"><a class="anchor" href="#foreignKeyColumnDatatype"></a>6.3.27. foreignKeyColumnDatatype</h4>
 <div class="paragraph">
 <p>Alias: foreignKeyColumnDatatype</p>
 </div>
@@ -4480,7 +4843,7 @@ SQL Server</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyColumnSuffix"><a class="anchor" href="#foreignKeyColumnSuffix"></a>5.3.28. foreignKeyColumnSuffix</h4>
+<h4 id="foreignKeyColumnSuffix"><a class="anchor" href="#foreignKeyColumnSuffix"></a>6.3.28. foreignKeyColumnSuffix</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4521,7 +4884,7 @@ is appended.
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyColumnSuffixCodelist"><a class="anchor" href="#foreignKeyColumnSuffixCodelist"></a>5.3.29. foreignKeyColumnSuffixCodelist</h4>
+<h4 id="foreignKeyColumnSuffixCodelist"><a class="anchor" href="#foreignKeyColumnSuffixCodelist"></a>6.3.29. foreignKeyColumnSuffixCodelist</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4563,7 +4926,7 @@ is appended.
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyColumnSuffixDatatype"><a class="anchor" href="#foreignKeyColumnSuffixDatatype"></a>5.3.30. foreignKeyColumnSuffixDatatype</h4>
+<h4 id="foreignKeyColumnSuffixDatatype"><a class="anchor" href="#foreignKeyColumnSuffixDatatype"></a>6.3.30. foreignKeyColumnSuffixDatatype</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4600,7 +4963,7 @@ is appended.
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyDeferrable"><a class="anchor" href="#foreignKeyDeferrable"></a>5.3.31. foreignKeyDeferrable</h4>
+<h4 id="foreignKeyDeferrable"><a class="anchor" href="#foreignKeyDeferrable"></a>6.3.31. foreignKeyDeferrable</h4>
 <div class="paragraph">
 <p>(since v2.13.0)</p>
 </div>
@@ -4626,7 +4989,7 @@ as deferrable. For further details, see section
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyInitialConstraintMode"><a class="anchor" href="#foreignKeyInitialConstraintMode"></a>5.3.32. foreignKeyInitialConstraintMode</h4>
+<h4 id="foreignKeyInitialConstraintMode"><a class="anchor" href="#foreignKeyInitialConstraintMode"></a>6.3.32. foreignKeyInitialConstraintMode</h4>
 <div class="paragraph">
 <p>(since v2.13.0)</p>
 </div>
@@ -4651,7 +5014,7 @@ as deferrable. For further details, see section
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyOnDelete"><a class="anchor" href="#foreignKeyOnDelete"></a>5.3.33. foreignKeyOnDelete</h4>
+<h4 id="foreignKeyOnDelete"><a class="anchor" href="#foreignKeyOnDelete"></a>6.3.33. foreignKeyOnDelete</h4>
 <div class="paragraph">
 <p>(since v2.13.0)</p>
 </div>
@@ -4677,7 +5040,7 @@ referential actions in case of a delete. For further details, see section
 </div>
 </div>
 <div class="sect3">
-<h4 id="foreignKeyOnUpdate"><a class="anchor" href="#foreignKeyOnUpdate"></a>5.3.34. foreignKeyOnUpdate</h4>
+<h4 id="foreignKeyOnUpdate"><a class="anchor" href="#foreignKeyOnUpdate"></a>6.3.34. foreignKeyOnUpdate</h4>
 <div class="paragraph">
 <p>(since v2.13.0)</p>
 </div>
@@ -4703,7 +5066,7 @@ referential actions in case of an update. For further details, see section
 </div>
 </div>
 <div class="sect3">
-<h4 id="geometryDimension"><a class="anchor" href="#geometryDimension"></a>5.3.35. geometryDimension</h4>
+<h4 id="geometryDimension"><a class="anchor" href="#geometryDimension"></a>6.3.35. geometryDimension</h4>
 <div class="paragraph">
 <p>(since v2.9.0)</p>
 </div>
@@ -4745,7 +5108,7 @@ system. An example for a valid value is 'XY'.
 </div>
 </div>
 <div class="sect3">
-<h4 id="idColumnName"><a class="anchor" href="#idColumnName"></a>5.3.36. idColumnName</h4>
+<h4 id="idColumnName"><a class="anchor" href="#idColumnName"></a>6.3.36. idColumnName</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4769,11 +5132,11 @@ creation statements.</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-If an &lt;&lt;identifier&gt;&gt; attribute is defined on a class, and
+If an «identifier» attribute is defined on a class, and
 <a href="./SQL_DDL.html#rule-sql-cls-identifierStereotype"><em>rule-sql-cls-identifierStereotype</em></a>
 is included in the encoding rule, then ShapeChange will not generate an
 additional identifier column. It will use the column that represents the
-&lt;&lt;identifier&gt;&gt; attribute as primary key.
+«identifier» attribute as primary key.
 </td>
 </tr>
 </table>
@@ -4783,7 +5146,7 @@ additional identifier column. It will use the column that represents the
 </div>
 </div>
 <div class="sect3">
-<h4 id="lengthQualifier"><a class="anchor" href="#lengthQualifier"></a>5.3.37. lengthQualifier</h4>
+<h4 id="lengthQualifier"><a class="anchor" href="#lengthQualifier"></a>6.3.37. lengthQualifier</h4>
 <div class="paragraph">
 <p>(since v2.9.0)</p>
 </div>
@@ -4837,7 +5200,7 @@ lengthQualifier.
 </div>
 </div>
 <div class="sect3">
-<h4 id="maxNameLength"><a class="anchor" href="#maxNameLength"></a>5.3.38. maxNameLength</h4>
+<h4 id="maxNameLength"><a class="anchor" href="#maxNameLength"></a>6.3.38. maxNameLength</h4>
 <div class="paragraph">
 <p>(since v2.10.0)</p>
 </div>
@@ -4869,7 +5232,7 @@ the name of a database object exceeds that name, it is truncated.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="nameForCodeStatusCLColumn"><a class="anchor" href="#nameForCodeStatusCLColumn"></a>5.3.39. nameForCodeStatusCLColumn</h4>
+<h4 id="nameForCodeStatusCLColumn"><a class="anchor" href="#nameForCodeStatusCLColumn"></a>6.3.39. nameForCodeStatusCLColumn</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4891,7 +5254,7 @@ the name of a database object exceeds that name, it is truncated.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="nameForCodeStatusNotesColumn"><a class="anchor" href="#nameForCodeStatusNotesColumn"></a>5.3.40. nameForCodeStatusNotesColumn</h4>
+<h4 id="nameForCodeStatusNotesColumn"><a class="anchor" href="#nameForCodeStatusNotesColumn"></a>6.3.40. nameForCodeStatusNotesColumn</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4913,7 +5276,7 @@ the name of a database object exceeds that name, it is truncated.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="nameForCodeSupercedesColumn"><a class="anchor" href="#nameForCodeSupercedesColumn"></a>5.3.41. nameForCodeSupercedesColumn</h4>
+<h4 id="nameForCodeSupercedesColumn"><a class="anchor" href="#nameForCodeSupercedesColumn"></a>6.3.41. nameForCodeSupercedesColumn</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -4936,7 +5299,7 @@ by a code list value.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="oneToManyReferenceColumnName"><a class="anchor" href="#oneToManyReferenceColumnName"></a>5.3.42. oneToManyReferenceColumnName</h4>
+<h4 id="oneToManyReferenceColumnName"><a class="anchor" href="#oneToManyReferenceColumnName"></a>6.3.42. oneToManyReferenceColumnName</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -4961,7 +5324,7 @@ type.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="outputDirectory"><a class="anchor" href="#outputDirectory"></a>5.3.43. outputDirectory</h4>
+<h4 id="outputDirectory"><a class="anchor" href="#outputDirectory"></a>6.3.43. outputDirectory</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -4983,7 +5346,7 @@ replication schema file will be created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="postgreSqlRole"><a class="anchor" href="#postgreSqlRole"></a>5.3.44. postgreSqlRole</h4>
+<h4 id="postgreSqlRole"><a class="anchor" href="#postgreSqlRole"></a>6.3.44. postgreSqlRole</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -5006,7 +5369,7 @@ Rule(s): <a href="./SQL_DDL.html#rule-sql-all-schemas">rule-sql-all-schemas</a>
 </div>
 </div>
 <div class="sect3">
-<h4 id="primaryKeySpecification"><a class="anchor" href="#primaryKeySpecification"></a>5.3.45. primaryKeySpecification</h4>
+<h4 id="primaryKeySpecification"><a class="anchor" href="#primaryKeySpecification"></a>6.3.45. primaryKeySpecification</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5051,7 +5414,7 @@ specification can include pieces that must be written after this keyword
 </div>
 </div>
 <div class="sect3">
-<h4 id="primaryKeySpecificationCodelist"><a class="anchor" href="#primaryKeySpecificationCodelist"></a>5.3.46. primaryKeySpecificationCodelist</h4>
+<h4 id="primaryKeySpecificationCodelist"><a class="anchor" href="#primaryKeySpecificationCodelist"></a>6.3.46. primaryKeySpecificationCodelist</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5088,7 +5451,7 @@ specification can include pieces that must be written after this keyword
 </div>
 </div>
 <div class="sect3">
-<h4 id="reflexiveRelationshipFieldSuffix"><a class="anchor" href="#reflexiveRelationshipFieldSuffix"></a>5.3.47. reflexiveRelationshipFieldSuffix</h4>
+<h4 id="reflexiveRelationshipFieldSuffix"><a class="anchor" href="#reflexiveRelationshipFieldSuffix"></a>6.3.47. reflexiveRelationshipFieldSuffix</h4>
 <div class="paragraph">
 <p>(since v2.10)</p>
 </div>
@@ -5114,7 +5477,7 @@ if the property represented is a reflexive property.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="removeEmptyLinesInDdlOutput"><a class="anchor" href="#removeEmptyLinesInDdlOutput"></a>5.3.48. removeEmptyLinesInDdlOutput</h4>
+<h4 id="removeEmptyLinesInDdlOutput"><a class="anchor" href="#removeEmptyLinesInDdlOutput"></a>6.3.48. removeEmptyLinesInDdlOutput</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5133,7 +5496,7 @@ DDL files created by the target. Some SQL clients choke on such lines.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType"><a class="anchor" href="#replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType"></a>5.3.49. replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType</h4>
+<h4 id="replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType"><a class="anchor" href="#replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType"></a>6.3.49. replicationSchemaDocumentationForFieldWithUnlimitedLengthCharacterDataType</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5156,7 +5519,7 @@ is not restricted.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="replicationSchemaObjectIdentifierFieldType"><a class="anchor" href="#replicationSchemaObjectIdentifierFieldType"></a>5.3.50. replicationSchemaObjectIdentifierFieldType</h4>
+<h4 id="replicationSchemaObjectIdentifierFieldType"><a class="anchor" href="#replicationSchemaObjectIdentifierFieldType"></a>6.3.50. replicationSchemaObjectIdentifierFieldType</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5178,7 +5541,7 @@ for which a data entity contains information.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="replicationSchemaForeignKeyFieldType"><a class="anchor" href="#replicationSchemaForeignKeyFieldType"></a>5.3.51. replicationSchemaForeignKeyFieldType</h4>
+<h4 id="replicationSchemaForeignKeyFieldType"><a class="anchor" href="#replicationSchemaForeignKeyFieldType"></a>6.3.51. replicationSchemaForeignKeyFieldType</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5201,7 +5564,7 @@ key.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="replicationSchemaTargetNamespaceSuffix"><a class="anchor" href="#replicationSchemaTargetNamespaceSuffix"></a>5.3.52. replicationSchemaTargetNamespaceSuffix</h4>
+<h4 id="replicationSchemaTargetNamespaceSuffix"><a class="anchor" href="#replicationSchemaTargetNamespaceSuffix"></a>6.3.52. replicationSchemaTargetNamespaceSuffix</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5223,7 +5586,7 @@ of the replication schema that is produced by the target.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="sdoDimElements"><a class="anchor" href="#sdoDimElements"></a>5.3.53. sdoDimElements</h4>
+<h4 id="sdoDimElements"><a class="anchor" href="#sdoDimElements"></a>6.3.53. sdoDimElements</h4>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5279,7 +5642,7 @@ this parameter only applies if the target database system is Oracle).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="separateCodeInsertStatementsByCodelistType"><a class="anchor" href="#separateCodeInsertStatementsByCodelistType"></a>5.3.54. separateCodeInsertStatementsByCodelistType</h4>
+<h4 id="separateCodeInsertStatementsByCodelistType"><a class="anchor" href="#separateCodeInsertStatementsByCodelistType"></a>6.3.54. separateCodeInsertStatementsByCodelistType</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -5307,7 +5670,7 @@ name of that file will be that of the main DDL file, plus suffix
 </div>
 </div>
 <div class="sect3">
-<h4 id="separateSpatialIndexStatements"><a class="anchor" href="#separateSpatialIndexStatements"></a>5.3.55. separateSpatialIndexStatements</h4>
+<h4 id="separateSpatialIndexStatements"><a class="anchor" href="#separateSpatialIndexStatements"></a>6.3.55. separateSpatialIndexStatements</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -5332,7 +5695,7 @@ suffix '_spatial'.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="shortNameByTaggedValue"><a class="anchor" href="#shortNameByTaggedValue"></a>5.3.56. shortNameByTaggedValue</h4>
+<h4 id="shortNameByTaggedValue"><a class="anchor" href="#shortNameByTaggedValue"></a>6.3.56. shortNameByTaggedValue</h4>
 <div class="paragraph">
 <p>(since v2.6.0)</p>
 </div>
@@ -5358,7 +5721,7 @@ for a model element.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="size"><a class="anchor" href="#size"></a>5.3.57. size</h4>
+<h4 id="size"><a class="anchor" href="#size"></a>6.3.57. size</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -5382,7 +5745,7 @@ means use the type for unlimited text length.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="srid"><a class="anchor" href="#srid"></a>5.3.58. srid</h4>
+<h4 id="srid"><a class="anchor" href="#srid"></a>6.3.58. srid</h4>
 <div class="paragraph">
 <p>Alias: <em>none</em></p>
 </div>
@@ -5423,7 +5786,7 @@ SpatiaLite.
 </div>
 </div>
 <div class="sect3">
-<h4 id="tablespace"><a class="anchor" href="#tablespace"></a>5.3.59. tablespace</h4>
+<h4 id="tablespace"><a class="anchor" href="#tablespace"></a>6.3.59. tablespace</h4>
 <div class="paragraph">
 <p>(since v2.5.0)</p>
 </div>
@@ -5446,9 +5809,32 @@ There is no default value.</p>
 <a href="./SQL_DDL.html#rule-sql-all-databaseModel">rule-sql-all-databaseModel</a></p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="writeSqlEncodingInfos"><a class="anchor" href="#writeSqlEncodingInfos"></a>6.3.60. writeSqlEncodingInfos</h4>
+<div class="paragraph">
+<p>(since v2.14.0)</p>
+</div>
+<div class="paragraph">
+<p>Required / Optional: optional</p>
+</div>
+<div class="paragraph">
+<p>Type: String</p>
+</div>
+<div class="paragraph">
+<p>Default Value: <em>none</em></p>
+</div>
+<div class="paragraph">
+<p>Explanation: This optional parameter can be set, in order to
+generate <a href="./SQL_DDL.html#SQL_Encoding_Infos">SQL encoding infos</a>.</p>
+</div>
+<div class="paragraph">
+<p>Applies to Rule(s):
+<em>none</em></p>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="Map_Entries"><a class="anchor" href="#Map_Entries"></a>5.4. Map Entries</h3>
+<h3 id="Map_Entries"><a class="anchor" href="#Map_Entries"></a>6.4. Map Entries</h3>
 <div class="paragraph">
 <p>&lt;mapEntries&gt; contain individual &lt;MapEntry&gt; elements, which for this
 target contain information for mapping specific types (classes) from the
@@ -5534,7 +5920,7 @@ conceptual UML classes.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="type"><a class="anchor" href="#type"></a>5.4.1. type</h4>
+<h4 id="type"><a class="anchor" href="#type"></a>6.4.1. type</h4>
 <div class="paragraph">
 <p>Required / Optional: Required</p>
 </div>
@@ -5545,7 +5931,7 @@ unexpected results).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="rule"><a class="anchor" href="#rule"></a>5.4.2. rule</h4>
+<h4 id="rule"><a class="anchor" href="#rule"></a>6.4.2. rule</h4>
 <div class="paragraph">
 <p>Required / Optional: Required</p>
 </div>
@@ -5555,7 +5941,7 @@ to indicate that the mapping applies to all encoding rules.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="targetType"><a class="anchor" href="#targetType"></a>5.4.3. targetType</h4>
+<h4 id="targetType"><a class="anchor" href="#targetType"></a>6.4.3. targetType</h4>
 <div class="paragraph">
 <p>Required / Optional: Required</p>
 </div>
@@ -5579,7 +5965,7 @@ setting of 'size' for this property (as described before).</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="param"><a class="anchor" href="#param"></a>5.4.4. param</h4>
+<h4 id="param"><a class="anchor" href="#param"></a>6.4.4. param</h4>
 <div class="paragraph">
 <p>Required / Optional: Optional</p>
 </div>
@@ -5620,7 +6006,7 @@ the characteristic.</p>
 are described in the following sections.</p>
 </div>
 <div class="sect4">
-<h5 id="Parameter_defaultValue"><a class="anchor" href="#Parameter_defaultValue"></a>5.4.4.1. Parameter: defaultValue</h5>
+<h5 id="Parameter_defaultValue"><a class="anchor" href="#Parameter_defaultValue"></a>6.4.4.1. Parameter: defaultValue</h5>
 <div class="paragraph">
 <p>(since v2.4.0)</p>
 </div>
@@ -5685,7 +6071,7 @@ usually does not apply to numeric types.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="Parameter_length"><a class="anchor" href="#Parameter_length"></a>5.4.4.2. Parameter: length</h5>
+<h5 id="Parameter_length"><a class="anchor" href="#Parameter_length"></a>6.4.4.2. Parameter: length</h5>
 <div class="paragraph">
 <p>(available since v2.5.0)</p>
 </div>
@@ -5718,7 +6104,7 @@ setting via target parameter
 </div>
 </div>
 <div class="sect4">
-<h5 id="Parameter_geometry"><a class="anchor" href="#Parameter_geometry"></a>5.4.4.3. Parameter: geometry</h5>
+<h5 id="Parameter_geometry"><a class="anchor" href="#Parameter_geometry"></a>6.4.4.3. Parameter: geometry</h5>
 <div class="paragraph">
 <p>Explanation: Indicates that the map entry contains a mapping for a
 geometry type (specifically from ISO 19107). IMPORTANT: If geometry
@@ -5799,7 +6185,7 @@ tessellation scheme for a spatial index.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="Parameter_precision"><a class="anchor" href="#Parameter_precision"></a>5.4.4.4. Parameter: precision</h5>
+<h5 id="Parameter_precision"><a class="anchor" href="#Parameter_precision"></a>6.4.4.4. Parameter: precision</h5>
 <div class="paragraph">
 <p>(available since v2.5.0)</p>
 </div>
@@ -5814,7 +6200,7 @@ mutually exclusive with 'length'.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="Parameter_table"><a class="anchor" href="#Parameter_table"></a>5.4.4.5. Parameter: table</h5>
+<h5 id="Parameter_table"><a class="anchor" href="#Parameter_table"></a>6.4.4.5. Parameter: table</h5>
 <div class="paragraph">
 <p>Explanation: Indicates that the map entry contains a mapping for a type
 that is represented by a table. This is important for correctly setting
@@ -5850,6 +6236,19 @@ that is identified by the map entry. Recognized values are:</p>
 </ul>
 </div>
 </li>
+<li>
+<p>primaryKeyColumns (since v2.14.0):</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Applies to database type: all</p>
+</li>
+<li>
+<p>Description: the value is a space-separated (!) list of the names of all columns that constitute the primary key of the table. A table often only has a single primary key column.</p>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -5858,10 +6257,10 @@ that is identified by the map entry. Recognized values are:</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Configuration_Examples"><a class="anchor" href="#Configuration_Examples"></a>6. Configuration Examples</h2>
+<h2 id="Configuration_Examples"><a class="anchor" href="#Configuration_Examples"></a>7. Configuration Examples</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="DDL"><a class="anchor" href="#DDL"></a>6.1. DDL</h3>
+<h3 id="DDL"><a class="anchor" href="#DDL"></a>7.1. DDL</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><table class="CodeRay"><tr>
@@ -5941,7 +6340,7 @@ that is identified by the map entry. Recognized values are:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Configuration_Examples_Replication_Schema"><a class="anchor" href="#Configuration_Examples_Replication_Schema"></a>6.2. Replication Schema</h3>
+<h3 id="Configuration_Examples_Replication_Schema"><a class="anchor" href="#Configuration_Examples_Replication_Schema"></a>7.2. Replication Schema</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><table class="CodeRay"><tr>
@@ -6045,7 +6444,7 @@ that is identified by the map entry. Recognized values are:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Configuration_Examples_Database_Model"><a class="anchor" href="#Configuration_Examples_Database_Model"></a>6.3. Database Model</h3>
+<h3 id="Configuration_Examples_Database_Model"><a class="anchor" href="#Configuration_Examples_Database_Model"></a>7.3. Database Model</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><table class="CodeRay"><tr>
@@ -6119,11 +6518,6 @@ that is identified by the map entry. Recognized values are:</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

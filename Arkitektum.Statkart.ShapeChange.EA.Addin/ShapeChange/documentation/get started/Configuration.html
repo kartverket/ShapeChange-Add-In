@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Configuration</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -586,6 +583,12 @@ Schema.</p>
 </div>
 </li>
 <li>
+<p>The <strong>optional</strong>
+<a href="./The_element_validators.html"><strong>&lt;validators&gt;
+element</strong></a> defines the model validators that can be used by model transformers
+and targets to check requirements on a given model before it is processed.</p>
+</li>
+<li>
 <p>The <a href="./The_element_log.html"><strong>&lt;log&gt; element</strong></a>
 defines logging parameters.</p>
 </li>
@@ -629,6 +632,22 @@ transformations can also be applied on the result of other
 transformations. Targets can be applied on the input model and/or the
 output of transformations. This results in a kind of tree-based
 processing model.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Since v3.1.0, model validators can be configured, to validate
+the content of models that are given to transformations and
+targets for processing. These validators can act as gatekeepers,
+only allowing subsequent processing to proceed if validation was
+successful.
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -682,6 +701,19 @@ like this:</p>
 38
 39
 40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
 </pre></td>
   <td class="code"><pre><span class="tag">&lt;ShapeChangeConfiguration&gt;</span>
     <span class="tag">&lt;input&gt;</span>
@@ -689,7 +721,8 @@ like this:</p>
     <span class="tag">&lt;/input&gt;</span>
     <span class="tag">&lt;transformers&gt;</span>
         <span class="tag">&lt;Transformer</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>
-<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Transformer1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Transformer1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">validators</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">v1</span><span class="delimiter">&quot;</span></span>
+<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
             <span class="comment">&lt;!-- ... --&gt;</span>
         <span class="tag">&lt;/Transformer&gt;</span>
         <span class="tag">&lt;Transformer</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>
@@ -714,7 +747,9 @@ like this:</p>
             <span class="comment">&lt;!-- Target 2 ... --&gt;</span>
         <span class="tag">&lt;/Target&gt;</span>
         <span class="tag">&lt;TargetXmlSchema</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>
-<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">inputs</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Transformer2 Transformer3</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">inputs</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Transformer2 Transformer3</span><span class="delimiter">&quot;</span></span>
+<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">validators</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">v1 v2</span><span class="delimiter">&quot;</span></span>
+<span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span><span class="error"> </span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
             <span class="comment">&lt;!-- Target 3 ... --&gt;</span>
         <span class="tag">&lt;/TargetXmlSchema&gt;</span>
         <span class="tag">&lt;Target</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">inputs</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">Transformer4</span><span class="delimiter">&quot;</span></span>
@@ -722,16 +757,21 @@ like this:</p>
             <span class="comment">&lt;!-- Target 4 ... --&gt;</span>
         <span class="tag">&lt;/Target&gt;</span>
     <span class="tag">&lt;/targets&gt;</span>
+    <span class="tag">&lt;validators&gt;</span>
+        <span class="tag">&lt;Validator</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>
+            <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">v1</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">validationMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">strict</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+          <span class="comment">&lt;!-- Validator v1 ... --&gt;</span>
+        <span class="tag">&lt;/Validator&gt;</span>
+        <span class="tag">&lt;Validator</span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>
+            <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">v2</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">mode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">enabled</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">validationMode</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">strict</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
+          <span class="comment">&lt;!-- Validator v2 ... --&gt;</span>
+        <span class="tag">&lt;/Validator&gt;</span>
+    <span class="tag">&lt;/validators&gt;</span>
 <span class="tag">&lt;/ShapeChangeConfiguration&gt;</span></pre></td>
 </tr></table></code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

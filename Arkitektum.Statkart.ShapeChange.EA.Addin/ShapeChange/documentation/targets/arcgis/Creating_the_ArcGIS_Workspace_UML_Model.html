@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Creating the ArcGIS Workspace UML Model</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -519,15 +516,15 @@ table.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Application Schema&gt;&gt;, &lt;&lt;applicationSchema&gt;&gt;, &lt;&lt;schema&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Application Schema», «applicationSchema», «schema»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Package
-(with stereotype &lt;&lt;ArcGIS&gt;&gt;)</p></td>
+(with stereotype «ArcGIS»)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;bundle&gt;&gt;, &lt;&lt;leaf&gt;&gt;, or no stereotype</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«bundle», «leaf», or no stereotype</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Package with no stereotype,
 except for the package that contains all feature classes – that package
-has the stereotype &lt;&lt;FeatureDataset&gt;&gt;.The package hierarchy is
+has the stereotype «FeatureDataset».The package hierarchy is
 maintained, even though classes are split into separate package
 hierarchies according to their category (features, object classes /
 tables, and domains). The package hierarchy is not reflected in the
@@ -556,47 +553,47 @@ table.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;featureType&gt;&gt; with no geometry property, and &lt;&lt;type&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«featureType» with no geometry property, and «type»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with
-stereotype &lt;&lt;ObjectClass&gt;&gt;)</p></td>
+stereotype «ObjectClass»)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> &lt;&lt;featureType&gt;&gt; with one geometry property with value type GM_Point</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype &lt;&lt;Point&gt;&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> «featureType» with one geometry property with value type GM_Point</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype «Point»)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">  &lt;&lt;featureType&gt;&gt; with one geometry property with value type
+<td class="tableblock halign-left valign-top"><p class="tableblock">  «featureType» with one geometry property with value type
 GM_MultiPoint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype \&lt;&lt;Multipoint)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype «Multipoint)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">  &lt;&lt;featureType&gt;&gt; with one geometry property with value type GM_Curve
+<td class="tableblock halign-left valign-top"><p class="tableblock">  «featureType» with one geometry property with value type GM_Curve
 or GM_MultiCurve</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype &lt;&lt;Polyline&gt;&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype «Polyline»)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">  &lt;&lt;featureType&gt;&gt; with one geometry property with value type GM_Surface
+<td class="tableblock halign-left valign-top"><p class="tableblock">  «featureType» with one geometry property with value type GM_Surface
 or GM_MultiSurface</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype &lt;&lt;Polygon&gt;&gt;)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> Class (with stereotype «Polygon»)</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">  &lt;&lt;featureType&gt;&gt; with one geometry property with other value type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">  «featureType» with one geometry property with other value type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> Not supported / will be ignored; schema must be pre-processed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">  &lt;&lt;featureType&gt;&gt; with multiple geometry properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">  «featureType» with multiple geometry properties</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> For the first
 geometry property, see above; all other geometry properties are ignored.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> &lt;&lt;dataType&gt;&gt; or &lt;&lt;union&gt;&gt; in the same application schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> «dataType» or «union» in the same application schema</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"> Not
 supported / will be ignored; schema must be pre-processed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> &lt;&lt;enumeration&gt;&gt; and &lt;&lt;codeList&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> «enumeration» and «codeList»</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p> Class (with stereotype &lt;&lt;CodedValueDomain&gt;&gt;)</p>
+<p> Class (with stereotype «CodedValueDomain»)</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -660,7 +657,7 @@ as an integer with a string lookup.</p>
 </li>
 <li>
 <p>It is possible to restrict the other fields of a supertype using a
-specific &lt;&lt;CodedValueDomain&gt;&gt; for each subtype.</p>
+specific «CodedValueDomain» for each subtype.</p>
 </li>
 <li>
 <p>A subtype may neither extend the set of properties nor redefine the
@@ -676,12 +673,12 @@ would not follow the naming conventions of ISO 19103.</p>
 </li>
 <li>
 <p>In Enterprise Architect the subtypes are expressed using distinct
-classes with a &lt;&lt;Subtype&gt;&gt; stereotype, which are related to the parent
-class using a generalisation relationship (with &lt;&lt;Subtype&gt;&gt; stereotype).</p>
+classes with a «Subtype» stereotype, which are related to the parent
+class using a generalisation relationship (with «Subtype» stereotype).</p>
 </li>
 <li>
 <p>For further details, see the enterprise architect tutorial
-<a href="http://www.sparxsystems.com/bin/arcgis-enterprise-architect-uml-modeling-tutorial.pdf">Designing
+<a href="https://sparxsystems.com/bin/arcgis-enterprise-architect-uml-modeling-tutorial.pdf">Designing
 ArcGIS Geodatabases with Enterprise Architect</a>, Appendix D.</p>
 </li>
 </ul>
@@ -717,15 +714,15 @@ the fields of the ArcGIS subtypes:</p>
 <ul>
 <li>
 <p>An attribute with a code list or enumeration as type may lead to the
-creation of subtype specific &lt;&lt;CodedValueDomain&gt;&gt;s. Each code / enum can
+creation of subtype specific «CodedValueDomain»s. Each code / enum can
 have tagged value <em>arcgisUsedBySubtypes</em>. This is a comma-separated list
 of all the subtypes which use that particular code / enum. If at least
 one of the codes / enums defines a subtype restriction, then for each
 ArcGIS subtype, a field that represents the restriction of the attribute
-is created. The type of that field is a &lt;&lt;CodedValueDomain&gt;&gt; that
+is created. The type of that field is a «CodedValueDomain» that
 contains the codes that apply to that subtype. If restrictions are only
 defined on some of the subtypes, the other subtypes will have fields
-with the original &lt;&lt;CodedValueDomain&gt;&gt; as type.</p>
+with the original «CodedValueDomain» as type.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -821,11 +818,11 @@ is shown in the subsequent figure [click to enlarge]):</p>
 <ul>
 <li>
 <p>The classification code list is not represented by a
-&lt;&lt;CodedValueDomain&gt;&gt; in the ArcGIS workspace model. Instead, it is
+«CodedValueDomain» in the ArcGIS workspace model. Instead, it is
 represented by the ArcGIS subtypes.</p>
 </li>
 <li>
-<p>The ArcGIS workspace UML model does not contain &lt;&lt;CodedValueDomain&gt;&gt;
+<p>The ArcGIS workspace UML model does not contain «CodedValueDomain»
 elements for the code lists NumericValue and UnusedCodeList from the
 conceptual model, since they are not used by any fields in the ArcGIS
 workspace model (removal of unused coded value domains is controlled by
@@ -964,7 +961,7 @@ log will inform the user about this situation).
 <div class="sect3">
 <h4 id="Attribute"><a class="anchor" href="#Attribute"></a>1.3.1. Attribute</h4>
 <div class="paragraph">
-<p>&lt;&lt;property&gt;&gt; elements within the application schema that are modelled as
+<p>«property» elements within the application schema that are modelled as
 attributes are converted as described in the following table.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -980,26 +977,26 @@ attributes are converted as described in the following table.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;property&gt;&gt;, maximum multiplicity &gt; 1, except if value type is
-&lt;&lt;type&gt;&gt; or &lt;&lt;featureType&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«property», maximum multiplicity &gt; 1, except if value type is
+«type» or «featureType»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not supported / will be ignored; schema
 must be pre-processed.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;property&gt;&gt;, value is of geometry type (name starts with "GM_")</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«property», value is of geometry type (name starts with "GM_")</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Geometry properties are ignored; the stereotype of a feature class
 implies the geometry property and its type.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;property&gt;&gt;, value type is &lt;&lt;enumeration&gt;&gt; or &lt;&lt;codeList&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«property», value type is «enumeration» or «codeList»</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Attribute
-(&lt;&lt;Field&gt;&gt;), value type is the coded value domain class.</p></td>
+(«Field»), value type is the coded value domain class.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;property&gt;&gt;, value type is other type specified outside of the
+<td class="tableblock halign-left valign-top"><p class="tableblock">«property», value type is other type specified outside of the
 application schema</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Attribute (&lt;&lt;Field&gt;&gt;), type mapping as defined in the following table</p>
+<p>Attribute («Field»), type mapping as defined in the following table</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1009,7 +1006,7 @@ application schema</p></td>
 </td>
 <td class="content">
 If the application schema contains a numeric range constraint for
-the property ShapeChange will create an according &lt;&lt;RangeDomain&gt;&gt; and
+the property ShapeChange will create an according «RangeDomain» and
 set the type accordingly.
 </td>
 </tr>
@@ -1017,24 +1014,24 @@ set the type accordingly.
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;enum&gt;&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«enum»</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Attribute (&lt;&lt;DomainCodedValue&gt;&gt;)</p>
+<p>Attribute («DomainCodedValue»)</p>
 </div>
 <div class="paragraph">
-<p>Per default the initial value defined by the &lt;&lt;enum&gt;&gt; is used as initial
+<p>Per default the initial value defined by the «enum» is used as initial
 value. Via 
 <a href="./ArcGIS_Workspace.html#rule-arcgis-prop-initialValueByAlias">rule-arcgis-prop-initialValueByAlias</a>
 this behavior can be changed to set the initial value using the alias of
-the &lt;&lt;enum&gt;&gt;.</p>
+the «enum».</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;property&gt;&gt;, value type is a non-abstract &lt;&lt;type&gt;&gt; or &lt;&lt;featureType&gt;&gt;
+<td class="tableblock halign-left valign-top"><p class="tableblock">«property», value type is a non-abstract «type» or «featureType»
 in the application schema</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Association (&lt;&lt;RelationshipClass&gt;&gt;) to the corresponding class and
-&lt;&lt;field&gt;&gt; as described for one to many relationship
+<p>Association («RelationshipClass») to the corresponding class and
+«field» as described for one to many relationship
 <a href="./Creating_the_ArcGIS_Workspace_UML_Model.html#Mapping_of_1n__n1_Relationship">here</a>.</p>
 </div>
 <div class="admonitionblock note">
@@ -1059,7 +1056,7 @@ subtype branches of the abstract class.
 <p> </p>
 </div>
 <div class="paragraph">
-<p>Attributes with stereotype &lt;&lt;Field&gt;&gt; in the ArcGIS workspace model have
+<p>Attributes with stereotype «Field» in the ArcGIS workspace model have
 a specific list of tagged values. The tagged values length, precision
 and scale are determined as follows:</p>
 </div>
@@ -1138,7 +1135,7 @@ details:</p>
 <h4 id="Association"><a class="anchor" href="#Association"></a>1.3.2. Association</h4>
 <div class="paragraph">
 <p>An association in the application schema is converted to an association
-with stereotype &lt;&lt;RelationshipClass&gt;&gt; as follows:</p>
+with stereotype «RelationshipClass» as follows:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1227,15 +1224,15 @@ shows how ISO 19107 geometry types are realized:</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GM_Point</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Point&gt;&gt; feature class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Point» feature class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GM_MultiPoint</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Multipoint&gt;&gt; feature class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Multipoint» feature class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GM_Curve</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Polyline&gt;&gt; feature class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Polyline» feature class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GM_MultiCurve</p></td>
@@ -1243,7 +1240,7 @@ shows how ISO 19107 geometry types are realized:</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GM_Surface</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;Polygon&gt;&gt; feature class</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">«Polygon» feature class</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">GM_MultiSurface</p></td>
@@ -1264,7 +1261,7 @@ shows how ISO 19107 geometry types are realized:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>An association with stereotype &lt;&lt;RelationshipClass&gt;&gt; is created
+<p>An association with stereotype «RelationshipClass» is created
 between the source and target of the relationship:</p>
 <div class="ulist">
 <ul>
@@ -1299,7 +1296,7 @@ the target class (see next list item)</p>
 </div>
 </li>
 <li>
-<p>Attribute (&lt;&lt;Field&gt;&gt;) in target class with name "&lt;source_role_name&gt;ID"
+<p>Attribute («Field») in target class with name "&lt;source_role_name&gt;ID"
 and type esriFieldTypeInteger (Precision: 9)</p>
 </li>
 </ul>
@@ -1335,7 +1332,7 @@ esriFieldTypeInteger (Precision: 9)</p>
 </div>
 </li>
 <li>
-<p>An association with stereotype &lt;&lt;RelationshipClass&gt;&gt; is created
+<p>An association with stereotype «RelationshipClass» is created
 between the source and target of the relationship:</p>
 <div class="ulist">
 <ul>
@@ -1406,7 +1403,7 @@ is one way to at least partially represent a reflexive relationship.</p>
 <h4 id="RangeDomain_from_OCL"><a class="anchor" href="#RangeDomain_from_OCL"></a>1.3.8. RangeDomain from OCL</h4>
 <div class="paragraph">
 <p>ArcGIS supports range domains for numeric values (classes with
-stereotype &lt;&lt;RangeDomain&gt;&gt;) which allow to set minimum and maximum
+stereotype «RangeDomain») which allow to set minimum and maximum
 values.</p>
 </div>
 <div class="paragraph">
@@ -1484,8 +1481,8 @@ implies(viu.value >= 0 and viu.value <= 100)))))</p>
 <div class="paragraph">
 <p>Whenever a property in the application schema has a numeric range
 constraint and maps to a numeric type (esriFieldTypeInteger or
-esriFieldTypeDouble), a &lt;&lt;RangeDomain&gt;&gt; is created and set as the type
-of the &lt;&lt;field&gt;&gt; that represents the property.</p>
+esriFieldTypeDouble), a «RangeDomain» is created and set as the type
+of the «field» that represents the property.</p>
 </div>
 <div class="paragraph">
 <p>Range limits in ArcGIS are inclusive. For cases in which the lower
@@ -1505,7 +1502,7 @@ other boundary (currently +/-1000000000).</p>
 In order for ShapeChange to process and not dismiss OCL
 constraints while loading the input model, ensure that the configuration
 parameter
-<a href="../../get started/The_element_input.html#checkingConstraints">checkingConstraints</a>
+<a href="../../get started/The_element_input.html#checkingConstraints__constraintLoading">checkingConstraints or constraintLoading</a>
 for the "input" element is not set to 'disabled' (the default value is
 'enabled').
 </td>
@@ -1534,7 +1531,7 @@ range domain. For further details, see
 that the length of a textual property value does not exceed a specific
 limit. If such an OCL constraint follows a specific pattern, ShapeChange
 can recognize it and use the information to populate the 'length' tagged
-value of the &lt;&lt;field&gt;&gt; that will represent the property in the ArcGIS
+value of the «field» that will represent the property in the ArcGIS
 model.</p>
 </div>
 <div class="paragraph">
@@ -1558,7 +1555,7 @@ self.propWithSpecialLength->notEmpty() implies
 In order for ShapeChange to process and not dismiss OCL
 constraints while loading the input model, ensure that the configuration
 parameter
-<a href="../../get started/The_element_input.html#checkingConstraints">checkingConstraints</a>
+<a href="../../get started/The_element_input.html#checkingConstraints__constraintLoading">checkingConstraints or constraintLoading</a>
 for the "input" element is not set to 'disabled' (the default value is
 'enabled').
 </td>
@@ -1672,10 +1669,10 @@ be part of the documentation.
 <h3 id="Setting_the_Spatial_Reference_System"><a class="anchor" href="#Setting_the_Spatial_Reference_System"></a>2.3. Setting the Spatial Reference System</h3>
 <div class="paragraph">
 <p>ShapeChange currently does not set the spatial reference system used by
-the ArcGIS workspace. The SRS is set in the template .eap and can be
+the ArcGIS workspace. The SRS is set in the template .qea and can be
 changed there (before deriving the ArcGIS workspace model) or after
 processing by ShapeChange is complete. The SRS can be set using the
-ArcGIS extension. Simply right-click on the &lt;&lt;SpatialReference&gt;&gt; class
+ArcGIS extension. Simply right-click on the «SpatialReference» class
 (which can be found in the ArcGIS workspace model under 'Model/ArcGIS
 Workspace/Spatial Reference'), then select Extensions &gt; ArcGIS &gt; Set
 Coordinate System; in the dialog that opens, choose the SRS you want.</p>
@@ -1723,11 +1720,6 @@ workspace model generated by this target.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

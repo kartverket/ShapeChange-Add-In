@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>Background documents from OGC Testbeds and Pilots</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -444,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following is a list of documents that are related to ShapeChange and its development. They were created as part of testbeds and pilots in the <a href="http://www.opengeospatial.org/ogc/programs/ip">OGC Innovation Program</a>:</p>
+<p>The following is a list of documents that are related to ShapeChange and its development. They were created as part of testbeds and pilots in the OGC Innovation Program:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -452,22 +449,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>OGC <a href="https://portal.ogc.org/files/?artifact_id=5344">Geospatial One-Stop – Transportation Pilot</a> (2003)</p>
 </li>
 <li>
-<p>OGC Testbed-2: <a href="http://portal.opengeospatial.org/files/?artifact_id=8071">Application Schema Development</a> (2004, OGC document 04-100)</p>
+<p>OGC Testbed-2: <a href="https://portal.opengeospatial.org/files/?artifact_id=8071">Application Schema Development</a> (2004, OGC document 04-100)</p>
 </li>
 <li>
-<p>OGC Testbed-3: <a href="http://portal.opengeospatial.org/files/?artifact_id=12893">Schema Maintenance and Tailoring</a> (2005, OGC document 05-117)</p>
+<p>OGC Testbed-3: <a href="https://portal.opengeospatial.org/files/?artifact_id=12893">Schema Maintenance and Tailoring</a> (2005, OGC document 05-117)</p>
 </li>
 <li>
-<p>OGC Testbed-3: <a href="http://portal.opengeospatial.org/files/?artifact_id=12894">UGAS Tool</a> (2005, OGC document 05-118)</p>
+<p>OGC Testbed-3: <a href="https://portal.opengeospatial.org/files/?artifact_id=12894">UGAS Tool</a> (2005, OGC document 05-118)</p>
 </li>
 <li>
 <p>OGC Testbed-4: <a href="https://portal.opengeospatial.org/files/?artifact_id=21628">GSIP Schema Processing</a> (2007, OGC document 07-028r1)</p>
 </li>
 <li>
-<p>OGC Testbed-5: <a href="http://portal.opengeospatial.org/files/?artifact_id=29029">GSIP Schema Processing</a> (2008, OGC document 08-078r1)</p>
+<p>OGC Testbed-5: <a href="https://portal.opengeospatial.org/files/?artifact_id=29029">GSIP Schema Processing</a> (2008, OGC document 08-078r1)</p>
 </li>
 <li>
-<p>OGC Testbed-6: <a href="http://portal.opengeospatial.org/files/?artifact_id=34098">UTDS-CityGML Implementation Profile</a> (2009, OGC document 09-037r1)</p>
+<p>OGC Testbed-6: <a href="https://portal.opengeospatial.org/files/?artifact_id=34098">UTDS-CityGML Implementation Profile</a> (2009, OGC document 09-037r1)</p>
 </li>
 <li>
 <p>OGC Testbed-7: <a href="https://portal.opengeospatial.org/files/?artifact_id=50438">Schema Automation Engineering Report</a> (2010, OGC document 10-088r3)</p>
@@ -485,17 +482,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>OGC Testbed-11: <a href="https://portal.opengeospatial.org/files/?artifact_id=63794">Aviation - Guidance on Using Semantics of Business Vocabulary and Business Rules (SBVR) Engineering Report</a> (2015, OGC document 15-024r2)</p>
 </li>
 <li>
-<p>OGC Testbed-12: <a href="http://docs.opengeospatial.org/per/16-020.html">ShapeChange Engineering Report</a> (2016, OGC document 16-020)</p>
+<p>OGC Testbed-12: <a href="https://docs.ogc.org/per/16-020.html">ShapeChange Engineering Report</a> (2016, OGC document 16-020)</p>
 </li>
 <li>
-<p>OGC Testbed-13: <a href="http://docs.opengeospatial.org/per/17-020r1.html">NAS Profiling Engineering Report</a> (2017, OGC document 17-020r1)</p>
+<p>OGC Testbed-13: <a href="https://docs.ogc.org/per/17-020r1.html">NAS Profiling Engineering Report</a> (2017, OGC document 17-020r1)</p>
 </li>
 <li>
-<p>OGC Testbed-14: <a href="http://docs.opengeospatial.org/per/18-032r2.html">Application Schema-based Ontology Development Engineering Report</a> (2018, OGC
+<p>OGC Testbed-14: <a href="https://docs.ogc.org/per/18-032r2.html">Application Schema-based Ontology Development Engineering Report</a> (2018, OGC
 document 18-032r2)</p>
 </li>
 <li>
-<p>OGC Testbed-14: <a href="http://docs.opengeospatial.org/per/18-091r2.html">Application Schemas and JSON Technologies Engineering Report</a> (2018, OGC document 18-091r2)</p>
+<p>OGC Testbed-14: <a href="https://docs.ogc.org/per/18-091r2.html">Application Schemas and JSON Technologies Engineering Report</a> (2018, OGC document 18-091r2)</p>
 </li>
 <li>
 <p>OGC UGAS-2019 Pilot:</p>
@@ -505,13 +502,13 @@ document 18-032r2)</p>
 <p><a href="../media/UGAS19-D100_property_stereotypes.pdf">Property Stereotypes for Metadata</a></p>
 </li>
 <li>
-<p><a href="https://www.ogc.org/projects/initiatives/ugas2019">Summary Report</a></p>
+<p><a href="https://www.ogc.org/initiatives/ugas2019/">Summary Report</a></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>OGC UML-to-GML Application Schema Pilot 2020 (UGAS-2020 - project page: <a href="https://www.ogc.org/projects/initiatives/ugas-2020">here</a>): <a href="https://docs.ogc.org/per/20-012.html">OGC UGAS-2020 Engineering Report (OGC 20-012)</a></p>
+<p>OGC UML-to-GML Application Schema Pilot 2020 (UGAS-2020 - project page: <a href="https://www.ogc.org/initiatives/ugas-2020/">here</a>): <a href="https://docs.ogc.org/per/20-012.html">OGC UGAS-2020 Engineering Report (OGC 20-012)</a></p>
 </li>
 </ul>
 </div>
@@ -519,11 +516,6 @@ document 18-032r2)</p>
 <p>The first version of ShapeChange was published after the OGC Geospatial One-Stop - Transportation Pilot in 2003. The reports from the pilot have not been published by OGC. OGC members can access them in the OGC Portal.</p>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.17">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>How to extend ShapeChange</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -84,10 +84,10 @@ code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;
 ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
 ul,ol{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
-ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-ul.square{list-style-type:square}
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
 ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
 dl dt{margin-bottom:.3125em;font-weight:bold}
 dl dd{margin-bottom:1.25em}
@@ -208,13 +208,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -393,7 +390,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -534,10 +531,11 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li><a href="#Creating_a_new_model_implementation">1. Creating a new model implementation</a></li>
 <li><a href="#Creating_a_new_model_transformation">2. Creating a new model transformation</a></li>
 <li><a href="#Creating_a_new_target">3. Creating a new target</a></li>
-<li><a href="#Setting_up_your_development_environment">4. Setting up your development environment</a>
+<li><a href="#Creating_a_new_model_validator">4. Creating a new model validator</a></li>
+<li><a href="#Setting_up_your_development_environment">5. Setting up your development environment</a>
 <ul class="sectlevel2">
-<li><a href="#Extending_the_ShapeChange_core_code_basis">4.1. Extending the ShapeChange core code basis</a></li>
-<li><a href="#Developing_and_hosting_an_extension_in_a_separate_project">4.2. Developing and hosting an extension in a separate project</a></li>
+<li><a href="#Extending_the_ShapeChange_core_code_basis">5.1. Extending the ShapeChange core code basis</a></li>
+<li><a href="#Developing_and_hosting_an_extension_in_a_separate_project">5.2. Developing and hosting an extension in a separate project</a></li>
 </ul>
 </li>
 </ul>
@@ -567,6 +565,10 @@ develop a new model transformation.</p>
 <li>
 <p>Creating a new ShapeChange target - This will allow you to derive new
 representations from an application schema.</p>
+</li>
+<li>
+<p>Creating a model validator - If you intend to perform specific
+checks on models that are processed by ShapeChange.</p>
 </li>
 </ul>
 </div>
@@ -757,7 +759,31 @@ other words, an update of the ShapeChange code was needed.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Setting_up_your_development_environment"><a class="anchor" href="#Setting_up_your_development_environment"></a>4. Setting up your development environment</h2>
+<h2 id="Creating_a_new_model_validator"><a class="anchor" href="#Creating_a_new_model_validator"></a>4. Creating a new model validator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In ShapeChange, a model validator is used to perform certain checks
+on a given model, before that model is processed by a transformation
+or target. Validation can ensure that all requirements of the subsequent
+process regarding the model are met.</p>
+</div>
+<div class="paragraph">
+<p>Creating a new model validator requires implementing interface
+<a href="https://github.com/ShapeChange/ShapeChange/blob/master/src/main/java/de/interactive_instruments/ShapeChange/ModelValidation/ModelValidator.java">de.interactive_instruments.ShapeChange.ModelValidation.ModelValidator</a>.</p>
+</div>
+<div class="paragraph">
+<p>The execution of a model validator typically requires information from the
+user, to define which checks shall be performed. That information can be
+provided via the ShapeChange configuration. More
+specifically, a model validator can have parameters, rules,
+and also a custom (XML based) configuration. The model validators that
+are already supported by ShapeChange may serve as implementation and
+configuration examples.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Setting_up_your_development_environment"><a class="anchor" href="#Setting_up_your_development_environment"></a>5. Setting up your development environment</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We describe two different setups for developing a ShapeChange extension:</p>
@@ -775,7 +801,7 @@ dependencies.</p>
 </ul>
 </div>
 <div class="sect2">
-<h3 id="Extending_the_ShapeChange_core_code_basis"><a class="anchor" href="#Extending_the_ShapeChange_core_code_basis"></a>4.1. Extending the ShapeChange core code basis</h3>
+<h3 id="Extending_the_ShapeChange_core_code_basis"><a class="anchor" href="#Extending_the_ShapeChange_core_code_basis"></a>5.1. Extending the ShapeChange core code basis</h3>
 <div class="paragraph">
 <p>To extend ShapeChange itself, and thus feed new/modified code back to
 ShapeChange:</p>
@@ -810,7 +836,7 @@ create a PullRequest.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Developing_and_hosting_an_extension_in_a_separate_project"><a class="anchor" href="#Developing_and_hosting_an_extension_in_a_separate_project"></a>4.2. Developing and hosting an extension in a separate project</h3>
+<h3 id="Developing_and_hosting_an_extension_in_a_separate_project"><a class="anchor" href="#Developing_and_hosting_an_extension_in_a_separate_project"></a>5.2. Developing and hosting an extension in a separate project</h3>
 <div class="paragraph">
 <p>You can develop your ShapeChange extension in a separate project. Your
 model implementations, transformations, and targets would then be
@@ -836,7 +862,7 @@ with the latest release):</p>
   <td class="code"><pre><span class="tag">&lt;dependency&gt;</span>
  <span class="tag">&lt;groupId&gt;</span>net.shapechange<span class="tag">&lt;/groupId&gt;</span>
  <span class="tag">&lt;artifactId&gt;</span>ShapeChange<span class="tag">&lt;/artifactId&gt;</span>
- <span class="tag">&lt;version&gt;</span>2.3.0<span class="tag">&lt;/version&gt;</span>
+ <span class="tag">&lt;version&gt;</span>3.0.0<span class="tag">&lt;/version&gt;</span>
  <span class="tag">&lt;/dependency&gt;</span></pre></td>
 </tr></table></code></pre>
 </div>
@@ -869,11 +895,6 @@ project and implements additional ShapeChange targets.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2022-11-17 14:14:12 +0100
 </div>
 </div>
 </body>
